@@ -112,7 +112,7 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
       data-aos="zoom-in-up"
       className=" overflow-hidden xl:mt-[-120px] 2xl:mt-[-80px]"
     >
-      <HashtagHeader text="#OurTarget" position="left" id="ourTarget"/>
+      <HashtagHeader text="#OurSolution" position="left" id="ourSolution"/>
       <section data-aos="fade-up" className="">
         <div className=" m-auto w-[90%]">
           <div className="m-auto mb-10 mt-10 flex w-[100%] flex-col max-[600px]:text-center">
