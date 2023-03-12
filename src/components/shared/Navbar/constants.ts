@@ -11,8 +11,8 @@ export const LINKS = [
         link:'/#ourGoals',
       },
       {
-        title:'Our Target',
-        link:'/#ourTarget',
+        title:'Our Solution',
+        link:'/#ourSolution',
       },
       {
         title: 'Our Team',

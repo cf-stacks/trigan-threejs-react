@@ -44,7 +44,7 @@ const ScrollingSlideShow = () => {
               </div>
             </div>
             {/* /* Video Ends */}
-            <HashtagHeader text="#Our Goals" position="left" id="ourGoals"/>
+            <HashtagHeader text="#Our Mission" position="left" id="ourGoals"/>
             <div className="mb-30 mx-auto max-w-6xl py-5 text-center font-extralight text-slate-100">
               <h2 className="headingStyle relative mt-10 mb-10 text-xl text-white md:text-5xl dark:text-black">
                 Dream of a{' '}
@@ -52,8 +52,23 @@ const ScrollingSlideShow = () => {
                   better future.
                 </span>
               </h2>
+              <div className="grid grid-cols-2 gap-2"> 
+              <div>
+              <p>We develop Web3 and AI technologies to create profitable and sustainable business opportunities that drive positive change and improve lives. Our mission is to bridge the gap between Web3 and the real world by creating innovative technologies that make a meaningful impact on society. We believe that social responsibility and collaboration are key to achieving our goals, and we are committed to being a leading force for good in the Web3 space.</p>
+           </div>
+           <div>
+          {/*} <div className="flex justify-center m-auto mt-[100px] w-[100%] "> {*/}
+     
+     <img
+     className="bg-blend-darken z-10 flex flex-col justify-center mt-[-50px] h-[300] w-[350px] flex  mb-[50px] max-[700px]:w-[400px]  max-[950px]:w-[600px] max-[800px]:w-[500px] max-[720px]:w-[400px] max-[560px]:w-[350px] max-[500px]:w-[290px]"
+     src="images/city-girl-1.jpg"
+     alt="girl-looking-out-over-city"
+   />
+           </div>
+           </div>
+           
               <HorizontalSlider />
-            </div>
+          </div>
           </div>
         </FadeInWhenVisible>
       </section>
