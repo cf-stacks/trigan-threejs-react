@@ -25,10 +25,10 @@ const AnimationCity = () => {
 
 
   return (
-    <div className="flex justify-center m-auto mt-[100px] w-[100%] ">
+    <div className="flex scale-75 md:scale-100 lg:scale-100 justify-center m-auto mt-[100px] w-[100%] ">
      
             <img
-            className="z-10 flex flex-col justify-center mt-[-50px] h-[300] w-[700px] flex  mb-[50px] max-[700px]:w-[400px]  max-[950px]:w-[600px] max-[800px]:w-[500px] max-[720px]:w-[400px] max-[560px]:w-[350px] max-[500px]:w-[290px]"
+            className="z-10 flex flex-col justify-center mt-[-50px] h-[300] w-[700px]  mb-[50px] max-[700px]:w-[400px]  max-[950px]:w-[600px] max-[800px]:w-[500px] max-[720px]:w-[400px] max-[560px]:w-[350px] max-[500px]:w-[290px]"
             src="images/trigan-section-bg-c.png"
             alt="planet"
           />

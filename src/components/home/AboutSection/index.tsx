@@ -352,13 +352,13 @@ Early Access Signup is now open! Please keep scrolling.
             <div className="absolute bottom-40 z-[0] h-[5%] w-[100%] bg-[#A855F7] blur-[300px]" />
           </div>
           {/* before was  md:w-1/2 */}
-          <div className="z-10 mb-20 flex  w-[90%] flex-col items-center  rounded-md bg-white/[.1]">
-            <div className="background-form z-10 mt-10 mb-10 flex w-[60%] items-center justify-center rounded-md p-5 shadow-lg md:px-16">
+          <div className="z-10 mb-20 flex  lg:w-[90%] flex-col items-center  rounded-md bg-white/[.1]">
+            <div className="background-form z-10 mt-10 mb-10 flex w-[100%] lg:w-[60%] items-center justify-center rounded-md p-5 shadow-lg md:px-16">
               <form
                 onSubmit={handleSubmit}
-                className="min-w-280 z-10 m-5 w-[80%]"
+                className="min-w-280 z-10 m-5  w-[90%] lg:w-[80%]"
               >
-                <h1 className="align-center m-auto mb-10 mb-4 flex justify-center text-center text-3xl font-bold text-white">
+                <h1 className="align-center m-auto  mb-4 flex justify-center text-center text-3xl font-bold text-white">
                   Sign Up now for early access
                 </h1>
                 <div className="mb-4">
