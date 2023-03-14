@@ -9,9 +9,9 @@ import GlobalLayout from '../components/layouts/GlobalLayout'
 import { useTheme } from 'next-themes'
 
 // const HeroSection = lazy(() => import('../components/home/HeroSection/index'))
-// const AboutSection = lazy(() => import('../components/home/AboutSection/index'))
+const AboutSection = lazy(() => import('../components/home/AboutSection/index'))
 import HeroSection  from'../components/home/HeroSection/index'
-import AboutSection from '../components/home/AboutSection/index'
+// import AboutSection from '../components/home/AboutSection/index'
 
 
 interface HomeProps {
@@ -30,10 +30,10 @@ const Home: NextPage<HomeProps> = () => {
       />
       <div className="relative overflow-x-hidden">
         <GlobalLayout>
-          {/* <Suspense fallback={null} > */}
               <HeroSection />
+          <Suspense fallback={<div>Loading...</div>} >
               <AboutSection />
-          {/* </Suspense>   */}
+          </Suspense>  
         </GlobalLayout>
       </div>
     </>

@@ -175,6 +175,7 @@ const VideoHeader = () => {
 
   return (
     <>
+    {/* <Suspense fallback={<div>Loading...</div>}> */}
     <header className={`fixed top-0 left-0 h-screen w-screen bg-black dark:bg-white`}>
       {/* Moon and Earth combined component */}
       {/* if it's in dark mode it shouldn't render the animation of the planet and the moon, if it's in light mode then it should render the animation */}
@@ -223,6 +224,7 @@ const VideoHeader = () => {
       </div>
 
     </header>
+    {/* </Suspense> */}
     </>
   )
 }
