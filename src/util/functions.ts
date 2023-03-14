@@ -46,12 +46,12 @@ export const getAllCategories = (teams: TeamMember[]): string[] => {
 
   // categories will have an additional "all" category
   categories.push('all')
+  categories.push('Founders')
   categories.push('Leadership')
-  categories.push('Founder')
   categories.push('Advisors')
   categories.push('Tech')
   categories.push('Marketing')
-  categories.push('Business Growth')
+  categories.push('Grants')
 
 
   return categories
@@ -69,12 +69,12 @@ export const groupByCategory = (
     })
   }
 
-  if (category === 'Founder') {
+  if (category === 'Founders'  ) {
     const filteredTeams = teams
       .map((group) => group.members)
       .flat();
 
-    const filterFinal = filteredTeams.filter((member) => member.category === 'Founder')
+    const filterFinal = filteredTeams.filter((member) => member.category === 'Founders' )
       .map((teamMember, i) => {
         return teamMember;
       })
@@ -99,12 +99,12 @@ export const groupByCategory = (
     })
   }
 
-  if (category === 'Business Growth') {
+  if (category === 'Grants') {
     const filteredTeams = teams
       .map((group) => group.members)
       .flat();
 
-    const filterFinal = filteredTeams.filter((member) => member.category === 'Business Growth')
+    const filterFinal = filteredTeams.filter((member) => member.category === 'Grants')
       .map((teamMember, i) => {
         return teamMember;
       })
@@ -160,12 +160,12 @@ export const groupByCategory = (
     })
   }
 
-  if (category === 'Business Growth') {
+  if (category === 'Grants') {
     const filteredTeams = teams
       .map((group) => group.members)
       .flat();
 
-    const filterFinal = filteredTeams.filter((member) => member.category === 'Founder')
+    const filterFinal = filteredTeams.filter((member) => member.category === 'Grants')
       .map((teamMember, i) => {
         return teamMember;
       })

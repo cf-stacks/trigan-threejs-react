@@ -18,10 +18,10 @@ const TeamCard: React.FC<TeamCardProps> = ({
   showDetails,
   handleShowDetails,
 }) => {
-  console.log('teamMember', teamMember)
+  // console.log('teamMember', teamMember)
   return (
     <div
-      className="flex max-w-xs justify-center overflow-hidden rounded-lg border-[1px] px-4 bg-blend-multiply backdrop-blur backdrop-filter md:px-2"
+      className="flex  justify-center overflow-hidden rounded-lg border-[1px] px-4 bg-blend-multiply backdrop-blur backdrop-filter md:px-2"
       key={teamMember.id}
     >
       <div className="flex flex-col justify-between items-center pt-[1.5rem]">

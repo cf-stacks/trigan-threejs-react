@@ -40,14 +40,35 @@ const TeamsByCategory: React.FC<TeamsByCategoryProps> = ({
   
   // console.log(category, teams);  
 
+
   return (
     
     <div className="flex w-full flex-col items-center">
-      {/* Founders  */}
+      {/* EXECUTIVE  */}
       {category === 'all' ? (
         <>
-         
           <p className="my-6 text-center text-3xl font-semibold text-white dark:text-black">
+          EXECUTIVE
+          </p>
+          <div className=" grid max-w-[950px] gap-4 pt-8 sm:grid-cols-2 md:px-12">
+            {teams
+              .map((group) => group.members)
+              .flat()
+              .filter((member) => member.category === 'Founders' || member.category === 'Leadership')
+              .map((teamMember, i) => (
+                // console.log(teamMembaer)
+                <TeamCard
+                  handleShowDetails={handleShowDetails}
+                  key={teamMember.id}
+                  teamMember={teamMember}
+                  idx={i}
+                  showDetails={false}
+                ></TeamCard>
+                
+              ))}
+          </div>
+
+          {/* <p className="my-6 text-center text-3xl font-semibold text-white dark:text-black">
             LEADERSHIP
           </p>
           <div className=" grid max-w-[950px] gap-4 pt-8 sm:grid-cols-2 md:px-12">
@@ -64,26 +85,7 @@ const TeamsByCategory: React.FC<TeamsByCategoryProps> = ({
                   showDetails={false}
                 ></TeamCardL>
               ))}
-          </div>
-
-          <p className="my-6 text-center text-3xl font-semibold text-white dark:text-black">
-            FOUNDERS
-          </p>
-          <div className=" grid max-w-[950px] gap-4 pt-8 sm:grid-cols-2 md:px-12">
-            {teams
-              .map((group) => group.members)
-              .flat()
-              .filter((member) => member.category === "Founders")
-              .map((teamMember, i) => (
-                <TeamCardF
-                  handleShowDetails={handleShowDetails}
-                  key={teamMember.id}
-                  teamMember={teamMember}
-                  idx={i}
-                  showDetails={false}
-                ></TeamCardF>
-              ))}
-          </div>
+          </div> */}
 
           <p className="my-6 text-center text-3xl font-semibold text-white">
             ADVISORS
@@ -144,13 +146,13 @@ const TeamsByCategory: React.FC<TeamsByCategoryProps> = ({
           </div>
 
           <p className="my-6 text-center text-3xl font-semibold text-white">
-          Business Growth
+          GROWTH
           </p>
           <div className="grid max-w-[1300px] grid-cols-1 gap-4 pt-8 sm:grid-cols-2  md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
             {teams
               .map((group) => group.members)
               .flat()
-              .filter((member) => member.category === 'Business Growth')
+              .filter((member) => member.category === 'Grants')
               .map((teamMember, i) => (
                 <TeamCard
                   handleShowDetails={handleShowDetails}
