@@ -46,12 +46,12 @@ const TeamsByCategory: React.FC<TeamsByCategoryProps> = ({
       {/* Founders  */}
       {category === 'all' ? (
         <>
-         
+        
           <p className="my-6 text-center text-3xl font-semibold text-white dark:text-black">
-            LEADERSHIP
+            EXECUTIVE
           </p>
           <div className=" grid max-w-[950px] gap-4 pt-8 sm:grid-cols-2 md:px-12">
-            {teams
+          {teams
               .map((group) => group.members)
               .flat()
               .filter((member) => member.category === "Leadership")
@@ -64,12 +64,8 @@ const TeamsByCategory: React.FC<TeamsByCategoryProps> = ({
                   showDetails={false}
                 ></TeamCardL>
               ))}
-          </div>
-
-          <p className="my-6 text-center text-3xl font-semibold text-white dark:text-black">
-            FOUNDERS
-          </p>
-          <div className=" grid max-w-[950px] gap-4 pt-8 sm:grid-cols-2 md:px-12">
+           </div>         
+           <div className=" grid max-w-[950px] gap-4 pt-8 sm:grid-cols-2 md:px-12">     
             {teams
               .map((group) => group.members)
               .flat()
@@ -144,13 +140,13 @@ const TeamsByCategory: React.FC<TeamsByCategoryProps> = ({
           </div>
 
           <p className="my-6 text-center text-3xl font-semibold text-white">
-          Business Growth
+          GROWTH
           </p>
           <div className="grid max-w-[1300px] grid-cols-1 gap-4 pt-8 sm:grid-cols-2  md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
             {teams
               .map((group) => group.members)
               .flat()
-              .filter((member) => member.category === 'Business Growth')
+              .filter((member) => member.category === 'Grants')
               .map((teamMember, i) => (
                 <TeamCard
                   handleShowDetails={handleShowDetails}
