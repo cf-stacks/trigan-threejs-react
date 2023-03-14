@@ -5,10 +5,28 @@ import { FadeInWhenVisible } from '../../shared/FadeInWhenVisible'
 import HorizontalSlider from './HorizontalSlider'
 import HashtagHeader from '../HashtagHeader'
 
+
+
 const ScrollingSlideShow = () => {
+  const [text, setText] = useState("");
+
+  // useEffect(() => {
+  //   AOS.init({ offset: 150 })
+  // })
+
+
   useEffect(() => {
-    AOS.init({ offset: 150 })
-  })
+    const textComplete = "We develop Web3 and AI technologies to create profitable and sustainable business opportunities that drive positive change and improve lives. Our mission is to bridge the gap between Web3 and the real world by creating innovative technologies that make a meaningful impact on society. We believe that social responsibility and collaboration are key to achieving our goals, and we are committed to being a leading force for good in the Web3 space.";
+    
+    let i = 0;
+    const timer = setInterval(() => {
+      setText(textComplete.substring(0, i));
+      i++;
+      if (i > textComplete.length) {
+        clearInterval(timer);
+      }
+    }, 10);
+  }, []);
   return (
     <div
       className="relative mt-[1600px] flex w-full flex-col items-center gap-20 py-40"
@@ -46,27 +64,45 @@ const ScrollingSlideShow = () => {
             {/* /* Video Ends */}
             <HashtagHeader text="#Our Mission" position="left" id="ourGoals" />
             <div className="mb-30 mx-auto max-w-6xl py-5 text-center font-extralight text-slate-100">
-              <h2 className="headingStyle relative mt-10 mb-10 text-xl text-white md:text-5xl dark:text-black">
+              <h2 data-aos="fade-up" className="headingStyle relative mt-10 mb-10 text-xl text-white md:text-5xl dark:text-black">
                 Dream of a{' '}
                 <span style={{ color: '#A855F7' } as React.CSSProperties}>
                   better future.
                 </span>
               </h2>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
-                <div>
-                  <p>We develop Web3 and AI technologies to create profitable and sustainable business opportunities that drive positive change and improve lives. Our mission is to bridge the gap between Web3 and the real world by creating innovative technologies that make a meaningful impact on society. We believe that social responsibility and collaboration are key to achieving our goals, and we are committed to being a leading force for good in the Web3 space.</p>
+              <div> 
+              <div className=' flex m-auto mt-[100px] mb-[150px] max-[850px]:flex-col max-[850px]:mt-[40px]'>
+                <div  className=' w-[60%] text-justify p-8 max-[850px]:flex-col max-[850px]:m-auto max-[850px]:w-[90%]'>
+                <h3 className='mt-[-30px] text-xl'>
+                  {text.split('').map((char, index) => {
+                    const key = `${index}-${char}`;
+                    return (
+                      <span
+                        key={key}
+                      >
+                        {char}
+                      </span>
+                    );
+                  })}
+                </h3>
                 </div>
-                <div>
-                  {/*} <div className="flex justify-center m-auto mt-[100px] w-[100%] "> {*/}
-
+                {/* <hr className='mt-20 border-4 border-purple-600' /> */}
+                <div className='bg-[#A855F7] w-[450px] h-[400px] flex justify-center align-center m-auto max-[600px]:flex-col max-[600px]:m-auto'>
+                  
                   <img
-                    className="bg-blend-darken z-10 flex flex-col justify-center lg:mt-[-50px]   lg:h-[300px] lg:w-[350px]  lg:my-[50px] lg:max-[700px]:w-[400px]  lg:max-[950px]:w-[600px] lg:max-[800px]:w-[500px] lg:max-[720px]:w-[400px] lg:max-[560px]:w-[350px] lg:max-[500px]:w-[290px] w-full"
+                    className="m-auto bg-blend-darken w-[450px] h-[400px] object-cover max-[600px]:w-[400px] max-[600px]:h-[350px] transform rotate-3 max-[850px]:mt-[30px]"
                     src="images/city-girl-1.jpg"
                     alt="girl-looking-out-over-city"
                   />
                 </div>
               </div>
+           <div>
+          {/*} <div className="flex justify-center m-auto mt-[100px] w-[100%] "> {*/}
+     
 
+           </div>
+           </div>
+           
               <HorizontalSlider />
             </div>
           </div>
