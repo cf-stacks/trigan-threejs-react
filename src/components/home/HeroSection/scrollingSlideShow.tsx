@@ -71,8 +71,8 @@ const ScrollingSlideShow = () => {
                 </span>
               </h2>
               <div> 
-              <div className=' flex m-auto mt-[100px] mb-[150px] max-[768px]:flex-col'>
-                <div  className=' w-[60%] text-justify p-8 max-[768px]:flex-col max-[768px]:m-auto max-[768px]:w-[90%]'>
+              <div className=' flex m-auto mt-[100px] mb-[150px] max-[850px]:flex-col max-[850px]:mt-[40px]'>
+                <div  className=' w-[60%] text-justify p-8 max-[850px]:flex-col max-[850px]:m-auto max-[850px]:w-[90%]'>
                 <h3 className='mt-[-30px] text-xl'>
                   {text.split('').map((char, index) => {
                     const key = `${index}-${char}`;
@@ -90,7 +90,7 @@ const ScrollingSlideShow = () => {
                 <div className='bg-[#A855F7] w-[450px] h-[400px] flex justify-center align-center m-auto max-[600px]:flex-col max-[600px]:m-auto'>
                   
                   <img
-                    className="m-auto bg-blend-darken w-[450px] h-[400px] object-cover max-[600px]:w-[400px] max-[600px]:h-[350px] transform rotate-3"
+                    className="m-auto bg-blend-darken w-[450px] h-[400px] object-cover max-[600px]:w-[400px] max-[600px]:h-[350px] transform rotate-3 max-[850px]:mt-[30px]"
                     src="images/city-girl-1.jpg"
                     alt="girl-looking-out-over-city"
                   />
