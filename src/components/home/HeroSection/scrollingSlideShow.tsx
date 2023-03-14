@@ -73,13 +73,12 @@ const ScrollingSlideShow = () => {
               <div> 
               <div className=' flex m-auto mt-[100px] mb-[150px] max-[768px]:flex-col'>
                 <div  className=' w-[60%] text-justify p-8 max-[768px]:flex-col max-[768px]:m-auto max-[768px]:w-[90%]'>
-                <h3>
+                <h3 className='mt-[-30px] text-xl'>
                   {text.split('').map((char, index) => {
                     const key = `${index}-${char}`;
                     return (
                       <span
                         key={key}
-                        className="text-xl"
                       >
                         {char}
                       </span>
