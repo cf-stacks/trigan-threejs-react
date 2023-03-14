@@ -70,10 +70,10 @@ const VideoHeader = () => {
                   className={`flex-wrap text-center font-m_plus_rounded_1c font-semibold uppercase md:font-bold`}
                 >
                   <pre className="mt-[25px] text-[25px] font-bold font-m_plus_rounded_1c dark:text-purple-500">
-                    A Better Life
+                  THE URBAN BLOCKCHAIN
                   </pre>
                   <span className="text-[35px] font-bold font-m_plus_rounded_1c dark:text-purple-500">
-                    for Everyone.
+                  POWERED BY AI
                   </span>
                 </h1>
               </div>
@@ -97,10 +97,10 @@ const VideoHeader = () => {
                     className={`text-center font-m_plus_rounded_1c font-semibold uppercase md:font-bold`}
                   >
                     <pre className="mt-[25px] text-[25px] font-bold font-m_plus_rounded_1c dark:text-purple-500  max-[400px]:text-[22px]">
-                      Empowering Communities
+                    INNOVATING BEYOND PoW AND PoS
                     </pre>
                     <span className="text-[35px] font-bold font-m_plus_rounded_1c dark:text-purple-500">
-                      Everywhere.
+                    REDEFINING BLOCKCHAIN FOR A FAIRER FUTURE.
                     </span>
                   </h1>
                 </div>
@@ -124,10 +124,10 @@ const VideoHeader = () => {
                     className={`text-center font-m_plus_rounded_1c font-semibold uppercase md:font-bold`}
                   >
                     <pre className="mt-[30px] text-[22px] font-bold font-m_plus_rounded_1c dark:text-purple-500 max-[400px]:text-[18px]">
-                      Driving Social Change Through
+                    INTRODUCING THE FUTURE
                     </pre>
                     <span className="text-[27px] font-bold font-m_plus_rounded_1c dark:text-purple-500">
-                      Technological Evolution.
+                    OF LIVING.
                     </span>
                   </h1>
                 </div>
