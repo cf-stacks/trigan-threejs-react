@@ -114,8 +114,7 @@ export const SignUpModal = ({
             />
             <div className="flex justify-center w-full pb-4">
               <button
-                style={{ background: '#DC2626' } as React.CSSProperties}
-                className="mt-2 w-full rounded-2xl bg-gray-900 px-4 py-1.5 text-light transition-all hover:bg-gray-900/80 sm:text-sm md:text-lg"
+                className="bg-[#A855F7] mt-2 w-full rounded-2xl bg-gray-900 px-4 py-1.5 text-light transition-all hover:bg-gray-900/80 sm:text-sm md:text-lg"
               >
                 Sign up
               </button>

@@ -352,8 +352,8 @@ Early Access Signup is now open! Please keep scrolling.
             <div className="absolute bottom-40 z-[0] h-[5%] w-[100%] bg-[#A855F7] blur-[300px]" />
           </div>
           {/* before was  md:w-1/2 */}
-          <div className="z-10 mb-20 flex  lg:w-[90%] flex-col items-center  rounded-md bg-white/[.1]">
-            <div className="background-form z-10 mt-10 mb-10 flex w-[100%] lg:w-[60%] items-center justify-center rounded-md p-5 shadow-lg md:px-16">
+          <div className="z-10 mb-20 flex  w-[90%] flex-col items-center  rounded-md bg-black/[.5]">
+            <div className="z-10 mt-10 mb-10 flex items-center justify-center rounded-md p-5 md:px-16">
               <form
                 onSubmit={handleSubmit}
                 className="min-w-280 z-10 m-5  w-[90%] lg:w-[80%]"
@@ -372,7 +372,7 @@ Early Access Signup is now open! Please keep scrolling.
                     type="text"
                     id="name"
                     placeholder="your name"
-                    className="form-input w-full rounded-md border-b-indigo-500 shadow-sm"
+                    className="form-input w-full rounded-md border-[#A855F7] shadow-sm"
                     value={name}
                     onChange={(event) => setName(event.target.value)}
                   />
@@ -388,7 +388,7 @@ Early Access Signup is now open! Please keep scrolling.
                     type="email"
                     id="email"
                     placeholder="email@trigan.com"
-                    className="form-input w-full rounded-md border-gray-300 shadow-sm"
+                    className="form-input w-full rounded-md border-[#A855F7] shadow-sm"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
                   />
@@ -401,7 +401,7 @@ Early Access Signup is now open! Please keep scrolling.
                     Country
                   </label>
                   <select
-                    className="form-input w-full  rounded-md border-gray-300 shadow-sm"
+                    className="form-input w-full  rounded-md border-[#A855F7] shadow-sm"
                     value={selectedCountry}
                     onChange={handleSelectChange}
                   >
@@ -416,7 +416,7 @@ Early Access Signup is now open! Please keep scrolling.
                 <div className=" mt-10 mb-10 w-full">
                   <button
                     type="submit"
-                    className="w-full rounded-md bg-[#00a000] py-2 font-bold text-white"
+                    className="w-full rounded-md bg-[#A855F7] py-2 font-bold text-white"
                   >
                     Subscribe
                   </button>

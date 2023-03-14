@@ -46,14 +46,15 @@ const TeamsByCategory: React.FC<TeamsByCategoryProps> = ({
     <div className="flex w-full flex-col items-center">
       {/* EXECUTIVE  */}
       {category === 'all' ? (
-        <>
+        <>      
           <p className="my-6 text-center text-3xl font-semibold text-white dark:text-black">
-          EXECUTIVE
+            EXECUTIVE
           </p>
           <div className=" grid max-w-[950px] gap-4 pt-8 sm:grid-cols-2 md:px-12">
-            {teams
+          {teams
               .map((group) => group.members)
               .flat()
+
               .filter((member) => member.category === 'Founders' || member.category === 'Leadership')
               .map((teamMember, i) => (
                 // console.log(teamMembaer)
@@ -64,14 +65,10 @@ const TeamsByCategory: React.FC<TeamsByCategoryProps> = ({
                   idx={i}
                   showDetails={false}
                 ></TeamCard>
-                
               ))}
-          </div>
+           </div>         
+           <div className=" grid max-w-[950px] gap-4 pt-8 sm:grid-cols-2 md:px-12">     
 
-          {/* <p className="my-6 text-center text-3xl font-semibold text-white dark:text-black">
-            LEADERSHIP
-          </p>
-          <div className=" grid max-w-[950px] gap-4 pt-8 sm:grid-cols-2 md:px-12">
             {teams
               .map((group) => group.members)
               .flat()
