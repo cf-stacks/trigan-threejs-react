@@ -22,6 +22,7 @@ const TeamCardF: React.FC<TeamCardProps> = ({
   return (
     <div  className="flex max-w-xs items-center justify-center overflow-hidden rounded-lg border-[1px] px-4 md:px-2 bg-blend-multiply backdrop-blur backdrop-filter"
       key={teamMember.id}>
+          
       <div className="flex flex-col items-center pt-[1.5rem]">
        <div className='w-full relative border-radius flex justify-center items-center z-20'>
         <img

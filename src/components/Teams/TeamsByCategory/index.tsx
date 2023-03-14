@@ -46,27 +46,12 @@ const TeamsByCategory: React.FC<TeamsByCategoryProps> = ({
       {/* Founders  */}
       {category === 'all' ? (
         <>
-
+        
           <p className="my-6 text-center text-3xl font-semibold text-white dark:text-black">
             EXECUTIVE
           </p>
           <div className=" grid max-w-[950px] gap-4 pt-8 sm:grid-cols-2 md:px-12">
           {teams
-              .map((group) => group.members)
-              .flat()
-              .filter((member) => member.category === "Founders")
-              .map((teamMember, i) => (
-                <TeamCardF
-                  handleShowDetails={handleShowDetails}
-                  key={teamMember.id}
-                  teamMember={teamMember}
-                  idx={i}
-                  showDetails={false}
-                ></TeamCardF>
-              ))}
-           </div>         
-           <div className=" grid max-w-[950px] gap-4 pt-8 sm:grid-cols-2 md:px-12">     
-            {teams
               .map((group) => group.members)
               .flat()
               .filter((member) => member.category === "Leadership")
@@ -78,6 +63,21 @@ const TeamsByCategory: React.FC<TeamsByCategoryProps> = ({
                   idx={i}
                   showDetails={false}
                 ></TeamCardL>
+              ))}
+           </div>         
+           <div className=" grid max-w-[950px] gap-4 pt-8 sm:grid-cols-2 md:px-12">     
+            {teams
+              .map((group) => group.members)
+              .flat()
+              .filter((member) => member.category === "Founders")
+              .map((teamMember, i) => (
+                <TeamCardF
+                  handleShowDetails={handleShowDetails}
+                  key={teamMember.id}
+                  teamMember={teamMember}
+                  idx={i}
+                  showDetails={false}
+                ></TeamCardF>
               ))}
           </div>
 
