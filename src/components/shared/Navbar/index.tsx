@@ -235,7 +235,7 @@ const Navbar: React.FC<NavbarProps> = () => {
               
               <EarlyAccessButton
                 style={{ width: '125px' } as React.CSSProperties}
-                className="invisible lg:visible md:visible h-10 font-bold text-white bg-red-600 border rounded-full lg:text-md hover:bg-red-700 md:ml-2 md:w-28 md:px-2 md:py-1 md:text-[10px] lg:w-36 lg:px-4 lg:py-2"
+                className="invisible lg:visible md:visible h-10 font-bold text-white bg-[#A855F7] border rounded-full lg:text-md hover:bg-[#793fae] md:ml-2 md:w-28 md:px-2 md:py-1 md:text-[10px] lg:w-36 lg:px-4 lg:py-2"
               />
 
               {/* Hamburger Menu */}
