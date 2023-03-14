@@ -82,7 +82,7 @@ const TeamsByCategory: React.FC<TeamsByCategoryProps> = ({
                   showDetails={false}
                 ></TeamCardL>
               ))}
-          </div> */}
+          </div>
 
           <p className="my-6 text-center text-3xl font-semibold text-white">
             ADVISORS
