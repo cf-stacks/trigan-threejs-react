@@ -46,13 +46,13 @@ export const getAllCategories = (teams: TeamMember[]): string[] => {
 
   // categories will have an additional "all" category
   categories.push('all')
-  categories.push('Founder')
   categories.push('Leadership')
+  categories.push('Founder')
   categories.push('Advisors')
   categories.push('Tech')
   categories.push('Marketing')
-  categories.push('Grants')
-  
+  categories.push('Business Growth')
+
 
   return categories
 }
@@ -71,13 +71,13 @@ export const groupByCategory = (
 
   if (category === 'Founder') {
     const filteredTeams = teams
-  .map((group) => group.members)
-  .flat();
-  
+      .map((group) => group.members)
+      .flat();
+
     const filterFinal = filteredTeams.filter((member) => member.category === 'Founder')
-    .map((teamMember, i) => {
-      return teamMember;
-    })
+      .map((teamMember, i) => {
+        return teamMember;
+      })
 
     return filterFinal.sort(function (a, b) {
       return a.position - b.position
@@ -86,28 +86,28 @@ export const groupByCategory = (
 
   if (category === 'Leadership') {
     const filteredTeams = teams
-  .map((group) => group.members)
-  .flat();
-  
+      .map((group) => group.members)
+      .flat();
+
     const filterFinal = filteredTeams.filter((member) => member.category === 'Leadership')
-    .map((teamMember, i) => {
-      return teamMember;
-    })
+      .map((teamMember, i) => {
+        return teamMember;
+      })
 
     return filterFinal.sort(function (a, b) {
       return a.position - b.position
     })
   }
 
-  if (category === 'Grants') {
+  if (category === 'Business Growth') {
     const filteredTeams = teams
-  .map((group) => group.members)
-  .flat();
-  
-    const filterFinal = filteredTeams.filter((member) => member.category === 'Grants')
-    .map((teamMember, i) => {
-      return teamMember;
-    })
+      .map((group) => group.members)
+      .flat();
+
+    const filterFinal = filteredTeams.filter((member) => member.category === 'Business Growth')
+      .map((teamMember, i) => {
+        return teamMember;
+      })
 
     return filterFinal.sort(function (a, b) {
       return a.position - b.position
@@ -117,13 +117,13 @@ export const groupByCategory = (
 
   if (category === 'Advisors') {
     const filteredTeams = teams
-  .map((group) => group.members)
-  .flat();
-  
+      .map((group) => group.members)
+      .flat();
+
     const filterFinal = filteredTeams.filter((member) => member.category === 'Advisors')
-    .map((teamMember, i) => {
-      return teamMember;
-    })
+      .map((teamMember, i) => {
+        return teamMember;
+      })
 
     return filterFinal.sort(function (a, b) {
       return a.position - b.position
@@ -132,13 +132,13 @@ export const groupByCategory = (
 
   if (category === 'Marketing') {
     const filteredTeams = teams
-  .map((group) => group.members)
-  .flat();
-  
+      .map((group) => group.members)
+      .flat();
+
     const filterFinal = filteredTeams.filter((member) => member.category === 'Marketing')
-    .map((teamMember, i) => {
-      return teamMember;
-    })
+      .map((teamMember, i) => {
+        return teamMember;
+      })
 
     return filterFinal.sort(function (a, b) {
       return a.position - b.position
@@ -147,28 +147,28 @@ export const groupByCategory = (
 
   if (category === 'Tech') {
     const filteredTeams = teams
-  .map((group) => group.members)
-  .flat();
-  
+      .map((group) => group.members)
+      .flat();
+
     const filterFinal = filteredTeams.filter((member) => member.category === 'Tech')
-    .map((teamMember, i) => {
-      return teamMember;
-    })
+      .map((teamMember, i) => {
+        return teamMember;
+      })
 
     return filterFinal.sort(function (a, b) {
       return a.position - b.position
     })
   }
 
-  if (category === 'Grants') {
+  if (category === 'Business Growth') {
     const filteredTeams = teams
-  .map((group) => group.members)
-  .flat();
-  
+      .map((group) => group.members)
+      .flat();
+
     const filterFinal = filteredTeams.filter((member) => member.category === 'Founder')
-    .map((teamMember, i) => {
-      return teamMember;
-    })
+      .map((teamMember, i) => {
+        return teamMember;
+      })
 
     return filterFinal.sort(function (a, b) {
       return a.position - b.position

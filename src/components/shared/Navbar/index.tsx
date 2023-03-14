@@ -242,11 +242,14 @@ const Navbar: React.FC<NavbarProps> = () => {
               <motion.button
                 initial={{ scale: 1.1 }}
                 animate={{ scale: 1 }}
-                onClick={() => setShowLinks(true)}
+                onClick={() => setShowLinks(!showLinks)}
                 className="block md:hidden"
               >
+                {/* <IoMdClose className={'h-7 w-7'} /> */}
                 <GiHamburgerMenu className={'h-7 w-7'} />
-              </motion.button>
+              </motion.button> 
+              
+             
             </div>
           </div>
         </div>
@@ -255,16 +258,16 @@ const Navbar: React.FC<NavbarProps> = () => {
       ) : "" }
       {/* Navigation Links (small screen) */}
       <AnimatePresence>
-        {showLinks && (
+        {showLinks &&  (
           <motion.div
             key="mobile-nav"
             initial={{ y: '-100%', opacity: 0 }}
-            animate={{ y: '0', opacity: 5 }}
-            exit={{ y: '-100%', opacity: 0, transition: { duration: 15.0 } }}
-            transition={{ duration: 5, ease: 'easeOut' }}
+            animate={{ y: '0', opacity: 3 }}
+            exit={{ y: '-100%', opacity: 0, transition: { duration: 3 } }}
+            transition={{ duration: 3, ease: 'easeOut' }}
             className="fixed top-0 left-0 z-40 w-full h-screen overflow-y-hidden text-white bg-white"
           >
-            <div className="flex justify-end">
+            <div className="flex justify-end mt-12">
               <div onClick={() => setShowLinks(false)} className="mt-8 mr-8">
                 <IoMdClose className="inline-block h-7 w-7 text-zinc-900" />
               </div>

@@ -11,14 +11,14 @@ const Engage = () => {
   return (
     <div className=' dark:bg-white dark:text-black'>
       <GlobalLayout>
-        <div className="flex flex-col items-center justify-center px-3 pb-20 sm:px-0 md:flex-row md:justify-evenly">
-        <div className="mt-[200px] w-full flex flex-row justify-center">
-        <div className="flex flex-col w-full md:w-1/2 justify-center">
+        <div className="flex flex-col px-3 pb-20 sm:px-0 w-[95%] md:w-[80%] max-w-[1400px] mx-auto ">
+        <div className="mt-[200px] grid grid-cols-1 lg:grid-cols-2 gap-2 justify-items-center">
+        <div className="flex flex-col w-full  justify-center">
           <Form />
           </div>
      {/* map div component belowa */}
        <div 
-       className="flex flex-col w-full md:w-1/2 justify-center">
+       className="flex flex-col w-full justify-center lg:mt-32">
           <Maps />
           <div className="flex bg-black dark:bg-white w-full flex-col justify-around  text-left md:flex-row md:items-center md:text-center ">
           <div className="flex pb-3  pl-3 pr-4 text-left"

@@ -356,9 +356,9 @@ Early Access Signup is now open! Please keep scrolling.
             <div className="z-10 mt-10 mb-10 flex items-center justify-center rounded-md p-5 md:px-16">
               <form
                 onSubmit={handleSubmit}
-                className="min-w-280 z-10 m-5 w-[80%]"
+                className="min-w-280 z-10 m-5  w-[90%] lg:w-[80%]"
               >
-                <h1 className="align-center m-auto mb-10 mb-4 flex justify-center text-center text-3xl font-bold text-white">
+                <h1 className="align-center m-auto  mb-4 flex justify-center text-center text-3xl font-bold text-white">
                   Sign Up now for early access
                 </h1>
                 <div className="mb-4">
