@@ -16,6 +16,7 @@ const GlobalLayout: React.FC<GlobalLayoutProps> = ({ children }) => {
         <Navbar />
       <main>{children}</main>
         <Footer />
+ 
     </>
   )
 }

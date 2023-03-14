@@ -31,7 +31,7 @@ const Teams: NextPage<TeamsProps> = ({ teams }) => {
             <div className="text-white ">
               <Title padding="py-3" title="Our Teams" />
             </div>
-            <Suspense fallback={null} >
+            <Suspense fallback={<div>Loading...</div>} >
 
             <div className="w-full lg:w-[80%] m-auto px-2 pb-10 ">
 

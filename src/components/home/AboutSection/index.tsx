@@ -17,8 +17,9 @@ import { api } from '../../../util/api'
 import React, { lazy, Suspense } from 'react'
 import { countries } from './SelectCountries'
 // import ImageLabel, { TypeImgLabel } from '../ImageLabel'
-import AnimationCity from './AnimationCity'
+// import AnimationCity from './AnimationCity'
 
+const AnimationCity = lazy(() => import('./AnimationCity'))
 const HashtagHeader = lazy(() => import('../HashtagHeader'))
 const BlogCard = lazy(() => import('../HeroSection/BlogCard'))
 
@@ -108,6 +109,7 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
   }, []);
 
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <div
       data-aos="zoom-in-up"
       className=" overflow-hidden xl:mt-[-120px] 2xl:mt-[-80px]"
@@ -164,8 +166,9 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
               className="m-auto flex min-h-[200px] w-[40%] min-w-[300px] justify-center "
             />
           </div> */}
-          
+          <Suspense fallback={<div>Loading..</div>}>
           <AnimationCity/>
+          </Suspense>
          
         </div>
 
@@ -449,6 +452,7 @@ Early Access Signup is now open! Please keep scrolling.
         </div>
       </section>
     </div>
+    </Suspense>
   )
 }
 
