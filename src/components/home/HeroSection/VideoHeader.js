@@ -97,10 +97,10 @@ const VideoHeader = () => {
                     className={`text-center font-m_plus_rounded_1c font-semibold uppercase md:font-bold`}
                   >
                     <pre className="mt-[25px] text-[25px] font-bold font-m_plus_rounded_1c dark:text-purple-500  max-[400px]:text-[22px]">
-                    INNOVATING BEYOND PoW AND PoS
+                    INNOVATING BEYOND
                     </pre>
                     <span className="text-[35px] font-bold font-m_plus_rounded_1c dark:text-purple-500">
-                    REDEFINING BLOCKCHAIN FOR A FAIRER FUTURE.
+                    PoW AND PoS
                     </span>
                   </h1>
                 </div>
@@ -112,9 +112,37 @@ const VideoHeader = () => {
               </div>
             </>
 
+
+)
+break
+case 2:
+  setCurrentItem(
+    <>
+      <div className="flex flex-col align-center justify-end  w-full h-[500px] m-auto max-[500px]:w-[300px]">
+        <div className="flex justify-center h-[150px]">
+          <h1
+            id="header1"
+            className={`text-center font-m_plus_rounded_1c font-semibold uppercase md:font-bold`}
+          >
+            <pre className="mt-[25px] text-[25px] font-bold font-m_plus_rounded_1c dark:text-purple-500  max-[400px]:text-[22px]">
+            REDEFINING BLOCKCHAIN FOR
+            </pre>
+            <span className="text-[35px] font-bold font-m_plus_rounded_1c dark:text-purple-500">
+            A FAIRER FUTURE
+            </span>
+          </h1>
+        </div>
+        <div className="align-items text-center">
+          <button className="rounded-full border bg-transparent py-2 px-4  font-m_plus_rounded_1c font-bold text-white hover:bg-gray-400 dark:text-purple-500 dark:hover:text-black">
+            <a href="/project">Learn More</a>
+          </button>
+        </div>
+      </div>
+    </>
+
           )
           break
-          case 2:
+          case 3:
           setCurrentItem(
             <>
               <div className="flex flex-col  align-center justify-end  w-full h-[500px] m-auto max-[500px]:w-[300px]">
@@ -126,8 +154,8 @@ const VideoHeader = () => {
                     <pre className="mt-[30px] text-[22px] font-bold font-m_plus_rounded_1c dark:text-purple-500 max-[400px]:text-[18px]">
                     INTRODUCING THE FUTURE
                     </pre>
-                    <span className="text-[27px] font-bold font-m_plus_rounded_1c dark:text-purple-500">
-                    OF LIVING.
+                    <span className="text-[35px] font-bold font-m_plus_rounded_1c dark:text-purple-500">
+                    OF LIVING
                     </span>
                   </h1>
                 </div>
@@ -141,7 +169,7 @@ const VideoHeader = () => {
             )
             break
       }
-      if (index.current === 2) {
+      if (index.current === 3) {
         index.current = 0
       } else {
         index.current = Number(index.current) + 1
