@@ -33,7 +33,7 @@ const Teams: NextPage<TeamsProps> = ({ teams }) => {
             </div>
             <Suspense fallback={null} >
 
-            <div className="w-[80%] m-auto px-2 pb-10 ">
+            <div className="w-full lg:w-[80%] m-auto px-2 pb-10 ">
 
             <TeamCatSelector
                 category={category}

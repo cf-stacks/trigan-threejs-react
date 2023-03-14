@@ -40,13 +40,13 @@ const TeamsByCategory: React.FC<TeamsByCategoryProps> = ({
   
   // console.log(category, teams);  
 
+
   return (
     
     <div className="flex w-full flex-col items-center">
-      {/* Founders  */}
+      {/* EXECUTIVE  */}
       {category === 'all' ? (
-        <>
-        
+        <>      
           <p className="my-6 text-center text-3xl font-semibold text-white dark:text-black">
             EXECUTIVE
           </p>
@@ -54,7 +54,25 @@ const TeamsByCategory: React.FC<TeamsByCategoryProps> = ({
           {teams
               .map((group) => group.members)
               .flat()
-              .filter((member) => member.category === "Founders")
+
+              .filter((member) => member.category === 'Founders' || member.category === 'Leadership')
+              .map((teamMember, i) => (
+                // console.log(teamMembaer)
+                <TeamCard
+                  handleShowDetails={handleShowDetails}
+                  key={teamMember.id}
+                  teamMember={teamMember}
+                  idx={i}
+                  showDetails={false}
+                ></TeamCard>
+              ))}
+           </div>         
+           <div className=" grid max-w-[950px] gap-4 pt-8 sm:grid-cols-2 md:px-12">     
+
+            {teams
+              .map((group) => group.members)
+              .flat()
+              .filter((member) => member.category === "Leadership")
               .map((teamMember, i) => (
                 <TeamCardL
                   handleShowDetails={handleShowDetails}
@@ -64,22 +82,7 @@ const TeamsByCategory: React.FC<TeamsByCategoryProps> = ({
                   showDetails={false}
                 ></TeamCardL>
               ))}
-           </div>         
-           <div className=" grid max-w-[950px] gap-4 pt-8 sm:grid-cols-2 md:px-12">     
-            {teams
-              .map((group) => group.members)
-              .flat()
-              .filter((member) => member.category === "Leadership")
-              .map((teamMember, i) => (
-                <TeamCardF
-                  handleShowDetails={handleShowDetails}
-                  key={teamMember.id}
-                  teamMember={teamMember}
-                  idx={i}
-                  showDetails={false}
-                ></TeamCardF>
-              ))}
-          </div>
+          </div> */}
 
           <p className="my-6 text-center text-3xl font-semibold text-white">
             ADVISORS
