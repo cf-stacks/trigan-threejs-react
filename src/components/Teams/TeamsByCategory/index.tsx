@@ -58,13 +58,13 @@ const TeamsByCategory: React.FC<TeamsByCategoryProps> = ({
               .filter((member) => member.category === 'Founders') // || member.category === 'Leadership')
               .map((teamMember, i) => (
                 // console.log(teamMembaer)
-                <TeamCard
+                <TeamCardL
                   handleShowDetails={handleShowDetails}
                   key={teamMember.id}
                   teamMember={teamMember}
                   idx={i}
                   showDetails={false}
-                ></TeamCard>
+                ></TeamCardL>
               ))}
            </div>         
            <div className=" grid max-w-[950px] gap-4 pt-8 sm:grid-cols-2 md:px-12">     
