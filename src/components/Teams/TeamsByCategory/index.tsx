@@ -55,7 +55,7 @@ const TeamsByCategory: React.FC<TeamsByCategoryProps> = ({
               .map((group) => group.members)
               .flat()
 
-              .filter((member) => member.category === 'Founders' || member.category === 'Leadership')
+              .filter((member) => member.category === 'Founders') // || member.category === 'Leadership')
               .map((teamMember, i) => (
                 // console.log(teamMembaer)
                 <TeamCard
