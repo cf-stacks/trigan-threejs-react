@@ -25,7 +25,7 @@ const Form = () => {
               >
                 Contact
                 <span 
-                className='text-[#5e1fff] dark:text-tpurple'
+                className='text-tpurple'
                 > Us</span>
               </p>
             </div>
@@ -47,7 +47,7 @@ const Form = () => {
                         id="first-name"
                         placeholder="First Name"
                         autoComplete="given-name"
-                        className="mt-1 bg-transparent block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="mt-1 block focus:border-purple-500 focus:ring-purple-500 sm:text-sm form-input w-full bg-white  rounded-md border-[#A855F7] shadow-sm"
                       />
                     </div>
 
@@ -64,7 +64,7 @@ const Form = () => {
                         placeholder="Last Name"
                         id="last-name"
                         autoComplete="family-name"
-                        className="mt-1 bg-tra bg-transparent block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  className="mt-1 block focus:border-purple-500 focus:ring-purple-500 sm:text-sm form-input w-full bg-white  rounded-md border-[#A855F7] shadow-sm"
                       />
                     </div>
 
@@ -82,7 +82,7 @@ const Form = () => {
                         placeholder="Email Address"
                         id="email-address"
                         autoComplete="email"
-                        className="mt-1 bg-transparent block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  className="mt-1 block focus:border-purple-500 focus:ring-purple-500 sm:text-sm form-input w-full bg-white  rounded-md border-[#A855F7] shadow-sm"
                       />
                     </div>
 
@@ -92,7 +92,7 @@ const Form = () => {
                         id="text"
                         placeholder="Message"
                         autoComplete="text"
-                        className="mt-1 block bg-transparent  h-32 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                       className="mt-1 block focus:border-purple-500 h-36 focus:ring-purple-500 sm:text-sm form-input w-full bg-white  rounded-md border-[#A855F7] shadow-sm"
                       />
                     </div>
                   </div>
@@ -100,7 +100,7 @@ const Form = () => {
                 <div className="items-center justify-center px-4 py-3 text-center sm:px-6">
                   <button
                     type="submit"
-                    className=" md:w-96 w-full  justify-center rounded-full border border-transparent bg-indigo-600 dark:bg-tpurple dark:hover:bg-tpurple/75 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    className=" md:w-96 w-full justify-center rounded-full border border-transparent bg-tpurple hover:bg-tpurple/75 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-tpurple focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
                     Submit
                   </button>
                 </div>

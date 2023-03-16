@@ -1,5 +1,6 @@
 import {ReactNode} from 'react'
-import {FaDiscord, FaFacebookSquare, FaInstagram, FaLinkedin, FaTelegram, FaTiktok, FaTwitter, FaMedium} from 'react-icons/fa'
+import {FaDiscord, FaFacebookSquare, FaInstagram, FaLinkedin, FaTelegram, FaTiktok, FaTwitter} from 'react-icons/fa'
+import {BsMedium} from 'react-icons/bs'
 import {FadeInWhenVisible} from '../../shared/FadeInWhenVisible'
 
 interface SocialLinksProps {
@@ -36,7 +37,7 @@ const SOCIAL_LINKS = [
     path: 'https://t.me/triganofficial',
   },
   {
-    icon: <FaMedium className="text-white" />,
+    icon: <BsMedium className="text-white" />,
     path: 'https://medium.com/@trigan',
   },
 ]
