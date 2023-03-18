@@ -28,8 +28,21 @@ const Model = (props) => {
 
   useFrame(({ clock }) => {
     const elapsedTime = clock.getElapsedTime()
-    earthRef.current.rotation.y = elapsedTime / 2.5 / 8
-    cloudRef.current.rotation.y = elapsedTime / 3 / 8
+    const time = props.time + elapsedTime;
+    if(clock.running){
+      earthRef.current.rotation.y = time / 2.5 / 8
+      cloudRef.current.rotation.y = time / 3 / 8
+    }
+
+    if(!clock.running && props.isPlaying){
+      clock.start();
+    }
+
+    if(clock.running && !props.isPlaying){
+      props.setTime(time);
+      clock.stop();
+    }
+    // console.log(time, props.time);/
   })
 
   return (

@@ -3,7 +3,7 @@ import Model from '../EarthTexture/Draco'
 import React, { memo, useEffect, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 
-function Combined() {
+function Combined({ time, setTime, isPlaying }) {
   const [scrollPercent, setScrollPercent] = useState(0)
   const [scaleDownValue, setScaleDownValue] = useState(12)
   const [Device, setDevice] = useState(30)
@@ -54,8 +54,8 @@ function Combined() {
   return (
     // Grup all the elements
     <group ref={combinedRef}>
-      <Model />
-      <MoonModel />
+      <Model time={time} setTime={setTime} isPlaying={isPlaying} />
+      <MoonModel time={time} isPlaying={isPlaying} />
     </group>
   )
 }
