@@ -1,5 +1,6 @@
 {
   "name": "testing-libray-bruno",
+  "proxy":"https://test1.trigan.org",
   "private": true,
   "resolutions": {
     "@types/react": "17.0.2",

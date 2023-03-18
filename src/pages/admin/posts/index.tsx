@@ -128,14 +128,16 @@ const Dashboard: NextPage<DashboardProps> = () => {
 
   const fetchFunction = useCallback(async () => {
     setFetching(true)
+    console.log("request senttt")
     try {
-      const p: any = await axios.get(`${TEST_API_URL}/posts`, {
+      const p: any = await axios.get(`${TEST_API_URL}/linkedin-job/get`, {
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
         },
       })
 
+      console.log(p);
       setPosts(p.data.posts)
       console.log(p);
 
