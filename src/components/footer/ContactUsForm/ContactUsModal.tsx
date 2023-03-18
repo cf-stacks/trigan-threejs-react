@@ -17,8 +17,8 @@ interface ContactUsFormProps {
 }
 
 interface ContactUsModalProps {
-  modal: IEarlyAccessModalContext;
-  setModal: Function;
+  modal: IEarlyAccessModalContext
+  setModal: Function
 }
 
 export const ContactUsModal: React.FC<ContactUsModalProps> = () => {
@@ -73,7 +73,7 @@ export const ContactUsModal: React.FC<ContactUsModalProps> = () => {
         padding={0}
         className={'border border-gray-400 sm:w-full'}
       >
-        <div className="bg-white font-serif md:mt-5 lg:mt-0">
+        <div className="bg-white md:mt-5 lg:mt-0">
           <div className="mx-px my-px bg-black px-10 py-10 text-white">
             <h6 className="py-2 text-center text-xl uppercase text-[#DCDCDC] md:text-left">
               Contact Us
@@ -84,14 +84,14 @@ export const ContactUsModal: React.FC<ContactUsModalProps> = () => {
                 placeholder="Type Your Name"
                 control={control as any}
                 error={name?.message}
-                border="border-[#DCDCDC]"
+                className="form-input w-full rounded-md border-[#A855F7] shadow-sm"
               />
               <TextInputField
                 name="subject"
                 placeholder="Type Your Subject"
                 control={control as any}
                 error={subject?.message}
-                border="border-[#DCDCDC]"
+                className="form-input w-full rounded-md border-[#A855F7] shadow-sm"
               />
 
               <TextInputField
@@ -104,7 +104,7 @@ export const ContactUsModal: React.FC<ContactUsModalProps> = () => {
                   },
                 }}
                 error={email?.message}
-                border="border-[#DCDCDC]"
+                className="form-input w-full rounded-md border-[#A855F7] shadow-sm"
               />
 
               <TextInputField
@@ -112,7 +112,7 @@ export const ContactUsModal: React.FC<ContactUsModalProps> = () => {
                 placeholder="Type Your Country"
                 control={control as any}
                 error={country?.message}
-                border="border-[#DCDCDC]"
+                className="form-input w-full rounded-md border-[#A855F7] shadow-sm"
               />
 
               <TextareaInputField
@@ -120,10 +120,10 @@ export const ContactUsModal: React.FC<ContactUsModalProps> = () => {
                 placeholder="Type Your Message"
                 control={control as any}
                 error={content?.message}
-                border="border-[#DCDCDC]"
+                className="form-input w-full rounded-md border-[#A855F7] shadow-sm"
               />
               <div className="flex w-full justify-center pb-4">
-                <button className="w-full rounded bg-red-600 px-4 py-1.5 text-light transition-all hover:bg-red-700 sm:text-sm md:text-lg">
+                <button className="w-full rounded-md bg-[#A855F7] py-2 font-bold text-white">
                   Contact Us
                 </button>
               </div>
