@@ -25,19 +25,16 @@ const Logo = () => (
 
   <motion.div
     transition={{ delay: 5, duration: 5, ease: 'easeInOut' }}
-    exit={{ opacity: 0, transition: { duration: 5, delay: 5 } }}
-    className="m-auto"
-  >
+    exit={{ opacity: 0 , transition: { duration: 5, delay: 5 } }}
+    className="w-[100%] h-[100%] m-auto flex justify-center align-center"
+    >
+
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="white"
       id="HeroLogo"
-      viewBox="0 0 1000 1000"
-      style={{
-        enableBackground: 'new 0 0 1000 1000',
-        // width: '500px',
-      }}
-      className="m-auto w-[300px] md2:w-[500px]"
+      viewBox="80 0 1000 1000"
+      className="flex m-auto justify-center align-center w-[300px] md2:w-[500px]"
     >
       <path d="M535.57 593.55C530.35 597.22 528.79 604.27 531.98 609.79L566.42 669.45C574.1 682.75 593.3 682.75 600.98 669.45L702.83 493.03C706.72 486.29 698.73 478.98 692.36 483.45L535.57 593.55Z" />
       <path d="M633.68 315.11L758.77 373.24C764.67 375.98 771.7 373.76 774.95 368.13L814.47 299.69C820.91 288.53 812.86 274.59 799.98 274.59L583.71 274.59L583.71 274.59C574.9 274.59 572.25 286.57 580.24 290.28L633.68 315.11Z" />
