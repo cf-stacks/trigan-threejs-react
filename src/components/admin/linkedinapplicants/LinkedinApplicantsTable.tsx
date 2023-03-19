@@ -1,6 +1,6 @@
 import { SetStateAction, useState, Dispatch } from 'react'
 import { Table, Loader, Button, createStyles, ScrollArea } from '@mantine/core'
-import { IconPencil, IconX } from '@tabler/icons'
+import { IconMail, IconMessage, IconPencil, IconX } from '@tabler/icons'
 import { useRouter } from 'next/router'
 
 const useStyles = createStyles((theme) => ({
@@ -106,6 +106,9 @@ export const ApplicantsTable = ({
                 color="blue"
               >
                 <IconPencil style={{ zIndex: -1 }} />
+              </Button>
+              <Button onClick={() => {}} variant="light" color="blue">
+                <IconMail style={{ zIndex: -1 }} />
               </Button>
             </Button.Group>
           </td>
