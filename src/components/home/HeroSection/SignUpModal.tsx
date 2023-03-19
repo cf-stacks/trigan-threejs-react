@@ -18,14 +18,14 @@ interface Imodal {
 interface IPostModals {
   modal: Imodal
   setModal: React.Dispatch<React.SetStateAction<Imodal>>
-  selectedPost: any
-  setSelectedPost: any
-  fetchFunction: () => Promise<void>
+  selectedPost?: any
+  setSelectedPost?: any
+  fetchFunction?: () => Promise<void>
 }
 
 export const SignUpModal = ({
-  selectedPost,
-  setSelectedPost,
+  selectedPost = {},
+  setSelectedPost = {},
   fetchFunction,
 }: IPostModals) => {
   const useStyles = createStyles((theme) => ({
@@ -86,7 +86,7 @@ export const SignUpModal = ({
           modal: classes.modal,
         }}
       >
-        <div className="px-10 py-10 my-3 text-left lg:mt-0">
+        <div className="my-3 px-10 py-10 text-left lg:mt-0">
           <h6 className="py-2 text-xl uppercase text-[#DCDCDC]">
             Sign Up for Early Access!
           </h6>
@@ -97,7 +97,7 @@ export const SignUpModal = ({
               control={control as any}
               error={name?.message}
               border="border-[#b4bec8]"
-              style={{ 'margin-bottom': '10px' } as React.CSSProperties}
+              className="form-input w-full rounded-md border-[#A855F7] shadow-sm"
             />
             <TextInputField
               name="email"
@@ -110,12 +110,10 @@ export const SignUpModal = ({
               }}
               error={email?.message}
               border="border-[#b4bec8]"
-              style={{ 'margin-bottom': '5px' } as React.CSSProperties}
+              className="form-input w-full rounded-md border-[#A855F7] shadow-sm"
             />
-            <div className="flex justify-center w-full pb-4">
-              <button
-                className="bg-[#A855F7] mt-2 w-full rounded-2xl bg-gray-900 px-4 py-1.5 text-light transition-all hover:bg-gray-900/80 sm:text-sm md:text-lg"
-              >
+            <div className="flex w-full justify-center py-4">
+              <button className="w-full rounded-md bg-[#A855F7] py-2 font-bold text-white">
                 Sign up
               </button>
             </div>

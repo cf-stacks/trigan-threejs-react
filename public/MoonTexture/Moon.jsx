@@ -4,7 +4,7 @@ import { useFrame, useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 
-function MoonModel(){
+function MoonModel({time, isPlaying}){
     // Import Moon Object
     let moon = useLoader(
         GLTFLoader, "MoonTexture/moon.glb"
@@ -13,17 +13,21 @@ function MoonModel(){
     const moonRef = React.useRef()
 
     useFrame(({ clock }) => {
-        // Rotation of the Moon around its orbit
-        moon.rotation.y += 0.0025
-
-        // Speed of rotation around the Earth 
-        const t = clock.getElapsedTime() / 19;
-
-        // Rotation of the moon around the earth
-        const x = 3.5 * Math.sin(t);
-        const z = -3 * Math.cos(t);
-        moon.position.x = x;
-        moon.position.z = z;
+        
+        if(clock.running){
+            // Rotation of the Moon around its orbit
+            moon.rotation.y += 0.0025
+    
+            // Speed of rotation around the Earth 
+            const elapsedTime = clock.getElapsedTime();
+            const t = (elapsedTime + time) / 19;
+    
+            // Rotation of the moon around the earth
+            const x = 3.5 * Math.sin(t);
+            const z = -3 * Math.cos(t);
+            moon.position.x = x;
+            moon.position.z = z;
+        }
       });
 
 

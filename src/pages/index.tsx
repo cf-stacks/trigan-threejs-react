@@ -10,9 +10,8 @@ import { useTheme } from 'next-themes'
 
 // const HeroSection = lazy(() => import('../components/home/HeroSection/index'))
 const AboutSection = lazy(() => import('../components/home/AboutSection/index'))
-import HeroSection  from'../components/home/HeroSection/index'
+import HeroSection from '../components/home/HeroSection/index'
 // import AboutSection from '../components/home/AboutSection/index'
-
 
 interface HomeProps {
   children?: ReactNode
@@ -20,7 +19,10 @@ interface HomeProps {
 }
 const Home: NextPage<HomeProps> = () => {
   const { systemTheme, theme, setTheme } = useTheme()
-  setTheme('light')
+
+  useEffect(() => {
+    setTheme('light')
+  }, [])
 
   return (
     <>
@@ -30,10 +32,10 @@ const Home: NextPage<HomeProps> = () => {
       />
       <div className="relative overflow-x-hidden">
         <GlobalLayout>
-              <HeroSection />
-          <Suspense fallback={<div>Loading...</div>} >
-              <AboutSection />
-          </Suspense>  
+          <HeroSection />
+          <Suspense fallback={<div>Loading...</div>}>
+            <AboutSection />
+          </Suspense>
         </GlobalLayout>
       </div>
     </>

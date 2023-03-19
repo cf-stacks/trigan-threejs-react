@@ -112,10 +112,10 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
     <Suspense fallback={<div>Loading...</div>}>
     <div
       data-aos="zoom-in-up"
-      className=" overflow-hidden xl:mt-[-120px] 2xl:mt-[-80px]"
+      className="overflow-hidden xl:mt-[-120px] 2xl:mt-[-80px] aos-init"
     >
       <HashtagHeader text="#OurSolution" position="left" id="ourSolution"/>
-      <section data-aos="fade-up" className="">
+      <section data-aos="fade-up" className="aos-init">
         <div className=" m-auto w-[90%]">
           <div className="m-auto mb-10 mt-10 flex w-[100%] flex-col max-[600px]:text-center">
             <h2 className="flex justify-center text-4xl dark:text-black max-[600px]:text-[28px]">
@@ -324,21 +324,21 @@ Early Access Signup is now open! Please keep scrolling.
                 data-aos="fade-right"
                 data-aos-offset="50"
                 data-aos-anchor-placement="bottom-bottom"
-                className="leftyside !absolute inset-x-0 right-8 m-auto w-64 !overflow-hidden pr-10 md:w-[455px]"
+                className="leftyside !absolute inset-x-0 right-8 m-auto w-64 !overflow-hidden pr-10 md:w-[455px] aos-init aos-animate"
                 src="/logo-parts/logo-left.png"
               />
               <img
                 loading="lazy"
                 data-aos="fade-left"
                 data-aos-anchor-placement="bottom-bottom"
-                className="rightyside !absolute inset-x-0 left-8 m-auto w-64 !overflow-hidden md:w-[455px]"
+                className="rightyside !absolute inset-x-0 left-8 m-auto w-64 !overflow-hidden md:w-[455px] aos-init aos-animate"
                 src="/logo-parts/logo-right.png"
               />
               <p
                 data-aos="zoom-in"
                 data-aos-anchor-placement="bottom-bottom"
                 data-aos-offset="100"
-                className="content_center absolute inset-x-0 m-auto mt-6 ml-[40px] !overflow-hidden pl-2 text-center text-2xl font-bold text-white max-[999px]:top-[-100px] max-[999px]:text-[12px] md:top-[8rem] md:text-2xl lg:top-[9rem]"
+                className="content_center absolute inset-x-0 m-auto mt-6 ml-[40px] !overflow-hidden pl-2 text-center text-2xl font-bold text-white max-[999px]:top-[-100px] max-[999px]:text-[12px] md:top-[8rem] md:text-2xl lg:top-[9rem] aos-init aos-animate"
               >
                 LET’S BUILD A <br />
                 BETTER FUTURE <br />
@@ -348,7 +348,7 @@ Early Access Signup is now open! Please keep scrolling.
                 loading="lazy"
                 data-aos="fade-down"
                 data-aos-anchor-placement="bottom-bottom"
-                className="bottomside relative inset-x-0 top-5 m-auto w-64 w-[480px] !overflow-hidden max-[999px]:top-[40px]"
+                className="bottomside relative inset-x-0 top-5 m-auto w-64 w-[480px] !overflow-hidden max-[999px]:top-[40px] aos-init aos-animate"
                 src="/logo-parts/logo-bottom.png"
               />
             </div>

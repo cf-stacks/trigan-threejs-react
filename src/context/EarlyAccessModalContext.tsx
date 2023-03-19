@@ -1,12 +1,18 @@
-import React, { createContext, ReactNode, useState } from 'react'
+import React, { createContext, Dispatch, ReactNode, SetStateAction, useState } from 'react'
 
 interface Props {
   children: ReactNode
 }
 
+interface Imodal {
+  open: boolean
+  size: string
+  type: string
+}
+
 export type EarlyAccessModalContextType = {
   modal: IEarlyAccessModalContext
-  setModal: Function
+  setModal: Dispatch<SetStateAction<Imodal>>
 }
 
 export interface IEarlyAccessModalContext {
