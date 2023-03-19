@@ -18,14 +18,14 @@ interface Imodal {
 interface IPostModals {
   modal: Imodal
   setModal: React.Dispatch<React.SetStateAction<Imodal>>
-  selectedPost: any
-  setSelectedPost: any
-  fetchFunction: () => Promise<void>
+  selectedPost?: any
+  setSelectedPost?: any
+  fetchFunction?: () => Promise<void>
 }
 
 export const SignUpModal = ({
-  selectedPost,
-  setSelectedPost,
+  selectedPost = {},
+  setSelectedPost = {},
   fetchFunction,
 }: IPostModals) => {
   const useStyles = createStyles((theme) => ({
