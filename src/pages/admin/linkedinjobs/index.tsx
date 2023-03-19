@@ -77,7 +77,7 @@ const Jobs: NextPage = () => {
   }, [fetchFunction])
   return (
     <AdminLayout>
-      <Title align="center">Linkedin Accounts</Title>
+      <Title align="center">Linkedin Jobs</Title>
 
       <section>
         <JobsTable jobs={jobs} fetching={fetching} />
