@@ -28,6 +28,7 @@ const Login: React.FC<LoginProps> = () => {
   const onSubmit = async (e: any) => {
     e.preventDefault()
     console.log('were in')
+    console.log(password, email)
     try {
       const user: any = await axios.post(
         `${TEST_API_URL}/auth/login`,
@@ -35,11 +36,16 @@ const Login: React.FC<LoginProps> = () => {
           username: email,
           password,
         },
-        { params: { apiKey: API_KEY } }
+        {
+          headers: { 'Content-Type': 'application/json' },
+        }
       )
       console.log('request Done')
       console.log(user)
-      localStorage.setItem('access_token', user.data.Data.Data.acess_token as string)
+      localStorage.setItem(
+        'access_token',
+        user.data.Data.Data.acess_token as string
+      )
       console.log('saved to lcaol storage')
       try {
         checkLoggedIn()
