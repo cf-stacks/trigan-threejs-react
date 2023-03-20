@@ -1,6 +1,6 @@
 import { SetStateAction, useState, Dispatch } from 'react'
 import { Table, Loader, Button, createStyles, ScrollArea } from '@mantine/core'
-import { IconPencil, IconX } from '@tabler/icons'
+import { IconMail, IconMessage, IconPencil, IconX } from '@tabler/icons'
 import { useRouter } from 'next/router'
 
 const useStyles = createStyles((theme) => ({
@@ -73,7 +73,7 @@ export const ApplicantsTable = ({
   const [scrolled, setScrolled] = useState(false)
   const router = useRouter()
 
-  const statusColors = { ACTIVE: 'green', REJECT: 'yellow', INVITED: 'blue' }
+  const statusColors = { ACTIVE: 'green', REJECT: '#fcba03', INVITED: 'blue' }
 
   const newposts =
     applicants.length > 0 ? (
@@ -85,7 +85,9 @@ export const ApplicantsTable = ({
           <td>{new Date(element.updated_at).toLocaleDateString()}</td>
           <th>{element.linkedin_job_id}</th>
           <th>{element.name}</th>
-          <th>{element.cv_link ? 'Yes' : 'No'}</th>
+          <th style={{ color: 'purple' }}>
+            <a href={element.cv_link}>Link</a>
+          </th>
           <th
             style={{
               color: statusColors[element.status as keyof typeof statusColors],
@@ -104,6 +106,9 @@ export const ApplicantsTable = ({
                 color="blue"
               >
                 <IconPencil style={{ zIndex: -1 }} />
+              </Button>
+              <Button onClick={() => {}} variant="light" color="blue">
+                <IconMail style={{ zIndex: -1 }} />
               </Button>
             </Button.Group>
           </td>

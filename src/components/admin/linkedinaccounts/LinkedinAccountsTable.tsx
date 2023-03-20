@@ -47,7 +47,7 @@ export interface AccountType {
   updated_at: string
   name: string
   description: string
-  is_active: string
+  is_active: boolean
   encrypted_account: string
 }
 

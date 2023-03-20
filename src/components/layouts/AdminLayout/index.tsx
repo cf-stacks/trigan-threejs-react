@@ -26,7 +26,10 @@ import {
   IconTriangle,
   IconUserPlus,
   IconArrowSharpTurnRight,
-  IconSchema
+  IconSchema,
+  IconBrandLinkedin,
+  IconBriefcase,
+  IconForms,
 } from '@tabler/icons'
 import axios from 'axios'
 import { useRouter } from 'next/router'
@@ -195,6 +198,9 @@ const navLinks: LinksProp[] = [
   { icon: IconClipboardText, label: 'proposals' },
   { icon: IconList, label: 'content' },
   { icon: IconTriangle, label: 'ABtesting' },
+  { icon: IconBrandLinkedin, label: 'linkedinaccounts' },
+  { icon: IconBriefcase, label: 'linkedinjobs' },
+  { icon: IconFiles, label: 'linkedinapplicants' },
 ]
 
 //Creating admin context
@@ -296,6 +302,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
           top: 0,
           transition: 'transform 0.3s ease',
         }}
+        style={{ overflowY: 'scroll' }}
         className={open ? classes.slideLeft : ''}
         width={{ base: 80 }}
         p="md"

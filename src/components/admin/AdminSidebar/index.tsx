@@ -1,4 +1,4 @@
-import Image from "next/legacy/image"
+import Image from 'next/legacy/image'
 import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
 
@@ -13,6 +13,9 @@ export const LINKS = [
   'something else',
   'nothing',
   'i don"t know',
+  'linkedinaccounts',
+  'linkedinjobs',
+  'linkedinapplicants',
 ]
 
 export const AdminSidebar: React.FC<AdminSidebarProps> = () => {
@@ -20,7 +23,11 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = () => {
   return (
     <div className="h-full bg-grey py-5">
       <div className="relative mx-auto h-28 w-28">
-        <Image src="/images/trigan logo v.svg" layout="fill" alt="trigan logo" />
+        <Image
+          src="/images/trigan logo v.svg"
+          layout="fill"
+          alt="trigan logo"
+        />
       </div>
       <h2 className="py-2 text-center text-xl font-semibold">Trigan Admin</h2>
       <div>

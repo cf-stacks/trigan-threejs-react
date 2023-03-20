@@ -73,9 +73,19 @@ export const JobsTable = ({ jobs: users, fetching }: AccountsTableProps) => {
           <td>{new Date(element.updated_at).toLocaleDateString()}</td>
           <th>{element.linkedin_account_id}</th>
           <th>{element.title}</th>
-          <th>{element.description}</th>
-          <th>{element.job_id}</th>
           <th>
+            <div
+              style={{
+                whiteSpace: 'pre-line',
+                height: '100px',
+                overflowY: 'scroll',
+              }}
+            >
+              {element.description}
+            </div>
+          </th>
+          <th>{element.job_id}</th>
+          <th style={{ color: 'purple' }}>
             <a href={element.link}>link</a>
           </th>
           <th>{element.is_active ? 'Yes' : 'No'}</th>
