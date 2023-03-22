@@ -14,6 +14,31 @@ import {
 } from '@react-three/postprocessing'
 
 // extend({ UnrealBloomPass })
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+
+
+const loader = new GLTFLoader();
+
+loader.load(
+  'EarthTexture/planet.glb',
+  (gltf) => {
+    // Do something with the loaded GLTF object
+    console.log("*********************************")
+    console.log("The file is loaded");
+    console.log("*********************************")
+  },
+  (xhr) => {
+    // Progress callback
+    console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
+  },
+  (error) => {
+    // Error callback
+    console.log("*****************Error****************")
+    console.error(error);
+    console.log("*********************************")
+
+  }
+);
 
 
 const Model = (props) => {
