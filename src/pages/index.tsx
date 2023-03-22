@@ -7,6 +7,7 @@ import React, { lazy, Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import GlobalLayout from '../components/layouts/GlobalLayout'
 import { useTheme } from 'next-themes'
+import ErrorBoundary from './ErrorBoundary'
 
 // const HeroSection = lazy(() => import('../components/home/HeroSection/index'))
 const AboutSection = lazy(() => import('../components/home/AboutSection/index'))
@@ -32,10 +33,11 @@ const Home: NextPage<HomeProps> = () => {
       />
       <div className="relative overflow-x-hidden">
         <GlobalLayout>
-          <HeroSection />
-          <Suspense fallback={<div>Loading...</div>}>
-            <AboutSection />
-          </Suspense>
+        <ErrorBoundary>
+            <Suspense fallback={<div>Loading...</div>}>
+              <AboutSection />
+            </Suspense>
+          </ErrorBoundary>
         </GlobalLayout>
       </div>
     </>
