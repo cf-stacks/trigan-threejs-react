@@ -226,7 +226,7 @@ const VideoHeader = () => {
               <button className="rounded-full w-fit border bg-transparent py-2 px-4  font-m_plus_rounded_1c font-bold text-white hover:bg-gray-400 dark:text-purple-500 dark:hover:text-black">
                 <a href="/project">Learn More</a>
               </button>
-              <button className="rounded-full w-[80px] flex justify-center items-center  h-10 mt-3 border bg-transparent px-4 text-center  font-m_plus_rounded_1c font-bold text-white hover:bg-gray-400 dark:text-purple-500 dark:hover:text-black"
+              <button className="opacity-50 rounded-full w-[80px] flex justify-center items-center  h-10 mt-3 border bg-transparent px-4 text-center  font-m_plus_rounded_1c font-bold text-white hover:bg-gray-400 dark:text-purple-500 dark:hover:text-black"
                 onClick={() => setIsPlaying(p => !p)}>
                 {isPlaying ? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ffffff" className="w-6 h-6">
                   <path fillRule="evenodd" d="M6.75 5.25a.75.75 0 01.75-.75H9a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75V5.25zm7.5 0A.75.75 0 0115 4.5h1.5a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H15a.75.75 0 01-.75-.75V5.25z" clipRule="evenodd" />
