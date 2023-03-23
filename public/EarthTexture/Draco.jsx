@@ -3,6 +3,16 @@ import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
 import { useLoader } from 'react-three-fiber'
 
+import {
+  EffectComposer,
+  DepthOfField,
+  Bloom,
+  Noise,
+  Vignette,
+  Selection,
+} from '@react-three/postprocessing'
+import { Canvas } from '@react-three/fiber'
+
 const Model = (props) => {
   const group = useRef()
 
@@ -31,7 +41,6 @@ const Model = (props) => {
 
   return (
     <group ref={group}>
-      <color attach="background" args={['#000']} />
       <mesh
         emissive="red"
         emissiveIntensity={2}
