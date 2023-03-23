@@ -3,11 +3,12 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/autoplay'
 import React, { lazy, Suspense } from 'react'
+import dynamic from 'next/dynamic'
 
-// const ScrollingSlideShow = lazy(() => import('./scrollingSlideShow'))
-// const VideoHeader = lazy(() => import('./VideoHeader'))
-import ScrollingSlideShow from './scrollingSlideShow'
-import VideoHeader from'./VideoHeader'
+const ScrollingSlideShow = dynamic(() => import('./scrollingSlideShow'))
+const VideoHeader = dynamic(() => import('./VideoHeader'))
+// import ScrollingSlideShow from './scrollingSlideShow'
+// import VideoHeader from'./VideoHeader'
 
 interface HeroSectionProps {
   children?: ReactNode
@@ -23,10 +24,10 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
     // bg-slate-300/70
     <>
       <div className="relative">
-        {/* <Suspense fallback={<div>Loading...</div>}> */}
-          <VideoHeader></VideoHeader>
+        <Suspense fallback={<div>Loading...</div>}>
+          <VideoHeader/>
           <ScrollingSlideShow />
-        {/* </Suspense> */}
+        </Suspense>
       </div>
     </>
   )
