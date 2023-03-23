@@ -31,6 +31,7 @@ const Model = (props) => {
 
   return (
     <group ref={group}>
+      <color attach="background" args={['#000']} />
       <mesh
         emissive="red"
         emissiveIntensity={2}
