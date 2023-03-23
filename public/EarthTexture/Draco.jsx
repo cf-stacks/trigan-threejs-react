@@ -3,11 +3,20 @@ import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
 import { useLoader } from 'react-three-fiber'
 
+import {
+  EffectComposer,
+  DepthOfField,
+  Bloom,
+  Noise,
+  Vignette,
+  Selection,
+} from '@react-three/postprocessing'
+import { Canvas } from '@react-three/fiber'
+
 const Model = (props) => {
   const group = useRef()
 
-  // Create a sphere geometry with a radius of 1 and 64 segments
-  const earthGeometry = new THREE.SphereGeometry(1, 64, 64)
+  const earthGeometry = new THREE.SphereGeometry(1.9, 64, 64)
 
   // Load the Earth texture
   const earthTexture = useLoader(THREE.TextureLoader, 'EarthTexture/earth.jpg')
