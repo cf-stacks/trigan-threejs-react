@@ -24,8 +24,7 @@ import { PostsByDate } from '../components/Posts/PostsByDate';
 
 interface BlogProps {
   children?: ReactNode
-  // posts: any /* BlogPost[] */
-  posts: BlogPost[]
+  posts: BlogPost
 }
 
 const baseURL = 'https://test1.trigan.org/api/v1/posts?&apiKey='
