@@ -85,8 +85,8 @@ const ScrollingSlideShow = () => {
                     );
                   })}
                 </h3>
+                <hr className='mt-5 border-4 border-purple-600' />
                 </div>
-                {/* <hr className='mt-20 border-4 border-purple-600' /> */}
                 <div className='bg-[#A855F7] w-[450px] h-[400px] object-cover max-[600px]:w-[400px] max-[600px]:h-[350px] max-[500px]:w-[300px] max-[500px]:h-[250px] max-[850px]:mt-[35px] flex justify-center align-center m-auto max-[600px]:flex-col max-[600px]:m-auto max-[600px]:mt-5' >
                   
                   <img

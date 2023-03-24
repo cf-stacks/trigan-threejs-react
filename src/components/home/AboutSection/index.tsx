@@ -318,7 +318,7 @@ Early Access Signup is now open! Please keep scrolling.
       <section className="">
         <div className="flex flex-col items-center justify-center pt-96">
           <div className="mb-[50px] hidden w-5/12 md:block">
-            <div className=" relative mt-96 mb-28">
+            <div className="relative mt-[50px] mb-28">
               <img
                 loading="lazy"
                 data-aos="fade-right"
