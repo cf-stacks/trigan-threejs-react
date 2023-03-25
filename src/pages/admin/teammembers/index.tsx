@@ -131,15 +131,18 @@ const Dashboard: NextPage<DashboardProps> = () => {
   const fetchFunction = useCallback(async () => {
     setFetching(true)
     try {
-      const posts: any = await axios.get(`${TEST_API_URL}/teammember/getAll`, {
-        withCredentials: true,
-        headers: {
-          Authorization: `${localStorage.getItem('access_token')}`,
-        },
-        params: {
-          search,
-        },
-      })
+      const posts: any = await axios.get(
+        `${TEST_API_URL}/teammember/getAll?is_grouped_by_team=false`,
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `${localStorage.getItem('access_token')}`,
+          },
+          params: {
+            search,
+          },
+        }
+      )
       console.log(posts.data.Data)
       setPosts(posts.data.Data)
     } catch (error: any) {
