@@ -11,7 +11,7 @@ interface PostsByDateProps {
 }
 
 export const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
-  const mockPosts: any[] = posts.posts
+  const mockPosts: any[] = posts.posts ?? []
 
   return (
     <div className="m-auto mb-10 flex w-[100%] flex-row flex-wrap justify-center hover:cursor-pointer ">

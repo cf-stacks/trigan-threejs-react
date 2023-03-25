@@ -2,25 +2,25 @@ import { ReactNode } from 'react'
 import type { NextPage } from 'next'
 import { ThemeProvider } from 'next-themes'
 import { Title } from '../../../components/shared/Title'
-import  GlobalLayout  from '../../../components/layouts/GlobalLayout'
+import GlobalLayout from '../../../components/layouts/GlobalLayout'
 import { SEO } from '../../../components/shared/SEO'
 import PostSearch from '../../../components/Posts/PostSearch'
 import { PostsByDate } from '../../../components/Posts/PostsByDate'
+import { BlogPost } from '../../../types/BlogPost'
+import { useRouter } from 'next/router'
 
 interface SearchResultProps {
   children?: ReactNode
-  posts: any
+  posts: BlogPost
 }
 
-let posts = [null]
-
-export async function getServerSideProps({ query }: any) {
-  const { search_terms } = query
+export async function getServerSideProps(context : any) {
+  console.log("context value",context.params.searchresult);
   const res = await fetch(
-    `${process.env.URL}posts/search?apiKey=${process.env.GET_API_KEY}&search=${search_terms}`
+    `https://test1.trigan.org/api/v1/posts/search?apiKey=g436739d6734gd6734&search=${context.params.searchresult}`
   )
-  posts = await res.json()
-  console.log(posts)
+  let posts = await res.json()
+  console.log(posts, 'postss resjson !!')
   return {
     props: {
       posts,
@@ -29,6 +29,9 @@ export async function getServerSideProps({ query }: any) {
 }
 
 const SearchResult: NextPage<SearchResultProps> = ({ posts }) => {
+  const router = useRouter()
+  const { searchresult } = router.query
+
   return (
     <ThemeProvider attribute="class" enableSystem={true}>
       <div id="postsearch">
@@ -36,7 +39,7 @@ const SearchResult: NextPage<SearchResultProps> = ({ posts }) => {
         <GlobalLayout>
           <Title padding="py-3" title="Search Results" />
           <PostSearch />
-          <PostsByDate posts={posts.posts} />
+          <PostsByDate posts={posts} />
         </GlobalLayout>
       </div>
     </ThemeProvider>
