@@ -9,18 +9,15 @@ import {
   Modal,
   Title,
   TextInput,
-  Textarea,
   Divider,
   createStyles,
   Text,
-  Container,
 } from '@mantine/core'
 import axios from 'axios'
 import { ListItems } from './List'
 import { TEST_API_URL } from '../../../util/constants'
 import toast from 'react-hot-toast'
 import { BlogPost } from '../../../types/BlogPost'  
-import { useRouter } from 'next/router'
 import { getErrorMsg } from '../../../util/api'
 import RichTextEditor from '../content/RichText'
 

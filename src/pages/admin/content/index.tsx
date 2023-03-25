@@ -59,7 +59,7 @@ const Dashboard: NextPage<DashboardProps> = () => {
     setFetching(true);
     try {
       const response = await axios.get(
-        `${TEST_API_URL}/dynamic-content/getall?apiKey=${GET_API_KEY}&&weight=0.5`,
+        `${TEST_API_URL}/dynamic-content/getall?apiKey=${GET_API_KEY}&weight=0.5`,
         {
           withCredentials: true,
           headers: {
