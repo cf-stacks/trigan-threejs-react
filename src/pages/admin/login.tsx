@@ -54,7 +54,7 @@ const Login: React.FC<LoginProps> = () => {
       }
       console.log('checked if logged in')
       console.log('ok')
-      void router.push('/admin/posts')
+      void router.push('/admin/main')
     } catch (error: any) {
       console.log('problem')
       console.log('error', error.response)
