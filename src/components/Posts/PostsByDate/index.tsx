@@ -34,7 +34,7 @@ export const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                       <div className="m-auto mt-5 h-[250px] w-[420px]">
                         <img
                           loading="lazy"
-                          src="https://contentsnare.com/wp-content/uploads/2021/12/1964-dummy-text-image-generators-1024x576.jpg"
+                          src={BlogPost?.image_url?BlogPost.image_url:"https://contentsnare.com/wp-content/uploads/2021/12/1964-dummy-text-image-generators-1024x576.jpg"}
                           alt="Dummy photo"
                           className="h-full w-full object-cover shadow-lg"
                         />
