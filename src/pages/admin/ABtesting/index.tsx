@@ -69,6 +69,7 @@ const Dashboard: NextPage<DashboardProps> = () => {
         }
       )
       setABtestContents((response.data.Data as ABtestContent[]) || [])
+      console.log(response);
     } catch (error) {
       toast.error('Something went wrong')
     }

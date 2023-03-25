@@ -41,26 +41,27 @@ const Proposals: NextPage = () => {
       if (e) e.preventDefault()
       await fetchFunction()
     }
-    console.log(proposals)
+    
     const fetchFunction = useCallback(async () => {
         setFetching(true)
-        try {
-          const p: any = await axios.get(`${TEST_API_URL}/user/proposal/getAll`, {
-            withCredentials: true,
-            headers: {
-              Authorization: `${localStorage.getItem('access_token')}`,
-            },
-          })
-          console.log(p.data.Data);
-          setProposals(p.data.Data as [])
-        } catch (error) {
-          console.log(error)
-          const err = error as AxiosError
-          if (err.response?.status as number === 401) {
-            await router.push('/admin/login')
-          }
-          toast.error('Something went wrong')
-        }
+      // try {
+      //     // This endpoint must be updated
+      //     const p: any = await axios.get(`${TEST_API_URL}/user/proposal/getAll`, {
+      //       withCredentials: true,
+      //       headers: {
+      //         Authorization: `${localStorage.getItem('access_token')}`,
+      //       },
+      //     })
+      //     console.log(p.data.Data);
+      //     setProposals(p.data.Data as [])
+      //   } catch (error) {
+      //     console.log(error)
+      //     const err = error as AxiosError
+      //     if (err.response?.status as number === 401) {
+      //       await router.push('/admin/login')
+      //     }
+      //     toast.error('Something went wrong')
+      //   }
         setFetching(false);
     }, [router]);
 
