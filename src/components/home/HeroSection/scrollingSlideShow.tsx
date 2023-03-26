@@ -1,32 +1,60 @@
-import React, { useEffect, createRef, useRef, useState } from 'react'
+import React, { useEffect, createRef, useRef, useState, ReactNode } from 'react'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import { FadeInWhenVisible } from '../../shared/FadeInWhenVisible'
 import HorizontalSlider from './HorizontalSlider'
 import HashtagHeader from '../HashtagHeader'
+import { PostsByDate } from '../../Posts/PostsByDate'
+import { BlogPost } from '../../../types/BlogPost'
+import { NextPage } from 'next'
+import Link from 'next/link'
 
-
+interface BlogProps {
+  children?: ReactNode
+  // posts: any /* BlogPost[] */
+  posts: BlogPost
+}
 
 const ScrollingSlideShow = () => {
-  const [text, setText] = useState("");
+  const [text, setText] = useState('')
+  const [data, setData] = useState<BlogPost>()
+
+  async function getBlogPostData() {
+    const res = await fetch(
+      'https://test1.trigan.org/api/v1/posts?page-size=5&page=1&apiKey=g436739d6734gd6734'
+      /* `${process.env.URL}posts?&apiKey=${process.env.GET_API_KEY}`*/
+    )
+
+    const posts = await res.json()
+    setData(posts)
+  }
+
+  useEffect(() => {
+    getBlogPostData()
+  }, [])
 
   // useEffect(() => {
   //   AOS.init({ offset: 150 })
   // })
 
-
   useEffect(() => {
-    const textComplete = "We develop Web3 and AI technologies to create profitable and sustainable business opportunities that drive positive change and improve lives. Our mission is to bridge the gap between Web3 and the real world by creating innovative technologies that make a meaningful impact on society. We believe that social responsibility and collaboration are key to achieving our goals, and we are committed to being a leading force for good in the Web3 space.";
-    setText(textComplete);
+    const textComplete =
+      'We develop Web3 and AI technologies to create profitable and sustainable business opportunities that drive positive change and improve lives. Our mission is to bridge the gap between Web3 and the real world by creating innovative technologies that make a meaningful impact on society. We believe that social responsibility and collaboration are key to achieving our goals, and we are committed to being a leading force for good in the Web3 space.'
+    setText(textComplete)
     // let i = 0;
     // const timer = setInterval(() => {
-      // setText(textComplete.substring(0, i));
+    // setText(textComplete.substring(0, i));
     //   i++;
     //   if (i > textComplete.length) {
     //     clearInterval(timer);
     //   }
     // }, 10);
-  }, []);
+  }, [])
+
+  if (!data) {
+    return <div>Loading...</div>
+  }
+
   return (
     <div
       className="relative mt-[1600px] flex w-full flex-col items-center gap-20 py-40"
@@ -35,7 +63,11 @@ const ScrollingSlideShow = () => {
       <section id="about" className="w-full px-5">
         <FadeInWhenVisible>
           <div>
-            <HashtagHeader text="#Trigan Videos" position="left" id="triganVideos" />
+            <HashtagHeader
+              text="#Trigan Videos"
+              position="left"
+              id="triganVideos"
+            />
             {/* Video Starts */}
             <h6
               className="intro_h dark:text-black"
@@ -64,47 +96,114 @@ const ScrollingSlideShow = () => {
             {/* /* Video Ends */}
             <HashtagHeader text="#Our Mission" position="left" id="ourGoals" />
             <div className="mb-30 mx-auto max-w-6xl py-5 text-center font-extralight text-slate-100">
-              <h2 data-aos="fade-up" className="headingStyle relative mt-10 mb-10 text-[40px] max-[680px]:text-[32px] text-white dark:text-black">
+              <h2
+                data-aos="fade-up"
+                className="headingStyle relative mt-10 mb-10 text-[40px] text-white dark:text-black max-[680px]:text-[32px]"
+              >
                 Dream of a{' '}
                 <span style={{ color: '#A855F7' } as React.CSSProperties}>
                   better future.
                 </span>
               </h2>
-              <div> 
-              <div className=' flex m-auto mt-[100px] mb-[150px] max-[850px]:flex-col max-[850px]:mt-[40px]'>
-                <div  className='w-[50%] text-justify p-4 max-[850px]:flex-col max-[850px]:m-auto max-[850px]:w-[100%]'>
-                <h3 className='mt-[-20px] text-xl max-[680px]:text-md max-[480px]:text-sm'>
-                  {text.split('').map((char, index) => {
-                    const key = `${index}-${char}`;
-                    return (
-                      <span
-                        key={key}
-                      >
-                        {char}
-                      </span>
-                    );
-                  })}
-                </h3>
+              <div>
+                <div className=" m-auto mt-[100px] mb-[150px] flex max-[850px]:mt-[40px] max-[850px]:flex-col">
+                  <div className="w-[50%] p-4 text-justify max-[850px]:m-auto max-[850px]:w-[100%] max-[850px]:flex-col">
+                    <h3 className="max-[680px]:text-md mt-[-20px] text-xl max-[480px]:text-sm">
+                      {text.split('').map((char, index) => {
+                        const key = `${index}-${char}`
+                        return <span key={key}>{char}</span>
+                      })}
+                    </h3>
+                    <hr className="mt-5 border-4 border-purple-600" />
+                  </div>
+                  <div className="align-center m-auto flex h-[400px] w-[450px] justify-center bg-[#A855F7] object-cover max-[850px]:mt-[35px] max-[600px]:m-auto max-[600px]:mt-5 max-[600px]:h-[350px] max-[600px]:w-[400px] max-[600px]:flex-col max-[500px]:h-[250px] max-[500px]:w-[300px]">
+                    <img
+                      className="m-auto h-[400px] w-[450px] rotate-3 transform object-cover bg-blend-darken max-[600px]:h-[350px] max-[600px]:w-[400px] max-[500px]:h-[250px] max-[500px]:w-[300px]"
+                      src="images/city-girl-1.jpg"
+                      alt="girl-looking-out-over-city"
+                    />
+                  </div>
                 </div>
-                {/* <hr className='mt-20 border-4 border-purple-600' /> */}
-                <div className='bg-[#A855F7] w-[450px] h-[400px] object-cover max-[600px]:w-[400px] max-[600px]:h-[350px] max-[500px]:w-[300px] max-[500px]:h-[250px] max-[850px]:mt-[35px] flex justify-center align-center m-auto max-[600px]:flex-col max-[600px]:m-auto max-[600px]:mt-5' >
-                  
-                  <img
-                    className="m-auto bg-blend-darken w-[450px] h-[400px] object-cover max-[600px]:w-[400px] max-[600px]:h-[350px] max-[500px]:w-[300px] max-[500px]:h-[250px] transform rotate-3"
-                    src="images/city-girl-1.jpg"
-                    alt="girl-looking-out-over-city"
-                  />
+                <div>
+                  {/*} <div className="flex justify-center m-auto mt-[100px] w-[100%] "> {*/}
                 </div>
               </div>
-           <div>
-          {/*} <div className="flex justify-center m-auto mt-[100px] w-[100%] "> {*/}
-     
 
-           </div>
-           </div>
-           
               <HorizontalSlider />
             </div>
+          </div>
+      <HashtagHeader text="#Blog" position="left" id="ourSolution"/>
+          <div className="m-auto mb-10 flex w-[100%] flex-row flex-wrap justify-center hover:cursor-pointer ">
+            {data.posts.map((BlogPost: any, i: number) => {
+              const date = new Date(BlogPost.date_created)
+              return (
+                <div
+                  key={i}
+                  className={`c m-10 mt-10 flex grid h-[600px] w-[450px]  justify-around rounded-[5px] border-[1px] border-solid border-indigo-600 bg-white/[.9] shadow-md shadow-[#000000] dark:bg-white dark:text-black max-[600px]:justify-center md:flex md:px-1`}
+                >
+                  <FadeInWhenVisible duration={(i + 1) * 0.2}>
+                    <div
+                      id={BlogPost.id_post.toString()}
+                      className="overflow-hidden"
+                    >
+                      <div>
+                        <div className="flex flex-col">
+                          <Link
+                            href="/post/[id]"
+                            passHref
+                            as={`/post/${BlogPost.id_post}`}
+                          >
+                            <div className="m-auto mt-5 h-[250px] w-[420px]">
+                              <img
+                                loading="lazy"
+                                src={
+                                  BlogPost.image_url
+                                    ? BlogPost.image_url
+                                    : 'https://contentsnare.com/wp-content/uploads/2021/12/1964-dummy-text-image-generators-1024x576.jpg'
+                                }
+                                alt="Dummy photo"
+                                className="h-full w-full object-cover shadow-lg"
+                              />
+                            </div>
+                          </Link>
+                          <div className="flex h-[320px] w-[420px] flex-col gap-2 p-2">
+                            <pre className="text-xs font-thin">
+                              {date.toDateString().toUpperCase()}
+                            </pre>
+                            <Link
+                              href="/post/[id]"
+                              passHref
+                              as={`/post/${BlogPost.id_post}`}
+                            >
+                              <h2 className="cursor-pointer text-2xl font-semibold text-primary hover:text-dark">
+                                {BlogPost.title}
+                              </h2>
+                            </Link>
+                            <p className="mt-2 flex h-[340px] flex-wrap">
+                              {BlogPost.description}
+                            </p>
+                            <div className="flex h-[50px] w-[400px] flex-row flex-wrap">
+                              {BlogPost.tags.map((tag: string) => {
+                                return (
+                                  <div
+                                    key={BlogPost.tags.id}
+                                    className="ml-2 w-max "
+                                  >
+                                    <span className="flex flex flex-row flex-wrap items-center rounded-full bg-primary px-2 py-1.5 text-xs font-medium uppercase leading-none text-white">
+                                      {`#${tag}`}
+                                    </span>
+                                  </div>
+                                )
+                              })}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </FadeInWhenVisible>
+                </div>
+              )
+            })}
           </div>
         </FadeInWhenVisible>
       </section>
