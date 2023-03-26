@@ -21,6 +21,9 @@ import { useRouter } from 'next/router'
 import BlogHeader from '../components/BlogHeader'
 import PostSearch from '../components/Posts/PostSearch';
 import { PostsByDate } from '../components/Posts/PostsByDate';
+import dynamic from 'next/dynamic';
+
+const VideoHeader = dynamic(() => import('../components/home/HeroSection/VideoHeader'))
 
 interface BlogProps {
   children?: ReactNode
@@ -103,8 +106,10 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
   }
 
   return (
+    <div className="relative">
+      <VideoHeader/>
       <div className='dark:bg-white '> 
-      <div id="blog" className="">
+      <div id="blog" className="relative mt-[1600px] flex w-full flex-col items-center gap-20 py-40">
         <SEO title="Blog" description="Trigan Blog" />
         <GlobalLayout >
         
@@ -115,6 +120,7 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
           {/* check which functionality of this blogHeader component, which will render the post cards will be this component or <PostsByDate posts={posts} />. Or should you render the 2? what's the difference, because they seem to be the same content*/}
           {/* <BlogHeader /> */}
         </GlobalLayout>
+      </div>
       </div>
       </div>
   )
