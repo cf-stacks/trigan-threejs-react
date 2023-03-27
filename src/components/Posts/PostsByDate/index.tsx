@@ -57,9 +57,9 @@ export const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                         {BlogPost.description}
                       </p>
                       <div className="flex h-[50px] w-[400px] flex-row flex-wrap">
-                        {BlogPost.tags.map((tag: string) => {
+                        {BlogPost.tags.map((tag: string,index:number) => {
                           return (
-                            <div key={BlogPost.tags.id} className="ml-2 w-max ">
+                            <div key={index} className="ml-2 w-max ">
                               <span className="flex flex flex-row flex-wrap items-center rounded-full bg-primary px-2 py-1.5 text-xs font-medium uppercase leading-none text-white">
                                  {`#${tag}`}
                               </span>
