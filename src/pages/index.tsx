@@ -1,5 +1,5 @@
 import type { GetStaticProps, NextPage } from 'next'
-import { ReactNode, useEffect } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import { SEO } from '../components/shared/SEO'
 import { TeamMember } from '../types/TeamMember'
 import { api } from '../util/api'
@@ -7,6 +7,7 @@ import React, { lazy, Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import GlobalLayout from '../components/layouts/GlobalLayout'
 import { useTheme } from 'next-themes'
+
 
 // const HeroSection = lazy(() => import('../components/home/HeroSection/index'))
 const AboutSection = lazy(() => import('../components/home/AboutSection/index'))
@@ -61,4 +62,5 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-export default Home
+export default dynamic (() => Promise.resolve(Home), {ssr: false})
+
