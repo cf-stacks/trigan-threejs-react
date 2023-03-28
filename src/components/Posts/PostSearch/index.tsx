@@ -20,9 +20,10 @@ const PostSearch: React.FC<PostSearchProps> = () => {
           }}
         />
         <Link
-          href="/postsearch/[searchresult]"
-          passHref
-          as={`/postsearch/${value}`}
+         href={{
+            pathname: '/postsearch/[searchresult]',
+            query: { searchresult: value },
+          }}
         >
           <button className="ml-2 rounded-xl bg-primary px-4 py-1 align-middle text-xl font-semibold text-light">
             <svg
