@@ -46,7 +46,7 @@ function Combined({ time, setTime, isPlaying }) {
           ((document.documentElement.scrollHeight ||
             document.body.scrollHeight) -
             document.documentElement.clientHeight)) *
-        200
+        205
       setScrollPercent(tempScrollPercent)
     }
   }, [setDevice, window.innerWidth])

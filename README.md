@@ -32,3 +32,32 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Build Options
+
+NPM usually works ok, but may require the -f force flag for npm i (-f).
+
+`npm i`
+`npm run build`
+`npm run start`
+
+However, we now have PM2 clustering added as an option, which enables multithreading support.
+
+
+`pm2 startup` (enables pm2 system service on boot)
+
+Use with:
+
+`npm run pm2 start pm2.json`
+
+`pm2 save` may be needed to save changes for reboot.
+
+## Docker
+
+Many files are left over between docker builds of the project so it makes sense to first run:
+
+`docker system prune`
+
+Then run:
+
+`docker-compose up --build -d`

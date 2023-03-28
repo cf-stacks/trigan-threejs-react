@@ -130,7 +130,7 @@ const Dashboard: NextPage<DashboardProps> = () => {
     setFetching(true)
     console.log("request senttt")
     try {
-      const p: any = await axios.get(`${TEST_API_URL}/linkedin-job/get`, {
+      const p: any = await axios.get(`${TEST_API_URL}/posts?is_preview=false`, {
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
@@ -162,7 +162,7 @@ const Dashboard: NextPage<DashboardProps> = () => {
     if (term.length > 0) {
       console.log(term)
       setPosts(
-        posts.filter((post: any) =>
+        posts?.filter((post: any) =>
           post.title.toLowerCase().includes(term.toLowerCase())
         )
       )
