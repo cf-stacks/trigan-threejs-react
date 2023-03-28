@@ -6,6 +6,7 @@ import { Title } from '../../../components/shared/Title'
 import GlobalLayout from '../../../components/layouts/GlobalLayout'
 import { useRouter } from 'next/router'
 import { wrap } from 'module'
+import ReactMarkdown from 'react-markdown'
 
 interface PostProps {
   children?: ReactNode
@@ -70,7 +71,8 @@ function b64_to_utf8(char:string ) {
               </h6>
               <h6 className="font-medium">
                 Content:
-                <p className="py-2 text-sm" style={{wordWrap:'break-word'}}>{b64_to_utf8(post.data.content)}</p>
+                {/* <p className="py-2 text-sm" style={{wordWrap:'break-word'}}>{b64_to_utf8(post.data.content)}</p> */}
+              <ReactMarkdown>{b64_to_utf8(post.data.content)}</ReactMarkdown>
               </h6>
               <h6 className="font-medium">
                 Views:

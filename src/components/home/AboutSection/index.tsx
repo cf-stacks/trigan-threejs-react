@@ -167,7 +167,7 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
             />
           </div> */}
           <Suspense fallback={<div>Loading..</div>}>
-          <AnimationCity/>
+            <AnimationCity/>
           </Suspense>
          
         </div>
