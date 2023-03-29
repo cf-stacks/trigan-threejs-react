@@ -107,18 +107,10 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
     await router.push('/PostSearch')
   }
 
-  useEffect(() => {
-    window.addEventListener('scroll', () => {
-      var factor = Math.max(0, (2000 - window.scrollY) / 2000)
-      if (window.scrollY < 1300) factor = 1
-      document.documentElement.style.setProperty('--headerOpacity', factor.toString())
-      document.documentElement.style.setProperty('--headerScale', factor.toString())
-    })
-  },[])
-
+  
   return (
     <div className="relative">
-      <VideoHeader/>
+      {/* <VideoHeader/> */}
       <div className='dark:bg-white '> 
       <div id="blog" className="relative mt-[1600px] flex w-full flex-col items-center gap-20 py-40">
         <SEO title="Blog" description="Trigan Blog" />
