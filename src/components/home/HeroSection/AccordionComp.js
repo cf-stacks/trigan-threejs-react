@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import React, { useState, useEffect, useRef } from 'react'
-import { PlayState } from 'react-gsap';
 // import ScrollTrigger from "gsap/ScrollTrigger";
 // import Flip from "gsap/Flip";
 // import Draggable from "gsap/Draggable";
@@ -10,9 +9,8 @@ const AccordionComp = () => {
 
   const component = useRef();
   const [Show, setShow] = useState(false)
-  const [playState, setPlayState] = useState(PlayState.play);
+  const [playState, setPlayState] = useState();
   useEffect(() => {
-    setPlayState(PlayState.play);
   }, [])
 
   // useLayoutEffect(() => {
