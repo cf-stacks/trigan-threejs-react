@@ -31,6 +31,8 @@ interface BlogProps {
 }
 
 const baseURL = 'https://test1.trigan.org/api/v1/posts?&apiKey='
+
+
 // let posts = [null]
 
 // const posts = [
@@ -105,6 +107,15 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
     await router.push('/PostSearch')
   }
 
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      var factor = Math.max(0, (2000 - window.scrollY) / 2000)
+      if (window.scrollY < 1300) factor = 1
+      document.documentElement.style.setProperty('--headerOpacity', factor.toString())
+      document.documentElement.style.setProperty('--headerScale', factor.toString())
+    })
+  },[])
+
   return (
     <div className="relative">
       <VideoHeader/>
@@ -141,5 +152,6 @@ export async function getServerSideProps() {
     },
   }
 }
+
 
 export default Blog

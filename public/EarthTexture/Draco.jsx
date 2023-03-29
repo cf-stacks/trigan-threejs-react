@@ -61,7 +61,7 @@ const Model = (props) => {
           <group scale={66.72} ref={earthRef}>
             <mesh geometry={nodes.Earth.geometry} material={materials.Earth} />
           </group>
-          <group ref={earthRef} scale={67.82}>
+          <group ref={earthRef} scale={66.82}>
             <mesh
               geometry={nodes.Clouds.geometry}
               material={materials.Clouds}
