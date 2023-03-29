@@ -150,7 +150,7 @@ const Navbar: React.FC<NavbarProps> = () => {
         </Suspense>
       </div>
       {isScrollTop || isTop ? (
-        <nav className={`fixed z-50 w-full ${ isTop ? 'bg-black' : 'bg-transparent'} `}>
+        <nav className={`fixed z-50 w-full ${ isTop ? 'bg-black' : 'bg-transparent'} top-0 left-0`}>
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, transition: { duration: 1 } }}

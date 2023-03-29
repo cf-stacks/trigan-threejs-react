@@ -112,7 +112,7 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
     <div className="relative">
       {/* <VideoHeader/> */}
       <div className='dark:bg-white '> 
-      <div id="blog" className="relative mt-[1600px] flex w-full flex-col items-center gap-20 py-40">
+      <div id="blog" className="relative mt-[1600px] flex w-full flex-col items-center gap-20 pt-40">
         <SEO title="Blog" description="Trigan Blog" />
         <GlobalLayout >
         
