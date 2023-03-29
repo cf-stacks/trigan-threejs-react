@@ -23,8 +23,12 @@ const Post: NextPage<PostProps> = ({ post }) => {
   const updatedDate = new Date(post.data.date_updated).toLocaleString()
 
 function b64_to_utf8(char:string ) {
+  
+  if (typeof window !== 'undefined') {
+    return window.atob(char);
+  }
   // console.log("kjdfkjndf",window.atob(char))
-  return window.atob(char);
+  
   //  return decodeURIComponent(escape(window.atob( char )));
   // const buff = Buffer.from(char, "base64");
   // console.log("kjknnlklk",buff.toString("utf8"))
