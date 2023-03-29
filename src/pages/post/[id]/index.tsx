@@ -22,11 +22,13 @@ const Post: NextPage<PostProps> = ({ post }) => {
   const createdDate = new Date(post.data.date_created).toLocaleString()
   const updatedDate = new Date(post.data.date_updated).toLocaleString()
 
-function b64_to_utf8(char:string ) {
+function b64_to_utf8(char:string) {
+  let demo : any;
   
   if (typeof window !== 'undefined') {
-    return window.atob(char);
+    demo = window.atob(char);
   }
+  return demo;
   // console.log("kjdfkjndf",window.atob(char))
   
   //  return decodeURIComponent(escape(window.atob( char )));
