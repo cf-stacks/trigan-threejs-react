@@ -50,7 +50,8 @@ const Logo = () => (
   </motion.div>
 
 )
-const VideoHeader = () => {
+const VideoHeader = (props:any) => {
+  const {isScroll} = props;
   const index = useRef(0)
   const [playAnimation, setPlayAnimation] = useState(false)
   const [currentItem, setCurrentItem] = useState(Logo)
@@ -195,7 +196,7 @@ const VideoHeader = () => {
 
               <Suspense fallback={<Spinner />}>
                 <>
-                  <Combined time={time} setTime={setTime} isPlaying={isPlaying} />
+                  <Combined time={time} setTime={setTime} isPlaying={isPlaying} isScroll={isScroll}/>
                   <Stars
                     radius={300}
                     depth={60}

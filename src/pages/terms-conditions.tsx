@@ -3,9 +3,11 @@ import { SEO } from '../components/shared/SEO'
 import { TermPoint } from '../components/terms-conditions/TermPoint'
 import { TermTitle } from '../components/terms-conditions/TermTitle'
 import { ThemeProvider } from 'next-themes'
-
+import dynamic from 'next/dynamic';
 import React, { lazy, Suspense } from 'react'
 import GlobalLayout from '../components/layouts/GlobalLayout';
+
+const VideoHeader = dynamic(() => import('../components/home/HeroSection/VideoHeader'))
 
 interface TermsAndConditionsProps {
   children?: ReactNode
@@ -33,13 +35,15 @@ const RIGHT_TO_CANCEL_DOES_NOT_APPLY_OPTIONS = [
 const TermsAndConditions: React.FC<TermsAndConditionsProps> = () => {
   return (
     <ThemeProvider attribute="class" enableSystem={true}>
+      
       <>
         <SEO
           title="Terms & Conditions"
           description="Trigan Terms & Conditions"
         />
         <GlobalLayout>
-          <section className="text-justify bg-black bg-opacity-30">
+          <VideoHeader isScroll={false}/>
+          <section className="text-justify bg-black bg-opacity-30" style={{position:'relative'}}> 
             <div className="text-white py-5 text-center">
               <h2 className="text-xl font-semibold underline">
                 TERMS AND CONDITIONS
