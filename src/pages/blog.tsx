@@ -22,8 +22,10 @@ import BlogHeader from '../components/BlogHeader'
 import PostSearch from '../components/Posts/PostSearch';
 import { PostsByDate } from '../components/Posts/PostsByDate';
 import dynamic from 'next/dynamic';
+import { useFrame } from '@react-three/fiber'
 
 const VideoHeader = dynamic(() => import('../components/home/HeroSection/VideoHeader'))
+
 
 interface BlogProps {
   children?: ReactNode
@@ -100,17 +102,17 @@ const baseURL = 'https://test1.trigan.org/api/v1/posts?&apiKey='
 //   },
 // ];
 
+
 const Blog: NextPage<BlogProps> = ({ posts }) => {
   const router = useRouter()
 
   const handleSearch = async (title: string) => {
     await router.push('/PostSearch')
   }
-
   
   return (
     <div className="relative">
-      {/* <VideoHeader/> */}
+      <VideoHeader/>
       <div className='dark:bg-white '> 
       <div id="blog" className="relative mt-[1600px] flex w-full flex-col items-center gap-20 py-40">
         <SEO title="Blog" description="Trigan Blog" />
