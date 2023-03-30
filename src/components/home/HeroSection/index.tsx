@@ -25,7 +25,7 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
     <>
       <div className="relative">
         <Suspense fallback={<div>Loading...</div>}>
-          <VideoHeader/>
+          <VideoHeader isScroll={true}/>
           <ScrollingSlideShow />
         </Suspense>
       </div>

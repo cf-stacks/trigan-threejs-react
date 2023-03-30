@@ -3,7 +3,7 @@ import Model from '../EarthTexture/Draco'
 import React, { memo, useEffect, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 
-function Combined({ time, setTime, isPlaying }) {
+function Combined({ time, setTime, isPlaying, isScroll }) {
   const [scrollPercent, setScrollPercent] = useState(0)
   const [scaleDownValue, setScaleDownValue] = useState(12)
   const [Device, setDevice] = useState(30)
@@ -39,15 +39,18 @@ function Combined({ time, setTime, isPlaying }) {
     } else {
       setDevice(33)
     }
-    document.body.onscroll = () => {
-      //calculate the current scroll progress as a percentage
-      const tempScrollPercent =
-        ((document.documentElement.scrollTop || document.body.scrollTop) /
-          ((document.documentElement.scrollHeight ||
-            document.body.scrollHeight) -
-            document.documentElement.clientHeight)) *
-        205
-      setScrollPercent(tempScrollPercent)
+
+    if (isScroll) {
+      document.body.onscroll = () => {
+        //calculate the current scroll progress as a percentage
+        const tempScrollPercent =
+          ((document.documentElement.scrollTop || document.body.scrollTop) /
+            ((document.documentElement.scrollHeight ||
+              document.body.scrollHeight) -
+              document.documentElement.clientHeight)) *
+          200
+        setScrollPercent(tempScrollPercent)
+      }
     }
   }, [setDevice, window.innerWidth])
 

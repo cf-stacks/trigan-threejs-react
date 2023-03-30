@@ -50,7 +50,8 @@ const Logo = () => (
   </motion.div>
 
 )
-const VideoHeader = () => {
+const VideoHeader = (props:any) => {
+  const {isScroll} = props;
   const index = useRef(0)
   const [playAnimation, setPlayAnimation] = useState(false)
   const [currentItem, setCurrentItem] = useState(Logo)
@@ -65,7 +66,9 @@ const VideoHeader = () => {
   const currentTheme = theme === 'system' ? systemTheme : theme
 
   useEffect(() => {
-    window.addEventListener('scroll', () => {
+
+    if(isScroll){
+      window.addEventListener('scroll', () => {
       var factor = Math.max(0, (2000 - window.scrollY) / 2000)
       if (window.scrollY < 1300) factor = 1
       document.documentElement.style.setProperty('--headerOpacity', factor.toString())
@@ -152,6 +155,7 @@ const VideoHeader = () => {
       }
     }, 3000)
     return () => clearInterval(timer)
+    }
   }, [])
 
   useEffect(() => {
@@ -166,6 +170,7 @@ const VideoHeader = () => {
       window.addEventListener('load', onPageLoad)
       return () => window.removeEventListener('load', onPageLoad)
     }
+    
   }, [])
 
   function delayRenderCompanyCards() {
@@ -195,7 +200,7 @@ const VideoHeader = () => {
 
               <Suspense fallback={<Spinner />}>
                 <>
-                  <Combined time={time} setTime={setTime} isPlaying={isPlaying} />
+                  <Combined time={time} setTime={setTime} isPlaying={isPlaying} isScroll={isScroll}/>
                   <Stars
                     radius={300}
                     depth={60}
@@ -220,8 +225,9 @@ const VideoHeader = () => {
           }}
         >
           <div className="flex flex-col align-center justify-end  w-full h-[500px] m-auto max-[500px]:w-[300px]">
-            {currentItem}
+            {isScroll ? currentItem : null}
 
+          {isScroll ?
             <div className="flex flex-col items-center w-full">
               <button className="rounded-full w-fit border bg-transparent py-2 px-4  font-m_plus_rounded_1c font-bold text-white hover:bg-gray-400 dark:text-purple-500 dark:hover:text-black">
                 <a href="/project">Learn More</a>
@@ -235,10 +241,10 @@ const VideoHeader = () => {
                     <path fillRule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clipRule="evenodd" />
                   </svg>}
               </button>
-            </div>
+            </div>: null}
           </div>
 
-          {renderCompanyCards ? (<SupportersSection />) : null}
+          {isScroll && renderCompanyCards ? (<SupportersSection />) : null}
 
         </div>
         <div>
