@@ -1,8 +1,23 @@
 /* eslint-disable */
 import Web3 from 'web3'
-import WalletConnectProvider from '@walletconnect/web3-provider'
 import { mobileAndTabletCheck } from './functions'
 import { MetaMaskInpageProvider } from '@metamask/providers'
+
+import SignClient from '@walletconnect/sign-client'
+import { Web3Modal } from '@web3modal/standalone'
+import { useEffect, useState } from 'react'
+
+// Get projectID 
+if (!process.env.NEXT_PUBLIC_PROJECT_ID) {
+  throw new Error('You need to provide NEXT_PUBLIC_PROJECT_ID env variable')
+}
+
+// Configure web3Modal
+const web3Modal = new Web3Modal({
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+  walletConnectVersion: 2,
+})
+
 // FOR DEVELOPMENT SHOULD BE REMOVED !!!
 declare global {
   interface Window {
@@ -56,38 +71,29 @@ const getWeb3 = () =>
       }
       // Fallback to localhost; use dev console port by default...
       else {
-        const provider = new WalletConnectProvider({
-          rpc: {
-            1: 'https://mainnet.infura.io/v3/9bf494a3c8dc454a8f451534d96a63ea',
-            4: 'https://rinkeby.infura.io/v3/9bf494a3c8dc454a8f451534d96a63ea',
-            56: 'https://bsc-dataseed1.binance.org',
-            97: 'https://data-seed-prebsc-1-s1.binance.org:8545',
-            1337: 'http://127.0.0.1:7545',
+        // Initialize sign client
+        const signClient = await SignClient.init({
+          projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+        })
+        // Initiate connection and pass pairing uri to the modal
+        const namespaces = {
+          eip155: {
+            methods: ['eth_sign'],
+            chains: ['eip155:1'],
+            events: ['accountsChanged'],
           },
+        }
+        const { uri, approval } = await signClient.connect({
+          requiredNamespaces: namespaces,
         })
-
-        // Subscribe to accounts change
-        provider.on('accountsChanged', (accounts: string[]) => {
-          console.log(`accounts were changed to ${accounts[0] ?? 'empty'}`)
-        })
-
-        // Subscribe to chainId change
-        provider.on('chainChanged', (chainId: number) => {
-          console.log(`chainId were changed to ${chainId}`)
-        })
-
-        // Subscribe to session disconnection
-        provider.on('disconnect', (code: number, reason: string) => {
-          console.log(code, reason)
-          location.reload()
-        })
-
-        //  Enable session (triggers QR Code modal)
-        await provider.enable()
-
-        const web3 = new Web3(<any>provider)
-        console.log('No web3 instance found, detect for mobile.')
-        resolve(web3)
+        if (uri) {
+          await web3Modal.openModal({
+            uri,
+            standaloneChains: namespaces.eip155.chains,
+          })
+          await approval()
+          web3Modal.closeModal()
+        }
       }      
     }
     

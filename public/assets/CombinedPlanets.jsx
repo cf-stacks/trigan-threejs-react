@@ -39,6 +39,7 @@ function Combined({ time, setTime, isPlaying, isScroll }) {
     } else {
       setDevice(33)
     }
+
     if (isScroll) {
       document.body.onscroll = () => {
         //calculate the current scroll progress as a percentage
