@@ -22,18 +22,7 @@ import { AccountsModals } from '../../../components/admin/linkedinaccounts/Linke
 
 const Accounts: NextPage = () => {
   const [search, setSearch] = useState('')
-  const [accounts, setAccounts] = useState([
-    {
-      id: '1a600a96-b4e2-4b81-ab03-6026a6150e39',
-      creator_id: '5947b11d-d114-4b0e-b0c0-f91eefaf11da',
-      created_at: '2023-03-17T17:22:27.788278Z',
-      updated_at: '2023-03-17T17:22:27.789376Z',
-      name: 'abc',
-      description: 'abcdef',
-      is_active: true,
-      encrypted_account: 'BRdxABTPip',
-    },
-  ])
+  const [accounts, setAccounts] = useState([])
   const [fetching, setFetching] = useState(false)
   const [modal, setModal] = useState({ open: false, size: 'md', type: '' })
   const [selectedAccount, setSelectedAccount] = useState<AccountType>()
@@ -47,24 +36,24 @@ const Accounts: NextPage = () => {
   const fetchByUsername = useCallback(async () => {}, [])
 
   const fetchFunction = useCallback(async () => {
-    // setFetching(true)
-    // try {
-    //   const p: any = await axios.get(`${TEST_API_URL}/linkedin-job/get`, {
-    //     withCredentials: true,
-    //     headers: {
-    //       Authorization: `${localStorage.getItem('access_token')}`,
-    //     },
-    //   })
-    //   setAccounts(p.Data as [])
-    // } catch (error) {
-    //   console.log(error)
-    //   const err = error as AxiosError
-    //   if ((err.response?.status as number) === 401) {
-    //     await router.push('/admin/login')
-    //   }
-    //   toast.error('Something went wrong')
-    // }
-    // setFetching(false)
+    setFetching(true)
+    try {
+      const p: any = await axios.get(`${TEST_API_URL}/linkedin-job/get`, {
+        withCredentials: true,
+        headers: {
+          Authorization: `${localStorage.getItem('access_token')}`,
+        },
+      })
+      setAccounts(p.Data as [])
+    } catch (error) {
+      console.log(error)
+      const err = error as AxiosError
+      if ((err.response?.status as number) === 401) {
+        await router.push('/admin/login')
+      }
+      toast.error('Something went wrong')
+    }
+    setFetching(false)
   }, [router])
 
   useEffect(() => {
