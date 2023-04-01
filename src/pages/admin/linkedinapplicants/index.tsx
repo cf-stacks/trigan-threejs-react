@@ -38,7 +38,7 @@ const Applicants: NextPage = () => {
           Authorization: `${localStorage.getItem('access_token')}`,
         },
       })
-      setApplicants(p.Data as [])
+      setApplicants(p.data.Data as [])
     } catch (error) {
       console.log(error)
       const err = error as AxiosError
