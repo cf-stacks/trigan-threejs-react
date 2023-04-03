@@ -64,6 +64,7 @@
     "react-transition-group": "^4.4.5",
     "sharp": "^0.32.0",
     "swiper": "^8.4.4",
+    "swr": "^2.1.1",
     "three": "^0.147.0",
     "three-effectcomposer-es6": "^0.0.4",
     "three-stdlib": "^2.21.8",
