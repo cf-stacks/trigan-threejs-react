@@ -19,6 +19,7 @@ import {
   MoadalType,
 } from '../../../components/admin/linkedinaccounts/LinkedinAccountsTable'
 import { AccountsModals } from '../../../components/admin/linkedinaccounts/LinkedinAccountsModals'
+import {Pagination, PaginationProps} from "antd";
 
 const Accounts: NextPage = () => {
   const [search, setSearch] = useState('')
@@ -26,6 +27,10 @@ const Accounts: NextPage = () => {
   const [fetching, setFetching] = useState(false)
   const [modal, setModal] = useState({ open: false, size: 'md', type: '' })
   const [selectedAccount, setSelectedAccount] = useState<AccountType>()
+
+  const [totalCount, setCount] = useState(0);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(20);
 
   const router = useRouter()
 
@@ -35,16 +40,17 @@ const Accounts: NextPage = () => {
   }
   const fetchByUsername = useCallback(async () => {}, [])
 
-  const fetchFunction = useCallback(async () => {
+  const fetchFunction = useCallback(async (page: number, pageSize: number) => {
     setFetching(true)
     try {
-      const p: any = await axios.get(`${TEST_API_URL}/linkedin-job/get`, {
+      const p: any = await axios.get(`${TEST_API_URL}/linkedin-job/get?page=${page}&page_size=${pageSize}`, {
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
         },
       })
-      setAccounts(p.data.Data as [])
+      setAccounts(p.data.Data as []);
+      setCount(p.data.Meta.total_count);
     } catch (error) {
       console.log(error)
       const err = error as AxiosError
@@ -56,10 +62,19 @@ const Accounts: NextPage = () => {
     setFetching(false)
   }, [router])
 
+  const handlePaginationChange = (page: number) => {
+    setPage(page);
+  };
+
+  const handlePageSizeChange: PaginationProps['onShowSizeChange'] = (current, pageSize) => {
+    setPage(1);
+    setPageSize(pageSize);
+  };
+
   useEffect(() => {
-    void fetchFunction()
+    void fetchFunction(page, pageSize)
     console.log(accounts)
-  }, [fetchFunction])
+  }, [fetchFunction, page, pageSize])
   return (
     <AdminLayout>
       <Title align="center">Linkedin Accounts</Title>
@@ -94,9 +109,18 @@ const Accounts: NextPage = () => {
           setSelectedAccount={
             setSelectedAccount as Dispatch<SetStateAction<AccountType>>
           }
-          fetchFunction={fetchFunction}
+          fetchFunction={() => fetchFunction(page, pageSize)}
         />
       </div>
+
+      <Pagination
+          current={page}
+          pageSize={pageSize}
+          total={totalCount}
+          onChange={handlePaginationChange}
+          showSizeChanger
+          onShowSizeChange={handlePageSizeChange}
+      />
     </AdminLayout>
   )
 }
