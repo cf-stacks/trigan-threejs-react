@@ -35,17 +35,13 @@ const AnimationCity = ({ onButtonClick }: Props) => {
   return (
     <div className="flex scale-75 md:scale-100 lg:scale-100 justify-center m-auto mt-[100px] w-[100%] ">
 
-      {/* <img
-        className="z-10 flex flex-col justify-center mt-[-50px] h-[300] w-[700px]  mb-[50px] max-[700px]:w-[400px]  max-[950px]:w-[600px] max-[800px]:w-[500px] max-[720px]:w-[400px] max-[560px]:w-[350px] max-[500px]:w-[290px]"
-        src="images/trigan-section-bg-c.png"
-        alt="planet"
-      /> */}
+      
       {/* smaller image */}
-      <img
+      {/* <img
     className="z-10 flex flex-col justify-center mt-[-50px] h-[300] w-[400px]  mb-[50px]"
     src="images/trigan-section-bg-c.png"
     alt="planet"
-/>
+/> */}
       {/* max-[600px]:w-[400px]  max-[800px]:w-[600px] w-[900px]  */}
       <div data-aos="fade-up" className="absolute z-0 flex-col w-[1000px] max-[1100px]:w-[900px] max-[950px]:w-[850px] max-[870px]:w-[800px] aos-init">
 
@@ -54,11 +50,11 @@ const AnimationCity = ({ onButtonClick }: Props) => {
               <h2 className="text-xl  max-[870px]:text-md max-[800px]:text-[15px] max-[640px]:text-[12px] max-[500px]:text-[10px]">AI Assisted Communities</h2>
           </button>
         </div> */}
-               <button onClick={() => handleButtonClick('AI Assisted Communities')}>
+               <button onClick={() => handleButtonClick('AI Assisted Communities')} >
 
         <div data-aos="fade-left" className="border-b-4 border-gradient-l-black-violet flex flex-col justify-end mt-[20px] h-[100px] m-auto items-start ml-[50px] max-[800px]:h-[60px] max-[720px]:h-[50px] max-[800px]:ml-[100px] max-[800px]:mt-[30px] max-[640px]:ml-[200px] max-[560px]:ml-[165px] max-[500px]:ml-[185px] max-[445px]:ml-[200px] aos-init">
 
-          <h2 className="text-left text-xl max-[870px]:text-md max-[800px]:text-[15px] max-[640px]:text-[12px] max-[500px]:text-[10px]">AI Assisted Communities</h2>
+          <h2 className="text-left text-xl max-[870px]:text-md max-[800px]:text-[15px] max-[640px]:text-[12px] max-[500px]:text-[10px]">AI Assisted Communitiess</h2>
        
         </div>
            </button>
@@ -82,6 +78,11 @@ const AnimationCity = ({ onButtonClick }: Props) => {
         </div>
 
       </div>
+      <img
+        className="flex flex-col justify-center mt-[-50px] h-[300] w-[700px]  mb-[50px] max-[700px]:w-[400px]  max-[950px]:w-[600px] max-[800px]:w-[500px] max-[720px]:w-[400px] max-[560px]:w-[350px] max-[500px]:w-[290px]"
+        src="images/trigan-section-bg-c.png"
+        alt="planet"
+      />
     </div>
   );
 };
