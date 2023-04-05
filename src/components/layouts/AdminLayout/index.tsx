@@ -128,7 +128,7 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
 
   return (
     <AppProvider>
-      <MantineProvider>
+      <MantineProvider theme={{ colorScheme: "dark" }}>
         <AppShell
           padding="md"
           navbar={<Navigation isOpen={isOpen} setIsOpen={setIsOpen} />}

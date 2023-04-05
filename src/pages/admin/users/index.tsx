@@ -76,15 +76,20 @@ const Users: NextPage = () => {
               <title>Users</title>
             </Head>
 
-            <Title align='center'>Users</Title>
-            <TabHeaderAction 
-                search={{ 
-                    value: search, 
-                    onChange: (e) => setSearch(e.target.value), 
-                    handleSubmit: handleSubmit
-                }}
-                create={{onClick: () => setModal({ open: true, type: 'create', size: '' }), text: "Create User"}}
-            />
+            <div className='flex justify-between items-center'>
+              <Title size={24} align='center' className='text-white'>
+                Users
+              </Title>
+
+              <TabHeaderAction 
+                  search={{ 
+                      value: search, 
+                      onChange: (e) => setSearch(e.target.value), 
+                      handleSubmit: handleSubmit
+                  }}
+                  create={{onClick: () => setModal({ open: true, type: 'create', size: '' }), text: "Create User"}}
+              />
+            </div>
 
             <section>
                 <UsersTable 
