@@ -1,0 +1,11 @@
+{
+    "apps": [
+        {
+            "name": "trigan-fe",
+            "script": "npm",
+            "args" : "start",
+            "instances": "max",
+            "exec_mode": "cluster"
+        }
+    ]
+  }

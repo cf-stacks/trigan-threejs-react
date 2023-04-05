@@ -5,6 +5,9 @@ import { SEO } from '../components/shared/SEO'
 import { PolicyPoint } from './../components/privacy-policy/PolicyPoint'
 import { PolicyTitle } from './../components/privacy-policy/PolicyTitle'
 import { ThemeProvider } from 'next-themes'
+import dynamic from 'next/dynamic';
+
+const VideoHeader = dynamic(() => import('../components/home/HeroSection/VideoHeader'))
 
 interface PrivacyPolicyProps {
   children?: ReactNode
@@ -55,9 +58,11 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
   return (
     <ThemeProvider attribute="class" enableSystem={true}>
       <>
+
         <SEO title="Privacy Policy" description="Trigan Privacy Policy" />
         <GlobalLayout>
-          <section className="py-5 text-justify bg-black bg-opacity-30">
+          <VideoHeader isScroll={false}/>
+          <section className="py-5 text-justify bg-black bg-opacity-30" style={{position:'relative'}}>
             <div className="text-white text-center">
               <h2 className="text-xl font-semibold">
                 trigan.org Privacy Policy
@@ -466,6 +471,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
         </GlobalLayout>
       </>
     </ThemeProvider>
+    
   )
 }
 

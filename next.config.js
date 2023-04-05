@@ -1,3 +1,21 @@
+const fs = require('fs');
+const path = require('path');
+
+// Check if the font manifest file exists, if not, create an empty one
+const nextPath = path.join(process.cwd(), '.next');
+const nextServerPath = path.join(nextPath, 'server');
+const fontManifestPath = path.join(nextServerPath, 'next-font-manifest.json');
+if (!fs.existsSync(fontManifestPath)) {
+  if (!fs.existsSync(nextPath)) {
+    fs.mkdirSync(nextPath);
+  }
+  if (!fs.existsSync(nextServerPath)) {
+    fs.mkdirSync(nextServerPath);
+  }
+  fs.writeFileSync(fontManifestPath, JSON.stringify([]));
+}
+
+
 /* eslint-disable */
 const runtimeCaching = require('next-pwa/cache')
 const withPWA = require('next-pwa')({
@@ -25,6 +43,7 @@ const settings = {
   reactStrictMode: true,
   images: {
     domains: ['i.ibb.co'],
+    unoptimized: true,
   },
   eslint: {
     dirs: ['src'],
