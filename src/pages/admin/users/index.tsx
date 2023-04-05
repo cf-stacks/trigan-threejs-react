@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import TabHeaderAction from "../../../components/tabHeaderAction";
 import { MoadalType, UsersTable, UserType } from '../../../components/admin/users/UsersTable';
 import { UsersModals } from '../../../components/admin/users/UsersModals';
+import Head from 'next/head';
 
 const Users: NextPage = () => {
     const [search, setSearch] = useState('');
@@ -71,6 +72,10 @@ const Users: NextPage = () => {
     }, [fetchFunction])
     return (
         <AdminLayout>
+            <Head>
+              <title>Users</title>
+            </Head>
+
             <Title align='center'>Users</Title>
             <TabHeaderAction 
                 search={{ 
