@@ -176,6 +176,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                       layout="fill"
                       src={isDark ? '/images/trigan logo v dark.svg' : '/images/trigan logo v.svg'}
                       alt="Logo"
+                      style={{ zIndex: 100 }}
                     />
 
                   </button>
