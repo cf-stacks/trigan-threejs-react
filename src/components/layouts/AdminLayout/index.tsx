@@ -27,7 +27,6 @@ interface AdminLayoutProps {
 const useStyles = createStyles((theme) => ({
   main: {
     display: "flex",
-    // backgroundColor: "#222131",
     minHeight: "100vh",
   },
   link: {
@@ -119,7 +118,7 @@ export const useAdminContext = () => {
 export const AdminLayout = ({ children }: AdminLayoutProps) => {
   const {push} = useRouter()
   const { classes } = useStyles()
-  const [open, setOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(true)
 
   useEffect(() => {
     if (localStorage.getItem('access_token') === null) {
@@ -132,11 +131,12 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
       <MantineProvider>
         <AppShell
           padding="md"
-          navbar={<Navigation isOpen={open} />}
-          styles={(theme) => ({
-            main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
+          navbar={<Navigation isOpen={isOpen} setIsOpen={setIsOpen} />}
+          styles={() => ({
+            main: { backgroundColor: "#222131" },
           })}
         >
+            {/*
           <Center
             sx={{
               position: 'fixed',
@@ -151,18 +151,7 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
               {!open ? <IconX /> : <IconMenu2 />}
             </Button>
           </Center>
-          <div
-            className={open ? classes.slideRight : ''}
-            style={{
-              position: 'fixed',
-              right: 0,
-              top: 0,
-              width: 'calc(100vw - 80px)',
-              height: '100vh',
-              zIndex: 999999,
-            }}
-            onClick={() => setOpen(true)}
-          ></div>
+              */}
           <main className={classes.main}>
             <section style={{ margin: '2rem auto', minWidth: 'calc(100vw-80px)' }}>
               {children}

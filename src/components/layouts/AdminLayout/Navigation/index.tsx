@@ -1,24 +1,26 @@
-import { Navbar, Center, Image, Stack } from "@mantine/core";
-import { IconLogout } from "@tabler/icons";
+import { Navbar, Center, Image, Stack, clsx } from "@mantine/core";
+import { IconLogout, IconMenu2, IconX } from "@tabler/icons";
 import { useRouter } from "next/router";
-import { useMemo } from "react";
+import { Dispatch, SetStateAction, useMemo } from "react";
 import NavigationLink from "./Link";
 import { navLinks } from "./navLinks";
 
 interface NavigationProps {
     isOpen: boolean;
+    setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const Navigation = ({ isOpen }: NavigationProps) => {
+const Navigation = ({ isOpen, setIsOpen }: NavigationProps) => {
     const { push } = useRouter();
     const links = useMemo(() => {
         return navLinks.map((item) => (
-            <NavigationLink item={item} />
+            <NavigationLink item={item} smallSize={!isOpen} />
         ));
-    }, []);
+    }, [isOpen]);
 
     return (
         <Navbar
+            className="p-0"
             sx={{
                 position: 'fixed',
                 left: 0,
@@ -32,19 +34,37 @@ const Navigation = ({ isOpen }: NavigationProps) => {
                 left: 0,
                 bottom: 0,
             }}
-            style={{ overflowY: 'scroll' }}
-            width={{ base: 218 }}
-            hidden={!isOpen}
+            style={{ overflowY: 'scroll', backgroundColor: "#39394B", transition: "width 0.25s" }}
+            width={{ base: isOpen ? 218 : 80 }}
+            hidden={true}
             p="md"
         >
-            <Center sx={{ marginTop: '1rem' }}>
-                <Image src="/images/trigan-symbol.svg" alt="trigan logo" width={40} />
-            </Center>
+            <div className={clsx("flex justify-between items-center mt-4", isOpen && "px-7", !isOpen && "flex-col-reverse gap-4")}>
+                <div />
+
+                <div className="flex items-center">
+                    <Image
+                        className={clsx(isOpen && "mr-2", !isOpen && "block")}
+                        src="/images/trigan-symbol-white.svg"
+                        alt="trigan logo"
+                        width={32}
+                    />
+                    {isOpen && (
+                        <h3 style={{ letterSpacing: "4px", fontSize: 14 }}>TRIGAN</h3>
+                    )}
+                </div>
+
+                <span className="cursor-pointer">
+                    <IconMenu2 color="#FFFFFF" onClick={() => setIsOpen((prev) => !prev)} />
+                </span>
+            </div>
+
             <Navbar.Section grow mt={50}>
                 <Stack justify="center" spacing={0}>
                     {links}
                 </Stack>
             </Navbar.Section>
+
             <Navbar.Section>
                 <Stack justify="center" spacing={0}>
                     <NavigationLink

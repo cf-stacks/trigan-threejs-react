@@ -5,85 +5,57 @@ import {NavLinkItem} from "./navLinks";
 import { IconCaretDown, IconCaretUp } from "@tabler/icons";
 
 const useStyles = createStyles((theme) => ({
-  main: {
+  navigationLink: {
+    color: "#61616F",
     display: "flex",
-    // backgroundColor: "#222131",
-    minHeight: "100vh",
-  },
-  link: {
-    // width: 50,
-    // height: 50,
-    borderRadius: theme.radius.md,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color:
-      theme.colorScheme === 'dark'
-        ? theme.colors.dark[0]
-        : theme.colors.gray[7],
+    justifyContent: "space-between",
+    padding: "14px 30px",
+    backgroundImage: "linear-gradient(to left, #61616F 50%, transparent 50%) !important",
+    backgroundSize: "200% 100% !important",
+    transition: "background-position 0.25s !important",
+
+    '&.small': {
+      display: "flex",
+      justifyContent: "center",
+      paddingLeft: 0,
+      paddingRight: 0,
+    },
 
     '&:hover': {
-      backgroundColor:
-        theme.colorScheme === 'dark'
-          ? theme.colors.dark[5]
-          : theme.colors.gray[0],
+      backgroundPosition: "-100% 0 !important",
+      color: "#39394B",
     },
-    position: 'relative',
-  },
-  navbar: {
-    width: "0px",
-    transition: "width 0.3 ease"
-  },
-  navbarOpen: {
-    width: "218px",
-  },
-  slideLeft: {
-    transform: 'translateX(-80px)',
-    transition: 'transform 0.3s ease',
-  },
-  slideRight: {
-    transform: 'translateX(calc(100vw - 80px))',
-    transition: 'transform 0.3s ease',
   },
 
   active: {
-    '&, &:hover': {
-      backgroundColor: theme.fn.variant({
-        variant: 'light',
-        color: theme.primaryColor,
-      }).background,
-      color: theme.fn.variant({ variant: 'light', color: theme.primaryColor })
-        .color,
-    },
-  },
-
-  dropdown: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
+    backgroundColor: "#61616F !important",
+    color: "#39394B",
   },
 }))
 
 export interface NavigationLinkProps {
   item: NavLinkItem,
+  smallSize?: boolean,
   onClick?: () => void,
 }
 
 const NavigationLink = ({
   item: {icon: Icon, url, label, links},
+  smallSize = false,
   onClick,
 }: NavigationLinkProps) => {
   const {classes, cx} = useStyles();
   const {pathname, push} = useRouter()
   const isActive = useMemo(() => {
+    const page = pathname.replace('/admin/', '');
     if (!links) {
-      return false;
+      return page === url;
     }
     return links
       .map(({ url }) => url)
       .concat(url)
-      .includes(pathname.replace('/admin/', ''));
-  }, [links, pathname]);
+      .includes(page);
+  }, [url, links, pathname]);
 
   const submenuToggle = useMemo(() => {
     if (!links) {
@@ -92,7 +64,6 @@ const NavigationLink = ({
     const props = {
       width: 16,
       height: 16,
-      // className: classes.dropdown,
     };
     if (isActive) {
       return <IconCaretDown {...props} />;
@@ -103,48 +74,40 @@ const NavigationLink = ({
 
   return (
     <>
-      <Tooltip label={label} position="right" transitionDuration={0}>
-        <UnstyledButton
-          className={cx("flex justify-between", classes.link, {
-            [classes.active]:
-              isActive,
-          })}
-          onClick={() => {
-            push(`/admin/${url}`);
-            onClick?.();
-          }}
-        >
-          <div className="flex">
-            <Icon className="mr-4" stroke={1.5} />
+      <UnstyledButton
+        className={cx(classes.navigationLink, smallSize && "small", {
+          [classes.active]:
+            isActive,
+        })}
+        onClick={() => {
+          push(`/admin/${url}`);
+          onClick?.();
+        }}
+      >
+        <div className="flex">
+          <Icon className={cx(!smallSize && "mr-4")} stroke={1.5} />
 
-            {label}
-          </div>
+          {!smallSize && label}
+        </div>
 
-          {submenuToggle}
-        </UnstyledButton>
-      </Tooltip>
+        {!smallSize && submenuToggle}
+      </UnstyledButton>
 
       {isActive && links?.map(({ url, label, icon: Icon }, index) => (
-        <Tooltip
-          label={url}
-          position="right"
-          transitionDuration={1}
+        <UnstyledButton
           key={`${url}-${index}`}
+          className="flex"
+          onClick={() => {
+            push(`/admin/${url}`);
+          }}
+          // className={cx(classes.link, {
+          //   [classes.active]: item.label === active,
+          // })}
         >
-          <UnstyledButton
-            className="flex"
-            onClick={() => {
-              push(`/admin/${url}`);
-            }}
-            // className={cx(classes.link, {
-            //   [classes.active]: item.label === active,
-            // })}
-          >
-            <Icon stroke={0.5} />
+          <Icon stroke={0.5} />
 
-            {label}
-          </UnstyledButton>
-        </Tooltip>
+          {!smallSize && label}
+        </UnstyledButton>
       ))}
     </>
   );
