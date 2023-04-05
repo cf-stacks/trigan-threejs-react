@@ -265,7 +265,7 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
         <div className="paragraphStyle m-auto flex w-[90%] flex-wrap  rounded-md bg-white/[.1] py-2 text-lg font-extralight md:py-5 md:text-xl">
           <div className="m-auto flex h-[350px] w-[320px] max-w-screen-sm flex-col text-[25px] md:m-5 md:m-auto md:w-[100%] lg:w-[60%]">
             <p className="m-5">This site is currently under construction</p>
-            <p className="m-5">Clicked button is {clickedButton}</p>
+         {/*   <p className="m-5">Clicked button is {clickedButton}</p> */}
             <h1 className="m-5 text-xl font-bold text-white dark:text-purple-500 md:text-5xl">
               More info to follow shortly!
             </h1>

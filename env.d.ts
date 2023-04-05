@@ -7,6 +7,7 @@ declare global {
       MONGODB_URI: string;
       URL: string;
       GET_API_KEY: string;
+      NEXT_PUBLIC_PROJECT_ID: string;
     }
   }
 }
