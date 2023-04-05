@@ -164,21 +164,24 @@ const Navbar: React.FC<NavbarProps> = () => {
             <div className="flex items-center justify-between ">
               <div>
                 <motion.div
-                  initial={{ x: '-100%' }}
-                  animate={{ x: 0 }}
+                    initial={{ y: '-100%' }}
+                    animate={{ y: 0 }}
+                    transition={{
+                      type: 'spring',
+                      stiffness: 360,
+                      damping: 15,
+                    }}
                   className="relative w-48 h-16 lg:h-20 lg:w-56"
                 >
                   <button
                     onClick={() => router.push('/')}
                     className="p-0 transition duration-300"
                   >
-                    <div style={{width: '200px', height: '100px', position: 'relative'}}>
                       <Image
                         layout="fill"
                         src={isDark ? '/images/trigan logo v dark.svg' : '/images/trigan logo v.svg'}
                         alt="Logo"
                       />
-                    </div>
 
                   </button>
                 </motion.div>
