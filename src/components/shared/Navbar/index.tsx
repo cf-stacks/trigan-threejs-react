@@ -172,11 +172,13 @@ const Navbar: React.FC<NavbarProps> = () => {
                     onClick={() => router.push('/')}
                     className="p-0 transition duration-300"
                   >
-                    <Image  
-                      layout="fill"
-                      src={isDark ? '/images/trigan logo v dark.svg' : '/images/trigan logo v.svg'}
-                      alt="Logo"
-                    />
+                    <div style={{width: '200px', height: '100px', position: 'relative'}}>
+                      <Image
+                        layout="fill"
+                        src={isDark ? '/images/trigan logo v dark.svg' : '/images/trigan logo v.svg'}
+                        alt="Logo"
+                      />
+                    </div>
 
                   </button>
                 </motion.div>
