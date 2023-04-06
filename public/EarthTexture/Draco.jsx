@@ -1,7 +1,7 @@
 import React, { memo, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
-import { useLoader } from 'react-three-fiber'
+// import { useLoader } from 'react-three-fiber'
 import { useAnimations, useGLTF } from '@react-three/drei'
 
 import {
@@ -28,7 +28,7 @@ const Model = (props) => {
   const [Device, setDevice] = useState(30)
 
   // Load the Earth texture
-  const earthTexture = useLoader(THREE.TextureLoader, 'EarthTexture/earth.jpg')
+  // const earthTexture = useLoader(THREE.TextureLoader, 'EarthTexture/earth.jpg')
 
   useFrame(({ clock }) => {
     // Rotate the Earth model over time
