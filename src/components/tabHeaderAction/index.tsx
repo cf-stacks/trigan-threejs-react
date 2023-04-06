@@ -11,12 +11,43 @@ const useStyles = createStyles(() => ({
             flexDirection: 'column',
         },
     },
-    searchForm: {
+    searchContainer: {
+        marginRight: "1.5rem",
+        position: "relative",
         display: 'flex',
-        width: '600px',
+        width: '341px',
         '@media only screen and (max-width: 850px)': {
             width: '300px',
         },
+
+        input: {
+            backgroundColor: "#39394B",
+            color: "white",
+            borderRadius: "10px",
+            padding: "12px 20px",
+            paddingRight: "62px",
+            width: "100%",
+            height: "42px",
+        },
+
+        button: {
+            borderRadius: "10px",
+            position: "absolute",
+            right: "0",
+            color: "white",
+            height: "42px",
+            width: "42px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+        }
+    },
+
+    addButton: {
+        backgroundColor: "#A855F7 !important",
+        fontSize: "14px",
+        borderRadius: "10px",
+        padding: "12px 20px",
     },
 }));
 
@@ -39,22 +70,22 @@ const TabHeaderAction: React.FC<TableHeaderProps> = (props) => {
 
     return (
         <section className={classes.topSection}>
-            <form className={classes.searchForm} onSubmit={search.handleSubmit}>
+            <form className={classes.searchContainer} onSubmit={search.handleSubmit}>
                 <Input
                     sx={{ width: '100%' }}
                     placeholder={search.placeholder ?? "Search by title"}
                     value={search.value}
                     onChange={search.onChange}
                 />
-                <Button type="submit" variant="outline">
+                <button type="submit">
                     <IconSearch />
-                </Button>
+                </button>
             </form>
+
             <Button
-                color="green"
+                className={classes.addButton}
                 variant="filled"
                 onClick={create.onClick}
-                sx={{ backgroundColor: '#40c057 !important', margin: '1rem auto' }}
                 leftIcon={<IconPlus />}
             >
                 {create.text}

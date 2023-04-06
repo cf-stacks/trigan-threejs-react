@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import TabHeaderAction from "../../../components/tabHeaderAction";
 import { MoadalType, UsersTable, UserType } from '../../../components/admin/users/UsersTable';
 import { UsersModals } from '../../../components/admin/users/UsersModals';
+import Head from 'next/head';
 
 const Users: NextPage = () => {
     const [search, setSearch] = useState('');
@@ -71,15 +72,24 @@ const Users: NextPage = () => {
     }, [fetchFunction])
     return (
         <AdminLayout>
-            <Title align='center'>Users</Title>
-            <TabHeaderAction 
-                search={{ 
-                    value: search, 
-                    onChange: (e) => setSearch(e.target.value), 
-                    handleSubmit: handleSubmit
-                }}
-                create={{onClick: () => setModal({ open: true, type: 'create', size: '' }), text: "Create User"}}
-            />
+            <Head>
+              <title>Users</title>
+            </Head>
+
+            <div className='flex justify-between items-center'>
+              <Title size={24} align='center' className='text-white'>
+                Users
+              </Title>
+
+              <TabHeaderAction 
+                  search={{ 
+                      value: search, 
+                      onChange: (e) => setSearch(e.target.value), 
+                      handleSubmit: handleSubmit
+                  }}
+                  create={{onClick: () => setModal({ open: true, type: 'create', size: '' }), text: "Create User"}}
+              />
+            </div>
 
             <section>
                 <UsersTable 
