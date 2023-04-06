@@ -1,7 +1,7 @@
 import type { GetStaticProps, NextPage } from 'next'
 import { ReactNode, useState, useEffect } from 'react'
 import React, { lazy, Suspense } from 'react'
-import GlobalLayout from '../components/layouts/GlobalLayout';
+import GlobalLayout from '../components/layouts/GlobalLayout'
 
 import { SEO } from '../components/shared/SEO'
 import { Title } from '../components/shared/Title'
@@ -19,14 +19,15 @@ import { useRouter } from 'next/router'
 
 // andrey edits
 import BlogHeader from '../components/BlogHeader'
-import PostSearch from '../components/Posts/PostSearch';
-import { PostsByDate } from '../components/Posts/PostsByDate';
-import dynamic from 'next/dynamic';
+import PostSearch from '../components/Posts/PostSearch'
+import { PostsByDate } from '../components/Posts/PostsByDate'
+import dynamic from 'next/dynamic'
 import { useFrame } from '@react-three/fiber'
-import { Head } from 'next/document';
+import { Head } from 'next/document'
 
-const VideoHeader = dynamic(() => import('../components/home/HeroSection/VideoHeader'))
-
+const VideoHeader = dynamic(
+  () => import('../components/home/HeroSection/VideoHeader')
+)
 
 interface BlogProps {
   children?: ReactNode
@@ -39,25 +40,33 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
   const handleSearch = async (title: string) => {
     await router.push('/PostSearch')
   }
-  
+
   return (
     <div className="relative">
-      <VideoHeader isScroll={false}/>
-      <div className='dark:bg-white '> 
-      <div id="blog" className="relative mt-[1600px] flex w-full flex-col items-center gap-20 pt-40">
-        <SEO title="Blog" description="Trigan Blog" />
-        <GlobalLayout >
-        
-          <Title padding="headingStyle" title="Blog"/>
-          {/* <PostSearchFront /> */}
-          <PostSearch />
-          <PostsByDate posts={posts} />
-          {/* check which functionality of this blogHeader component, which will render the post cards will be this component or <PostsByDate posts={posts} />. Or should you render the 2? what's the difference, because they seem to be the same content*/}
-          {/* <BlogHeader /> */}
-        </GlobalLayout>
+      <VideoHeader isScroll={false} />
+      <div className="dark:bg-white ">
+        <div
+          id="blog"
+          className="relative mt-[100px] flex w-full flex-col items-center gap-20"
+        >
+          <SEO title="Blog" description="Trigan Blog" />
+          <GlobalLayout>
+            <h1
+              className={`w-full text-center text-2xl font-semibold capitalize md:text-5xl`}
+            >
+              <span className="inline-block border-b-2 border-light p-2 font-m_plus_rounded_1c  dark:text-black">
+                Blog
+              </span>
+            </h1>
+            {/* <PostSearchFront /> */}
+            <PostSearch />
+            <PostsByDate posts={posts} />
+            {/* check which functionality of this blogHeader component, which will render the post cards will be this component or <PostsByDate posts={posts} />. Or should you render the 2? what's the difference, because they seem to be the same content*/}
+            {/* <BlogHeader /> */}
+          </GlobalLayout>
+        </div>
       </div>
-      </div>
-      </div>
+    </div>
   )
 }
 
@@ -76,6 +85,5 @@ export async function getServerSideProps() {
     },
   }
 }
-
 
 export default Blog
