@@ -32,7 +32,7 @@ export const LINKS = [
     }, */
     ]
   },  
- /* {
+ {
     title: 'Blog',
     link: '/blog',
   },
