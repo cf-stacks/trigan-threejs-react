@@ -2,6 +2,7 @@ import type { GetStaticProps, NextPage } from 'next'
 import { ReactNode, useState, useEffect } from 'react'
 import React, { lazy, Suspense } from 'react'
 import GlobalLayout from '../components/layouts/GlobalLayout'
+import Link from 'next/link'
 
 import { SEO } from '../components/shared/SEO'
 import { Title } from '../components/shared/Title'
@@ -61,6 +62,17 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
             {/* <PostSearchFront /> */}
             <PostSearch />
             <PostsByDate posts={posts} />
+            <div className="mt-10 mb-20 flex w-[100%] flex-wrap justify-center">
+              <Link href="/blog" passHref as={``}>
+                <div className="mr-6 w-max hover:cursor-pointer hover:opacity-50">
+                  <span
+                    className={`border-1 flex h-[46px] flex-row flex-wrap items-center rounded-full border border-[#fff] bg-[#DC2626] px-7 py-1.5 text-[16px] font-medium capitalize text-white`}
+                  >
+                    Load More
+                  </span>
+                </div>
+              </Link>
+            </div>
             {/* check which functionality of this blogHeader component, which will render the post cards will be this component or <PostsByDate posts={posts} />. Or should you render the 2? what's the difference, because they seem to be the same content*/}
             {/* <BlogHeader /> */}
           </GlobalLayout>
