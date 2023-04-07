@@ -61,6 +61,9 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
             </h1>
             {/* <PostSearchFront /> */}
             <PostSearch />
+            <div className='flex w-full justify-center items-center mt-20'>
+              <div className="h-[1px] w-2/4 bg-[#5B5B5B]" />
+            </div>
             <PostsByDate posts={posts} />
             <div className="mt-10 mb-20 flex w-[100%] flex-wrap justify-center">
               <Link href="/blog" passHref as={``}>

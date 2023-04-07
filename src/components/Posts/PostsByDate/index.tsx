@@ -16,12 +16,16 @@ export const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
   const tagsArray: any[] = ['Agriculture', 'Web3', 'Crypto', 'Metavarse']
   return (
     <>
-      <div className="flex w-[100%] mt-32 mb-8 flex-wrap justify-center">
+      <div className="mt-16 mb-8 flex w-[100%] flex-wrap justify-center">
         {tagsArray.map((tag, i) => {
           return (
-            <div key={i} className="mr-6 w-max hover:cursor-pointer hover:opacity-50" onClick={() => setSelectedTag(i)}>
+            <div
+              key={i}
+              className="mr-6 w-max hover:cursor-pointer hover:opacity-50"
+              onClick={() => setSelectedTag(i)}
+            >
               <span
-                className={`flex flex-row flex-wrap items-center rounded-full border border-1 border-[#653394] bg-[${
+                className={`border-1 flex flex-row flex-wrap items-center rounded-full border border-[#653394] bg-[${
                   selectedTag === i ? '#653394' : 'none'
                 }] h-[46px] px-6 py-1.5 text-[16px] font-medium capitalize text-white`}
               >
