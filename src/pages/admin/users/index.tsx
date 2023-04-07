@@ -7,12 +7,12 @@ import { TEST_API_URL } from '../../../util/constants';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import TabHeaderAction from "../../../components/tabHeaderAction";
-import { MoadalType, UsersTable, UserType } from '../../../components/admin/users/UsersTable';
+import { MoadalType, UserType } from '../../../components/admin/users/UsersTable';
 import { UsersModals } from '../../../components/admin/users/UsersModals';
 import Head from 'next/head';
 import {ColumnSort, SortingState} from '@tanstack/react-table';
-import useColumns from './Table/useColumns';
 import Table from '../../../components/Table';
+import {useColumns} from '../../../table-columns/users';
 
 const Users: NextPage = () => {
     const [search, setSearch] = useState('');

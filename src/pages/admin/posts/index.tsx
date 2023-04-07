@@ -8,9 +8,9 @@ import toast from 'react-hot-toast';
 import { PostsModals } from '../../../components/admin/posts/PostsModals';
 import TabHeaderAction from "../../../components/tabHeaderAction"
 import { useRouter } from 'next/router';
-import useColumns from './Table/useColumns';
 import {ColumnSort, SortingState} from '@tanstack/react-table';
 import Table from '../../../components/Table';
+import {useColumns} from '../../../table-columns/posts';
 
 interface DashboardProps {
   children?: ReactNode
