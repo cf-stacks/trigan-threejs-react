@@ -4,51 +4,29 @@ import 'aos/dist/aos.css'
 import { FadeInWhenVisible } from '../../shared/FadeInWhenVisible'
 import HorizontalSlider from './HorizontalSlider'
 import HashtagHeader from '../HashtagHeader'
-import { PostsByDate } from '../../Posts/PostsByDate'
-import { BlogPost } from '../../../types/BlogPost'
-import { NextPage } from 'next'
 import Link from 'next/link'
-
-interface BlogProps {
-  children?: ReactNode
-  // posts: any /* BlogPost[] */
-  posts: BlogPost
-}
+import useSWR from 'swr'
 
 const ScrollingSlideShow = () => {
   const [text, setText] = useState('')
-  const [data, setData] = useState<BlogPost>()
+  const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(20)
 
-  async function getBlogPostData() {
-    const res = await fetch(
-      'https://test1.trigan.org/api/v1/posts?page-size=5&page=1&apiKey=g436739d6734gd6734'
-      /* `${process.env.URL}posts?&apiKey=${process.env.GET_API_KEY}`*/
-    )
+  const fetcher = (url) =>
+    fetch(url).then(async (r) => {
+      let resPosts = await r.json()
+      return resPosts.posts;
+    })
 
-    const posts = await res.json()
-    setData(posts)
-  }
-
-  useEffect(() => {
-    getBlogPostData()
-  }, [])
-
-  // useEffect(() => {
-  //   AOS.init({ offset: 150 })
-  // })
+  const { data, error } = useSWR(
+    `https://test1.trigan.org/api/v1/posts?page-size=${pageSize}&page=${page}&apiKey=g436739d6734gd6734`,
+    fetcher
+  )
 
   useEffect(() => {
     const textComplete =
       'We develop Web3 and AI technologies to create profitable and sustainable business opportunities that drive positive change and improve lives. Our mission is to bridge the gap between Web3 and the real world by creating innovative technologies that make a meaningful impact on society. We believe that social responsibility and collaboration are key to achieving our goals, and we are committed to being a leading force for good in the Web3 space.'
     setText(textComplete)
-    // let i = 0;
-    // const timer = setInterval(() => {
-    // setText(textComplete.substring(0, i));
-    //   i++;
-    //   if (i > textComplete.length) {
-    //     clearInterval(timer);
-    //   }
-    // }, 10);
   }, [])
 
   if (!data) {
@@ -134,7 +112,7 @@ const ScrollingSlideShow = () => {
           </div>
           <HashtagHeader text="#Blog" position="left" id="ourSolution" />
           <div className="m-auto mb-10 flex w-[100%] flex-row flex-wrap justify-center">
-            {data.posts.map((BlogPost: any, i: number) => {
+            {data?.map((BlogPost: any, i: number) => {
               const date = new Date(BlogPost.date_created)
               let tags = BlogPost.tags
               const uniqueTags = tags.filter((e: any, i: any) => {
