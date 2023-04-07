@@ -171,6 +171,13 @@ h6 {
   z-index: -1;
 }
 
+.full-width-container img {
+  max-width: none;
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
 @media screen and (max-width: 480px) {
   .abo_h2l {
     font-size: 30px;

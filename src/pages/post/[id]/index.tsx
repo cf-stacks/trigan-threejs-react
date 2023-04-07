@@ -85,7 +85,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                 <p className="mr-10">/</p>
                 <p>5 Min read</p>
               </div>
-              <h6 className="font-medium">
+              <h6 className="font-medium leading-loose full-width-container text-lg">
                 {/* <p className="py-2 text-sm" style={{wordWrap:'break-word'}}>{b64_to_utf8(post.data.content)}</p> */}
                 <ReactMarkdown>{b64_to_utf8(post.data.content)}</ReactMarkdown>
               </h6>
