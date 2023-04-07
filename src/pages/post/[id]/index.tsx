@@ -1,6 +1,7 @@
 import { ReactNode, useEffect, useState } from 'react'
 import { BlogPost } from '../../../types/BlogPost'
 import type { NextPage } from 'next'
+import useSWR from 'swr'
 import { ThemeProvider } from 'next-themes'
 import { Title } from '../../../components/shared/Title'
 import GlobalLayout from '../../../components/layouts/GlobalLayout'
@@ -19,7 +20,19 @@ interface PostProps {
 const Post: NextPage<PostProps> = ({ post }) => {
   const router = useRouter()
   const [tags, setTags] = useState(0)
-  const [posts, setPosts] = useState([])
+  const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(20)
+
+  const fetcher = (url) =>
+    fetch(url).then(async (r) => {
+      let resPosts = await r.json()
+      return resPosts.posts;
+    })
+
+  const { data, error } = useSWR(
+    `https://test1.trigan.org/api/v1/posts?page-size=${pageSize}&page=${page}&apiKey=g436739d6734gd6734`,
+    fetcher
+  )
 
   const { id } = router.query
   console.log('ROUTERID', id)
@@ -31,26 +44,8 @@ const Post: NextPage<PostProps> = ({ post }) => {
       demo = window.atob(char)
     }
     return demo
-    // console.log("kjdfkjndf",window.atob(char))
-
-    //  return decodeURIComponent(escape(window.atob( char )));
-    // const buff = Buffer.from(char, "base64");
-    // console.log("kjknnlklk",buff.toString("utf8"))
-    // return buff.toString("utf8");
   }
 
-  const getServerSidePosts = async () => {
-    const res = await fetch(
-      'https://test1.trigan.org/api/v1/posts?page-size=5&page=1&apiKey=g436739d6734gd6734'
-    )
-
-    let resPosts = await res.json()
-    setPosts(resPosts.posts);
-  }
-
-  useEffect(() => {
-    getServerSidePosts();
-  }, [tags])
   return (
     <ThemeProvider attribute="class" enableSystem={true}>
       <GlobalLayout>
@@ -85,12 +80,12 @@ const Post: NextPage<PostProps> = ({ post }) => {
                 <p className="mr-10">/</p>
                 <p>5 Min read</p>
               </div>
-              <h6 className="font-medium leading-loose full-width-container text-lg">
+              <h6 className="full-width-container text-lg font-medium leading-loose">
                 {/* <p className="py-2 text-sm" style={{wordWrap:'break-word'}}>{b64_to_utf8(post.data.content)}</p> */}
                 <ReactMarkdown>{b64_to_utf8(post.data.content)}</ReactMarkdown>
               </h6>
             </div>
-            <div className="mt-[180px] ml-4 flex max-h-[784px] w-1/4 flex-col bg-[#212529]">
+            <div className="mt-[180px] ml-4 flex max-h-[900px] w-1/4 flex-col bg-[#212529]">
               <div className="flex flex-col items-center py-16">
                 <h6 className=" mb-6 border-b-2 border-[#848484] pb-3 text-2xl">
                   Categories:
@@ -179,9 +174,8 @@ const Post: NextPage<PostProps> = ({ post }) => {
             <p className="inline-block border-b-2 border-[#5B5B5B] pb-4 text-xl font-medium text-white">
               Other Article related to {post.data.tags[tags]}
             </p>
-            <div className="flex flex-wrap justify-between mb-40">
-              {posts.map((BlogPost, i) => {
-                console.log('popop==> ', BlogPost)
+            <div className="mb-40 flex flex-wrap justify-between">
+              {data?.map((BlogPost, i) => {
                 const date = new Date(BlogPost.date_created)
                 let tags = BlogPost.tags
                 const uniqueTags = tags.filter((e: any, i: any) => {
@@ -218,55 +212,55 @@ const Post: NextPage<PostProps> = ({ post }) => {
                             </Link>
                             <div className="flex w-[400px] flex-col gap-2 px-8 py-4">
                               <div className="flex w-full justify-between">
-                                    <pre className="text-[12px] font-thin text-[#909090]">
-                                      {date.toLocaleDateString('en-US')}
-                                    </pre>
-                                    <svg
-                                      width="21"
-                                      height="19"
-                                      viewBox="0 0 21 19"
-                                      fill="none"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                      <path
-                                        d="M17.8665 3.2466C17.4409 2.82077 16.9355 2.48297 16.3793 2.2525C15.8231 2.02203 15.2269 1.90341 14.6248 1.90341C14.0227 1.90341 13.4266 2.02203 12.8704 2.2525C12.3141 2.48297 11.8088 2.82077 11.3831 3.2466L10.4998 4.12993L9.61648 3.2466C8.75674 2.38686 7.59068 1.90386 6.37481 1.90386C5.15895 1.90386 3.99289 2.38686 3.13315 3.2466C2.2734 4.10634 1.79041 5.27241 1.79041 6.48827C1.79041 7.70413 2.2734 8.87019 3.13315 9.72993L4.01648 10.6133L10.4998 17.0966L16.9831 10.6133L17.8665 9.72993C18.2923 9.3043 18.6301 8.79894 18.8606 8.24273C19.091 7.68651 19.2097 7.09034 19.2097 6.48827C19.2097 5.88619 19.091 5.29002 18.8606 4.7338C18.6301 4.17759 18.2923 3.67223 17.8665 3.2466Z"
-                                        stroke="#909090"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                      />
-                                    </svg>
-                                  </div>
-                                  <div>
-                                    <span className="text-xs font-light text-white">
-                                      Tags:
-                                    </span>
-                                  </div>
-                                  <div className="flex w-[400px] flex-row flex-wrap">
-                                    {uniqueTags.map(
-                                      (tag: string, index: number) => {
-                                        return (
-                                          <div
-                                            key={index}
-                                            className="mr-2 mb-2 w-max "
-                                          >
-                                            <span className="flex flex-row flex-wrap items-center rounded-full bg-[#4D5154] px-2 py-1.5 text-xs font-medium uppercase leading-none text-white">
-                                              {`#${tag}`}
-                                            </span>
-                                          </div>
-                                        )
-                                      }
-                                    )}
-                                  </div>
-                                  <Link
-                                    href="/post/[id]"
-                                    passHref
-                                    as={`/post/${BlogPost.id_post}`}
-                                  >
-                                    <h2 className=" text-2xl font-semibold text-white hover:cursor-pointer hover:text-grey">
-                                      {BlogPost.title}
-                                    </h2>
-                                  </Link>
+                                <pre className="text-[12px] font-thin text-[#909090]">
+                                  {date.toLocaleDateString('en-US')}
+                                </pre>
+                                <svg
+                                  width="21"
+                                  height="19"
+                                  viewBox="0 0 21 19"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M17.8665 3.2466C17.4409 2.82077 16.9355 2.48297 16.3793 2.2525C15.8231 2.02203 15.2269 1.90341 14.6248 1.90341C14.0227 1.90341 13.4266 2.02203 12.8704 2.2525C12.3141 2.48297 11.8088 2.82077 11.3831 3.2466L10.4998 4.12993L9.61648 3.2466C8.75674 2.38686 7.59068 1.90386 6.37481 1.90386C5.15895 1.90386 3.99289 2.38686 3.13315 3.2466C2.2734 4.10634 1.79041 5.27241 1.79041 6.48827C1.79041 7.70413 2.2734 8.87019 3.13315 9.72993L4.01648 10.6133L10.4998 17.0966L16.9831 10.6133L17.8665 9.72993C18.2923 9.3043 18.6301 8.79894 18.8606 8.24273C19.091 7.68651 19.2097 7.09034 19.2097 6.48827C19.2097 5.88619 19.091 5.29002 18.8606 4.7338C18.6301 4.17759 18.2923 3.67223 17.8665 3.2466Z"
+                                    stroke="#909090"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                  />
+                                </svg>
+                              </div>
+                              <div>
+                                <span className="text-xs font-light text-white">
+                                  Tags:
+                                </span>
+                              </div>
+                              <div className="flex w-[400px] flex-row flex-wrap">
+                                {uniqueTags.map(
+                                  (tag: string, index: number) => {
+                                    return (
+                                      <div
+                                        key={index}
+                                        className="mr-2 mb-2 w-max "
+                                      >
+                                        <span className="flex flex-row flex-wrap items-center rounded-full bg-[#4D5154] px-2 py-1.5 text-xs font-medium uppercase leading-none text-white">
+                                          {`#${tag}`}
+                                        </span>
+                                      </div>
+                                    )
+                                  }
+                                )}
+                              </div>
+                              <Link
+                                href="/post/[id]"
+                                passHref
+                                as={`/post/${BlogPost.id_post}`}
+                              >
+                                <h2 className=" text-2xl font-semibold text-white hover:cursor-pointer hover:text-grey">
+                                  {BlogPost.title}
+                                </h2>
+                              </Link>
                               <p className="flex flex-wrap text-[16px] font-normal text-white">
                                 Lorem ipsum dolor sit amet consectetur. Commodo
                                 sed viverra amet est odio massa libero
