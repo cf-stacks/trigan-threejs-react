@@ -1,4 +1,4 @@
-import { createStyles } from "@mantine/core";
+import { createStyles, Loader } from "@mantine/core";
 import {
   ColumnDef,
   flexRender,
@@ -52,7 +52,16 @@ function Table<T>({ loading, ...tableOptions }: TableProps<T>) {
                   }
                 }
                 return (
-                  <th key={header.id} className="font-normal text-left px-4">
+                  <th
+                    key={header.id}
+                    className="font-normal text-left px-4"
+                    {...{
+                      colSpan: header.colSpan,
+                      style: {
+                        width: header.getSize(),
+                      },
+                    }}
+                  >
                     {header.isPlaceholder ? null : (
                       <div
                         {...{
@@ -79,21 +88,34 @@ function Table<T>({ loading, ...tableOptions }: TableProps<T>) {
           ))}
         </thead>
         <tbody className="text-sm">
-          {table.getRowModel().rows.map(row => {
-            const isLast = false;
-            return (
-              <tr
-                key={row.id}
-                className={cx(classes.bodyRow, "mb-6")}
-              >
-                {row.getVisibleCells().map(cell => (
-                  <td key={cell.id} className="p-4">
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
-              </tr>
-            );
-          })}
+          {loading ? (
+            <tr className={cx(classes.bodyRow, "mb-6")}>
+              <td className="p-4" colSpan={999}>
+                <div className="flex justify-center">
+                  <Loader />
+                </div>
+              </td>
+            </tr>
+          ) : table.getRowModel().rows.map(row => (
+            <tr
+              key={row.id}
+              className={cx(classes.bodyRow, "mb-6")}
+            >
+              {row.getVisibleCells().map(cell => (
+                <td
+                key={cell.id}
+                className="p-4"
+                {...{
+                  style: {
+                    width: cell.column.getSize(),
+                  },
+                }}
+                >
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
+            </tr>
+          ))}
         </tbody>
         <tfoot>
           {table.getFooterGroups().map(footerGroup => (

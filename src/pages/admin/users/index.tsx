@@ -7,10 +7,12 @@ import { TEST_API_URL } from '../../../util/constants';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import TabHeaderAction from "../../../components/tabHeaderAction";
-import { MoadalType, UsersTable, UserType } from '../../../components/admin/users/UsersTable';
+import { MoadalType, UserType } from '../../../components/admin/users/UsersTable';
 import { UsersModals } from '../../../components/admin/users/UsersModals';
 import Head from 'next/head';
-import UserTable from './Table';
+import {ColumnSort, SortingState} from '@tanstack/react-table';
+import Table from '../../../components/Table';
+import {useColumns} from '../../../table-columns/users';
 
 const Users: NextPage = () => {
     const [search, setSearch] = useState('');
@@ -47,13 +49,17 @@ const Users: NextPage = () => {
       setFetching(false);
   }, [router]);
 
-    const fetchFunction = useCallback(async () => {
+    const fetchFunction = useCallback(async ({ sort }: { sort?: ColumnSort }) => {
         setFetching(true)
         try {
           const p: any = await axios.get(`${TEST_API_URL}/users`, {
             withCredentials: true,
             headers: {
               Authorization: `${localStorage.getItem('access_token')}`,
+            },
+            params: {
+                sortBy: sort ? sort.id : undefined,
+                order: sort ? sort.desc ? "desc" : "asc" : undefined,
             },
           })
           setUsers(p.data.Data as [])
@@ -68,9 +74,24 @@ const Users: NextPage = () => {
         setFetching(false);
     }, [router]);
 
+    const [rowSelection, setRowSelection] = useState({})
+    const [sorting, setSorting] = useState<SortingState>([])
+
+    const columns = useColumns({
+      edit: useCallback(() => {}, []),
+      remove: useCallback(() => {}, []),
+    });
+
     useEffect(() => {
-        void fetchFunction();
-    }, [fetchFunction])
+        const [sortField] = sorting;
+        void fetchFunction({ sort: sortField });
+    }, [fetchFunction, sorting])
+
+    const refetch = useCallback(async () => {
+      const [sortField] = sorting;
+      void fetchFunction({ sort: sortField });
+    }, [fetchFunction, sorting])
+
     return (
         <AdminLayout>
             <Head>
@@ -94,9 +115,14 @@ const Users: NextPage = () => {
             </div>
 
             <section>
-                <UserTable
-                  loading={false}
+                <Table
+                  loading={fetching}
+                  columns={columns}
                   data={users}
+                  state={{ rowSelection, sorting }}
+                  onSortingChange={setSorting}
+                  enableRowSelection={true}
+                  onRowSelectionChange={setRowSelection}
                 />
                 {/*
                 <UsersTable 
@@ -114,7 +140,7 @@ const Users: NextPage = () => {
                     setModal={setModal as Dispatch<SetStateAction<MoadalType>>}
                     selectedUser={selectedUser as UserType}
                     setSelectedUser={setSelectedUser as Dispatch<SetStateAction<UserType>>}
-                    fetchFunction={fetchFunction}
+                    fetchFunction={refetch}
                 />
             </div>
         </AdminLayout>

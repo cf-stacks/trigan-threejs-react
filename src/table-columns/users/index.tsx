@@ -1,9 +1,10 @@
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { useMemo } from "react";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
-import { UserType } from "../../../../components/admin/users/UsersTable";
 import moment from "moment";
-import { Avatar, Checkbox } from "@mantine/core";
+import { Avatar } from "@mantine/core";
+import {UserType} from "../../components/admin/users/UsersTable";
+import {useSelectColumn} from "../../components/Table/useSelectColumn";
 
 interface Arguments {
   edit: (user: UserType) => void;
@@ -14,32 +15,10 @@ const columnHelper = createColumnHelper<UserType>();
 
 const dateFormatter = (value: string) => moment(value).format("DD MMM, YYYY");
 
-const useColumns = ({ edit, remove }: Arguments) => {
+export const useColumns = ({ edit, remove }: Arguments) => {
+  const selectColumn = useSelectColumn();
   const columns: ColumnDef<UserType, any>[] =  useMemo(() => [
-    {
-      id: 'select',
-      header: ({ table }) => (
-        <Checkbox
-          {...{
-            checked: table.getIsAllRowsSelected(),
-            indeterminate: table.getIsSomeRowsSelected(),
-            onChange: table.getToggleAllRowsSelectedHandler(),
-          }}
-        />
-      ),
-      cell: ({ row }) => (
-        <div className="px-1">
-          <Checkbox
-            {...{
-              checked: row.getIsSelected(),
-              disabled: !row.getCanSelect(),
-              indeterminate: row.getIsSomeSelected(),
-              onChange: row.getToggleSelectedHandler(),
-            }}
-          />
-        </div>
-      ),
-    },
+    selectColumn,
     columnHelper.accessor("role_id", {
       header: "Role ID",
       cell: ({ getValue }) => `#${getValue()}`,
@@ -61,7 +40,7 @@ const useColumns = ({ edit, remove }: Arguments) => {
     }),
     columnHelper.accessor("password", {
       header: "Password",
-      cell: () => new Array(8).fill("*"),
+      cell: () => new Array(8).fill("*").join(""),
     }),
     columnHelper.accessor("created_at", {
       header: "Date created",
@@ -86,28 +65,6 @@ const useColumns = ({ edit, remove }: Arguments) => {
         </div>
       ),
     }),
-    /*
-    columnHelper.accessor(row => row.lastName, {
-      id: "lastName",
-      cell: info => <i>{info.getValue()}</i>,
-      header: () => <span>Last Name</span>,
-    }),
-    columnHelper.accessor("age", {
-      header: () => "Age",
-      cell: info => info.renderValue(),
-    }),
-    columnHelper.accessor("visits", {
-      header: () => <span>Visits</span>,
-    }),
-    columnHelper.accessor("status", {
-      header: "Status",
-    }),
-    columnHelper.accessor("progress", {
-      header: "Profile Progress",
-    }),
-    */
-  ], [edit, remove]);
+  ], [selectColumn, edit, remove]);
   return columns;
 }
-
-export default useColumns;

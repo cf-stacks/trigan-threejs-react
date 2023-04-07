@@ -63,7 +63,7 @@ interface TableHeaderProps {
         onClick: MouseEventHandler<HTMLButtonElement>;
         text: string | JSX.Element
     };
-    remove: MouseEventHandler<HTMLButtonElement>;
+    remove?: MouseEventHandler<HTMLButtonElement>;
 }
 
 const TabHeaderAction: React.FC<TableHeaderProps> = (props) => {
