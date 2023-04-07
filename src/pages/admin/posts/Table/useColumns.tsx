@@ -1,46 +1,52 @@
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { useMemo } from "react";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
-import { UserType } from "../../../../components/admin/users/UsersTable";
 import moment from "moment";
 import { Avatar, Checkbox } from "@mantine/core";
 import {useSelectColumn} from "../../../../components/Table/useSelectColumn";
+import { BlogPost } from "../../../../types/BlogPost";
 
 interface Arguments {
-  edit: (user: UserType) => void;
-  remove: (id: UserType["id"]) => void;
+  edit: (user: BlogPost) => void;
+  remove: (id: BlogPost["id_post"]) => void;
 }
 
-const columnHelper = createColumnHelper<UserType>();
+const columnHelper = createColumnHelper<BlogPost>();
 
 const dateFormatter = (value: string) => moment(value).format("DD MMM, YYYY");
 
 const useColumns = ({ edit, remove }: Arguments) => {
   const selectColumn = useSelectColumn();
-  const columns: ColumnDef<UserType, any>[] =  useMemo(() => [
+  const columns: ColumnDef<BlogPost, any>[] =  useMemo(() => [
     selectColumn,
-    columnHelper.accessor("role_id", {
-      header: "Role ID",
-      cell: ({ getValue }) => `#${getValue()}`,
+    columnHelper.accessor("author", {
+      header: "Author",
     }),
-    columnHelper.accessor((row) => `${row.first_name} ${row.last_name}`, {
-      header: "Username",
+    columnHelper.accessor("content", {
+      header: "Content",
       cell: ({ getValue }) => (
-        <div className="flex items-center">
-          <Avatar />
-          <span className="ml-2">{getValue()}</span>
+        <div className="w-[300px] truncate">
+          {getValue()}
         </div>
       ),
     }),
-    columnHelper.accessor("email", {
-      header: "Email",
+    columnHelper.accessor("categories", {
+      header: "Content",
+      cell: ({ getValue }) => {
+        const value: string[] = getValue();
+        return (
+          <div className="flex flex-wrap gap-2 max-w-[300px]">
+            {value?.map((item: string) => (
+              <span key={item} className="rounded bg-white text-primary px-2 py-1">
+                {item}
+              </span>
+            ))}
+          </div>
+        );
+      },
     }),
-    columnHelper.accessor("phone", {
-      header: "Phone",
-    }),
-    columnHelper.accessor("password", {
-      header: "Password",
-      cell: () => new Array(8).fill("*"),
+    columnHelper.accessor("original_filename", {
+      header: "Original File Name",
     }),
     columnHelper.accessor("created_at", {
       header: "Date created",

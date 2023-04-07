@@ -9,6 +9,7 @@ import { PostsTable } from '../../../components/admin/posts/PostsTable';
 import { PostsModals } from '../../../components/admin/posts/PostsModals';
 import TabHeaderAction from "../../../components/tabHeaderAction"
 import { useRouter } from 'next/router';
+import PostTable from './Table';
 
 interface DashboardProps {
   children?: ReactNode
@@ -173,25 +174,39 @@ const Dashboard: NextPage<DashboardProps> = () => {
 
   return (
     <AdminLayout>
-      <Title align={'center'}>Posts</Title>
-      <TabHeaderAction
-        search={{
-          value: search,
-          onChange: (e) => searchPosts(e.target.value),
-          handleSubmit: handleSubmit,
-        }}
-        create={{
-          text: 'Create Post',
-          onClick: () => setModal({ open: true, type: 'create', size: '' }),
-        }}
-      />
+      <div className='flex justify-between items-center mb-8'>
+        <Title size={24} align='center' className='text-white'>
+          Posts
+        </Title>
+
+        <TabHeaderAction
+          search={{
+            value: search,
+            onChange: (e) => searchPosts(e.target.value),
+            handleSubmit: handleSubmit,
+          }}
+          create={{
+            text: 'Create Post',
+            onClick: () => setModal({ open: true, type: 'create', size: '' }),
+          }}
+          remove={console.log}
+        />
+      </div>
 
       <section>
+        {/*
         <PostsTable
           posts={posts}
           fetching={fetching} //pass fetching instead of false when url is fixed
           setModal={setModal}
           setSelectedPost={setSelectedPost}
+        />
+        */}
+        <PostTable
+          data={posts}
+          loading={fetching} //pass fetching instead of false when url is fixed
+          //setModal={setModal}
+          //setSelectedPost={setSelectedPost}
         />
       </section>
 

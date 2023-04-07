@@ -95,7 +95,7 @@ const Users: NextPage = () => {
 
             <section>
                 <UserTable
-                  loading={false}
+                  loading={fetching}
                   data={users}
                 />
                 {/*
