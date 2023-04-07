@@ -10,7 +10,6 @@ import TabHeaderAction from "../../../components/tabHeaderAction";
 import { MoadalType, UsersTable, UserType } from '../../../components/admin/users/UsersTable';
 import { UsersModals } from '../../../components/admin/users/UsersModals';
 import Head from 'next/head';
-import UserTable from './Table';
 import {ColumnSort, SortingState} from '@tanstack/react-table';
 import useColumns from './Table/useColumns';
 import Table from '../../../components/Table';
@@ -88,6 +87,11 @@ const Users: NextPage = () => {
         void fetchFunction({ sort: sortField });
     }, [fetchFunction, sorting])
 
+    const refetch = useCallback(async () => {
+      const [sortField] = sorting;
+      void fetchFunction({ sort: sortField });
+    }, [fetchFunction, sorting])
+
     return (
         <AdminLayout>
             <Head>
@@ -136,7 +140,7 @@ const Users: NextPage = () => {
                     setModal={setModal as Dispatch<SetStateAction<MoadalType>>}
                     selectedUser={selectedUser as UserType}
                     setSelectedUser={setSelectedUser as Dispatch<SetStateAction<UserType>>}
-                    fetchFunction={fetchFunction}
+                    fetchFunction={refetch}
                 />
             </div>
         </AdminLayout>

@@ -8,7 +8,6 @@ import toast from 'react-hot-toast';
 import { PostsModals } from '../../../components/admin/posts/PostsModals';
 import TabHeaderAction from "../../../components/tabHeaderAction"
 import { useRouter } from 'next/router';
-import PostTable from './Table';
 import useColumns from './Table/useColumns';
 import {ColumnSort, SortingState} from '@tanstack/react-table';
 import Table from '../../../components/Table';
@@ -175,6 +174,11 @@ const Dashboard: NextPage<DashboardProps> = () => {
     void fetchFunction({ sort: sortField });
   }, [fetchFunction, sorting])
 
+  const refetch = useCallback(async () => {
+    const [sortField] = sorting;
+    void fetchFunction({ sort: sortField });
+  }, [fetchFunction, sorting])
+
   const searchPosts = async (term: string) => {
     setSearch(term)
     if (term.length > 0) {
@@ -212,15 +216,6 @@ const Dashboard: NextPage<DashboardProps> = () => {
       </div>
 
       <section>
-        {/*
-        <PostsTable
-          posts={posts}
-          fetching={fetching} //pass fetching instead of false when url is fixed
-          setModal={setModal}
-          setSelectedPost={setSelectedPost}
-        />
-        */}
-
         <Table
           loading={fetching}
           columns={columns}
@@ -238,7 +233,7 @@ const Dashboard: NextPage<DashboardProps> = () => {
           setModal={setModal}
           selectedPost={selectedPost}
           setSelectedPost={setSelectedPost}
-          fetchFunction={fetchFunction}
+          fetchFunction={refetch}
         />
       </div>
     </AdminLayout>

@@ -255,7 +255,7 @@ export const PostsModals = ({
         onClose={() => setModal({ ...modal, open: false })}
         size={961}
         withCloseButton={false}
-        padding="50px 30px"
+        classNames={{ modal: "p-[50px]" }}
         style={{ backgroundColor: "#000000" }}
       >
         <Title size={36} className="text-white mb-8">
