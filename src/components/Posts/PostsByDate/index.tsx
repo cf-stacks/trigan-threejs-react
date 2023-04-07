@@ -45,7 +45,7 @@ export const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
           return (
             <div
               key={i}
-              className={`c m-10 mt-10 flex grid h-[696px] w-[400px] justify-around overflow-hidden rounded-[15px] bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black max-[600px]:justify-center md:flex  md:px-1`}
+              className={` m-10 mt-10 flex grid h-[696px] w-[400px] justify-around overflow-hidden rounded-[15px] bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black max-[600px]:justify-center md:flex  md:px-1`}
             >
               <FadeInWhenVisible duration={(i + 1) * 0.2}>
                 <div
@@ -126,9 +126,6 @@ export const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                           aenean. Erat pulvinar pretium cras proin id interdum.
                           Elit purus tincidunt facilisis turpis tellus
                           suspendisse.
-                          {/* {BlogPost.description
-                          ? BlogPost.description
-                          : 'Lorem ipsum dolor sit amet consectetur. Commodo sed viverra amet est odio massa libero scelerisque rhoncus. Condimentum est sit montes nulla pharetra lacus neque faucibus. Vitae vulputate ac vitae ac aenean. Erat pulvinar pretium cras proin id interdum. Elit purus tincidunt facilisis turpis tellus suspendisse.'} */}
                         </p>
                         <Link href="/blog" passHref as={``}>
                           <h2 className=" text-lg font-normal text-[#DC2626] underline hover:cursor-pointer hover:text-grey">
