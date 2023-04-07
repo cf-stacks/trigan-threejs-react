@@ -44,6 +44,7 @@
     "gsap": "^3.11.3",
     "iron-session": "^6.1.2",
     "math.gl": "^3.6.3",
+    "moment": "^2.29.4",
     "mongoose": "^6.3.1",
     "next": "^13.2.1",
     "next-pwa": "^5.4.6",
