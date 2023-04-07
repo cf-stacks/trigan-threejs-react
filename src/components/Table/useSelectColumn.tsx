@@ -32,7 +32,6 @@ export const useSelectColumn = () => {
     id: 'select',
     header: ({ table }) => {
       const indeterminate = table.getIsSomeRowsSelected();
-      console.log({indeterminate});
       return (
         <Checkbox
           className={cx(classes.checkbox, indeterminate && classes.indeterminate)}

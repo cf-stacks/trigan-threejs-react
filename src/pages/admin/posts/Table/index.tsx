@@ -10,25 +10,6 @@ interface Props {
 }
 
 function PostTable({ loading, data }: Props) {
-  const [rowSelection, setRowSelection] = useState({})
-  const [sorting, setSorting] = useState<SortingState>([])
-
-  const columns = useColumns({
-    edit: useCallback(() => {}, []),
-    remove: useCallback(() => {}, []),
-  });
-
-  return (
-    <Table
-      loading={loading}
-      columns={columns}
-      data={data}
-      state={{ rowSelection, sorting }}
-      onSortingChange={setSorting}
-      enableRowSelection={true}
-      onRowSelectionChange={setRowSelection}
-    />
-  );
 }
 
 export default PostTable;

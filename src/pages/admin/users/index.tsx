@@ -11,6 +11,9 @@ import { MoadalType, UsersTable, UserType } from '../../../components/admin/user
 import { UsersModals } from '../../../components/admin/users/UsersModals';
 import Head from 'next/head';
 import UserTable from './Table';
+import {ColumnSort, SortingState} from '@tanstack/react-table';
+import useColumns from './Table/useColumns';
+import Table from '../../../components/Table';
 
 const Users: NextPage = () => {
     const [search, setSearch] = useState('');
@@ -47,13 +50,17 @@ const Users: NextPage = () => {
       setFetching(false);
   }, [router]);
 
-    const fetchFunction = useCallback(async () => {
+    const fetchFunction = useCallback(async ({ sort }: { sort?: ColumnSort }) => {
         setFetching(true)
         try {
           const p: any = await axios.get(`${TEST_API_URL}/users`, {
             withCredentials: true,
             headers: {
               Authorization: `${localStorage.getItem('access_token')}`,
+            },
+            params: {
+                sortBy: sort ? sort.id : undefined,
+                order: sort ? sort.desc ? "desc" : "asc" : undefined,
             },
           })
           setUsers(p.data.Data as [])
@@ -68,9 +75,19 @@ const Users: NextPage = () => {
         setFetching(false);
     }, [router]);
 
+    const [rowSelection, setRowSelection] = useState({})
+    const [sorting, setSorting] = useState<SortingState>([])
+
+    const columns = useColumns({
+      edit: useCallback(() => {}, []),
+      remove: useCallback(() => {}, []),
+    });
+
     useEffect(() => {
-        void fetchFunction();
-    }, [fetchFunction])
+        const [sortField] = sorting;
+        void fetchFunction({ sort: sortField });
+    }, [fetchFunction, sorting])
+
     return (
         <AdminLayout>
             <Head>
@@ -94,9 +111,14 @@ const Users: NextPage = () => {
             </div>
 
             <section>
-                <UserTable
+                <Table
                   loading={fetching}
+                  columns={columns}
                   data={users}
+                  state={{ rowSelection, sorting }}
+                  onSortingChange={setSorting}
+                  enableRowSelection={true}
+                  onRowSelectionChange={setRowSelection}
                 />
                 {/*
                 <UsersTable 
