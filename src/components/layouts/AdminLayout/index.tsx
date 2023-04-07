@@ -26,7 +26,6 @@ interface AdminLayoutProps {
 
 const useStyles = createStyles((theme) => ({
   main: {
-    display: "flex",
     minHeight: "100vh",
   },
   link: {
@@ -132,8 +131,8 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
         <AppShell
           padding="md"
           navbar={<Navigation isOpen={isOpen} setIsOpen={setIsOpen} />}
-          styles={() => ({
-            main: { backgroundColor: "#222131" },
+          styles={(theme) => ({
+            main: { backgroundColor: "#222131", paddingTop: 35, paddingLeft: 218 + 30 },
           })}
         >
             {/*
@@ -153,9 +152,7 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
           </Center>
               */}
           <main className={classes.main}>
-            <section style={{ margin: '2rem auto', minWidth: 'calc(100vw-80px)' }}>
               {children}
-            </section>
           </main>
         </AppShell>
       </MantineProvider>

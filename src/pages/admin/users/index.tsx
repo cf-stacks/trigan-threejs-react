@@ -10,6 +10,7 @@ import TabHeaderAction from "../../../components/tabHeaderAction";
 import { MoadalType, UsersTable, UserType } from '../../../components/admin/users/UsersTable';
 import { UsersModals } from '../../../components/admin/users/UsersModals';
 import Head from 'next/head';
+import UserTable from './Table';
 
 const Users: NextPage = () => {
     const [search, setSearch] = useState('');
@@ -76,7 +77,7 @@ const Users: NextPage = () => {
               <title>Users</title>
             </Head>
 
-            <div className='flex justify-between items-center'>
+            <div className='flex justify-between items-center mb-8'>
               <Title size={24} align='center' className='text-white'>
                 Users
               </Title>
@@ -87,17 +88,24 @@ const Users: NextPage = () => {
                       onChange: (e) => setSearch(e.target.value), 
                       handleSubmit: handleSubmit
                   }}
-                  create={{onClick: () => setModal({ open: true, type: 'create', size: '' }), text: "Create User"}}
+                  create={{onClick: () => setModal({ open: true, type: 'create', size: '' }), text: "Add new"}}
+                  remove={console.log}
               />
             </div>
 
             <section>
+                <UserTable
+                  loading={false}
+                  data={users}
+                />
+                {/*
                 <UsersTable 
                     users={users}
                     fetching={fetching}
                     setModal={setModal as Dispatch<SetStateAction<MoadalType>>}
                     setSelectedUsers={setSelectedUser as Dispatch<SetStateAction<UserType>>}
                 />
+                */}
             </section>
 
             <div>
