@@ -189,7 +189,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                 })
                 return (
                   <div
-                    className={`c mt-20 flex grid h-[696px] w-[400px] justify-around overflow-hidden rounded-[15px] bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black max-[600px]:justify-center md:flex  md:px-1`}
+                    className={`c mt-20 mr-4 flex grid h-[696px] w-[400px] justify-around overflow-hidden rounded-[15px] bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black max-[600px]:justify-center md:flex  md:px-1`}
                   >
                     <FadeInWhenVisible duration={(i + 1) * 0.2}>
                       <div
