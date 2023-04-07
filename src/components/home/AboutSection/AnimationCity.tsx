@@ -54,7 +54,7 @@ const AnimationCity = ({ onButtonClick }: Props) => {
 
         <div data-aos="fade-left" className="border-b-4 border-gradient-l-black-violet flex flex-col justify-end mt-[20px] h-[100px] m-auto items-start ml-[50px] max-[800px]:h-[60px] max-[720px]:h-[50px] max-[800px]:ml-[100px] max-[800px]:mt-[30px] max-[640px]:ml-[200px] max-[560px]:ml-[165px] max-[500px]:ml-[185px] max-[445px]:ml-[200px] aos-init">
 
-          <h2 className="text-left text-xl max-[870px]:text-md max-[800px]:text-[15px] max-[640px]:text-[12px] max-[500px]:text-[10px]">AI Assisted Communitiess</h2>
+          <h2 className="text-left text-xl max-[870px]:text-md max-[800px]:text-[15px] max-[640px]:text-[12px] max-[500px]:text-[10px]">AI Assisted Communities</h2>
        
         </div>
            </button>
