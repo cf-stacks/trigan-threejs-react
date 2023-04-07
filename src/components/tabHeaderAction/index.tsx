@@ -1,6 +1,7 @@
 import React, { ChangeEventHandler, FormEventHandler, MouseEventHandler } from "react";
 import { Button, createStyles, Input } from '@mantine/core';
 import { IconPlus, IconSearch } from '@tabler/icons';
+import { AiOutlineDelete } from "react-icons/ai";
 
 
 const useStyles = createStyles(() => ({
@@ -61,12 +62,13 @@ interface TableHeaderProps {
     create: {
         onClick: MouseEventHandler<HTMLButtonElement>;
         text: string | JSX.Element
-    }
+    };
+    remove: MouseEventHandler<HTMLButtonElement>;
 }
 
 const TabHeaderAction: React.FC<TableHeaderProps> = (props) => {
     const { search, create } = props;
-    const { classes } = useStyles();
+    const { classes, cx } = useStyles();
 
     return (
         <section className={classes.topSection}>
@@ -83,13 +85,17 @@ const TabHeaderAction: React.FC<TableHeaderProps> = (props) => {
             </form>
 
             <Button
-                className={classes.addButton}
+                className={cx(classes.addButton, "mr-5")}
                 variant="filled"
                 onClick={create.onClick}
-                leftIcon={<IconPlus />}
+                rightIcon={<IconPlus />}
             >
                 {create.text}
             </Button>
+
+            <span className="cursor-pointer text-white" onClick={props.remove}>
+                <AiOutlineDelete size={24} />
+            </span>
         </section>
     )
 }
