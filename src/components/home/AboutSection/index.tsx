@@ -46,7 +46,11 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [selectedCountry, setSelectedCountry] = useState('')
-  const [data, setData] = useState(null)
+  const [data, setData] = useState({
+    title: '',
+    url: '',
+    text: '',
+  })
   const [showLabel, setShowLabel] = useState(false)
 
   const handleButtonClick = (data: {
