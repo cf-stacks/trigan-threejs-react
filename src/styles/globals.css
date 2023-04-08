@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@700&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@700&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,7 +7,7 @@
 body,
 html {
   scroll-behavior: smooth;
-  font-family: "Roboto Flex", sans-serif;
+  font-family: 'Roboto Flex', sans-serif;
   position: relative;
   transition: 0.4s;
 }
@@ -18,7 +18,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
   color: white;
 }
 /*edit ahmed*/
@@ -67,7 +67,11 @@ h6 {
   flex-direction: column;
   gap: 15px;
   height: 320px;
-  background: linear-gradient(126.08deg, rgba(255, 255, 255, 0.3) 13.84%, rgba(255, 255, 255, 0.1) 74.14%) !important;
+  background: linear-gradient(
+    126.08deg,
+    rgba(255, 255, 255, 0.3) 13.84%,
+    rgba(255, 255, 255, 0.1) 74.14%
+  ) !important;
 }
 .horizontalCard .purple {
   width: 50px;
@@ -88,7 +92,8 @@ h6 {
 .swiper-wrapper {
   height: 450px !important;
 }
-.swiper-button-prev {
+.swiper-button-prev,
+.review-swiper-button-prev {
   position: absolute !important;
   top: 380px !important;
   left: 45% !important;
@@ -96,19 +101,34 @@ h6 {
   width: 48px !important;
   height: 48px !important;
   background: #dc2626 !important;
+  z-index: 2;
+}
+.review-swiper-button-prev {
+  /* top: 800px !important; */
 }
 .swiper-button-prev.swiper-button-disabled {
-  background: linear-gradient(126.08deg, rgba(255, 255, 255, 0.3) 13.84%, rgba(255, 255, 255, 0.1) 74.14%) !important;
+  background: linear-gradient(
+    126.08deg,
+    rgba(255, 255, 255, 0.3) 13.84%,
+    rgba(255, 255, 255, 0.1) 74.14%
+  ) !important;
 }
 .swiper-button-next.swiper-button-disabled {
-  background: linear-gradient(126.08deg, rgba(255, 255, 255, 0.3) 13.84%, rgba(255, 255, 255, 0.1) 74.14%) !important;
+  background: linear-gradient(
+    126.08deg,
+    rgba(255, 255, 255, 0.3) 13.84%,
+    rgba(255, 255, 255, 0.1) 74.14%
+  ) !important;
 }
 .swiper-button-next:after,
-.swiper-button-prev:after {
+.swiper-button-prev:after,
+.review-swiper-button-prev:after,
+.review-swiper-button-next:after {
   font-size: 24px !important;
   color: white !important;
 }
-.swiper-button-next {
+.swiper-button-next,
+.review-swiper-button-next {
   position: absolute !important;
   top: 380px !important;
   left: 55% !important;
@@ -118,7 +138,13 @@ h6 {
   display: flex !important;
   justify-content: center !important;
   height: 48px !important;
+  z-index: 2;
 }
+.review-swiper-button-next,
+.review-swiper-button-prev {
+  top: 770px !important;
+}
+
 .horizontalCard p {
   text-align: left;
   font-size: 16px;
@@ -148,7 +174,7 @@ h6 {
 }
 
 .background-form {
-  background-image: url("../assets/city-form.png");
+  background-image: url('../assets/city-form.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -157,7 +183,13 @@ h6 {
 
 .border-gradient-r-black-violet {
   border-bottom-style: solid;
-  border-image: linear-gradient(to right, transparent, transparent, transparent, violet);
+  border-image: linear-gradient(
+    to right,
+    transparent,
+    transparent,
+    transparent,
+    violet
+  );
   border-image-slice: 1;
   border-bottom-width: 4px;
   z-index: -1;
@@ -165,7 +197,13 @@ h6 {
 
 .border-gradient-l-black-violet {
   border-bottom-style: solid;
-  border-image: linear-gradient(to left, transparent, transparent, transparent, violet);
+  border-image: linear-gradient(
+    to left,
+    transparent,
+    transparent,
+    transparent,
+    violet
+  );
   border-image-slice: 1;
   border-bottom-width: 4px;
   z-index: -1;
@@ -186,6 +224,9 @@ h6 {
 @media screen and (max-width: 480px) {
   .abo_h2l {
     font-size: 30px;
+  }
+  .review-swiper-button-prev {
+    left: 35% !important;
   }
 }
 .abo_p {
@@ -371,23 +412,28 @@ h6 {
   }
 
   .filter-grey {
-    filter: invert(85%) sepia(8%) saturate(755%) hue-rotate(194deg) brightness(87%) contrast(88%);
+    filter: invert(85%) sepia(8%) saturate(755%) hue-rotate(194deg)
+      brightness(87%) contrast(88%);
   }
 
   .filter-primary {
-    filter: invert(19%) sepia(92%) saturate(5054%) hue-rotate(253deg) brightness(95%) contrast(93%);
+    filter: invert(19%) sepia(92%) saturate(5054%) hue-rotate(253deg)
+      brightness(95%) contrast(93%);
   }
 
   .filter-secondary {
-    filter: invert(9%) sepia(26%) saturate(4361%) hue-rotate(218deg) brightness(94%) contrast(98%);
+    filter: invert(9%) sepia(26%) saturate(4361%) hue-rotate(218deg)
+      brightness(94%) contrast(98%);
   }
 
   .filter-light-gray {
-    filter: invert(99%) sepia(29%) saturate(5020%) hue-rotate(180deg) brightness(111%) contrast(94%);
+    filter: invert(99%) sepia(29%) saturate(5020%) hue-rotate(180deg)
+      brightness(111%) contrast(94%);
   }
 
   .filter-lighter-gray {
-    filter: invert(92%) sepia(5%) saturate(5766%) hue-rotate(189deg) brightness(100%) contrast(96%);
+    filter: invert(92%) sepia(5%) saturate(5766%) hue-rotate(189deg)
+      brightness(100%) contrast(96%);
   }
 
   .animation-delay-2000 {
