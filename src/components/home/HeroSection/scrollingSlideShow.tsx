@@ -20,7 +20,7 @@ const ScrollingSlideShow = () => {
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(20)
 
-  const fetcher = (url) =>
+  const fetcher = (url: any) =>
     fetch(url).then(async (r) => {
       let resPosts = await r.json()
       return resPosts.posts
