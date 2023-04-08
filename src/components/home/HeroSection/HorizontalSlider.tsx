@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import { Pagination, Navigation } from 'swiper'
 import AOS from 'aos'
-import Vector from "../../../assets/Vector.png"
+import Vector from '../../../assets/Vector.png'
 import 'aos/dist/aos.css'
 
 const HorizontalSlider = () => {
@@ -55,41 +56,52 @@ const HorizontalSlider = () => {
       id: 5,
       img: 'icons/logos/rr2.png',
       headerText: 'Universal Basic Income',
-      mainText: 'Universal Basic Income, providing a guaranteed income for all community members, promoting financial stability and reducing poverty.',
-      },
-      {
+      mainText:
+        'Universal Basic Income, providing a guaranteed income for all community members, promoting financial stability and reducing poverty.',
+    },
+    {
       id: 6,
       img: 'icons/logos/rr1.png',
       headerText: 'Decentralised Governance',
-      mainText: "Decentralised governance, giving power back to the community and promoting transparency and fairness in decision-making.",
-      },
-      {
+      mainText:
+        'Decentralised governance, giving power back to the community and promoting transparency and fairness in decision-making.',
+    },
+    {
       id: 7,
       img: 'icons/logos/rr3.png',
       headerText: 'Eco-Friendly Solutions',
-      mainText: "Prioritising environmental sustainability, providing solutions that promote a cleaner and greener future for cities.",
-      },
-      {
+      mainText:
+        'Prioritising environmental sustainability, providing solutions that promote a cleaner and greener future for cities.',
+    },
+    {
       id: 8,
       img: 'icons/logos/rr3.png',
       headerText: 'Opportunity for All',
-      mainText: "Designed to provide equal opportunities for success, regardless of background or socioeconomic status.",
-      },
-      {
+      mainText:
+        'Designed to provide equal opportunities for success, regardless of background or socioeconomic status.',
+    },
+    {
       id: 9,
       img: 'icons/logos/rr1.png',
       headerText: 'Real-World Impact',
-      mainText: "Designed to tackle real-world issues and make a meaningful impact on urban communities, improving the quality of life for all.",
-      },
+      mainText:
+        'Designed to tackle real-world issues and make a meaningful impact on urban communities, improving the quality of life for all.',
+    },
   ]
   return (
-    <div className="relative px-4 pt-[50px] pb-[50px] ">
+    <div className="relative px-4 pb-[50px] pt-[50px] ">
       <Swiper
         pagination={{
           clickable: true,
         }}
         navigation={true}
-        modules={[Pagination, Navigation]}
+        speed={800}
+        loop={true}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        modules={[Pagination, Navigation, Autoplay]}
         breakpoints={{
           // when window width is >= 320px
           320: {
@@ -109,11 +121,14 @@ const HorizontalSlider = () => {
         className="px-5"
       >
         {slidesContent.map((slide) => (
-          <SwiperSlide className="border-gray dark:bg-slate-900 dark:text-black" key={slide.id}>
-            <div
-              className="horizontalCard flex-column relative  flex h-[200px] w-full max-w-[600px] items-left justify-center rounded-lg px-2 font-semibold text-white shadow-lg md2:px-10 md2:text-xl"
-            >
-              <div className="purple"><img src={slide.img}/></div> 
+          <SwiperSlide
+            className="border-gray dark:bg-slate-900 dark:text-black"
+            key={slide.id}
+          >
+            <div className="horizontalCard flex-column items-left  relative flex h-[200px] w-full max-w-[600px] justify-center rounded-lg px-2 font-semibold text-white shadow-lg md2:px-10 md2:text-xl">
+              <div className="purple">
+                <img src={slide.img} />
+              </div>
               <h2 className="text-left">{slide.headerText}</h2>
               <p className="h-[150px] text-left">{slide.mainText}</p>
             </div>
