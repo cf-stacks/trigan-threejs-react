@@ -23,7 +23,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(20)
 
-  const fetcher = (url) =>
+  const fetcher = (url: string) =>
     fetch(url).then(async (r) => {
       let resPosts = await r.json()
       return resPosts.posts;
@@ -175,7 +175,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
               Other Article related to {post.data.tags[tags]}
             </p>
             <div className="mb-40 flex flex-wrap justify-between">
-              {data?.map((BlogPost, i) => {
+              {data?.map((BlogPost: any, i: number) => {
                 const date = new Date(BlogPost.date_created)
                 let tags = BlogPost.tags
                 const uniqueTags = tags.filter((e: any, i: any) => {
