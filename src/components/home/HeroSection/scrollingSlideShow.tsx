@@ -191,9 +191,9 @@ const ScrollingSlideShow = () => {
                           <div>
                             <div className="flex flex-col">
                               <Link
-                                href="/post/[id]"
+                                href="/blog/post/[blog_name]"
                                 passHref
-                                as={`/post/${BlogPost.id_post}`}
+                                as={`/blog/post/${BlogPost.slug_id}`}
                               >
                                 <div className="m-auto h-[263px] w-[400px] hover:cursor-pointer  max-[500px]:w-[100%]">
                                   <img
@@ -251,25 +251,22 @@ const ScrollingSlideShow = () => {
                                   )}
                                 </div>
                                 <Link
-                                  href="/post/[id]"
+                                  href="/blog/post/[blog_name]"
                                   passHref
-                                  as={`/post/${BlogPost.id_post}`}
+                                  as={`/blog/post/${BlogPost.slug_id}`}
                                 >
                                   <h2 className=" text-2xl font-semibold text-white hover:cursor-pointer hover:text-grey">
                                     {BlogPost.title}
                                   </h2>
                                 </Link>
                                 <p className="flex flex-wrap text-[16px] font-normal text-white">
-                                  Lorem ipsum dolor sit amet consectetur.
-                                  Commodo sed viverra amet est odio massa libero
-                                  scelerisque rhoncus. Condimentum est sit
-                                  montes nulla pharetra lacus neque faucibus.
-                                  Vitae vulputate ac vitae ac aenean. Erat
-                                  pulvinar pretium cras proin id interdum. Elit
-                                  purus tincidunt facilisis turpis tellus
-                                  suspendisse.
+                                  {BlogPost.short_description}
                                 </p>
-                                <Link href="/blog" passHref as={``}>
+                                <Link
+                                  href="/blog/post/[blog_name]"
+                                  passHref
+                                  as={`/blog/post/${BlogPost.slug_id}`}
+                                >
                                   <h2 className=" text-lg font-normal text-[#DC2626] underline hover:cursor-pointer hover:text-grey">
                                     Read More
                                   </h2>
