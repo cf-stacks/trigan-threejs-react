@@ -7,7 +7,10 @@ import { SEO } from '../components/shared/SEO'
 const SupportTheProjectPage: React.FC<any> = () => {
   return (
     <div>
-      <SEO title="" description="" />
+      <SEO
+        title="Empowering Charities and the Third Sector with Trigan: A Game-Changing Blockchain Solution"
+        description="Trigan's innovative blockchain technology offers a new way for charities and third sector organisations to operate more effectively and achieve greater impact. Find out how Trigan can transform your organisation's operations and make a real difference in the world."
+      />
       <GlobalLayout>
         <div className="font-mplus1 mx-auto bg-black text-white">
           <div className="flex flex-col items-center justify-center pb-[60px] pt-[130px] md:pt-[200px]">
