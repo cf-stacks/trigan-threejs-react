@@ -14,9 +14,9 @@ const SupportTheProjectPage: React.FC<any> = () => {
       <GlobalLayout>
         <div className="font-mplus1 mx-auto bg-black text-white">
           <div className="flex flex-col items-center justify-center pb-[60px] pt-[130px] md:pt-[200px]">
-            <div className="w-[255px} flex justify-center rounded-3xl bg-gray-900 px-[32px] py-[8px] text-white">
+            <div className="w-[255px} flex  justify-center rounded-3xl bg-gray-900 px-[32px] py-[8px] font-bold text-white">
               #SupportThe
-              <span className="text-purple-500">TRIGAN</span>
+              <span className=" font-bold text-purple-500">TRIGAN</span>
               Project
             </div>
             <div className="w-[850px]">
@@ -27,14 +27,14 @@ const SupportTheProjectPage: React.FC<any> = () => {
                 Cities Worldwide
               </h2>
             </div>
-            <p className="mx-[10px] mt-[20px] text-center text-2xl text-gray-300 md:mx-[0px]  md:mt-[8px] md:text-sm">
+            <p className="mx-[10px] mt-[20px] text-center text-[20px] font-bold font-bold  text-gray-300 md:mx-[0px]  md:mt-[8px]">
               {' '}
               Your contribution can make a difference in the lives of millions
               and drive the transformation of urban spaces
               <br />
               <br />
             </p>
-            <p className="mx-[10px] mt-[20px] max-w-[620px] text-center text-2xl text-gray-300 md:mx-[0px] md:mt-[6px] md:text-sm">
+            <p className="mx-[10px] mt-[20px] max-w-[620px] text-center text-[20px] font-bold text-gray-300 md:mx-[0px] md:mt-[6px]">
               At Trigan, we're dedicated to creating a world where cities are
               smarter, safer, and more connected, aiming to improve people's
               lives in every corner of the globe.
@@ -50,16 +50,16 @@ const SupportTheProjectPage: React.FC<any> = () => {
           </div>
           <div className="mx-auto max-w-screen-xl">
             <div className="w-[375px] md:mr-auto md:w-[715px]">
-              <div className="t-[60px] md:t-[120px] md: mx-[0] mx-auto flex w-[255px] justify-center rounded-3xl bg-gray-900 p-[8px] text-white">
+              <div className="t-[60px] md:t-[120px]  mx-auto flex w-[255px] justify-center rounded-3xl bg-gray-900 p-[8px] font-bold text-white md:mx-[0]">
                 #Your
-                <span className="text-purple-500">Support</span>
+                <span className="font-bold text-purple-500">Support</span>
                 Matters
               </div>
               <h2 className="font-mplus1 mb-[16px] mt-[16px] text-center text-3xl leading-10 text-white md:text-left md:text-5xl">
                 {' '}
                 Accelerate <span className="text-purple-500">Progress</span>
               </h2>
-              <p className="mb-[32px] max-w-[620px] text-center text-gray-300 md:text-left">
+              <p className="mb-[32px] max-w-[620px] text-center text-xl font-bold text-gray-300 md:text-left">
                 Your contribution will help us expand and enhance our platform,
                 allowing us to reach more cities and provide even better
                 solutions for urban challenges.
@@ -79,7 +79,7 @@ const SupportTheProjectPage: React.FC<any> = () => {
                   {' '}
                   Empower <span className="text-purple-500">Communities</span>
                 </h2>
-                <p className="mb-[32px] text-center text-gray-300 md:text-right">
+                <p className="mb-[32px] text-center text-xl font-bold text-gray-300 md:text-right">
                   By supporting the Trigan Project, you'll enable us to create
                   opportunities for individuals, businesses, and institutions to
                   thrive and make a positive impact on their communities.
@@ -99,7 +99,7 @@ const SupportTheProjectPage: React.FC<any> = () => {
                 {' '}
                 Drive <span className="text-purple-500">Innovation</span>
               </h2>
-              <p className="mb-[32px] max-w-[620px] text-center text-gray-300 md:text-left">
+              <p className="mb-[32px] max-w-[620px] text-center text-xl font-bold text-gray-300 md:text-left">
                 Your support will help us continue developing cutting-edge
                 technology and ground-breaking solutions that can redefine how
                 we live, work, and interact in cities.
@@ -119,7 +119,7 @@ const SupportTheProjectPage: React.FC<any> = () => {
                   {' '}
                   Foster <span className="text-purple-500">Sustainability</span>
                 </h2>
-                <p className="mb-[32px] text-center text-gray-300 md:text-right">
+                <p className="mb-[32px] text-center text-xl font-bold text-gray-300 md:text-right">
                   Your contribution will allow us to promote environmentally
                   friendly practices and create sustainable urban environments
                   for future generations.
@@ -139,7 +139,7 @@ const SupportTheProjectPage: React.FC<any> = () => {
                 {' '}
                 Champion <span className="text-purple-500">Equality</span>
               </h2>
-              <p className="mb-[32px] max-w-[620px] text-center text-gray-300 md:text-left">
+              <p className="mb-[32px] max-w-[620px] text-center text-xl font-bold text-gray-300 md:text-left">
                 By supporting our mission, you'll help us work towards reducing
                 inequality, combating poverty, and building a more balanced and
                 inclusive society
@@ -161,7 +161,7 @@ const SupportTheProjectPage: React.FC<any> = () => {
                 How to Support the{' '}
                 <span className="text-purple-500">Trigan Project</span>
               </h2>
-              <p className="mx-auto mb-[40px]  mt-[32px] max-w-[1200px] text-xl leading-[22px] text-gray-300 md:mt-[8px]">
+              <p className="mx-auto mb-[40px] mt-[32px]  max-w-[1200px] text-xl text-xl font-bold leading-[22px] text-gray-300 md:mt-[8px]">
                 Contributing to the Trigan Project is easy, and every little bit
                 helps. Here's how you can get involved:
               </p>
@@ -169,7 +169,7 @@ const SupportTheProjectPage: React.FC<any> = () => {
             <div className="mx-auto w-[355px]  text-sm leading-[22px] text-gray-300 md:w-[580px] md:text-xl">
               <div>
                 <h3 className="text-purple-600">Donate</h3>
-                <p>
+                <p className="text-xl font-bold">
                   Contribute financially to the project through our secure
                   online donation portal [link to the portal]. Choose a one-time
                   or recurring donation and select the amount that suits you
@@ -178,7 +178,7 @@ const SupportTheProjectPage: React.FC<any> = () => {
               </div>
               <div className="mt-[24px] flex flex-col items-center">
                 <h3 className="text-purple-600">Spread the Word</h3>
-                <p>
+                <p className="text-xl font-bold">
                   Share our mission with your friends, family, and professional
                   network. Follow us on social media and engage with our content
                   to help raise awareness about the Trigan Project.
@@ -186,7 +186,7 @@ const SupportTheProjectPage: React.FC<any> = () => {
               </div>
               <div className="mt-[24px] flex flex-col items-center">
                 <h3 className="text-purple-600">Offer your expertise</h3>
-                <p>
+                <p className="text-xl font-bold">
                   If you have skills, knowledge, or resources that you believe
                   could benefit the project, reach out to us and let us know how
                   you'd like to contribute.
@@ -194,7 +194,7 @@ const SupportTheProjectPage: React.FC<any> = () => {
               </div>
               <div className="mt-[24px] flex flex-col items-center">
                 <h3 className="text-purple-600">Partner with Us</h3>
-                <p>
+                <p className="text-xl">
                   If you represent a business or organisation that shares our
                   values and goals, consider partnering to help drive the Trigan
                   Project forward.
@@ -202,7 +202,7 @@ const SupportTheProjectPage: React.FC<any> = () => {
               </div>
               <div className="mt-[24px] flex flex-col items-center">
                 <h3 className="text-purple-600">Stay Informed</h3>
-                <p>
+                <p className="text-xl font-bold">
                   Subscribe to our newsletter [link to the subscription form] to
                   receive updates about our progress and learn about new
                   opportunities to support our mission.
@@ -211,17 +211,17 @@ const SupportTheProjectPage: React.FC<any> = () => {
             </div>
             <div className="mx-auto mt-[80px] max-w-screen-xl">
               <div className="flex flex-col gap-[16px] md:flex-row">
-                <div className="flex justify-center rounded-3xl bg-gray-900 px-[32px] py-[8px] text-white">
+                <div className="flex justify-center  rounded-3xl bg-gray-900 px-[32px] py-[8px] font-bold text-white">
                   #Together
                 </div>{' '}
-                <div className="flex justify-center rounded-3xl bg-gray-900 px-[32px] py-[8px] text-white">
+                <div className="flex justify-center  rounded-3xl bg-gray-900 px-[32px] py-[8px] font-bold text-white">
                   #YourSupportMatters
                 </div>{' '}
-                <div className="flex justify-center rounded-3xl bg-gray-900 px-[32px] py-[8px] text-white">
+                <div className="flex justify-center  rounded-3xl bg-gray-900 px-[32px] py-[8px] font-bold text-white">
                   #SupportTheTRIGAN Project
                 </div>
               </div>
-              <p className="mx-[10px] w-[360px] pb-[40px]  pt-[20px] text-center text-gray-300 md:mx-[0px] md:w-[1135px] md:text-left">
+              <p className="mx-[10px] w-[360px] pb-[40px] pt-[20px] text-center text-xl font-bold text-gray-300 md:mx-[0px] md:w-[1135px] md:text-left">
                 We can build a brighter, more sustainable, and inclusive future
                 for cities around the world. Support the Trigan Project today
                 and become part of the movement transforming urban living for
