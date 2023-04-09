@@ -56,7 +56,7 @@ const Dashboard: NextPage<DashboardProps> = () => {
 
   // console.log()
   const fetchFunction = useCallback(async () => {
-    setFetching(true);
+    setFetching(true)
     try {
       const response = await axios.get(
         `${TEST_API_URL}/dynamic-content/getall?apiKey=${GET_API_KEY}&weight=0.5`,
@@ -159,12 +159,13 @@ const Dashboard: NextPage<DashboardProps> = () => {
 
   const [value, onChange] = useState('')
   const rte = (
-    <RichTextEditor
-      value={value}
-      onChange={onChange}
-      onImageUpload={handleImageUpload}
-      id="rte"
-    />
+    <div id="rte">
+      <RichTextEditor
+        value={value as string}
+        onChange={onChange}
+        onImageUpload={handleImageUpload}
+      />
+    </div>
   )
 
   const CreateContentModal = (

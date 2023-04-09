@@ -69,7 +69,7 @@ const Dashboard: NextPage<DashboardProps> = () => {
         }
       )
       setABtestContents((response.data.Data as ABtestContent[]) || [])
-      console.log(response);
+      console.log(response)
     } catch (error) {
       toast.error('Something went wrong')
     }
@@ -151,12 +151,13 @@ const Dashboard: NextPage<DashboardProps> = () => {
 
   const [value, onChange] = useState('')
   const rte = (
-    <RichTextEditor
-      value={value}
-      onChange={onChange}
-      onImageUpload={handleImageUpload}
-      id="rte"
-    />
+    <div id="rte">
+      <RichTextEditor
+        value={value as string}
+        onChange={onChange}
+        onImageUpload={handleImageUpload}
+      />
+    </div>
   )
 
   const CreateModal = (

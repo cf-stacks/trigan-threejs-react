@@ -32,6 +32,10 @@ h6 {
   background: black;
   height: 300px;
 }
+.label__show__data::-webkit-scrollbar {
+  width: 0px;
+}
+
 .map-container {
   width: 91%;
   height: 70vh;

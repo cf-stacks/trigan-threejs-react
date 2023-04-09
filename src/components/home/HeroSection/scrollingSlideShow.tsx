@@ -129,6 +129,7 @@ const ScrollingSlideShow = () => {
               autoplay={{
                 delay: 2500,
                 disableOnInteraction: false,
+                pauseOnMouseEnter: true,
               }}
               modules={[Pagination, Navigation, Autoplay]}
               breakpoints={{
