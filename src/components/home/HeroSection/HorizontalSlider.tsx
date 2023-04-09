@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper'
 import 'swiper/css'
@@ -6,6 +6,7 @@ import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import { Pagination, Navigation } from 'swiper'
 import AOS from 'aos'
+
 import Vector from '../../../assets/Vector.png'
 import 'aos/dist/aos.css'
 
@@ -100,6 +101,7 @@ const HorizontalSlider = () => {
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
+          pauseOnMouseEnter: true,
         }}
         modules={[Pagination, Navigation, Autoplay]}
         breakpoints={{

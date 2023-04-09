@@ -102,7 +102,7 @@ const ScrollingSlideShow = () => {
                     </h3>
                     <hr className="mt-5 border-4 border-purple-600" />
                   </div>
-                  <div className="align-center  max-[500px]:w-[100%] m-auto flex h-[400px] w-[450px] justify-center bg-[#A855F7] object-cover max-[850px]:mt-[35px] max-[600px]:m-auto max-[600px]:mt-5 max-[600px]:h-[350px] max-[600px]:w-[400px] max-[600px]:flex-col max-[500px]:h-[250px]">
+                  <div className="align-center  m-auto flex h-[400px] w-[450px] justify-center bg-[#A855F7] object-cover max-[850px]:mt-[35px] max-[600px]:m-auto max-[600px]:mt-5 max-[600px]:h-[350px] max-[600px]:w-[400px] max-[600px]:flex-col max-[500px]:h-[250px] max-[500px]:w-[100%]">
                     <img
                       className="m-auto h-[400px] w-[450px] rotate-3 transform object-cover bg-blend-darken max-[600px]:h-[350px] max-[600px]:w-[400px] max-[500px]:h-[250px] max-[500px]:w-[300px]"
                       src="images/city-girl-1.jpg"
@@ -119,7 +119,7 @@ const ScrollingSlideShow = () => {
             </div>
           </div>
           <HashtagHeader text="#Blog" position="left" id="ourSolution" />
-          <div className="max-[500px]:w-[100%]  m-auto h-[110vh] w-[90%]">
+          <div className="m-auto  h-[110vh] w-[90%] max-[500px]:w-[100%]">
             <Swiper
               pagination={{
                 clickable: true,
@@ -129,6 +129,7 @@ const ScrollingSlideShow = () => {
               autoplay={{
                 delay: 2500,
                 disableOnInteraction: false,
+                pauseOnMouseEnter: true,
               }}
               modules={[Pagination, Navigation, Autoplay]}
               breakpoints={{
@@ -169,7 +170,7 @@ const ScrollingSlideShow = () => {
                 nextEl: '.review-swiper-button-next',
                 prevEl: '.review-swiper-button-prev',
               }}
-              className="max-[500px]:w-[100%] max-[500px]:h-[105%]  h-[100%] px-5"
+              className="h-[100%] px-5  max-[500px]:h-[105%] max-[500px]:w-[100%]"
             >
               {data?.map((BlogPost: any, i: number) => {
                 const date = new Date(BlogPost.date_created)
@@ -180,7 +181,7 @@ const ScrollingSlideShow = () => {
                 return (
                   <SwiperSlide key={i}>
                     <div
-                      className={` max-[500px]:w-[100%] m-10 mt-10 flex grid h-[696px] w-[400px] justify-around overflow-hidden rounded-[15px] bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black max-[600px]:justify-center md:flex  md:px-1`}
+                      className={` m-10 mt-10 flex grid h-[696px] w-[400px] justify-around overflow-hidden rounded-[15px] bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black max-[600px]:justify-center max-[500px]:w-[100%] md:flex  md:px-1`}
                     >
                       <FadeInWhenVisible duration={(i + 1) * 0.2}>
                         <div
@@ -194,7 +195,7 @@ const ScrollingSlideShow = () => {
                                 passHref
                                 as={`/post/${BlogPost.id_post}`}
                               >
-                                <div className="max-[500px]:w-[100%] m-auto h-[263px] w-[400px]  hover:cursor-pointer">
+                                <div className="m-auto h-[263px] w-[400px] hover:cursor-pointer  max-[500px]:w-[100%]">
                                   <img
                                     loading="lazy"
                                     src={
@@ -207,7 +208,7 @@ const ScrollingSlideShow = () => {
                                   />
                                 </div>
                               </Link>
-                              <div className="max-[500px]:w-[100%] flex w-[400px] flex-col gap-2 px-8 py-4">
+                              <div className="flex w-[400px] flex-col gap-2 px-8 py-4 max-[500px]:w-[100%]">
                                 <div className="flex w-full justify-between">
                                   <pre className="text-[12px] font-thin text-[#909090]">
                                     {date.toLocaleDateString('en-US')}
@@ -233,7 +234,7 @@ const ScrollingSlideShow = () => {
                                     Tags:
                                   </span>
                                 </div>
-                                <div className="max-[500px]:w-[100%] flex w-[400px] flex-row flex-wrap">
+                                <div className="flex w-[400px] flex-row flex-wrap max-[500px]:w-[100%]">
                                   {uniqueTags.map(
                                     (tag: string, index: number) => {
                                       return (
