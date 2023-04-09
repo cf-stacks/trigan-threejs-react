@@ -26,7 +26,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
   const fetcher = (url: string) =>
     fetch(url).then(async (r) => {
       let resPosts = await r.json()
-      return resPosts.posts;
+      return resPosts.posts
     })
 
   const { data, error } = useSWR(
@@ -53,7 +53,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
           id={post.data.id_post}
           className="my-5 px-16  dark:bg-light-grey md:mx-auto "
         >
-          <div className="mt-[180px] mb-12 flex w-[100%] flex-wrap justify-center">
+          <div className="mb-12 mt-[180px] flex w-[100%] flex-wrap justify-center">
             <span
               className={`flex h-[46px] flex-row flex-wrap items-center rounded-full border border-[#fff] bg-[#DC2626] px-7 py-1.5 text-[16px] font-medium capitalize text-white`}
             >
@@ -69,7 +69,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                   {post.data.title}
                 </span>
               </h1>
-              <div className="ml-20 flex pt-5 pb-10 text-lg text-white">
+              <div className="ml-20 flex pb-10 pt-5 text-lg text-white">
                 <p className="mr-10">
                   By <span className="font-medium">{post.data.author}</span>
                 </p>
@@ -85,7 +85,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                 <ReactMarkdown>{b64_to_utf8(post.data.content)}</ReactMarkdown>
               </h6>
             </div>
-            <div className="mt-[180px] ml-4 flex max-h-[900px] w-1/4 flex-col bg-[#212529]">
+            <div className="ml-4 mt-[180px] flex max-h-[900px] w-1/4 flex-col bg-[#212529]">
               <div className="flex flex-col items-center py-16">
                 <h6 className=" mb-6 border-b-2 border-[#848484] pb-3 text-2xl">
                   Categories:
@@ -144,16 +144,16 @@ const Post: NextPage<PostProps> = ({ post }) => {
                     <path
                       d="M17.0761 2.74657C16.6504 2.32074 16.1451 1.98294 15.5889 1.75247C15.0327 1.522 14.4365 1.40338 13.8344 1.40338C13.2323 1.40338 12.6362 1.522 12.0799 1.75247C11.5237 1.98294 11.0184 2.32074 10.5927 2.74657L9.70941 3.6299L8.82608 2.74657C7.96633 1.88683 6.80027 1.40383 5.58441 1.40383C4.36855 1.40383 3.20249 1.88683 2.34274 2.74657C1.483 3.60631 1 4.77237 1 5.98824C1 7.2041 1.483 8.37016 2.34274 9.2299L3.22608 10.1132L9.70941 16.5966L16.1927 10.1132L17.0761 9.2299C17.5019 8.80427 17.8397 8.29891 18.0702 7.7427C18.3006 7.18648 18.4193 6.59031 18.4193 5.98824C18.4193 5.38616 18.3006 4.78999 18.0702 4.23377C17.8397 3.67756 17.5019 3.1722 17.0761 2.74657Z"
                       stroke="white"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                   &nbsp; &nbsp;Like this
                 </span>
               </div>
             </Link>
-            <div className="flex pt-5 pb-10 text-lg text-white">
+            <div className="flex pb-10 pt-5 text-lg text-white">
               <p className="mr-10">{post.data.votes} &nbsp;likes</p>
               <p className="mr-10">/</p>
               <p>{post.data.views} &nbsp;views</p>
@@ -183,7 +183,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                 })
                 return (
                   <div
-                    className={`c mt-20 mr-4 flex grid h-[696px] w-[400px] justify-around overflow-hidden rounded-[15px] bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black max-[600px]:justify-center md:flex  md:px-1`}
+                    className={`c mr-4 mt-20 flex grid h-[696px] w-[400px] justify-around overflow-hidden rounded-[15px] bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black max-[600px]:justify-center md:flex  md:px-1`}
                   >
                     <FadeInWhenVisible duration={(i + 1) * 0.2}>
                       <div
@@ -225,9 +225,9 @@ const Post: NextPage<PostProps> = ({ post }) => {
                                   <path
                                     d="M17.8665 3.2466C17.4409 2.82077 16.9355 2.48297 16.3793 2.2525C15.8231 2.02203 15.2269 1.90341 14.6248 1.90341C14.0227 1.90341 13.4266 2.02203 12.8704 2.2525C12.3141 2.48297 11.8088 2.82077 11.3831 3.2466L10.4998 4.12993L9.61648 3.2466C8.75674 2.38686 7.59068 1.90386 6.37481 1.90386C5.15895 1.90386 3.99289 2.38686 3.13315 3.2466C2.2734 4.10634 1.79041 5.27241 1.79041 6.48827C1.79041 7.70413 2.2734 8.87019 3.13315 9.72993L4.01648 10.6133L10.4998 17.0966L16.9831 10.6133L17.8665 9.72993C18.2923 9.3043 18.6301 8.79894 18.8606 8.24273C19.091 7.68651 19.2097 7.09034 19.2097 6.48827C19.2097 5.88619 19.091 5.29002 18.8606 4.7338C18.6301 4.17759 18.2923 3.67223 17.8665 3.2466Z"
                                     stroke="#909090"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
                                   />
                                 </svg>
                               </div>
@@ -242,7 +242,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                                     return (
                                       <div
                                         key={index}
-                                        className="mr-2 mb-2 w-max "
+                                        className="mb-2 mr-2 w-max "
                                       >
                                         <span className="flex flex-row flex-wrap items-center rounded-full bg-[#4D5154] px-2 py-1.5 text-xs font-medium uppercase leading-none text-white">
                                           {`#${tag}`}

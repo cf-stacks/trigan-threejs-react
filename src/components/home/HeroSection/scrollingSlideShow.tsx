@@ -102,7 +102,7 @@ const ScrollingSlideShow = () => {
                     </h3>
                     <hr className="mt-5 border-4 border-purple-600" />
                   </div>
-                  <div className="align-center  max-[500px]:w-[100%] m-auto flex h-[400px] w-[450px] justify-center bg-[#A855F7] object-cover max-[850px]:mt-[35px] max-[600px]:m-auto max-[600px]:mt-5 max-[600px]:h-[350px] max-[600px]:w-[400px] max-[600px]:flex-col max-[500px]:h-[250px]">
+                  <div className="align-center  m-auto flex h-[400px] w-[450px] justify-center bg-[#A855F7] object-cover max-[850px]:mt-[35px] max-[600px]:m-auto max-[600px]:mt-5 max-[600px]:h-[350px] max-[600px]:w-[400px] max-[600px]:flex-col max-[500px]:h-[250px]">
                     <img
                       className="m-auto h-[400px] w-[450px] rotate-3 transform object-cover bg-blend-darken max-[600px]:h-[350px] max-[600px]:w-[400px] max-[500px]:h-[250px] max-[500px]:w-[300px]"
                       src="images/city-girl-1.jpg"
@@ -119,7 +119,7 @@ const ScrollingSlideShow = () => {
             </div>
           </div>
           <HashtagHeader text="#Blog" position="left" id="ourSolution" />
-          <div className="max-[500px]:w-[100%]  m-auto h-[110vh] w-[90%]">
+          <div className="m-auto  h-[110vh] w-[90%] max-[500px]:w-[100%]">
             <Swiper
               pagination={{
                 clickable: true,
@@ -169,7 +169,7 @@ const ScrollingSlideShow = () => {
                 nextEl: '.review-swiper-button-next',
                 prevEl: '.review-swiper-button-prev',
               }}
-              className="max-[500px]:w-[100%] max-[500px]:h-[105%]  h-[100%] px-5"
+              className="h-[100%] px-5  max-[500px]:h-[105%] max-[500px]:w-[100%]"
             >
               {data?.map((BlogPost: any, i: number) => {
                 const date = new Date(BlogPost.date_created)
@@ -180,7 +180,7 @@ const ScrollingSlideShow = () => {
                 return (
                   <SwiperSlide key={i}>
                     <div
-                      className={` max-[500px]:w-[100%] m-10 mt-10 flex grid h-[696px] w-[400px] justify-around overflow-hidden rounded-[15px] bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black max-[600px]:justify-center md:flex  md:px-1`}
+                      className={` m-10 mt-10 flex grid h-[696px] w-[400px] justify-around overflow-hidden rounded-[15px] bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black max-[600px]:justify-center max-[500px]:w-[100%] md:flex  md:px-1`}
                     >
                       <FadeInWhenVisible duration={(i + 1) * 0.2}>
                         <div
@@ -194,7 +194,7 @@ const ScrollingSlideShow = () => {
                                 passHref
                                 as={`/post/${BlogPost.id_post}`}
                               >
-                                <div className="max-[500px]:w-[100%] m-auto h-[263px] w-[400px]  hover:cursor-pointer">
+                                <div className="m-auto h-[263px] w-[400px] hover:cursor-pointer  max-[500px]:w-[100%]">
                                   <img
                                     loading="lazy"
                                     src={
@@ -207,7 +207,7 @@ const ScrollingSlideShow = () => {
                                   />
                                 </div>
                               </Link>
-                              <div className="max-[500px]:w-[100%] flex w-[400px] flex-col gap-2 px-8 py-4">
+                              <div className="flex w-[400px] flex-col gap-2 px-8 py-4 max-[500px]:w-[100%]">
                                 <div className="flex w-full justify-between">
                                   <pre className="text-[12px] font-thin text-[#909090]">
                                     {date.toLocaleDateString('en-US')}
@@ -222,9 +222,9 @@ const ScrollingSlideShow = () => {
                                     <path
                                       d="M17.8665 3.2466C17.4409 2.82077 16.9355 2.48297 16.3793 2.2525C15.8231 2.02203 15.2269 1.90341 14.6248 1.90341C14.0227 1.90341 13.4266 2.02203 12.8704 2.2525C12.3141 2.48297 11.8088 2.82077 11.3831 3.2466L10.4998 4.12993L9.61648 3.2466C8.75674 2.38686 7.59068 1.90386 6.37481 1.90386C5.15895 1.90386 3.99289 2.38686 3.13315 3.2466C2.2734 4.10634 1.79041 5.27241 1.79041 6.48827C1.79041 7.70413 2.2734 8.87019 3.13315 9.72993L4.01648 10.6133L10.4998 17.0966L16.9831 10.6133L17.8665 9.72993C18.2923 9.3043 18.6301 8.79894 18.8606 8.24273C19.091 7.68651 19.2097 7.09034 19.2097 6.48827C19.2097 5.88619 19.091 5.29002 18.8606 4.7338C18.6301 4.17759 18.2923 3.67223 17.8665 3.2466Z"
                                       stroke="#909090"
-                                      stroke-width="2"
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
+                                      strokeWidth="2"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
                                     />
                                   </svg>
                                 </div>
@@ -233,7 +233,7 @@ const ScrollingSlideShow = () => {
                                     Tags:
                                   </span>
                                 </div>
-                                <div className="max-[500px]:w-[100%] flex w-[400px] flex-row flex-wrap">
+                                <div className="flex w-[400px] flex-row flex-wrap max-[500px]:w-[100%]">
                                   {uniqueTags.map(
                                     (tag: string, index: number) => {
                                       return (
@@ -291,7 +291,7 @@ const ScrollingSlideShow = () => {
             </Swiper>
           </div>
 
-          {/* <div className="m-auto mb-10 flex w-[100%] flex-row flex-wrap justify-center">
+          <div className="m-auto mb-10 flex w-[100%] flex-row flex-wrap justify-center">
             {data?.map((BlogPost: any, i: number) => {
               const date = new Date(BlogPost.date_created)
               let tags = BlogPost.tags
@@ -300,6 +300,7 @@ const ScrollingSlideShow = () => {
               })
               return (
                 <div
+                  key={i}
                   className={` m-10 mt-10 flex grid h-[696px] w-[400px] justify-around overflow-hidden rounded-[15px] bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black max-[600px]:justify-center md:flex  md:px-1`}
                 >
                   <FadeInWhenVisible duration={(i + 1) * 0.2}>
@@ -342,9 +343,9 @@ const ScrollingSlideShow = () => {
                                 <path
                                   d="M17.8665 3.2466C17.4409 2.82077 16.9355 2.48297 16.3793 2.2525C15.8231 2.02203 15.2269 1.90341 14.6248 1.90341C14.0227 1.90341 13.4266 2.02203 12.8704 2.2525C12.3141 2.48297 11.8088 2.82077 11.3831 3.2466L10.4998 4.12993L9.61648 3.2466C8.75674 2.38686 7.59068 1.90386 6.37481 1.90386C5.15895 1.90386 3.99289 2.38686 3.13315 3.2466C2.2734 4.10634 1.79041 5.27241 1.79041 6.48827C1.79041 7.70413 2.2734 8.87019 3.13315 9.72993L4.01648 10.6133L10.4998 17.0966L16.9831 10.6133L17.8665 9.72993C18.2923 9.3043 18.6301 8.79894 18.8606 8.24273C19.091 7.68651 19.2097 7.09034 19.2097 6.48827C19.2097 5.88619 19.091 5.29002 18.8606 4.7338C18.6301 4.17759 18.2923 3.67223 17.8665 3.2466Z"
                                   stroke="#909090"
-                                  stroke-width="2"
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
                                 />
                               </svg>
                             </div>
@@ -356,7 +357,7 @@ const ScrollingSlideShow = () => {
                             <div className="flex w-[400px] flex-row flex-wrap">
                               {uniqueTags.map((tag: string, index: number) => {
                                 return (
-                                  <div key={index} className="mr-2 mb-2 w-max ">
+                                  <div key={index} className="mb-2 mr-2 w-max ">
                                     <span className="flex flex-row flex-wrap items-center rounded-full bg-[#4D5154] px-2 py-1.5 text-xs font-medium uppercase leading-none text-white">
                                       {`#${tag}`}
                                     </span>
@@ -395,7 +396,7 @@ const ScrollingSlideShow = () => {
                 </div>
               )
             })}
-          </div> */}
+          </div>
         </FadeInWhenVisible>
       </section>
     </div>
