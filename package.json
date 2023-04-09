@@ -23,7 +23,7 @@
   "dependencies": {
     "@mantine/core": "^5.10.0",
     "@mantine/hooks": "^5.10.0",
-    "@mantine/rte": "^5.4.1",
+    "@mantine/rte": "^3.4.3",
     "@metamask/providers": "^9.1.0",
     "@next/bundle-analyzer": "^13.1.1",
     "@react-google-maps/api": "^2.12.2",
@@ -71,7 +71,7 @@
     "three": "^0.147.0",
     "three-effectcomposer-es6": "^0.0.4",
     "three-stdlib": "^2.21.8",
-    "web3": "^1.8.0"
+    "web3": "^0.20.7"
   },
   "devDependencies": {
     "@emotion/react": "^11.10.5",
