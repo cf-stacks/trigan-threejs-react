@@ -16,7 +16,7 @@ export const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
   const tagsArray: any[] = ['Agriculture', 'Web3', 'Crypto', 'Metavarse']
   return (
     <>
-      <div className="mt-16 mb-8 flex w-[100%] flex-wrap justify-center">
+      <div className="mb-8 mt-16 flex w-[100%] flex-wrap justify-center">
         {tagsArray.map((tag, i) => {
           return (
             <div
@@ -55,9 +55,9 @@ export const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                   <div>
                     <div className="flex flex-col">
                       <Link
-                        href="/post/[id]"
+                        href="/blog/post/[blog_name]"
                         passHref
-                        as={`/post/${BlogPost.id_post}`}
+                        as={`/blog/post/${BlogPost.slug_id}`}
                       >
                         <div className="m-auto h-[263px] w-[400px] hover:cursor-pointer">
                           <img
@@ -101,7 +101,7 @@ export const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                         <div className="flex w-[400px] flex-row flex-wrap">
                           {uniqueTags.map((tag: string, index: number) => {
                             return (
-                              <div key={index} className="mr-2 mb-2 w-max ">
+                              <div key={index} className="mb-2 mr-2 w-max ">
                                 <span className="flex flex-row flex-wrap items-center rounded-full bg-[#4D5154] px-2 py-1.5 text-xs font-medium uppercase leading-none text-white">
                                   {`#${tag}`}
                                 </span>
@@ -110,24 +110,22 @@ export const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                           })}
                         </div>
                         <Link
-                          href="/post/[id]"
+                          href="/blog/post/[blog_name]"
                           passHref
-                          as={`/post/${BlogPost.id_post}`}
+                          as={`/blog/post/${BlogPost.slug_id}`}
                         >
                           <h2 className=" text-2xl font-semibold text-white hover:cursor-pointer hover:text-grey">
                             {BlogPost.title}
                           </h2>
                         </Link>
                         <p className="flex flex-wrap text-[16px] font-normal text-white">
-                          Lorem ipsum dolor sit amet consectetur. Commodo sed
-                          viverra amet est odio massa libero scelerisque
-                          rhoncus. Condimentum est sit montes nulla pharetra
-                          lacus neque faucibus. Vitae vulputate ac vitae ac
-                          aenean. Erat pulvinar pretium cras proin id interdum.
-                          Elit purus tincidunt facilisis turpis tellus
-                          suspendisse.
+                          {BlogPost.short_description}
                         </p>
-                        <Link href="/blog" passHref as={``}>
+                        <Link
+                          href="/blog/post/[blog_name]"
+                          passHref
+                          as={`/blog/post/${BlogPost.slug_id}`}
+                        >
                           <h2 className=" text-lg font-normal text-[#DC2626] underline hover:cursor-pointer hover:text-grey">
                             Read More
                           </h2>
