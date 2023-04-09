@@ -75,17 +75,19 @@ export const ContentListTable = ({
       }),
     []
   )
+  const onChange = () => console.log('okay')
 
   const [contentToEdit, setContentToEdit] = useState<DynamicContent>()
 
   const [value, setValue] = useState(contentToEdit?.content.description)
   const rte = (
-    <RichTextEditor
-      value={value}
-      onChange={setValue}
-      onImageUpload={handleImageUpload}
-      id="rte"
-    />
+    <div id="rte">
+      <RichTextEditor
+        value={value as string}
+        onChange={onChange}
+        onImageUpload={handleImageUpload}
+      />
+    </div>
   )
 
   const [name, setName] = useState('')

@@ -29,7 +29,7 @@ const VisionPage: React.FC<any> = () => {
                   Shape the <span className="text-purple-500">Future</span> of
                   Smart Cities
                 </h2>
-                <p className="w-[325px] pb-[48px]  text-center  text-gray-300 md:w-[100%]">
+                <p className="w-[325px] pb-[48px] text-center font-bold text-gray-300 md:w-[100%]">
                   {' '}
                   Be part of a passionate, dedicated team working towards
                   transforming cities and empowering communities.
@@ -40,9 +40,9 @@ const VisionPage: React.FC<any> = () => {
 
           <JoinTheTeamSlider />
           <div className="mx-auto">
-            <div className="mr-0 flex flex-col justify-center text-center md:m-[100px] md:flex-row md:gap-[40px]">
+            <div className="mr-0 flex flex-col justify-center text-center md:m-[100px] md:gap-[40px] lg:flex-row">
               {' '}
-              <p className="mdmt-[40px] w-[375px] text-gray-300">
+              <p className="mdmt-[40px] mx-auto w-[375px] font-bold text-gray-300">
                 Trigan's mission is to create a more connected, sustainable, and
                 inclusive world by transforming how cities function. Our
                 platform combines blockchain technology, AI, and real-world
@@ -78,7 +78,7 @@ const VisionPage: React.FC<any> = () => {
 
             <div className="mb-[100px] mt-[24px] flex flex-col items-center">
               <h3 className="pb-[38px] text-purple-500">What you can expect</h3>
-              <p className=" w-[355px]  text-center text-gray-300 md:w-[600px]">
+              <p className=" w-[355px] text-center font-bold text-gray-300 md:w-[600px]">
                 Trigan's mission is to create a more connected, sustainable, and
                 inclusive world by transforming how cities function. Our
                 platform combines blockchain technology, AI, and real-world
@@ -114,7 +114,7 @@ const VisionPage: React.FC<any> = () => {
                 <h4 className="pb-[12px] text-2xl">
                   Collaborative Environment
                 </h4>
-                <p className="w-[342px] text-gray-300">
+                <p className="w-[342px] font-bold text-gray-300">
                   Work alongside like-minded individuals from various fields,
                   united by a common goal of shaping the future of smart cities.
                 </p>
@@ -135,7 +135,7 @@ const VisionPage: React.FC<any> = () => {
                   />
                 </div>
                 <h4 className="pb-[12px] text-2xl">Personal Growth</h4>
-                <p className="w-[327px] text-gray-300  md:w-[342px]">
+                <p className="w-[327px] font-bold  text-gray-300 md:w-[342px]">
                   Develop new skills, expand your knowledge, and gain invaluable
                   experience as you contribute to a groundbreaking project
                 </p>
@@ -156,7 +156,7 @@ const VisionPage: React.FC<any> = () => {
                   />
                 </div>
                 <h4 className="pb-[12px] text-2xl">Global Impact</h4>
-                <p className="text-gray-300]  w-[342px] text-gray-300">
+                <p className="text-gray-300] w-[342px]  font-bold text-gray-300">
                   Be part of a team working towards making a lasting positive
                   change in cities worldwide.
                 </p>
@@ -177,7 +177,7 @@ const VisionPage: React.FC<any> = () => {
                   />
                 </div>
                 <h4 className="pb-[12px] text-2xl">Networking Opportunities</h4>
-                <p className="w-[327px]  text-gray-300 md:w-[342px]">
+                <p className="w-[327px] font-bold text-gray-300 md:w-[342px]">
                   Connect with professionals from different industries,
                   fostering relationships that can lead to exciting new
                   opportunities and collaborations.
@@ -199,7 +199,7 @@ const VisionPage: React.FC<any> = () => {
                   />
                 </div>
                 <h4 className="pb-[12px] text-2xl">Sense of Purpose</h4>
-                <p className="w-[327px]  text-gray-300 md:w-[342px]">
+                <p className="w-[327px] font-bold text-gray-300 md:w-[342px]">
                   Experience the satisfaction of knowing that your efforts
                   directly contribute to the betterment of society and the
                   environment
@@ -210,42 +210,42 @@ const VisionPage: React.FC<any> = () => {
           <div className="mx-auto flex max-w-[1440px] items-center justify-center gap-[45px] py-[100px]">
             {' '}
             <div className="w-[325px] md:w-[650px]">
-              <h4 className="mb-[32px] w-[375px] text-center text-xl font-bold text-purple-500 md:w-[100%] md:text-left">
+              <h4 className="mb-[32px] w-[375px]  text-center text-xl font-bold text-purple-500 md:w-[100%] md:text-left">
                 To join the Trigan team, follow these simple steps
               </h4>
               <div>
-                <h4 className="mx-[10px] w-[360px] text-justify  text-sm font-bold text-purple-500 md:mx-[0px] md:my-[16px] md:w-[500px]">
+                <h4 className="mx-[10px] w-[360px] text-justify text-sm font-bold text-purple-500 md:mx-[0px] md:my-[16px] md:w-[500px]">
                   Step 1.
                 </h4>
-                <p className="mx-[10px] w-[360px] text-justify  md:mx-[0px] md:w-[100%]">
+                <p className="mx-[10px] w-[360px] text-justify font-bold  md:mx-[0px] md:w-[100%]">
                   Fill out our online application form [link to the form],
                   providing your contact information, background, and relevant
                   experience.
                 </p>
               </div>
               <div>
-                <h4 className="mx-[10px] w-[360px] text-justify  text-sm font-bold text-purple-500 md:mx-[0px] md:my-[16px] md:w-[500px]">
+                <h4 className="mx-[10px] w-[360px] text-justify text-sm font-bold text-purple-500 md:mx-[0px] md:my-[16px] md:w-[500px]">
                   Step 2.
                 </h4>
-                <p className="mx-[10px] w-[360px] text-justify  md:mx-[0px] md:w-[100%]">
+                <p className="mx-[10px] w-[360px] text-justify  font-bold  md:mx-[0px] md:w-[100%]">
                   Tell us why you're interested in joining the Trigan team and
                   how you believe you can contribute to our mission.
                 </p>
               </div>
               <div>
-                <h4 className="mx-[10px] w-[360px] text-justify  text-sm font-bold text-purple-500 md:mx-[0px] md:my-[16px] md:w-[500px]">
+                <h4 className=" mx-[10px] w-[360px] text-justify text-sm font-bold font-bold text-purple-500 md:mx-[0px] md:my-[16px] md:w-[500px]">
                   Step 3.
                 </h4>
-                <p className="mx-[10px] w-[360px] text-justify  md:mx-[0px] md:w-[100%]">
+                <p className="mx-[10px] w-[360px] text-justify  font-bold  md:mx-[0px] md:w-[100%]">
                   Attach your resume or CV and any relevant portfolio pieces or
                   work samples, if applicable.
                 </p>
               </div>
               <div>
-                <h4 className="mx-[10px] w-[360px] text-justify  text-sm font-bold text-purple-500 md:mx-[0px] md:my-[16px] md:w-[500px]">
+                <h4 className="mx-[10px] w-[360px] text-justify text-sm  font-bold font-bold text-purple-500 md:mx-[0px] md:my-[16px] md:w-[500px]">
                   Step 4.
                 </h4>
-                <p className="mx-[10px] w-[360px] text-justify  md:mx-[0px] md:w-[100%]">
+                <p className="mx-[10px] w-[360px] text-justify  font-bold  md:mx-[0px] md:w-[100%]">
                   Submit your application and wait for our team to review it.
                   We'll be in touch if we believe you're a great fit for our
                   team. Take advantage of this unique opportunity to be part of
@@ -257,10 +257,10 @@ const VisionPage: React.FC<any> = () => {
             </div>
             <div>
               <Image
-                src="/images/team-page-3.png"
+                src="/images/team-page-3.jpg"
                 alt="trigan-symbol"
-                width={905}
-                height={500}
+                width={705}
+                height={600}
                 loading="lazy"
               />{' '}
             </div>
