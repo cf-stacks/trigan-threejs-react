@@ -46,7 +46,7 @@ let LABEL__DATA = [
 type Props = {
   onClickClose: () => any
   onMouseLeave: () => any
-  data: number
+  data: any
 }
 
 const LabelData = (props: Props) => {
