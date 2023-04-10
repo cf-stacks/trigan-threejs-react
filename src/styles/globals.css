@@ -32,6 +32,10 @@ h6 {
   background: black;
   height: 300px;
 }
+.label__show__data::-webkit-scrollbar {
+  width: 0px;
+}
+
 .map-container {
   width: 91%;
   height: 70vh;
@@ -822,50 +826,3 @@ h6 {
     right: 41px;
   }
 }
-
-.join-the-team-slider .swiper {
-  position:relative !important;
-}
-
-.join-the-team-slider .swiper .swiper-button-next {
-background:#A855F7 !important;
-    top: 25% !important;
-    left: 84.5% !important;
-
-}
-
-.join-the-team-slider .swiper .swiper-button-prev {
-  background:#A855F7 !important;
-
-  top: 25% !important;
-  left: 1.5% !important;
-  }
-
-  @media (min-width: 670px) {
-    .join-the-team-slider .swiper .swiper-button-prev{
-      top: 25% !important;
-  left: 1.5% !important;
-    }
-
-    .join-the-team-slider .swiper .swiper-button-next{
-      top: 25% !important;
-      left: 91.5% !important;
-    }
-  }
-
-  @media (min-width: 840px) {
-    .join-the-team-slider .swiper .swiper-button-prev{
-      top: 50% !important;
-      left: 1.5% !important;
-    }
-
-    .join-the-team-slider .swiper .swiper-button-next{
-      top: 50% !important;
-      left: 95.5% !important;
-    }
-  }
-
-  .feature-box {
-    background-image:url('../assets/rectangle.svg') !important; 
-    background-color: rgba(255, 255, 255, 0.4) !important; /* Add opacity to white color */
- }
