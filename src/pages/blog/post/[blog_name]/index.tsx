@@ -11,11 +11,14 @@ import ReactMarkdown from 'react-markdown'
 import moment from 'moment'
 import Link from 'next/link'
 import { FadeInWhenVisible } from '../../../../components/shared/FadeInWhenVisible'
+import dynamic from 'next/dynamic'
 
 interface PostProps {
   children?: ReactNode
   post: any
 }
+
+
 
 const Post: NextPage<PostProps> = ({ post }) => {
   const router = useRouter()
@@ -36,22 +39,21 @@ const Post: NextPage<PostProps> = ({ post }) => {
 
   const { blog_name } = router.query
 
+  //this function now converts base64 to utf-8 on client and on server side to prevent hydration errors
   function b64_to_utf8(char: string) {
-    let demo: any
-
-    if (typeof window !== 'undefined') {
-      demo = window.atob(char)
-    }
-    return demo
+    return Buffer.from(char, 'base64').toString('utf-8');
   }
 
   return (
+    
     <ThemeProvider attribute="class" enableSystem={true}>
+      
       <GlobalLayout>
         <div
           id={post?.data.id_post}
-          className="my-5 px-16  dark:bg-light-grey md:mx-auto "
+          className="my-5 px-16 dark:bg-light-grey md:mx-auto "
         >
+          
           <div className="mb-12 mt-[180px] flex w-[100%] flex-wrap justify-center">
             <span
               className={`flex h-[46px] flex-row flex-wrap items-center rounded-full border border-[#fff] bg-[#DC2626] px-7 py-1.5 text-[16px] font-medium capitalize text-white`}
@@ -80,7 +82,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                 <p>5 Min read</p>
               </div>
               <h6 className="full-width-container text-lg font-medium leading-loose">
-                <ReactMarkdown>{b64_to_utf8(post.data.content)}</ReactMarkdown>
+              <ReactMarkdown>{b64_to_utf8(post.data.content)}</ReactMarkdown>
               </h6>
             </div>
             <div className="ml-4 mt-[180px] flex max-h-[900px] w-1/4 flex-col bg-[#212529]">
@@ -183,6 +185,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                   <div
                     className={`c mr-4 mt-20 flex grid h-[696px] w-[400px] justify-around overflow-hidden rounded-[15px] bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black max-[600px]:justify-center md:flex  md:px-1`}
                   >
+                    
                     <FadeInWhenVisible duration={(i + 1) * 0.2}>
                       <div
                         id={BlogPost.id_post.toString()}
