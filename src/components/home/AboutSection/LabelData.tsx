@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { IoMdClose } from 'react-icons/io'
 type Props = {
   onClickClose: () => any
+  onMouseLeave: () => any
   data: { title: string; url: string; text: string }
 }
 
@@ -21,21 +22,22 @@ const LabelData = (props: Props) => {
       transition={{
         duration: 0.6,
       }}
-      className="fixed bottom-[8%] left-[15%]  z-10 h-[80vh]  w-[70%] rounded-lg bg-[#0a0a0aea] max-[768px]:bottom-[3%] max-[768px]:left-[5%] max-[768px]:h-[90vh] max-[768px]:w-[90%] "
+      className="fixed bottom-[8%] left-[15%]  z-10 h-[70vh]  w-[70%] rounded-lg bg-[#0a0a0aea] max-[768px]:bottom-[3%] max-[768px]:left-[5%] max-[768px]:h-[90vh] max-[768px]:w-[90%] "
+      onMouseLeave={props.onMouseLeave}
     >
       <div className="flex justify-between p-[2rem]  ">
         <h2 className="border-gradient-l-black-violet max-[870px]:text-md border-b-4  text-left text-xl capitalize max-[800px]:text-[15px] max-[640px]:text-[12px] max-[500px]:text-[10px]">
           {props.data.title}
         </h2>
         <button
-          className="cursor-pointer text-[1.4rem] text-white transition-all hover:text-[#eb6565] "
+          className=" cursor-pointer text-[1.4rem] text-white transition-all hover:text-[#eb6565]  "
           onClick={props.onClickClose}
         >
           <IoMdClose />
         </button>
       </div>
       <div className="content mt-[1rem]  flex justify-center  max-[768px]:flex-col">
-        <div className="image  w-[40%] max-[768px]:m-auto max-[768px]:h-[50%] max-[768px]:w-[90%]">
+        <div className="image  w-[32%] max-[768px]:m-auto max-[768px]:h-[50%] max-[768px]:w-[90%]">
           <img
             className="h-[100%] w-[100%] rounded-lg object-cover"
             src={props.data.url}

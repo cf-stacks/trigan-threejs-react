@@ -16,7 +16,7 @@ import { GetStaticProps } from 'next'
 import { api } from '../../../util/api'
 import React, { lazy, Suspense } from 'react'
 import { countries } from './SelectCountries'
-
+import LabelData from './LabelData'
 // import ImageLabel, { TypeImgLabel } from '../ImageLabel'
 // import AnimationCity from './AnimationCity'
 
@@ -46,6 +46,21 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [selectedCountry, setSelectedCountry] = useState('')
+  const [data, setData] = useState({
+    title: '',
+    url: '',
+    text: '',
+  })
+  const [showLabel, setShowLabel] = useState(false)
+
+  const handleButtonClick = (data: {
+    title: string
+    url: string
+    text: string
+  }) => {
+    setData(data)
+    setShowLabel(true)
+  }
 
   function handleSelectChange(event: any) {
     setSelectedCountry(event.target.value)
@@ -114,6 +129,14 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
+      {/* popup */}
+      {showLabel && (
+        <LabelData
+          onClickClose={() => setShowLabel(false)}
+          onMouseLeave={() => setShowLabel(false)}
+          data={data}
+        />
+      )}
       <div
         data-aos="zoom-in-up"
         className="aos-init overflow-hidden xl:mt-[-120px] 2xl:mt-[-80px]"
@@ -171,7 +194,7 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
             />
           </div> */}
             <Suspense fallback={<div>Loading..</div>}>
-              <AnimationCity />
+              <AnimationCity onButtonClick={handleButtonClick} />
             </Suspense>
           </div>
 
