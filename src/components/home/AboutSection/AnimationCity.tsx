@@ -9,7 +9,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 
 type Props = {
-  onButtonClick: (data: number) => void
+  onButtonClick: (data: any) => void
   active: string
   whoActive: (num: string) => void
 }
@@ -20,7 +20,7 @@ const AnimationCity = ({ onButtonClick, active, whoActive }: Props) => {
   const [isMobile, setIsMobile] = useState(false)
 
   console.log(active)
-  const handleButtonClick = (data: number) => {
+  const handleButtonClick = (data: any) => {
     onButtonClick(data)
   }
 
