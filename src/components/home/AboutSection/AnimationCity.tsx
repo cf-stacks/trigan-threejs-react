@@ -9,60 +9,18 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 
 type Props = {
-  onButtonClick: (data: { title: string; url: string; text: string }) => void
+  onButtonClick: (data: number) => void
   active: string
   whoActive: (num: string) => void
 }
 
 // import "./animation.css";
-const LABEL__DATA = [
-  {
-    id: 'label1',
-    title: 'AI Assisted Communities',
-    url: 'images/l1.png',
-    text: `Welcome to the neighbourhood of the future, where AI breathes life into communities, unlocking unprecedented synergy and collaboration. With Trigan, we're pushing the boundaries of urban living, creating a tapestry of smart, connected, and empowered spaces that redefine city life on a global scale.`,
-  },
-  {
-    id: 'label2',
-    title: ' Ecological Safeguards',
-    url: 'images/l2.png',
-    text: `Our planet deserves better, and Trigan is at the forefront of the green revolution. We're pioneering eco-conscious yet practical solutions that protect urban ecosystems, ensuring nature and humanity thrive in harmony. Together, we will build cities that breathe and grow, taking sustainability to a new level.`,
-  },
-  {
-    id: 'label3',
-    title: 'Unified loT Data Layer',
-    url: 'images/l3.png',
-    text: `Imagine an interconnected urban matrix where smart devices and systems work together to create a seamless cityscape. Trigan's groundbreaking IoT data platform makes it happen, weaving an invisible web of efficiency, intelligence, and convenience throughout the urban fabric.`,
-  },
-  {
-    id: 'label4',
-    title: 'Future of Work',
-    url: 'images/l5.png',
-    text: `Trigan is reimagining how we work, catapulting us into a new era of collaboration, flexibility, and sustainability. We're bridging the digital divide, unlocking the limitless potential of human ingenuity, and paving the way for a happier, more engaged workforce to thrive in the 21st century.`,
-  },
-  {
-    id: 'label5',
-    title: 'Sovereign Identity',
-    url: 'images/l6.jpg',
-    text: `Discover the future of digital identity with Trigan's cutting-edge, decentralised system. We're putting the power back in your hands, giving you unparalleled control over your data and life, and redefining privacy in the digital age. It's time to embrace a new realm of sovereign identity, and Trigan is leading the way.`,
-  },
-  {
-    id: 'label6',
-    title: 'The First Urban Blockchain',
-    url: 'images/l4.png',
-    text: `Meet the game-changer: Trigan's urban blockchain, a decentralised powerhouse driving smarter, safer, and more connected cities. Our unique platform and approach reshape the urban experience, leveraging our next-gen technology to transform governance, services, and transactions. Be part of the transformation.`,
-  },
-]
 
 const AnimationCity = ({ onButtonClick, active, whoActive }: Props) => {
   const [isMobile, setIsMobile] = useState(false)
 
   console.log(active)
-  const handleButtonClick = (data: {
-    title: string
-    url: string
-    text: string
-  }) => {
+  const handleButtonClick = (data: number) => {
     onButtonClick(data)
   }
 
@@ -104,11 +62,7 @@ const AnimationCity = ({ onButtonClick, active, whoActive }: Props) => {
           <div className="flex justify-between max-[720px]:mx-auto max-[720px]:w-[80%] max-[600px]:pr-[35px] max-[499px]:w-[60%]">
             <button
               onMouseEnter={() => {
-                handleButtonClick({
-                  title: 'AI Assisted Communities',
-                  url: 'images/l1.png',
-                  text: `Welcome to the neighbourhood of the future, where AI breathes life into communities, unlocking unprecedented synergy and collaboration. With Trigan, we're pushing the boundaries of urban living, creating a tapestry of smart, connected, and empowered spaces that redefine city life on a global scale.`,
-                })
+                handleButtonClick(1)
                 whoActive('1')
               }}
             >
@@ -127,11 +81,7 @@ const AnimationCity = ({ onButtonClick, active, whoActive }: Props) => {
             </button>
             <button
               onMouseEnter={() => {
-                handleButtonClick({
-                  title: 'Future of Work',
-                  url: 'images/l5.png',
-                  text: `Trigan is reimagining how we work, catapulting us into a new era of collaboration, flexibility, and sustainability. We're bridging the digital divide, unlocking the limitless potential of human ingenuity, and paving the way for a happier, more engaged workforce to thrive in the 21st century.`,
-                })
+                handleButtonClick(4)
                 whoActive('2')
               }}
             >
@@ -156,11 +106,7 @@ const AnimationCity = ({ onButtonClick, active, whoActive }: Props) => {
           >
             <button
               onMouseEnter={() => {
-                handleButtonClick({
-                  title: 'Sovereign Identity',
-                  url: 'images/l6.jpg',
-                  text: `Discover the future of digital identity with Trigan's cutting-edge, decentralised system. We're putting the power back in your hands, giving you unparalleled control over your data and life, and redefining privacy in the digital age. It's time to embrace a new realm of sovereign identity, and Trigan is leading the way.`,
-                })
+                handleButtonClick(5)
                 whoActive('3')
               }}
             >
@@ -180,11 +126,7 @@ const AnimationCity = ({ onButtonClick, active, whoActive }: Props) => {
           >
             <button
               onMouseEnter={() => {
-                handleButtonClick({
-                  title: ' Ecological Safeguards',
-                  url: 'images/l2.png',
-                  text: `Our planet deserves better, and Trigan is at the forefront of the green revolution. We're pioneering eco-conscious yet practical solutions that protect urban ecosystems, ensuring nature and humanity thrive in harmony. Together, we will build cities that breathe and grow, taking sustainability to a new level.`,
-                })
+                handleButtonClick(2)
                 whoActive('4')
               }}
             >
@@ -204,11 +146,7 @@ const AnimationCity = ({ onButtonClick, active, whoActive }: Props) => {
           >
             <button
               onMouseEnter={() => {
-                handleButtonClick({
-                  title: 'The First Urban Blockchain',
-                  url: 'images/l4.png',
-                  text: `Meet the game-changer: Trigan's urban blockchain, a decentralised powerhouse driving smarter, safer, and more connected cities. Our unique platform and approach reshape the urban experience, leveraging our next-gen technology to transform governance, services, and transactions. Be part of the transformation.`,
-                })
+                handleButtonClick(6)
                 whoActive('5')
               }}
             >
@@ -228,11 +166,7 @@ const AnimationCity = ({ onButtonClick, active, whoActive }: Props) => {
           >
             <button
               onMouseEnter={() => {
-                handleButtonClick({
-                  title: 'Unified loT Data Layer',
-                  url: 'images/l3.png',
-                  text: `Imagine an interconnected urban matrix where smart devices and systems work together to create a seamless cityscape. Trigan's groundbreaking IoT data platform makes it happen, weaving an invisible web of efficiency, intelligence, and convenience throughout the urban fabric.`,
-                })
+                handleButtonClick(3)
                 whoActive('6')
               }}
             >
