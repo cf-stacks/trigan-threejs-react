@@ -153,6 +153,16 @@ h6 {
   height: 48px !important;
   z-index: 2;
 }
+
+.label-button-prev {
+  left: 45% !important;
+}
+/* .label-button-next,
+.label-button-prev {
+  bottom: -20% !important;
+  transform: translateY(80px);
+  background: transparent !important;
+} */
 .review-swiper-button-next,
 .review-swiper-button-prev {
   top: 770px !important;
@@ -255,10 +265,24 @@ h6 {
   color: #f2f6fb;
   padding: 0 200px 20px 40px;
 }
+@media screen and (max-width: 768px) {
+  /*  .label-button-next,
+   .label-button-prev {
+    bottom: -100% !important;
+    transform: translateY(320px) translateX(-20px);
+    background: transparent !important;
+  } */
+}
 @media screen and (max-width: 480px) {
   .abo_pl {
     padding: 0 10px 20px 40px;
   }
+  /* .label-button-next,
+  .label-button-prev {
+    bottom: -100% !important;
+    transform: translateY(220px) translateX(-20px);
+    background: transparent !important;
+  } */
 }
 .tail {
   background: #212529;
