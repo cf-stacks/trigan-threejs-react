@@ -102,11 +102,7 @@ const ScrollingSlideShow = () => {
                     </h3>
                     <hr className="mt-5 border-4 border-purple-600" />
                   </div>
-<<<<<<< HEAD
-                  <div className="align-center  m-auto flex h-[400px] w-[450px] justify-center bg-[#A855F7] object-cover max-[850px]:mt-[35px] max-[600px]:m-auto max-[600px]:mt-5 max-[600px]:h-[350px] max-[600px]:w-[400px] max-[600px]:flex-col max-[500px]:h-[250px]">
-=======
                   <div className="align-center  m-auto flex h-[400px] w-[450px] justify-center bg-[#A855F7] object-cover max-[850px]:mt-[35px] max-[600px]:m-auto max-[600px]:mt-5 max-[600px]:h-[350px] max-[600px]:w-[400px] max-[600px]:flex-col max-[500px]:h-[250px] max-[500px]:w-[100%]">
->>>>>>> main
                     <img
                       className="m-auto h-[400px] w-[450px] rotate-3 transform object-cover bg-blend-darken max-[600px]:h-[350px] max-[600px]:w-[400px] max-[500px]:h-[250px] max-[500px]:w-[300px]"
                       src="images/city-girl-1.jpg"
@@ -185,7 +181,7 @@ const ScrollingSlideShow = () => {
                 return (
                   <SwiperSlide key={i}>
                     <div
-                      className={` m-10 mt-10 flex grid h-[696px] w-[400px] justify-around overflow-hidden rounded-[15px] bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black max-[600px]:justify-center max-[500px]:w-[100%] md:flex  md:px-1`}
+                      className={` m-10 mt-10 flex h-[696px] w-[400px] justify-around overflow-hidden rounded-[15px] bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black max-[600px]:justify-center max-[500px]:w-[100%] md:flex  md:px-1`}
                     >
                       <FadeInWhenVisible duration={(i + 1) * 0.2}>
                         <div
@@ -303,7 +299,7 @@ const ScrollingSlideShow = () => {
               return (
                 <div
                   key={i}
-                  className={` m-10 mt-10 flex grid h-[696px] w-[400px] justify-around overflow-hidden rounded-[15px] bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black max-[600px]:justify-center md:flex  md:px-1`}
+                  className={` m-10 mt-10 flex h-[696px] w-[400px] justify-around overflow-hidden rounded-[15px] bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black max-[600px]:justify-center md:flex  md:px-1`}
                 >
                   <FadeInWhenVisible duration={(i + 1) * 0.2}>
                     <div

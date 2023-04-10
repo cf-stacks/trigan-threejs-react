@@ -23,7 +23,7 @@
   "dependencies": {
     "@mantine/core": "^5.10.0",
     "@mantine/hooks": "^5.10.0",
-    "@mantine/rte": "^3.4.3",
+    "@mantine/rte": "^5.10.0",
     "@metamask/providers": "^9.1.0",
     "@next/bundle-analyzer": "^13.1.1",
     "@react-google-maps/api": "^2.12.2",
