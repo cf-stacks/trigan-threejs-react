@@ -51,7 +51,7 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
     url: '',
     text: '',
   })
-  const [labelActive, setLabelActive] = useState(0)
+  const [labelActive, setLabelActive] = useState('0')
   const [showLabel, setShowLabel] = useState(false)
 
   const handleButtonClick = (data: {
@@ -62,12 +62,12 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
     setData(data)
     setShowLabel(true)
   }
-  const whoActive = (num: number) => {
+  const whoActive = (num: string) => {
     setLabelActive(num)
   }
   const classHandler = () => {
     const timer = setTimeout(() => {
-      setLabelActive(0)
+      setLabelActive('0')
     }, 500)
     return () => {
       clearTimeout(timer)
