@@ -8,7 +8,7 @@ import {
   useRef,
   useState,
 } from 'react'
-import { useAnimation } from 'framer-motion'
+import { useAnimation, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
@@ -51,6 +51,7 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
     url: '',
     text: '',
   })
+  const [labelActive, setLabelActive] = useState(0)
   const [showLabel, setShowLabel] = useState(false)
 
   const handleButtonClick = (data: {
@@ -60,6 +61,17 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
   }) => {
     setData(data)
     setShowLabel(true)
+  }
+  const whoActive = (num: number) => {
+    setLabelActive(num)
+  }
+  const classHandler = () => {
+    const timer = setTimeout(() => {
+      setLabelActive(0)
+    }, 500)
+    return () => {
+      clearTimeout(timer)
+    }
   }
 
   function handleSelectChange(event: any) {
@@ -130,13 +142,18 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       {/* popup */}
-      {showLabel && (
-        <LabelData
-          onClickClose={() => setShowLabel(false)}
-          onMouseLeave={() => setShowLabel(false)}
-          data={data}
-        />
-      )}
+      <AnimatePresence mode="wait">
+        {showLabel && (
+          <LabelData
+            onClickClose={() => setShowLabel(false)}
+            onMouseLeave={() => {
+              setShowLabel(false)
+              classHandler()
+            }}
+            data={data}
+          />
+        )}
+      </AnimatePresence>
       <div
         data-aos="zoom-in-up"
         className="aos-init overflow-hidden xl:mt-[-120px] 2xl:mt-[-80px]"
@@ -194,7 +211,11 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
             />
           </div> */}
             <Suspense fallback={<div>Loading..</div>}>
-              <AnimationCity onButtonClick={handleButtonClick} />
+              <AnimationCity
+                onButtonClick={handleButtonClick}
+                active={labelActive}
+                whoActive={whoActive}
+              />
             </Suspense>
           </div>
 

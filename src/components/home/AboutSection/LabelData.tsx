@@ -1,5 +1,5 @@
 import React from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 import { IoMdClose } from 'react-icons/io'
 type Props = {
@@ -11,6 +11,7 @@ type Props = {
 const LabelData = (props: Props) => {
   return (
     <motion.div
+      key="modal"
       initial={{
         scale: 0,
         opacity: 0,
@@ -20,7 +21,15 @@ const LabelData = (props: Props) => {
         opacity: 1,
       }}
       transition={{
-        duration: 0.6,
+        duration: 0.5,
+        delay: 0.15,
+      }}
+      exit={{
+        scale: 0,
+        opacity: 0,
+        transition: {
+          duration: 0.5,
+        },
       }}
       className="fixed bottom-[8%] left-[15%]  z-10 h-[70vh]  w-[70%] rounded-lg bg-[#0a0a0aea] max-[768px]:bottom-[3%] max-[768px]:left-[5%] max-[768px]:h-[90vh] max-[768px]:w-[90%] "
       onMouseLeave={props.onMouseLeave}
