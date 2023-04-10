@@ -23,7 +23,7 @@ const Model = (props) => {
 
   // const earthGeometry = new THREE.SphereGeometry(1.9, 64, 64)
 //workaround path for blog pages
-  const { nodes, materials, animations } = useGLTF('../../EarthTexture/planet.glb')
+  const { nodes, materials, animations } = useGLTF('EarthTexture/planet.glb')
 
   const { actions } = useAnimations(animations, group)
   const [Device, setDevice] = useState(30)
@@ -75,6 +75,6 @@ const Model = (props) => {
 }
 
 //workaround path for blog pages
-useGLTF.preload('../../EarthTexture/planet.glb')
+useGLTF.preload('EarthTexture/planet.glb')
 
 export default Model
