@@ -68,10 +68,10 @@ const AnimationCity = ({ onButtonClick, active, whoActive }: Props) => {
             >
               <div
                 data-aos="fade-left"
-                className="border-gradient-l-black-violet aos-init m-auto   flex h-[100px] flex-col items-start justify-end border-b-4  max-[768px]:mt-[30px] max-[767px]:h-[60px]  max-[720px]:h-[auto] max-[640px]:ml-[45px]  max-[499px]:ml-[30px] "
+                className="label__title border-gradient-l-black-violet aos-init m-auto   flex h-[100px] flex-col items-start justify-end border-b-4  max-[768px]:mt-[30px] max-[767px]:h-[60px]  max-[720px]:h-[auto] max-[640px]:ml-[45px]  max-[499px]:ml-[30px] "
               >
                 <h2
-                  className={` label__title__text  label__title__text1 max-[870px]:text-md text-left text-xl duration-300 ease-in-out max-[768px]:text-[15px] max-[640px]:text-[12px] max-[500px]:text-[10px] ${
+                  className={` label__title__text label__title__text1  max-[870px]:text-md text-left text-xl duration-300 ease-in-out max-[768px]:text-[15px] max-[640px]:text-[12px] max-[500px]:text-[10px] ${
                     active === '1' ? 'active1' : ''
                   }`}
                 >
