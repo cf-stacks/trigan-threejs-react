@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { BsChevronDoubleRight, BsChevronDoubleLeft } from 'react-icons/bs'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper'
-import { Pagination, Navigation } from 'swiper'
+import { Pagination, Navigation, Mousewheel } from 'swiper'
 
 import 'swiper/css'
 import 'swiper/css/pagination'
@@ -77,7 +77,7 @@ const LabelData = (props: Props) => {
           duration: 0.5,
         },
       }}
-      className="fixed bottom-[8%] left-[15%]  z-10 h-[70vh]  w-[70%] rounded-lg bg-[#0a0a0aea] max-[768px]:bottom-[3%] max-[768px]:left-[5%] max-[768px]:h-[90vh] max-[768px]:w-[90%] "
+      className="fixed bottom-[8%] left-[15%]  z-10 flex  h-[70vh] w-[70%] items-center rounded-lg bg-[#0a0a0aea] max-[768px]:bottom-[3%] max-[768px]:left-[5%] max-[768px]:h-[90vh] max-[768px]:w-[90%]"
       onMouseLeave={props.onMouseLeave}
     >
       <Swiper
@@ -85,14 +85,14 @@ const LabelData = (props: Props) => {
           clickable: true,
         }}
         direction={'vertical'}
-        speed={1200}
+        speed={1000}
+        mousewheel={true}
         loop={true}
-        // autoplay={{
-        //   delay: 1300,
-        //   disableOnInteraction: false,
-        //   pauseOnMouseEnter: true,
-        // }}
-        modules={[Pagination, Navigation, Autoplay]}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: true,
+        }}
+        modules={[Pagination, Navigation, Autoplay, Mousewheel]}
         breakpoints={{
           // when window width is >= 320px
           320: {
@@ -101,11 +101,7 @@ const LabelData = (props: Props) => {
             centeredSlides: true,
           },
         }}
-        navigation={{
-          nextEl: '.label-button-next',
-          prevEl: '.label-button-prev',
-        }}
-        className=" h-[90%] w-[100%]"
+        className=" h-[100%] w-[100%]"
       >
         <div className="">
           <div className="  w-[100%] flex-col text-[25px] md:m-5 md:m-auto ">
@@ -118,7 +114,7 @@ const LabelData = (props: Props) => {
                     </h2>
                   </div>
                   <div className="content mt-[1rem]  flex  items-center justify-center max-[768px]:flex-col">
-                    <div className="image  w-[28%] max-[768px]:m-auto max-[768px]:mb-[2vh] max-[768px]:h-[50%] max-[768px]:w-[55%]  max-[500px]:w-[90%]">
+                    <div className="image  w-[30%] max-[768px]:m-auto max-[768px]:mb-[2vh] max-[768px]:h-[50%] max-[768px]:w-[55%]  max-[500px]:w-[90%]">
                       <img
                         className="h-[100%] w-[100%] rounded-lg object-cover"
                         src={item.url}
@@ -135,14 +131,6 @@ const LabelData = (props: Props) => {
           </div>
         </div>
       </Swiper>
-      <div className="label__buttons flex justify-center">
-        <span className="label-button-prev mx-[10px] flex cursor-pointer items-center justify-center text-[1.5rem] text-white">
-          <BsChevronDoubleLeft />
-        </span>
-        <span className="label-button-next mx-[10px] flex cursor-pointer items-center justify-center text-[1.5rem] text-white">
-          <BsChevronDoubleRight />
-        </span>
-      </div>
     </motion.div>
   )
 }
