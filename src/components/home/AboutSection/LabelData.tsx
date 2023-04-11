@@ -50,7 +50,6 @@ type Props = {
 }
 
 const LabelData = (props: Props) => {
-  const [labelsData, setLabelsData] = useState(LABEL__DATA)
   let slicArr: any = []
   slicArr = LABEL__DATA.slice(props.data - 1, LABEL__DATA.length)
   let newArr = slicArr.concat(LABEL__DATA.slice(0, props.data - 1))
@@ -88,7 +87,7 @@ const LabelData = (props: Props) => {
         direction={'vertical'}
         speed={1000}
         mousewheel={true}
-       // loop={true}
+        // loop={true}
         autoplay={{
           delay: 3000,
           disableOnInteraction: true,
