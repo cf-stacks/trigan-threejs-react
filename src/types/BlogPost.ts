@@ -10,5 +10,8 @@ export interface BlogPost {
   tags: Array<string>
   original_filename: string
   created_at: string
-  updated_at: string
+  updated_at: string,
+  votes: number,
+  views: number,
+  image_url:string
 }

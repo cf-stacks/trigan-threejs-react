@@ -21,9 +21,9 @@
     "postbuild": "rimraf ./next/**/*.js.map"
   },
   "dependencies": {
-    "@mantine/core": "^5.10.0",
+    "@mantine/core": "^5.10.5",
     "@mantine/hooks": "^5.10.0",
-    "@mantine/rte": "^3.4.3",
+    "@mantine/rte": "^3.6.14",
     "@metamask/providers": "^9.1.0",
     "@next/bundle-analyzer": "^13.1.1",
     "@react-google-maps/api": "^2.12.2",

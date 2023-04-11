@@ -44,7 +44,7 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
 
   return (
     <div className="relative">
-      <VideoHeader isScroll={false} />
+       <VideoHeader isScroll={false} /> 
       <div className="dark:bg-white ">
         <div
           id="blog"
@@ -55,7 +55,7 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
             <h1
               className={`w-full text-center text-2xl font-semibold capitalize md:text-5xl`}
             >
-              <span className="inline-block border-b-2 border-light p-2 font-m_plus_rounded_1c  dark:text-black">
+              <span className="inline-block border-b-2 border-light p-2 font-m_plus_rounded_1c dark:text-black">
                 Blog
               </span>
             </h1>
@@ -65,6 +65,7 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
               <div className="h-[1px] w-2/4 bg-[#5B5B5B]" />
             </div>
             <PostsByDate posts={posts} />
+            
             <div className="mt-10 mb-20 flex w-[100%] flex-wrap justify-center">
               <Link href="/blog" passHref as={``}>
                 <div className="mr-6 w-max hover:cursor-pointer hover:opacity-50">
