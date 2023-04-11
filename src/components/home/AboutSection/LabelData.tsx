@@ -79,6 +79,7 @@ const LabelData = (props: Props) => {
       }}
       className="fixed bottom-[8%] left-[15%]  z-10 flex  h-[70vh] w-[70%] items-center rounded-lg bg-[#0a0a0aea] max-[768px]:bottom-[3%] max-[768px]:left-[5%] max-[768px]:h-[90vh] max-[768px]:w-[90%]"
       onMouseLeave={props.onMouseLeave}
+      onClick={props.onMouseLeave}
     >
       <Swiper
         pagination={{
