@@ -71,7 +71,7 @@ const AnimationCity = ({ onButtonClick, active, whoActive }: Props) => {
                 className="border-gradient-l-black-violet aos-init m-auto   flex h-[100px] flex-col items-start justify-end border-b-4  max-[768px]:mt-[30px] max-[767px]:h-[60px]  max-[720px]:h-[auto] max-[640px]:ml-[45px]  max-[499px]:ml-[30px] "
               >
                 <h2
-                  className={`max-[870px]:text-md text-left text-xl duration-300 ease-in-out max-[768px]:text-[15px] max-[640px]:text-[12px] max-[500px]:text-[10px] ${
+                  className={` label__title__text  label__title__text1 max-[870px]:text-md text-left text-xl duration-300 ease-in-out max-[768px]:text-[15px] max-[640px]:text-[12px] max-[500px]:text-[10px] ${
                     active === '1' ? 'active1' : ''
                   }`}
                 >
@@ -90,7 +90,7 @@ const AnimationCity = ({ onButtonClick, active, whoActive }: Props) => {
                 className="border-gradient-r-black-violet aos-init m-auto  flex h-[100px] flex-col items-start justify-end border-b-4  duration-300 ease-in-out max-[768px]:mt-[30px] max-[768px]:h-[60px] max-[720px]:h-[auto] max-[640px]:ml-[200px] max-[560px]:ml-[165px] max-[500px]:ml-[185px] max-[445px]:ml-[200px]"
               >
                 <h2
-                  className={`max-[870px]:text-md text-left text-xl duration-300 ease-in-out max-[768px]:text-[15px] max-[640px]:text-[12px] max-[500px]:text-[10px] ${
+                  className={`label__title__text label__title__text2  max-[870px]:text-md text-left text-xl duration-300 ease-in-out max-[768px]:text-[15px] max-[640px]:text-[12px] max-[500px]:text-[10px] ${
                     active === '2' ? 'active2' : ''
                   }`}
                 >
@@ -111,7 +111,7 @@ const AnimationCity = ({ onButtonClick, active, whoActive }: Props) => {
               }}
             >
               <h2
-                className={`max-[870px]:text-md text-left text-xl duration-300 ease-in-out max-[768px]:text-[15px] max-[640px]:text-[12px] max-[500px]:text-[10px] ${
+                className={`label__title__text label__title__text3  max-[870px]:text-md text-left text-xl duration-300 ease-in-out max-[768px]:text-[15px] max-[640px]:text-[12px] max-[500px]:text-[10px] ${
                   active === '3' ? 'active3' : ''
                 }`}
               >
@@ -131,7 +131,7 @@ const AnimationCity = ({ onButtonClick, active, whoActive }: Props) => {
               }}
             >
               <h2
-                className={`max-[870px]:text-md text-left text-xl duration-300 ease-in-out max-[768px]:text-[15px] max-[640px]:text-[12px] max-[500px]:text-[10px] ${
+                className={` label__title__text  label__title__text4 max-[870px]:text-md text-left text-xl duration-300 ease-in-out max-[768px]:text-[15px] max-[640px]:text-[12px] max-[500px]:text-[10px] ${
                   active === '4' ? 'active4' : ''
                 }`}
               >
@@ -151,7 +151,7 @@ const AnimationCity = ({ onButtonClick, active, whoActive }: Props) => {
               }}
             >
               <h2
-                className={`max-[870px]:text-md text-left text-xl duration-300 ease-in-out max-[768px]:text-[15px] max-[640px]:text-[12px] max-[500px]:text-[10px] ${
+                className={`label__title__text label__title__text5  max-[870px]:text-md text-left text-xl duration-300 ease-in-out max-[768px]:text-[15px] max-[640px]:text-[12px] max-[500px]:text-[10px] ${
                   active === '5' ? 'active5' : ''
                 }`}
               >
@@ -171,7 +171,7 @@ const AnimationCity = ({ onButtonClick, active, whoActive }: Props) => {
               }}
             >
               <h2
-                className={`max-[870px]:text-md text-left text-xl duration-300 ease-in-out max-[768px]:text-[15px] max-[640px]:text-[12px] max-[500px]:text-[10px] ${
+                className={`label__title__text label__title__text6 max-[870px]:text-md text-left text-xl duration-300 ease-in-out max-[768px]:text-[15px] max-[640px]:text-[12px] max-[500px]:text-[10px] ${
                   active === '6' ? 'active6' : ''
                 }`}
               >
