@@ -35,8 +35,11 @@ export const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
         })}
       </div>
       <div className='flex'>
-      <div className="m-auto mb-10 flex w-2/3 flex-row flex-wrap justify-center col-span-4">
-        {mockPosts.map((BlogPost, i) => {
+      <div className="mb-10 flex w-2/3 flex-row flex-wrap justify-center col-span-4">
+        {
+        mockPosts.length === 0 ?
+        <div className='text-white text-[16px]'>No posts to display</div> :
+        mockPosts.map((BlogPost, i) => {
           const date = new Date(BlogPost.date_created)
           let tags = BlogPost.tags
           const uniqueTags = tags.filter((e: any, i: any) => {
@@ -141,7 +144,8 @@ export const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
       </div>
       
       <div className=' w-1/3 flex justify-center'>
-        <div className="ml-4 mt-[40px] flex h-[900px] w-2/3 flex-col bg-[#212529]">
+        {/*UX dynamic sidebar width for when there are less than 2 posts*/}
+        <div className={`ml-4 mt-[40px] flex h-[900px] w-[${mockPosts.length<2 ? '100%' : '70%'}]  flex-col bg-[#212529]`}>
           <div className="flex flex-col items-center py-16">
 {/* Other content */}
           </div>
