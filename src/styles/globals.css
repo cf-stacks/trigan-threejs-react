@@ -61,37 +61,32 @@ h6 {
 .active6 {
   transform: scale(1.2);
 }
-.label__title__text {
+.label__title {
+  animation: moving 1.5s 0.1s infinite alternate-reverse ease-in-out;
+}
+.label__title__text1 {
   animation: scaling 1.5s 0.1s infinite alternate-reverse ease-in-out;
 }
-.label__title__text1 {
-  animation-delay: 0.5s;
-}
-.label__title__text1 {
-  animation-delay: 1s;
-}
-.label__title__text1 {
-  animation-delay: 1.5s;
-}
-.label__title__text1 {
-  animation-delay: 2s;
-}
-.label__title__text1 {
-  animation-delay: 2.5s;
-}
-.label__title__text1 {
-  animation-delay: 3s;
-}
-
-@keyframes scaling {
+@keyframes moving {
   0% {
-    text-shadow: 0.1px -0.1px 20px #000000, -0.1px 0.1px 20px #000000;
-    transform: scale(1) translateX(-1px);
+    /* text-shadow: 0.1px -0.1px 20px #000000, -0.1px 0.1px 20px #000000; */
+    transform: translateY(-3px);
   }
 
   100% {
-    text-shadow: 0.1px -0.1px 20px #8a8a8a, -0.1px 0.1px 20px #8a8a8a;
-    transform: scale(1.015) translateX(2px);
+    /* text-shadow: 0.1px -0.1px 20px #8a8a8a, -0.1px 0.1px 20px #8a8a8a; */
+    transform: translateY(6px);
+  }
+}
+@keyframes scaling {
+  0% {
+    /* text-shadow: 0.1px -0.1px 20px #000000, -0.1px 0.1px 20px #000000; */
+    transform: scale(1);
+  }
+
+  100% {
+    /* text-shadow: 0.1px -0.1px 20px #8a8a8a, -0.1px 0.1px 20px #8a8a8a; */
+    transform: scale(1.07);
   }
 }
 :root {
