@@ -87,7 +87,7 @@ const LabelData = (props: Props) => {
         direction={'vertical'}
         speed={1000}
         mousewheel={true}
-        loop={true}
+       // loop={true}
         autoplay={{
           delay: 3000,
           disableOnInteraction: true,
