@@ -14,11 +14,14 @@ import { FadeInWhenVisible } from '../../../../components/shared/FadeInWhenVisib
 import dynamic from 'next/dynamic'
 
 interface PostProps {
-  children?: ReactNode
-  post: any
+  children?: ReactNode,
+  post: ApiPostData
 }
 
-
+//helper interface for props
+interface ApiPostData {
+  data: BlogPost
+}
 
 const Post: NextPage<PostProps> = ({ post }) => {
   const router = useRouter()
@@ -32,7 +35,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
       return resPosts.posts
     })
 
-  const { data, error } = useSWR(
+  const { data, error }: { data: BlogPost[], error: any } = useSWR(
     `https://test1.trigan.org/api/v1/posts?page-size=${pageSize}&page=${page}&apiKey=g436739d6734gd6734`,
     fetcher
   )
@@ -40,20 +43,23 @@ const Post: NextPage<PostProps> = ({ post }) => {
   const { blog_name } = router.query
 
   //this function now converts base64 to utf-8 on client and on server side to prevent hydration errors
+  //also, buffer returns valid characters
   function b64_to_utf8(char: string) {
     return Buffer.from(char, 'base64').toString('utf-8');
   }
 
+  //removes duplicate tags and limits categories array length to 1
+  removeDuplicates(post);
+
   return (
-    
+
     <ThemeProvider attribute="class" enableSystem={true}>
-      
       <GlobalLayout>
         <div
           id={post?.data.id_post}
           className="my-5 px-16 dark:bg-light-grey md:mx-auto "
         >
-          
+
           <div className="mb-12 mt-[180px] flex w-[100%] flex-wrap justify-center">
             <span
               className={`flex h-[46px] flex-row flex-wrap items-center rounded-full border border-[#fff] bg-[#DC2626] px-7 py-1.5 text-[16px] font-medium capitalize text-white`}
@@ -82,7 +88,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                 <p>5 Min read</p>
               </div>
               <h6 className="full-width-container text-lg font-medium leading-loose">
-              <ReactMarkdown>{b64_to_utf8(post.data.content)}</ReactMarkdown>
+                <ReactMarkdown>{b64_to_utf8(post.data.content)}</ReactMarkdown>
               </h6>
             </div>
             <div className="ml-4 mt-[180px] flex max-h-[900px] w-1/4 flex-col bg-[#212529]">
@@ -90,23 +96,51 @@ const Post: NextPage<PostProps> = ({ post }) => {
                 <h6 className=" mb-6 border-b-2 border-[#848484] pb-3 text-2xl">
                   Categories:
                 </h6>
+                {post.data.categories.map((cat: string, i: any) => {
+                  return (
+                    <div
+                      key={i}
+                      className="w-max py-4"
+                      onClick={() => {
+                        const matchingPosts=returnForCat(data,cat);
+                        console.log(matchingPosts);
+                      }}
+                    >
+                      <span
+                        className={`flex flex flex-row flex-wrap items-center px-2 py-1.5 text-xl font-${tags === i ? 'semibold' : 'light'
+                          } leading-none text-white hover:cursor-pointer hover:opacity-50`}
+                      >
+                        {cat}
+                      </span>
+                    </div>
+                  )
+                })}
+
+              </div>
+              <div className="flex flex-col items-center py-16">
+                <h6 className=" mb-6 border-b-2 border-[#848484] pb-3 text-2xl">
+                  Tags:
+                </h6>
                 {post.data.tags.map((tag: string, i: any) => {
                   return (
                     <div
                       key={i}
                       className="w-max py-4"
-                      onClick={() => setTags(i)}
+                      onClick={() => {
+                        const matchingPosts=returnForTag(data,tag);
+                        console.log(matchingPosts);
+                      }}
                     >
                       <span
-                        className={`flex flex flex-row flex-wrap items-center px-2 py-1.5 text-xl font-${
-                          tags === i ? 'semibold' : 'light'
-                        } leading-none text-white hover:cursor-pointer hover:opacity-50`}
+                        className={`flex flex flex-row flex-wrap items-center px-2 py-1.5 text-xl font-${tags === i ? 'semibold' : 'light'
+                          } leading-none text-white hover:cursor-pointer hover:opacity-50`}
                       >
                         {tag}
                       </span>
                     </div>
                   )
                 })}
+
               </div>
               <div className="h-[1px] w-full bg-[#5B5B5B]" />
               <div className="flex flex-col items-center py-16">
@@ -185,7 +219,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                   <div
                     className={`c mr-4 mt-20 flex grid h-[696px] w-[400px] justify-around overflow-hidden rounded-[15px] bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black max-[600px]:justify-center md:flex  md:px-1`}
                   >
-                    
+
                     <FadeInWhenVisible duration={(i + 1) * 0.2}>
                       <div
                         id={BlogPost.id_post.toString()}
@@ -285,6 +319,42 @@ const Post: NextPage<PostProps> = ({ post }) => {
     </ThemeProvider>
   )
 }
+
+function removeDuplicates(post: ApiPostData) {
+
+  while (post.data.categories.length > 1) {
+    post.data.categories.pop();
+  }
+
+  post.data.tags=post.data.tags.filter((tag, index) => post.data.tags.indexOf(tag) === index);
+
+};
+
+function returnForTag(data:BlogPost[], tag:string){
+
+  //filter through received posts to find those with tag
+const matchingPosts=data.filter(post => {
+
+    //if any tags on a post match the received tag, include in array
+    return post.tags.includes(tag);
+    
+});
+
+return matchingPosts;
+}
+
+function returnForCat(data:BlogPost[], cat:string){
+
+  //filter through received posts to find those with category
+  const matchingPosts=data.filter(post => {
+  
+      //if any tags on a post match the received tag, include in array
+      return post.categories.includes(cat);
+      
+  });
+  
+  return matchingPosts;
+  }
 
 export async function getServerSideProps(context: any) {
   const res = await fetch(

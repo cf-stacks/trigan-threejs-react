@@ -25,9 +25,8 @@ export const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
               onClick={() => setSelectedTag(i)}
             >
               <span
-                className={`border-1 flex flex-row flex-wrap items-center rounded-full border border-[#653394] bg-[${
-                  selectedTag === i ? '#653394' : 'none'
-                }] h-[46px] px-6 py-1.5 text-[16px] font-medium capitalize text-white`}
+                className={`border-1 flex flex-row flex-wrap items-center rounded-full border border-[#653394] bg-[${selectedTag === i ? '#653394' : 'none'
+                  }] h-[46px] px-6 py-1.5 text-[16px] font-medium capitalize text-white`}
               >
                 {tag}
               </span>
@@ -35,7 +34,8 @@ export const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
           )
         })}
       </div>
-      <div className="m-auto mb-10 flex w-[100%] flex-row flex-wrap justify-center">
+      <div className='flex'>
+      <div className="m-auto mb-10 flex w-2/3 flex-row flex-wrap justify-center col-span-4">
         {mockPosts.map((BlogPost, i) => {
           const date = new Date(BlogPost.date_created)
           let tags = BlogPost.tags
@@ -138,6 +138,33 @@ export const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
             </div>
           )
         })}
+      </div>
+      
+      <div className=' w-1/3 flex justify-center'>
+        <div className="ml-4 mt-[40px] flex h-[900px] w-2/3 flex-col bg-[#212529]">
+          <div className="flex flex-col items-center py-16">
+{/* Other content */}
+          </div>
+          <div className="h-[1px] w-full bg-[#5B5B5B]" />
+          <div className="flex flex-col items-center py-16">
+            <Link href="/admin/login" passHref as={``}>
+              <h2 className=" py-4 text-xl font-light text-white underline hover:cursor-pointer hover:text-grey">
+                Login/Register
+              </h2>
+            </Link>
+            <Link href="/post/[id]" passHref as={``}>
+              <h2 className=" py-4 text-xl font-light text-white underline hover:cursor-pointer hover:text-grey">
+                Edit post
+              </h2>
+            </Link>
+            <Link href="/blog" passHref as={``}>
+              <h2 className=" py-4 text-xl font-light text-white underline hover:cursor-pointer hover:text-grey">
+                Create Post
+              </h2>
+            </Link>
+          </div>
+        </div>
+      </div>
       </div>
     </>
   )
