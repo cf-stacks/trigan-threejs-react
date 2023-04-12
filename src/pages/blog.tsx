@@ -42,9 +42,40 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
     await router.push('/PostSearch')
   }
 
+  //is of type string if parameters are properly included
+  const { tag, cat } = router.query;
+
+  //filter posts based on tag or category in URL
+    if (typeof tag === 'string' && typeof cat === 'string') {
+//if both tag and category are supplied, only keep matching posts
+      handleQuery(posts, tag, cat);
+      console.log(tag);
+      console.log(posts.posts);
+
+    } else if (typeof tag === 'string') {
+
+      //if tag parameter is supplied, only keep matching posts
+      handleTagQuery(posts, tag);
+      console.log(tag);
+      console.log(posts.posts);
+
+    } else if (typeof cat === 'string') {
+
+      //if category parameter is supplied, only keep matching posts
+      handleCatQuery(posts, cat);
+      console.log(tag);
+      console.log(posts.posts);
+
+    } else {
+
+      console.log('incorrect query');
+
+    }
+
+
   return (
     <div className="relative">
-       <VideoHeader isScroll={false} /> 
+      <VideoHeader isScroll={false} />
       <div className="dark:bg-white ">
         <div
           id="blog"
@@ -65,7 +96,7 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
               <div className="h-[1px] w-2/4 bg-[#5B5B5B]" />
             </div>
             <PostsByDate posts={posts} />
-            
+
             <div className="mt-10 mb-20 flex w-[100%] flex-wrap justify-center">
               <Link href="/blog" passHref as={``}>
                 <div className="mr-6 w-max hover:cursor-pointer hover:opacity-50">
@@ -102,4 +133,39 @@ export async function getServerSideProps() {
   }
 }
 
+function handleQuery(posts: BlogPost, tag: string, cat: string) {
+
+  //filter through received posts to find those with tag
+  posts.posts = posts.posts.filter((post: BlogPost) => {
+
+    //if any tags on a post match the received tag, include in array
+    if(post.tags.includes(tag)&&post.categories.includes(cat)){
+      return true;
+    }
+  })
+
+}
+
+function handleTagQuery(posts: BlogPost, tag: string) {
+
+  //filter through received posts to find those with tag
+  posts.posts = posts.posts.filter((post: BlogPost) => {
+
+    //if any tags on a post match the received tag, include in array
+    return post.tags.includes(tag);
+  })
+}
+
+function handleCatQuery(posts: BlogPost, cat: string) {
+
+  //filter through received posts to find those with tag
+  posts.posts = posts.posts.filter((post: BlogPost) => {
+
+    //if any tags on a post match the received tag, include in array
+    return post.categories.includes(cat);
+  })
+}
+
 export default Blog
+
+

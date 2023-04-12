@@ -104,6 +104,10 @@ const Post: NextPage<PostProps> = ({ post }) => {
                       onClick={() => {
                         const matchingPosts=returnForCat(data,cat);
                         console.log(matchingPosts);
+                        router.push({
+                          pathname: '/blog',
+                          query: { cat: cat},
+                        })
                       }}
                     >
                       <span
@@ -129,6 +133,10 @@ const Post: NextPage<PostProps> = ({ post }) => {
                       onClick={() => {
                         const matchingPosts=returnForTag(data,tag);
                         console.log(matchingPosts);
+                        router.push({
+                          pathname: '/blog',
+                          query: { tag: tag},
+                        })
                       }}
                     >
                       <span
