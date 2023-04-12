@@ -5,14 +5,15 @@ import { Title } from '../../../components/shared/Title'
 import GlobalLayout from '../../../components/layouts/GlobalLayout'
 import { SEO } from '../../../components/shared/SEO'
 import PostSearch from '../../../components/Posts/PostSearch'
-import { PostsByDate } from '../../../components/Posts/PostsByDate'
 import { BlogPost } from '../../../types/BlogPost'
 import { useRouter } from 'next/router'
+import dynamic from 'next/dynamic'
 
 interface SearchResultProps {
   children?: ReactNode
   posts: BlogPost
 }
+const PostsByDateNoSSR:any= dynamic(() => import('../../../components/Posts/PostsByDate'),{ssr:false});
 
 export async function getServerSideProps(context : any) {
   console.log("context value",context.params.searchresult);
@@ -34,12 +35,12 @@ const SearchResult: NextPage<SearchResultProps> = ({ posts }) => {
 
   return (
     <ThemeProvider attribute="class" enableSystem={true}>
-      <div id="postsearch">
+      <div id="postsearch" className='relative mt-[100px] flex w-full flex-col items-center gap-20'>
         <SEO title="Posts Search Results" description="Trigan Blog" />
         <GlobalLayout>
           <Title padding="py-3" title="Search Results" />
           <PostSearch />
-          <PostsByDate posts={posts} />
+          <PostsByDateNoSSR posts={posts} />
         </GlobalLayout>
       </div>
     </ThemeProvider>
