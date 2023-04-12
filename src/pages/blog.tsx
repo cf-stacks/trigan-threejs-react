@@ -10,7 +10,7 @@ import { Title } from '../components/shared/Title'
 // import { newApi } from '../util/newApi'
 import { ThemeProvider } from 'next-themes'
 import { BlogPost } from '../types/BlogPost'
-// import { PostsByDate } from '../components/Posts/PostsByDate'
+//import PostsByDate from '../components/Posts/PostsByDate'
 // import PostSearch from '../components/Posts/PostSearch'
 // import { TextInputField } from '../components/shared/Forms/TextInputField'
 import { useRouter } from 'next/router'
@@ -21,7 +21,6 @@ import { useRouter } from 'next/router'
 // andrey edits
 import BlogHeader from '../components/BlogHeader'
 import PostSearch from '../components/Posts/PostSearch'
-import { PostsByDate } from '../components/Posts/PostsByDate'
 import dynamic from 'next/dynamic'
 import { useFrame } from '@react-three/fiber'
 import { Head } from 'next/document'
@@ -35,40 +34,39 @@ interface BlogProps {
   posts: BlogPost
 }
 
-const Blog: NextPage<BlogProps> = ({ posts }) => {
+
+const PostsByDateNoSSR:any= dynamic(() => import('../components/Posts/PostsByDate'),{ssr:false});
+
+const Blog: NextPage<BlogProps> = ({ posts}) => {
   const router = useRouter()
 
   const handleSearch = async (title: string) => {
     await router.push('/PostSearch')
   }
 
+//is of type string if parameters are properly included
+const { tag, cat } = router.query;
 
-  //is of type string if parameters are properly included
-  const { tag, cat } = router.query;
-
-  //filter posts based on tag or category in URL
-    if (typeof tag === 'string' && typeof cat === 'string') {
+//filter posts based on tag or category in URL
+  if (typeof tag === 'string' && typeof cat === 'string') {
 //if both tag and category are supplied, only keep matching posts
-      handleQuery(posts, tag, cat);
+    posts.posts=handleQuery(posts, tag, cat);
 
-    } else if (typeof tag === 'string') {
+  } else if (typeof tag === 'string') {
 
-      //if tag parameter is supplied, only keep matching posts
-      handleTagQuery(posts, tag);
+    //if tag parameter is supplied, only keep matching posts
+    posts.posts=handleTagQuery(posts, tag);
 
-    } else if (typeof cat === 'string') {
+  } else if (typeof cat === 'string') {
 
-      //if category parameter is supplied, only keep matching posts
-      handleCatQuery(posts, cat);
+    //if category parameter is supplied, only keep matching posts
+    posts.posts=handleCatQuery(posts, cat);
 
-    } else {
+  } else {
 
-      console.log('incorrect query');
+    console.log('incorrect query');
 
-    }
-
-    
-
+  }
 
   return (
     <div className="relative">
@@ -92,7 +90,7 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
             <div className='flex w-full justify-center items-center mt-20'>
               <div className="h-[1px] w-2/4 bg-[#5B5B5B]" />
             </div>
-            <PostsByDate posts={posts} />
+            <PostsByDateNoSSR posts={posts}/>
 
             <div className="mt-10 mb-20 flex w-[100%] flex-wrap justify-center">
               <Link href="/blog" passHref as={``}>
@@ -114,26 +112,10 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
   )
 }
 
-export async function getServerSideProps() {
-  const res = await fetch(
-    'https://test1.trigan.org/api/v1/posts?page-size=5&page=1&apiKey=g436739d6734gd6734'
-    /* `${process.env.URL}posts?&apiKey=${process.env.GET_API_KEY}`*/
-  )
-
-  let posts = await res.json()
-  console.log(posts, 'postss resjson !!')
-
-  return {
-    props: {
-      posts,
-    },
-  }
-}
-
 function handleQuery(posts: BlogPost, tag: string, cat: string) {
 
   //filter through received posts to find those with tag
-  posts.posts = posts.posts.filter((post: BlogPost) => {
+  return posts.posts.filter((post: BlogPost) => {
 
     //if any tags on a post match the received tag, include in array
     if(post.tags.includes(tag)&&post.categories.includes(cat)){
@@ -146,7 +128,7 @@ function handleQuery(posts: BlogPost, tag: string, cat: string) {
 function handleTagQuery(posts: BlogPost, tag: string) {
 
   //filter through received posts to find those with tag
-  posts.posts = posts.posts.filter((post: BlogPost) => {
+  return posts.posts.filter((post: BlogPost) => {
 
     //if any tags on a post match the received tag, include in array
     return post.tags.includes(tag);
@@ -156,11 +138,26 @@ function handleTagQuery(posts: BlogPost, tag: string) {
 function handleCatQuery(posts: BlogPost, cat: string) {
 
   //filter through received posts to find those with tag
-  posts.posts = posts.posts.filter((post: BlogPost) => {
+  return posts.posts.filter((post: BlogPost) => {
 
     //if any tags on a post match the received tag, include in array
     return post.categories.includes(cat);
   })
+}
+
+export async function getServerSideProps() {
+  const res = await fetch(
+    'https://test1.trigan.org/api/v1/posts?page-size=5&page=1&apiKey=g436739d6734gd6734'
+    /* `${process.env.URL}posts?&apiKey=${process.env.GET_API_KEY}`*/
+  )
+
+  let posts = await res.json();
+
+  return {
+    props: {
+      posts:posts
+    },
+  }
 }
 
 export default Blog
