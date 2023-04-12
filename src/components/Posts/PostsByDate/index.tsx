@@ -3,6 +3,7 @@ import { ReactNode, useState } from 'react'
 import { BlogPost } from '../../../types/BlogPost'
 import { FadeInWhenVisible } from '../../shared/FadeInWhenVisible'
 import Link from 'next/link'
+import router from 'next/router'
 // import Image from 'next/image'
 
 interface PostsByDateProps {
@@ -14,6 +15,8 @@ export const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
   const [selectedTag, setSelectedTag] = useState(0)
   const mockPosts: any[] = posts.posts ?? []
   const tagsArray: any[] = ['Agriculture', 'Web3', 'Crypto', 'Metavarse']
+  const{tagsArrayPosts, catsArrayPosts}:{tagsArrayPosts:any[],catsArrayPosts:any[]}=removeDuplicates(posts);
+
   return (
     <>
       <div className="mb-8 mt-16 flex w-[100%] flex-wrap justify-center">
@@ -145,10 +148,60 @@ export const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
       
       <div className=' w-1/3 flex justify-center'>
         {/*UX dynamic sidebar width for when there are less than 2 posts*/}
-        <div className={`ml-4 mt-[40px] flex h-[900px] w-[${mockPosts.length<2 ? '100%' : '70%'}]  flex-col bg-[#212529]`}>
+        <div className={`ml-4 mt-[40px] flex h-[1200px] w-[${mockPosts.length<2 ? '100%' : '70%'}]  flex-col bg-[#212529]`}>
           <div className="flex flex-col items-center py-16">
-{/* Other content */}
+                <h6 className=" mb-6 border-b-2 border-[#848484] pb-3 text-2xl">
+                  Categories:
+                </h6>
+                {catsArrayPosts.map((cat: string, i: any) => {
+                  return (
+                    <div
+                      key={i}
+                      className="w-max py-4"
+                      onClick={() => {
+                        router.push({
+                          pathname: '/blog',
+                          query: { cat: cat},
+                        })
+                      }}
+                    >
+                      <span
+                        className={`flex flex flex-row flex-wrap items-center px-2 py-1.5 text-xl font-light leading-none text-white hover:cursor-pointer hover:opacity-50`}
+                      >
+                        {cat}
+                      </span>
+                    </div>
+                  )
+                })}
+
           </div>
+
+          <div className="flex flex-col items-center py-16">
+                <h6 className=" mb-6 border-b-2 border-[#848484] pb-3 text-2xl">
+                  Tags:
+                </h6>
+                {tagsArrayPosts.map((tag: string, i: any) => {
+                  return (
+                    <div
+                      key={i}
+                      className="w-max py-4"
+                      onClick={() => {
+                        router.push({
+                          pathname: '/blog',
+                          query: { tag: tag},
+                        })
+                      }}
+                    >
+                      <span
+                        className={`flex flex flex-row flex-wrap items-center px-2 py-1.5 text-xl font-light leading-none text-white hover:cursor-pointer hover:opacity-50`}
+                      >
+                        {tag}
+                      </span>
+                    </div>
+                  )
+                })}
+
+              </div>
           <div className="h-[1px] w-full bg-[#5B5B5B]" />
           <div className="flex flex-col items-center py-16">
             <Link href="/admin/login" passHref as={``}>
@@ -173,3 +226,21 @@ export const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
     </>
   )
 }
+
+//makes sure tags and categories aren't duplicated for showing in sidebar
+function removeDuplicates(posts: BlogPost) {
+
+  let tagsArrayPosts:any[]=[];
+
+posts.posts.forEach((post:BlogPost) => {
+  for (let i = 0; i < post.tags.length; i++) {
+    tagsArrayPosts.push(post.tags[i]);
+  }
+});
+
+  const catsArrayPosts=['Blog','Post'];
+
+  tagsArrayPosts=tagsArrayPosts.filter((tag:any, index:number) => tagsArrayPosts.indexOf(tag) === index);
+
+  return {tagsArrayPosts, catsArrayPosts};
+};

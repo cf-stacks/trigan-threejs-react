@@ -102,8 +102,6 @@ const Post: NextPage<PostProps> = ({ post }) => {
                       key={i}
                       className="w-max py-4"
                       onClick={() => {
-                        const matchingPosts=returnForCat(data,cat);
-                        console.log(matchingPosts);
                         router.push({
                           pathname: '/blog',
                           query: { cat: cat},
@@ -131,8 +129,6 @@ const Post: NextPage<PostProps> = ({ post }) => {
                       key={i}
                       className="w-max py-4"
                       onClick={() => {
-                        const matchingPosts=returnForTag(data,tag);
-                        console.log(matchingPosts);
                         router.push({
                           pathname: '/blog',
                           query: { tag: tag},
@@ -338,31 +334,6 @@ function removeDuplicates(post: ApiPostData) {
 
 };
 
-function returnForTag(data:BlogPost[], tag:string){
-
-  //filter through received posts to find those with tag
-const matchingPosts=data.filter(post => {
-
-    //if any tags on a post match the received tag, include in array
-    return post.tags.includes(tag);
-    
-});
-
-return matchingPosts;
-}
-
-function returnForCat(data:BlogPost[], cat:string){
-
-  //filter through received posts to find those with category
-  const matchingPosts=data.filter(post => {
-  
-      //if any tags on a post match the received tag, include in array
-      return post.categories.includes(cat);
-      
-  });
-  
-  return matchingPosts;
-  }
 
 export async function getServerSideProps(context: any) {
   const res = await fetch(
