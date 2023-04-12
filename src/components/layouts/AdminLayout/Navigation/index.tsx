@@ -41,7 +41,7 @@ const Navigation = ({ isOpen, setIsOpen }: NavigationProps) => {
         transition: 'width 0.25s',
       }}
       width={{ base: isOpen ? 218 : 80 }}
-      hidden={true}
+      hidden={false}
       p="md"
     >
       <div
