@@ -26,7 +26,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
   const fetcher = (url: string) =>
     fetch(url).then(async (r) => {
       let resPosts = await r.json()
-      return resPosts.posts;
+      return resPosts.posts
     })
 
   const { data, error } = useSWR(
@@ -53,7 +53,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
           id={post.data.id_post}
           className="my-5 px-16  dark:bg-light-grey md:mx-auto "
         >
-          <div className="mt-[180px] mb-12 flex w-[100%] flex-wrap justify-center">
+          <div className="mb-12 mt-[180px] flex w-[100%] flex-wrap justify-center">
             <span
               className={`flex h-[46px] flex-row flex-wrap items-center rounded-full border border-[#fff] bg-[#DC2626] px-7 py-1.5 text-[16px] font-medium capitalize text-white`}
             >
@@ -69,7 +69,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                   {post.data.title}
                 </span>
               </h1>
-              <div className="ml-20 flex pt-5 pb-10 text-lg text-white">
+              <div className="ml-20 flex pb-10 pt-5 text-lg text-white">
                 <p className="mr-10">
                   By <span className="font-medium">{post.data.author}</span>
                 </p>
@@ -85,7 +85,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                 <ReactMarkdown>{b64_to_utf8(post.data.content)}</ReactMarkdown>
               </h6>
             </div>
-            <div className="mt-[180px] ml-4 flex max-h-[900px] w-1/4 flex-col bg-[#212529]">
+            <div className="ml-4 mt-[180px] flex max-h-[900px] w-1/4 flex-col bg-[#212529]">
               <div className="flex flex-col items-center py-16">
                 <h6 className=" mb-6 border-b-2 border-[#848484] pb-3 text-2xl">
                   Categories:
@@ -153,7 +153,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                 </span>
               </div>
             </Link>
-            <div className="flex pt-5 pb-10 text-lg text-white">
+            <div className="flex pb-10 pt-5 text-lg text-white">
               <p className="mr-10">{post.data.votes} &nbsp;likes</p>
               <p className="mr-10">/</p>
               <p>{post.data.views} &nbsp;views</p>
@@ -183,7 +183,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                 })
                 return (
                   <div
-                    className={`c mt-20 mr-4 flex grid h-[696px] w-[400px] justify-around overflow-hidden rounded-[15px] bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black max-[600px]:justify-center md:flex  md:px-1`}
+                    className={`c mr-4 mt-20 flex grid h-[696px] w-[400px] justify-around overflow-hidden rounded-[15px] bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black max-[600px]:justify-center md:flex  md:px-1`}
                   >
                     <FadeInWhenVisible duration={(i + 1) * 0.2}>
                       <div
@@ -242,7 +242,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                                     return (
                                       <div
                                         key={index}
-                                        className="mr-2 mb-2 w-max "
+                                        className="mb-2 mr-2 w-max "
                                       >
                                         <span className="flex flex-row flex-wrap items-center rounded-full bg-[#4D5154] px-2 py-1.5 text-xs font-medium uppercase leading-none text-white">
                                           {`#${tag}`}
