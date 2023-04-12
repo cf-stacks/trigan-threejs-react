@@ -42,6 +42,7 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
     await router.push('/PostSearch')
   }
 
+
   //is of type string if parameters are properly included
   const { tag, cat } = router.query;
 
@@ -49,28 +50,24 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
     if (typeof tag === 'string' && typeof cat === 'string') {
 //if both tag and category are supplied, only keep matching posts
       handleQuery(posts, tag, cat);
-      console.log(tag);
-      console.log(posts.posts);
 
     } else if (typeof tag === 'string') {
 
       //if tag parameter is supplied, only keep matching posts
       handleTagQuery(posts, tag);
-      console.log(tag);
-      console.log(posts.posts);
 
     } else if (typeof cat === 'string') {
 
       //if category parameter is supplied, only keep matching posts
       handleCatQuery(posts, cat);
-      console.log(tag);
-      console.log(posts.posts);
 
     } else {
 
       console.log('incorrect query');
 
     }
+
+    
 
 
   return (
