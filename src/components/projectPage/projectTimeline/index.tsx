@@ -48,12 +48,6 @@ const ProjectTimeline = () => {
         
     ]
 
-    // let start = 'justify-start' 'items-start'
-    // let end = 'justify-end' 'items-end'
-
-    // map through the timelineItems array and return the following JSX and position the divs left and right accordingly 
-
-
     
     return (
         <section className="py-10">
@@ -65,9 +59,10 @@ const ProjectTimeline = () => {
                                 className={`${index  % 2 === 0 ?
                                     'justify-start items-start' : 'justify-end items-end'
                                             } first-letter: m-auto flex flex-col `}>
+                                   <div className='py-2 my-2'>
                                     <div className={`${index  % 2 === 0 ?
                                                 'justify-start text-start items-start' : 'justify-end text-end items-end'
-                                                        } flex flex-col justify-start items-start w-[550px]`}>
+                                                        } flex flex-col justify-start items-start w-[600px]`}>
                                         <h3 className= "text-[#F2F6FB] py-2 font-m_plus_rounded_1c tracking-tighter text-5xl  text-center">
                                             {item.title}
                                             <span className='bg-gradient-to-r text-[#A855F7] to-violet-500 bg-clip-text text-5xl text-transparent pl-2'>
@@ -85,34 +80,15 @@ const ProjectTimeline = () => {
                                         width={600} height={450} alt="" />
                                     </div>
                                 </div>
+                                </div>
                             )
                         })
 
                     }
-
-            {/* <div className="m-auto justfify-start flex flex-col items-start ">
-
-                <div className="flex flex-col justify-start items-start w-[550px]">
-<h3 className= "text-[#F2F6FB] py-2 font-m_plus_rounded_1c tracking-tighter text-5xl  text-center">
-    Project
-    <span className='bg-gradient-to-r text-[#A855F7] to-violet-500 bg-clip-text text-5xl text-transparent pl-2'>
-                  Future </span></h3>
-                      
-                      <p 
-                      className="text-sm pb-2 font-medium font-m_plus_rounded_1c  w-[70%] text-[#BAC0C6] dark:text-black ">
-                        Your contribution can make a difference in the lives of millions and drive the transformation of urban spaces
-                        </p>
-
-                        </div>
-                <div className="flex items-start justify-start w-full">
-                    <Image src='/images/project1.svg' width={600} height={450} alt="" />
-
-                </div>
-                </div> */}
+            
                 </div>
 
         </section>
     );
 }
-
 export default ProjectTimeline;
