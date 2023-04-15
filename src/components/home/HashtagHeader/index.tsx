@@ -8,7 +8,7 @@ export default function HashtagHeader({ text, position,id }: types.Props) {
   return (
     <div
       id={id}
-      className={`mx-auto flex h-[38px] w-[158px] items-center justify-center rounded-[30px] bg-neutralBlack-50 p-2 text-neutralGray-10 ${align}`}
+      className={`mx-auto flex h-[41px] w-fit items-center justify-center rounded-[30px] bg-neutralBlack-50 py-2 px-4 text-neutralGray-10 ${align}`}
     >
       <p>{text}</p>
     </div>
