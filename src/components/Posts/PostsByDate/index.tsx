@@ -1,9 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import { ReactNode, useState } from 'react'
+import { ReactNode, useLayoutEffect, useState } from 'react'
 import { BlogPost } from '../../../types/BlogPost'
 import { FadeInWhenVisible } from '../../shared/FadeInWhenVisible'
 import Link from 'next/link'
-import router from 'next/router'
+import router, { useRouter } from 'next/router'
+import useSWR from 'swr';
 // import Image from 'next/image'
 
 interface PostsByDateProps {
@@ -11,11 +12,41 @@ interface PostsByDateProps {
   posts: BlogPost
 }
 
-export const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
+
+
+
+const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
+  const router = useRouter();
   const [selectedTag, setSelectedTag] = useState(0)
   const mockPosts: any[] = posts.posts ?? []
-  const tagsArray: any[] = ['Agriculture', 'Web3', 'Crypto', 'Metavarse']
-  const{tagsArrayPosts, catsArrayPosts}:{tagsArrayPosts:any[],catsArrayPosts:any[]}=removeDuplicates(posts);
+  const tagsArray: any[] = ['Agriculture', 'Web3', 'Crypto', 'Metavarse'];
+  const [allPosts, setPosts] = useState(null);
+
+  //on load, all posts are fetched directly from api and set to state so sidebar can show all tags
+  useLayoutEffect(() => {
+    fetch('https://test1.trigan.org/api/v1/posts?apiKey=g436739d6734gd6734')
+      .then(response => response.json())
+      .then(data => setPosts(data))
+      .catch(error => console.error(error));
+  }, []);
+
+
+  let catsArrayPosts: any[] = [];
+let tagsArrayPosts: any[] = [];
+
+  if(allPosts!==null){
+
+    //if data has been fetched, tags from all posts are shown
+  const{t, c}:{t:string[],c:string[]}=removeDuplicates(allPosts);
+  catsArrayPosts=[...c];
+  tagsArrayPosts=[...t];
+  } else {
+
+    //if data hasn't been fetched yet, show tags for current post
+    const{t, c}:{t:string[],c:string[]}=removeDuplicates(posts);
+    catsArrayPosts=[...c];
+    tagsArrayPosts=[...t];
+  }
 
   return (
     <>
@@ -227,20 +258,27 @@ export const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
   )
 }
 
+
 //makes sure tags and categories aren't duplicated for showing in sidebar
-function removeDuplicates(posts: BlogPost) {
+function removeDuplicates(data: BlogPost) {
 
   let tagsArrayPosts:any[]=[];
+  let catsArrayPosts:any[]=[];
 
-posts.posts.forEach((post:BlogPost) => {
+data.posts.forEach((post:BlogPost) => {
   for (let i = 0; i < post.tags.length; i++) {
     tagsArrayPosts.push(post.tags[i]);
   }
+
+  for (let i = 0; i < post.categories.length; i++) {
+      catsArrayPosts.push(post.categories[i]);
+    }
 });
 
-  const catsArrayPosts=['Blog','Post'];
-
   tagsArrayPosts=tagsArrayPosts.filter((tag:any, index:number) => tagsArrayPosts.indexOf(tag) === index);
+  catsArrayPosts=catsArrayPosts.filter((cat:any, index:number) => catsArrayPosts.indexOf(cat) === index);
 
-  return {tagsArrayPosts, catsArrayPosts};
+  return {t:tagsArrayPosts, c:catsArrayPosts};
 };
+
+export default PostsByDate

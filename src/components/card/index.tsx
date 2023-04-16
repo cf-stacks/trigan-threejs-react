@@ -72,7 +72,7 @@ const callouts = [
 const Card = () => {
   return (
     <>
-      <div className="mt-6 mb-20 space-y-12 pb-12 lg:grid  lg:grid-cols-3 lg:gap-x-6 lg:space-y-6">
+      <div className="mb-20 mt-6 space-y-12 pb-12 lg:grid  lg:grid-cols-3 lg:gap-x-6 lg:space-y-6">
         {callouts.map((callout) => (
           <div
             key={callout.name}
@@ -121,7 +121,7 @@ const Card = () => {
                   <img
                     alt={callout.imageAlt}
                     src={callout.imageSrc}
-                    loading='lazy'
+                    loading="lazy"
                     className="max-h-40 w-full object-cover"
                   />
                 </div>
