@@ -30,42 +30,36 @@ const VideoHeader = dynamic(
 )
 
 interface BlogProps {
-  children?: ReactNode
   posts: BlogPost
 }
 
+const PostsByDateNoSSR: any = dynamic(
+  () => import('../components/Posts/PostsByDate'),
+  { ssr: false }
+)
 
-const PostsByDateNoSSR:any= dynamic(() => import('../components/Posts/PostsByDate'),{ssr:false});
-
-const Blog: NextPage<BlogProps> = ({ posts}) => {
+const Blog: NextPage<BlogProps> = ({ posts }) => {
   const router = useRouter()
 
-  const handleSearch = async (title: string) => {
-    await router.push('/PostSearch')
-  }
+  // const handleSearch = async (title: string) => {
+  //   await router.push('/PostSearch')
+  // }
 
-//is of type string if parameters are properly included
-const { tag, cat } = router.query;
+  //is of type string if parameters are properly included
+  const { tag, cat } = router.query
 
-//filter posts based on tag or category in URL
-  if (typeof tag === 'string' && typeof cat === 'string') {
-//if both tag and category are supplied, only keep matching posts
-    posts.posts=handleQuery(posts, tag, cat);
-
-  } else if (typeof tag === 'string') {
-
+  //filter posts based on tag or category in URL
+  if (posts && typeof tag === 'string' && typeof cat === 'string') {
+    //if both tag and category are supplied, only keep matching posts
+    posts.posts = handleQuery(posts, tag, cat)
+  } else if (posts && typeof tag === 'string') {
     //if tag parameter is supplied, only keep matching posts
-    posts.posts=handleTagQuery(posts, tag);
-
-  } else if (typeof cat === 'string') {
-
+    posts.posts = handleTagQuery(posts, tag)
+  } else if (posts && typeof cat === 'string') {
     //if category parameter is supplied, only keep matching posts
-    posts.posts=handleCatQuery(posts, cat);
-
+    posts.posts = handleCatQuery(posts, cat)
   } else {
-
-    console.log('incorrect query');
-
+    console.log('incorrect query')
   }
 
   return (
@@ -87,12 +81,24 @@ const { tag, cat } = router.query;
             </h1>
             {/* <PostSearchFront /> */}
             <PostSearch />
-            <div className='flex w-full justify-center items-center mt-20'>
+            <div className="mt-20 flex w-full items-center justify-center">
               <div className="h-[1px] w-2/4 bg-[#5B5B5B]" />
             </div>
-            <PostsByDateNoSSR posts={posts}/>
+            {!posts ? (
+              <section className="Imgpart_center mx-auto max-w-6xl items-center px-4 py-36 text-slate-100 2xl:max-w-3xl">
+                <div className="paragraphStyle m-auto flex w-[90%] flex-wrap rounded-md bg-white/[.1] py-2 text-lg font-extralight md:py-5 md:text-xl">
+                  <div className="m-auto flex w-[320px] max-w-screen-sm flex-col text-[25px] md:m-5 md:m-auto md:w-[100%] lg:w-[60%]">
+                    <p className="m-10 mt-10 text-lg font-extralight md:text-xl">
+                      No posts yet
+                    </p>
+                  </div>
+                </div>
+              </section>
+            ) : (
+              <PostsByDateNoSSR posts={posts} />
+            )}
 
-            <div className="mt-10 mb-20 flex w-[100%] flex-wrap justify-center">
+            <div className="mb-20 mt-10 flex w-[100%] flex-wrap justify-center">
               <Link href="/blog" passHref as={``}>
                 <div className="mr-6 w-max hover:cursor-pointer hover:opacity-50">
                   <span
@@ -113,53 +119,50 @@ const { tag, cat } = router.query;
 }
 
 function handleQuery(posts: BlogPost, tag: string, cat: string) {
-
   //filter through received posts to find those with tag
   return posts.posts.filter((post: BlogPost) => {
-
     //if any tags on a post match the received tag, include in array
-    if(post.tags.includes(tag)&&post.categories.includes(cat)){
-      return true;
+    if (post.tags.includes(tag) && post.categories.includes(cat)) {
+      return true
     }
   })
-
 }
 
 function handleTagQuery(posts: BlogPost, tag: string) {
-
   //filter through received posts to find those with tag
   return posts.posts.filter((post: BlogPost) => {
-
     //if any tags on a post match the received tag, include in array
-    return post.tags.includes(tag);
+    return post.tags.includes(tag)
   })
 }
 
 function handleCatQuery(posts: BlogPost, cat: string) {
-
   //filter through received posts to find those with tag
   return posts.posts.filter((post: BlogPost) => {
-
     //if any tags on a post match the received tag, include in array
-    return post.categories.includes(cat);
+    return post.categories.includes(cat)
   })
 }
 
 export async function getServerSideProps() {
-  const res = await fetch(
-    'https://test1.trigan.org/api/v1/posts?page-size=5&page=1&apiKey=g436739d6734gd6734'
-    /* `${process.env.URL}posts?&apiKey=${process.env.GET_API_KEY}`*/
-  )
+  let posts = null
 
-  let posts = await res.json();
+  try {
+    const res = await fetch(
+      'https://test1.trigan.org/api/v1/posts?page-size=5&page=1&apiKey=g436739d6734gd6734'
+      /* `${process.env.URL}posts?&apiKey=${process.env.GET_API_KEY}`*/
+    )
+
+    posts = await res.json()
+  } catch (e) {
+    console.log(e)
+  }
 
   return {
     props: {
-      posts:posts
+      posts: posts,
     },
   }
 }
 
 export default Blog
-
-
