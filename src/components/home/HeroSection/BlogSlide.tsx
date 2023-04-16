@@ -203,7 +203,7 @@ const BlogSlide = () => {
           </span>
         </Swiper>
       </div>
-
+{/*
       <div className="m-auto mb-10 flex w-[100%] flex-row flex-wrap justify-center">
         {data?.map((BlogPost: any, i: number) => {
           const date = new Date(BlogPost.date_created)
@@ -309,7 +309,7 @@ const BlogSlide = () => {
             </div>
           )
         })}
-      </div>
+      </div>  */}
     </>
   )
 }
