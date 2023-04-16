@@ -16,6 +16,8 @@ import {
 } from '../../../services/linkedin-applicants'
 import { ApplicantsModals } from '../linkedinapplicants/LinkedinApplicantsModals'
 import { toast } from 'react-hot-toast'
+import { JobType } from './LinkedinAccountJobs'
+import { ApplicantType } from '../linkedinapplicants/LinkedinApplicantsTable'
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -75,32 +77,6 @@ const useStyles = createStyles((theme) => ({
     },
   },
 }))
-
-export interface ApplicantType {
-  id: string
-  created_at: string
-  updated_at: string
-  linkedin_job_post_id: string
-  applicant_id: string
-  name: string
-  cv_link: string
-  status: string
-  is_invited: boolean
-  is_nda: boolean
-}
-
-export interface JobType {
-  id: string
-  creator_id: string
-  created_at: string
-  updated_at: string
-  linkedin_account_id: string
-  title: string
-  description: string
-  job_id: string
-  link: string
-  is_active: boolean
-}
 
 export interface ModalType {
   open: boolean
@@ -222,7 +198,6 @@ export const LinkedinJobApplicants = ({
 
   useEffect(() => {
     void fetchData({ page, page_size })
-    console.log('applicants', applicants)
   }, [page, page_size])
 
   if (fetchingApplicant)

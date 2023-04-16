@@ -20,15 +20,16 @@ const Linkedin: NextPage = () => {
       <LinkedinAccounts
         selectedAccount={selectedAccount as AccountType}
         setSelectedAccount={
-          setSelectedAccount as Dispatch<SetStateAction<AccountType>>
+          setSelectedAccount as Dispatch<SetStateAction<AccountType | null>>
         }
-        setSelectedJob={setSelectedJob as Dispatch<SetStateAction<JobType>>}
       />
       {!!selectedAccount && (
         <LinkedinAccountJobs
           accountID={selectedAccount.id}
           selectedJob={selectedJob as JobType}
-          setSelectedJob={setSelectedJob as Dispatch<SetStateAction<JobType>>}
+          setSelectedJob={
+            setSelectedJob as Dispatch<SetStateAction<JobType | null>>
+          }
         />
       )}
       {!!selectedAccount && !!selectedJob && (
