@@ -464,6 +464,7 @@ h6 {
     @apply mx-auto flex cursor-pointer rounded-lg bg-red-600 px-4 py-2 text-light opacity-100 transition duration-200 hover:scale-110 hover:shadow-lg;
   }
 
+
   .tokensform {
     @apply mr-1 h-12 w-full rounded-sm bg-white bg-opacity-90 pl-4;
   }
@@ -474,6 +475,10 @@ h6 {
 
   .primary-btn {
     @apply mx-auto flex cursor-pointer rounded-lg bg-primary px-4 py-2 text-light opacity-100 transition duration-200 hover:scale-110 hover:shadow-lg;
+  }
+
+  .colored-text {
+    @apply bg-gradient-to-r text-[#A855F7]  to-violet-500 bg-clip-text text-2xl text-transparent;
   }
 
   .filter-grey {
