@@ -14,7 +14,6 @@ import { ApplicantOptionsType } from '../../../services/linkedin-applicants'
 import { toast } from 'react-hot-toast'
 import { fetchAccounts } from '../../../services/linkedin-accounts'
 import { AccountsModals } from '../linkedinaccounts/LinkedinAccountsModals'
-import { JobType } from './LinkedinJobApplicants'
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -111,14 +110,12 @@ export interface ModalType {
 
 interface AccountsTableProps {
   selectedAccount: AccountType
-  setSelectedAccount: React.Dispatch<React.SetStateAction<AccountType>>
-  setSelectedJob: React.Dispatch<React.SetStateAction<JobType>>
+  setSelectedAccount: React.Dispatch<React.SetStateAction<AccountType | null>>
 }
 
 export const LinkedinAccounts = ({
   selectedAccount,
   setSelectedAccount,
-  setSelectedJob,
 }: AccountsTableProps) => {
   const [accounts, setAccounts] = useState([])
 
@@ -155,7 +152,7 @@ export const LinkedinAccounts = ({
 
   const handleSelectAccount = async (account: AccountType) => {
     if (account === selectedAccount) {
-      setSelectedAccount(undefined)
+      setSelectedAccount(null)
       return
     }
     setSelectedAccount(account)
@@ -180,14 +177,13 @@ export const LinkedinAccounts = ({
 
   useEffect(() => {
     return () => {
-      setSelectedAccount(undefined)
+      setSelectedAccount(null)
       fetchData()
     }
   }, [router])
 
   useEffect(() => {
     void fetchAccounts({ page, page_size })
-    console.log(accounts)
   }, [fetchAccounts, page, page_size])
 
   const accountsList =
@@ -216,7 +212,7 @@ export const LinkedinAccounts = ({
                 <Button.Group>
                   <Button
                     onClick={() => {
-                      setModal({ open: true, type: 'edit' })
+                      setModal({ open: true, size: 'md', type: 'edit' })
                       setSelectedAccount(account)
                     }}
                     variant="light"
@@ -226,7 +222,7 @@ export const LinkedinAccounts = ({
                   </Button>
                   <Button
                     onClick={() => {
-                      setModal({ open: true, type: 'delete' })
+                      setModal({ open: true, size: 'md', type: 'delete' })
                       setSelectedAccount(account)
                     }}
                     variant="light"

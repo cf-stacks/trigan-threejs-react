@@ -100,7 +100,7 @@ export interface JobType {
 interface JobsTableProps {
   accountID: string
   selectedJob: JobType
-  setSelectedJob: React.Dispatch<React.SetStateAction<JobType>>
+  setSelectedJob: React.Dispatch<React.SetStateAction<JobType | null>>
 }
 
 export const LinkedinAccountJobs = ({
@@ -122,7 +122,7 @@ export const LinkedinAccountJobs = ({
 
   const handleSelectJob = async (job: JobType) => {
     if (job === selectedJob) {
-      setSelectedJob(undefined)
+      setSelectedJob(null)
       return
     }
     setSelectedJob(job)
@@ -151,8 +151,6 @@ export const LinkedinAccountJobs = ({
   }
 
   const handlePaginationChange = (page: number) => {
-    console.log('PAGEEE', page)
-
     setPage(page)
   }
 
@@ -165,7 +163,7 @@ export const LinkedinAccountJobs = ({
   }
 
   useEffect(() => {
-    setSelectedJob(undefined)
+    setSelectedJob(null)
     return () => {
       fetchData({ id: accountID })
     }
@@ -173,7 +171,6 @@ export const LinkedinAccountJobs = ({
 
   useEffect(() => {
     void fetchData({ page, page_size })
-    console.log(jobs)
   }, [page, page_size])
 
   const jobsList =
