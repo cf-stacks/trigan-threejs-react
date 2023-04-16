@@ -44,6 +44,7 @@ export const navLinks: NavLinkItem[] = [
   { icon: IconClipboardText, url: 'proposals', label: 'Proposals' },
   { icon: IconList, url: 'content', label: 'Content' },
   { icon: IconTriangle, url: 'ABtesting', label: 'AB testing' },
+  { icon: IconBrandLinkedin, url: 'linkedin', label: 'LinkedIn' },
   { icon: IconBrandLinkedin, url: 'linkedinaccounts', label: 'LinkedIn accounts' },
   { icon: IconBriefcase, url: 'linkedinjobs', label: 'LinkedIn jobs' },
   { icon: IconFiles, url: 'linkedinapplicants', label: 'LinkedIn applicants' },
