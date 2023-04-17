@@ -45,13 +45,13 @@ export const getAllCategories = (teams: TeamMember[]): string[] => {
   const categories: string[] = []
 
   // categories will have an additional "all" category
-  categories.push('all')
-  categories.push('Founders')
-  categories.push('Leadership')
-  categories.push('Advisors')
-  categories.push('Tech')
-  categories.push('Marketing')
-  categories.push('Grants')
+  categories?.push('all')
+  categories?.push('Founders')
+  categories?.push('Leadership')
+  categories?.push('Advisors')
+  categories?.push('Tech')
+  categories?.push('Marketing')
+  categories?.push('Grants')
 
 
   return categories
@@ -64,52 +64,52 @@ export const groupByCategory = (
   const groupedTeams: TeamMember[] = []
 
   if (category === 'all') {
-    return teams.sort(function (a, b) {
+    return teams?.sort(function (a, b) {
       return a.position - b.position
     })
   }
 
   if (category === 'Founders'  ) {
     const filteredTeams = teams
-      .map((group) => group.members)
-      .flat();
+      ?.map((group) => group.members)
+      ?.flat();
 
-    const filterFinal = filteredTeams.filter((member) => member.category === 'Founders' )
-      .map((teamMember, i) => {
+    const filterFinal = filteredTeams?.filter((member) => member.category === 'Founders' )
+      ?.map((teamMember, i) => {
         return teamMember;
       })
 
-    return filterFinal.sort(function (a, b) {
+    return filterFinal?.sort(function (a, b) {
       return a.position - b.position
     })
   }
 
   if (category === 'Leadership') {
     const filteredTeams = teams
-      .map((group) => group.members)
-      .flat();
+      ?.map((group) => group.members)
+      ?.flat();
 
-    const filterFinal = filteredTeams.filter((member) => member.category === 'Leadership')
-      .map((teamMember, i) => {
+    const filterFinal = filteredTeams?.filter((member) => member.category === 'Leadership')
+      ?.map((teamMember, i) => {
         return teamMember;
       })
 
-    return filterFinal.sort(function (a, b) {
+    return filterFinal?.sort(function (a, b) {
       return a.position - b.position
     })
   }
 
   if (category === 'Grants') {
     const filteredTeams = teams
-      .map((group) => group.members)
-      .flat();
+      ?.map((group) => group.members)
+      ?.flat();
 
-    const filterFinal = filteredTeams.filter((member) => member.category === 'Grants')
-      .map((teamMember, i) => {
+    const filterFinal = filteredTeams?.filter((member) => member.category === 'Grants')
+      ?.map((teamMember, i) => {
         return teamMember;
       })
 
-    return filterFinal.sort(function (a, b) {
+    return filterFinal?.sort(function (a, b) {
       return a.position - b.position
     })
   }
@@ -117,60 +117,60 @@ export const groupByCategory = (
 
   if (category === 'Advisors') {
     const filteredTeams = teams
-      .map((group) => group.members)
-      .flat();
+      ?.map((group) => group.members)
+      ?.flat();
 
-    const filterFinal = filteredTeams.filter((member) => member.category === 'Advisors')
-      .map((teamMember, i) => {
+    const filterFinal = filteredTeams?.filter((member) => member.category === 'Advisors')
+      ?.map((teamMember, i) => {
         return teamMember;
       })
 
-    return filterFinal.sort(function (a, b) {
+    return filterFinal?.sort(function (a, b) {
       return a.position - b.position
     })
   }
 
   if (category === 'Marketing') {
     const filteredTeams = teams
-      .map((group) => group.members)
-      .flat();
+      ?.map((group) => group.members)
+      ?.flat();
 
-    const filterFinal = filteredTeams.filter((member) => member.category === 'Marketing')
-      .map((teamMember, i) => {
+    const filterFinal = filteredTeams?.filter((member) => member.category === 'Marketing')
+      ?.map((teamMember, i) => {
         return teamMember;
       })
 
-    return filterFinal.sort(function (a, b) {
+    return filterFinal?.sort(function (a, b) {
       return a.position - b.position
     })
   }
 
   if (category === 'Tech') {
     const filteredTeams = teams
-      .map((group) => group.members)
-      .flat();
+      ?.map((group) => group.members)
+      ?.flat();
 
-    const filterFinal = filteredTeams.filter((member) => member.category === 'Tech')
-      .map((teamMember, i) => {
+    const filterFinal = filteredTeams?.filter((member) => member.category === 'Tech')
+      ?.map((teamMember, i) => {
         return teamMember;
       })
 
-    return filterFinal.sort(function (a, b) {
+    return filterFinal?.sort(function (a, b) {
       return a.position - b.position
     })
   }
 
   if (category === 'Grants') {
     const filteredTeams = teams
-      .map((group) => group.members)
-      .flat();
+      ?.map((group) => group.members)
+      ?.flat();
 
-    const filterFinal = filteredTeams.filter((member) => member.category === 'Grants')
-      .map((teamMember, i) => {
+    const filterFinal = filteredTeams?.filter((member) => member.category === 'Grants')
+      ?.map((teamMember, i) => {
         return teamMember;
       })
 
-    return filterFinal.sort(function (a, b) {
+    return filterFinal?.sort(function (a, b) {
       return a.position - b.position
     })
   }

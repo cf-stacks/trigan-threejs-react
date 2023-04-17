@@ -5,10 +5,12 @@ import { Title } from '@mantine/core';
 import axios, { AxiosError } from 'axios';  
 import { TEST_API_URL } from '../../../util/constants';
 import toast from 'react-hot-toast';
-import { PostsTable } from '../../../components/admin/posts/PostsTable';
 import { PostsModals } from '../../../components/admin/posts/PostsModals';
 import TabHeaderAction from "../../../components/tabHeaderAction"
 import { useRouter } from 'next/router';
+import {ColumnSort, SortingState} from '@tanstack/react-table';
+import Table from '../../../components/Table';
+import {useColumns} from '../../../table-columns/posts';
 
 interface DashboardProps {
   children?: ReactNode
@@ -121,12 +123,8 @@ const Dashboard: NextPage<DashboardProps> = () => {
   const [selectedPost, setSelectedPost] = useState<any>([])
 
   const router = useRouter()
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    if (e) e.preventDefault()
-    await fetchFunction()
-  }
 
-  const fetchFunction = useCallback(async () => {
+  const fetchFunction = useCallback(async ({ sort }: { sort?: ColumnSort }) => {
     setFetching(true)
     console.log("request senttt")
     try {
@@ -134,6 +132,10 @@ const Dashboard: NextPage<DashboardProps> = () => {
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
+        },
+        params: {
+            sortBy: sort ? sort.id : undefined,
+            order: sort ? sort.desc ? "desc" : "asc" : undefined,
         },
       })
 
@@ -153,9 +155,29 @@ const Dashboard: NextPage<DashboardProps> = () => {
     setFetching(false)
   }, [router])
 
+  const [rowSelection, setRowSelection] = useState({})
+  const [sorting, setSorting] = useState<SortingState>([])
+
+  const columns = useColumns({
+    edit: useCallback(() => {}, []),
+    remove: useCallback(() => {}, []),
+  });
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    if (e) e.preventDefault()
+    const [sortField] = sorting;
+    await fetchFunction({ sort: sortField })
+  }
+
   useEffect(() => {
-    void fetchFunction()
-  }, [fetchFunction])
+    const [sortField] = sorting;
+    void fetchFunction({ sort: sortField });
+  }, [fetchFunction, sorting])
+
+  const refetch = useCallback(async () => {
+    const [sortField] = sorting;
+    void fetchFunction({ sort: sortField });
+  }, [fetchFunction, sorting])
 
   const searchPosts = async (term: string) => {
     setSearch(term)
@@ -167,31 +189,41 @@ const Dashboard: NextPage<DashboardProps> = () => {
         )
       )
     } else {
-      await fetchFunction()
+      const [sortField] = sorting;
+      await fetchFunction({ sort: sortField })
     }
   }
 
   return (
     <AdminLayout>
-      <Title align={'center'}>Posts</Title>
-      <TabHeaderAction
-        search={{
-          value: search,
-          onChange: (e) => searchPosts(e.target.value),
-          handleSubmit: handleSubmit,
-        }}
-        create={{
-          text: 'Create Post',
-          onClick: () => setModal({ open: true, type: 'create', size: '' }),
-        }}
-      />
+      <div className='flex justify-between items-center mb-8'>
+        <Title size={24} align='center' className='text-white'>
+          Posts
+        </Title>
+
+        <TabHeaderAction
+          search={{
+            value: search,
+            onChange: (e) => searchPosts(e.target.value),
+            handleSubmit: handleSubmit,
+          }}
+          create={{
+            text: 'Create Post',
+            onClick: () => setModal({ open: true, type: 'create', size: '' }),
+          }}
+          remove={console.log}
+        />
+      </div>
 
       <section>
-        <PostsTable
-          posts={posts}
-          fetching={fetching} //pass fetching instead of false when url is fixed
-          setModal={setModal}
-          setSelectedPost={setSelectedPost}
+        <Table
+          loading={fetching}
+          columns={columns}
+          data={posts}
+          state={{ rowSelection, sorting }}
+          onSortingChange={setSorting}
+          enableRowSelection={true}
+          onRowSelectionChange={setRowSelection}
         />
       </section>
 
@@ -201,7 +233,7 @@ const Dashboard: NextPage<DashboardProps> = () => {
           setModal={setModal}
           selectedPost={selectedPost}
           setSelectedPost={setSelectedPost}
-          fetchFunction={fetchFunction}
+          fetchFunction={refetch}
         />
       </div>
     </AdminLayout>

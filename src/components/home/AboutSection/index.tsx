@@ -8,7 +8,7 @@ import {
   useRef,
   useState,
 } from 'react'
-import { useAnimation } from 'framer-motion'
+import { useAnimation, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
@@ -16,6 +16,7 @@ import { GetStaticProps } from 'next'
 import { api } from '../../../util/api'
 import React, { lazy, Suspense } from 'react'
 import { countries } from './SelectCountries'
+import LabelData from './LabelData'
 // import ImageLabel, { TypeImgLabel } from '../ImageLabel'
 // import AnimationCity from './AnimationCity'
 
@@ -45,6 +46,25 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [selectedCountry, setSelectedCountry] = useState('')
+  const [data, setData] = useState(0)
+  const [labelActive, setLabelActive] = useState('0')
+  const [showLabel, setShowLabel] = useState(false)
+
+  const handleButtonClick = (data: any) => {
+    setData(data)
+    setShowLabel(true)
+  }
+  const whoActive = (num: string) => {
+    setLabelActive(num)
+  }
+  const classHandler = () => {
+    const timer = setTimeout(() => {
+      setLabelActive('0')
+    }, 500)
+    return () => {
+      clearTimeout(timer)
+    }
+  }
 
   function handleSelectChange(event: any) {
     setSelectedCountry(event.target.value)
@@ -80,23 +100,26 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
         width: imgRef.current?.width as number,
       })
     }
-  },[imgRef])
+  }, [imgRef])
   const [winWidth, setwinWidth] = useState(0)
   const [showLabels, setShowLabels] = useState(false)
-  const handleScroll = useCallback((event: any) => {
-    if(divRef.current){
-      const top = divRef.current.getBoundingClientRect().top as number
-      if (top < 400 && top > -150) {
-        setShowLabels(true)
-      } else {
-        setShowLabels(false)
+  const handleScroll = useCallback(
+    (event: any) => {
+      if (divRef.current) {
+        const top = divRef.current.getBoundingClientRect().top as number
+        if (top < 400 && top > -150) {
+          setShowLabels(true)
+        } else {
+          setShowLabels(false)
+        }
       }
-    }
-  },[divRef])
+    },
+    [divRef]
+  )
   const handleResize = useCallback((event: any) => {
     onWindowResize()
     setwinWidth(document.body.clientWidth)
-  },[])
+  }, [])
   useEffect(() => {
     onWindowResize()
     setwinWidth(document.body.clientWidth)
@@ -106,26 +129,39 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', handleResize)
     }
-  }, []);
+  }, [])
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-    <div
-      data-aos="zoom-in-up"
-      className="overflow-hidden xl:mt-[-120px] 2xl:mt-[-80px] aos-init"
-    >
-      <HashtagHeader text="#OurSolution" position="left" id="ourSolution"/>
-      <section data-aos="fade-up" className="aos-init">
-        <div className=" m-auto w-[90%]">
-          <div className="m-auto mb-10 mt-10 flex w-[100%] flex-col max-[600px]:text-center">
-            <h2 className="flex justify-center text-4xl dark:text-black max-[600px]:text-[28px]">
-              Unlocking the Potential{' '}
-            </h2>
-            <h2 className="mt-2 flex justify-center bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-4xl text-transparent max-[600px]:text-[28px]">
-              of places, everywhere
-            </h2>
-          </div>
-          {/* <div
+      {/* popup */}
+      <AnimatePresence mode="wait">
+        {showLabel && (
+          <LabelData
+            onClickClose={() => setShowLabel(false)}
+            onMouseLeave={() => {
+              setShowLabel(false)
+              classHandler()
+            }}
+            data={data}
+          />
+        )}
+      </AnimatePresence>
+      <div
+        data-aos="zoom-in-up"
+        className="aos-init overflow-hidden xl:mt-[-120px] 2xl:mt-[-80px]"
+      >
+        <HashtagHeader text="#OurSolution" position="left" id="ourSolution" />
+        <section data-aos="fade-up" className="aos-init">
+          <div className=" m-auto w-[90%]">
+            <div className="m-auto mb-10 mt-10 flex w-[100%] flex-col max-[600px]:text-center">
+              <h2 className="flex justify-center text-4xl dark:text-black max-[600px]:text-[28px]">
+                Unlocking the Potential{' '}
+              </h2>
+              <h2 className="mt-2 flex justify-center bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-4xl text-transparent max-[600px]:text-[28px]">
+                of places, everywhere
+              </h2>
+            </div>
+            {/* <div
             className="bg-slate-800 backdrop-blur-lg backdrop-filter"
             ref={divRef}
           > */}
@@ -166,13 +202,16 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
               className="m-auto flex min-h-[200px] w-[40%] min-w-[300px] justify-center "
             />
           </div> */}
-          <Suspense fallback={<div>Loading..</div>}>
-            <AnimationCity/>
-          </Suspense>
-         
-        </div>
+            <Suspense fallback={<div>Loading..</div>}>
+              <AnimationCity
+                onButtonClick={handleButtonClick}
+                active={labelActive}
+                whoActive={whoActive}
+              />
+            </Suspense>
+          </div>
 
-{/*}
+          {/*}
         <div
           className="object-fit absolute -z-10 h-full min-w-full"
           // style={{ background: 'black' }}
@@ -221,8 +260,8 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
           </div>
        
         </div> {*/}
-      </section>
-      {/*}
+        </section>
+        {/*}
       <div className='mt-20'>
         <HashtagHeader text="#OurActivities" position="left"/>
         <h2 className="dark:text-black dark:bg-white abo_h2 flex justify-center mt-10">
@@ -255,30 +294,33 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
 <p className="abo_pl">Our platform also creates new economic opportunities, by creating a new kind of digital economy that is more human-centric, caring, and successful. It is tailored to real-world problems and can operate in any organization or society.</p>
 
   </section> */}
-      {/* <HorizontalSlideShow /> */}
-      {/* <AccordionComp /> */}
-      <section className="Imgpart_center mx-auto  max-w-6xl items-center px-4 py-36 text-slate-100 2xl:max-w-3xl">
-        <div className="paragraphStyle m-auto flex w-[90%] flex-wrap  rounded-md bg-white/[.1] py-2 text-lg font-extralight md:py-5 md:text-xl">
-          <div className="m-auto flex h-[350px] w-[320px] max-w-screen-sm flex-col text-[25px] md:m-5 md:m-auto md:w-[100%] lg:w-[60%]">
-            <p className="m-5">This site is currently under construction</p>
-            <h1 className="m-5 text-xl font-bold text-white dark:text-purple-500 md:text-5xl">
-              More info to follow shortly!
-            </h1>
-            <p className="m-5 mt-10 text-lg font-extralight md:text-xl">
-Early Access Signup is now open! Please keep scrolling.
-            </p>
-          </div>
-          <div className="min-w-300px m-auto flex flex h-[150px] max-w-screen-sm flex-row items-center justify-center md:w-[60%] lg:w-[40%]">
-   {/*}         <button className="h-[50px] w-[150px] rounded-full border bg-red-600 py-2 px-4 text-[15px] font-bold text-white text-white hover:bg-red-700 max-[600px]:w-[120px]">
+
+        {/* <HorizontalSlideShow /> */}
+        {/* <AccordionComp /> */}
+        <section className="Imgpart_center mx-auto  max-w-6xl items-center px-4 py-36 text-slate-100 2xl:max-w-3xl">
+          <div className="paragraphStyle m-auto flex w-[90%] flex-wrap  rounded-md bg-white/[.1] py-2 text-lg font-extralight md:py-5 md:text-xl">
+            <div className="m-auto flex h-[350px] w-[320px] max-w-screen-sm flex-col text-[25px] md:m-5 md:m-auto md:w-[100%] lg:w-[60%]">
+              <p className="m-5">This site is currently under construction</p>
+              {/*   <p className="m-5">Clicked button is {clickedButton}</p> */}
+              <h1 className="m-5 text-xl font-bold text-white dark:text-purple-500 md:text-5xl">
+                More info to follow shortly!
+              </h1>
+              <p className="m-5 mt-10 text-lg font-extralight md:text-xl">
+                Early Access Signup is now open! Please keep scrolling.
+              </p>
+            </div>
+            <div className="min-w-300px m-auto flex flex h-[150px] max-w-screen-sm flex-row items-center justify-center md:w-[60%] lg:w-[40%]">
+              {/*}         <button className="h-[50px] w-[150px] rounded-full border bg-red-600 py-2 px-4 text-[15px] font-bold text-white text-white hover:bg-red-700 max-[600px]:w-[120px]">
               Try Now
             </button>
             <button className="ml-10 h-[50px] w-[150px] rounded-full border bg-transparent py-2 px-4 text-[15px] font-bold text-white hover:bg-white/[.4] max-[600px]:w-[120px]">
               Learn More
             </button>
- {*/}         </div>
-          <br></br>
+ {*/}{' '}
+            </div>
+            <br></br>
 
-          {/*    <div className="h-46 relative">
+            {/*    <div className="h-46 relative">
             <img
               loading="lazy"
               data-aos="fade-right"
@@ -313,120 +355,120 @@ Early Access Signup is now open! Please keep scrolling.
             />
 <div className="p-6"></div> 
           </div> */}
-        </div>
-      </section>
-      <section className="">
-        <div className="flex flex-col items-center justify-center pt-96">
-          <div className="mb-[50px] hidden w-5/12 md:block">
-            <div className="relative mt-[50px] mb-28">
-              <img
-                loading="lazy"
-                data-aos="fade-right"
-                data-aos-offset="50"
-                data-aos-anchor-placement="bottom-bottom"
-                className="leftyside !absolute inset-x-0 right-8 m-auto w-64 !overflow-hidden pr-10 md:w-[455px] aos-init aos-animate"
-                src="/logo-parts/logo-left.png"
-              />
-              <img
-                loading="lazy"
-                data-aos="fade-left"
-                data-aos-anchor-placement="bottom-bottom"
-                className="rightyside !absolute inset-x-0 left-8 m-auto w-64 !overflow-hidden md:w-[455px] aos-init aos-animate"
-                src="/logo-parts/logo-right.png"
-              />
-              <p
-                data-aos="zoom-in"
-                data-aos-anchor-placement="bottom-bottom"
-                data-aos-offset="100"
-                className="content_center absolute inset-x-0 m-auto mt-6 ml-[40px] !overflow-hidden pl-2 text-center text-2xl font-bold text-white max-[999px]:top-[-100px] max-[999px]:text-[12px] md:top-[8rem] md:text-2xl lg:top-[9rem] aos-init aos-animate"
-              >
-                LET’S BUILD A <br />
-                BETTER FUTURE <br />
-                TOGETHER
-              </p>
-              <img
-                loading="lazy"
-                data-aos="fade-down"
-                data-aos-anchor-placement="bottom-bottom"
-                className="bottomside relative inset-x-0 top-5 m-auto w-64 w-[480px] !overflow-hidden max-[999px]:top-[40px] aos-init aos-animate"
-                src="/logo-parts/logo-bottom.png"
-              />
-            </div>
-            <div className="absolute bottom-40 z-[0] h-[5%] w-[100%] bg-[#A855F7] blur-[300px]" />
           </div>
-          {/* before was  md:w-1/2 */}
-          <div className="z-10 mb-20 flex  w-[90%] flex-col items-center  rounded-md bg-black/[.5]">
-            <div className="z-10 mt-10 mb-10 flex items-center justify-center rounded-md p-5 md:px-16">
-              <form
-                onSubmit={handleSubmit}
-                className="min-w-280 z-10 m-5  w-[90%] lg:w-[80%]"
-              >
-                <h1 className="align-center m-auto  mb-4 flex justify-center text-center text-3xl font-bold text-white">
-                  Sign Up now for early access
-                </h1>
-                <div className="mb-4">
-                  <label
-                    htmlFor="name"
-                    className="mb-2 block font-bold text-white"
-                  >
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    placeholder="your name"
-                    className="form-input w-full rounded-md border-[#A855F7] shadow-sm"
-                    value={name}
-                    onChange={(event) => setName(event.target.value)}
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="email"
-                    className="mb-2 block font-bold text-white"
-                  >
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    placeholder="email@trigan.com"
-                    className="form-input w-full rounded-md border-[#A855F7] shadow-sm"
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                  />
-                </div>
-                <div className="mb-4 ">
-                  <label
-                    htmlFor="email"
-                    className="mb-2 block font-bold text-white"
-                  >
-                    Country
-                  </label>
-                  <select
-                    className="form-input w-full  rounded-md border-[#A855F7] shadow-sm"
-                    value={selectedCountry}
-                    onChange={handleSelectChange}
-                  >
-                    <option value="">Select your country</option>
-                    {countries.map((country) => (
-                      <option key={country} value={country}>
-                        {country}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className=" mt-10 mb-10 w-full">
-                  <button
-                    type="submit"
-                    className="w-full rounded-md bg-[#A855F7] py-2 font-bold text-white"
-                  >
-                    Subscribe
-                  </button>
-                </div>
-              </form>
+        </section>
+        <section className="">
+          <div className="flex flex-col items-center justify-center pt-96">
+            <div className="mb-[50px] hidden w-5/12 md:block">
+              <div className="relative mb-28 mt-[50px]">
+                <img
+                  loading="lazy"
+                  data-aos="fade-right"
+                  data-aos-offset="50"
+                  data-aos-anchor-placement="bottom-bottom"
+                  className="leftyside aos-init aos-animate !absolute inset-x-0 right-8 m-auto w-64 !overflow-hidden pr-10 md:w-[455px]"
+                  src="/logo-parts/logo-left.png"
+                />
+                <img
+                  loading="lazy"
+                  data-aos="fade-left"
+                  data-aos-anchor-placement="bottom-bottom"
+                  className="rightyside aos-init aos-animate !absolute inset-x-0 left-8 m-auto w-64 !overflow-hidden md:w-[455px]"
+                  src="/logo-parts/logo-right.png"
+                />
+                <p
+                  data-aos="zoom-in"
+                  data-aos-anchor-placement="bottom-bottom"
+                  data-aos-offset="100"
+                  className="content_center aos-init aos-animate absolute inset-x-0 m-auto ml-[40px] mt-6 !overflow-hidden pl-2 text-center text-2xl font-bold text-white max-[999px]:top-[-100px] max-[999px]:text-[12px] md:top-[8rem] md:text-2xl lg:top-[9rem]"
+                >
+                  LET’S BUILD A <br />
+                  BETTER FUTURE <br />
+                  TOGETHER
+                </p>
+                <img
+                  loading="lazy"
+                  data-aos="fade-down"
+                  data-aos-anchor-placement="bottom-bottom"
+                  className="bottomside aos-init aos-animate relative inset-x-0 top-5 m-auto w-64 w-[480px] !overflow-hidden max-[999px]:top-[40px]"
+                  src="/logo-parts/logo-bottom.png"
+                />
+              </div>
+              <div className="absolute bottom-40 z-[0] h-[5%] w-[100%] bg-[#A855F7] blur-[300px]" />
+            </div>
+            {/* before was  md:w-1/2 */}
+            <div className="z-10 mb-20 flex  w-[90%] flex-col items-center  rounded-md bg-black/[.5]">
+              <div className="z-10 mb-10 mt-10 flex items-center justify-center rounded-md p-5 md:px-16">
+                <form
+                  onSubmit={handleSubmit}
+                  className="min-w-280 z-10 m-5  w-[90%] lg:w-[80%]"
+                >
+                  <h1 className="align-center m-auto  mb-4 flex justify-center text-center text-3xl font-bold text-white">
+                    Sign Up now for early access
+                  </h1>
+                  <div className="mb-4">
+                    <label
+                      htmlFor="name"
+                      className="mb-2 block font-bold text-white"
+                    >
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      placeholder="your name"
+                      className="form-input w-full rounded-md border-[#A855F7] shadow-sm"
+                      value={name}
+                      onChange={(event) => setName(event.target.value)}
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label
+                      htmlFor="email"
+                      className="mb-2 block font-bold text-white"
+                    >
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      placeholder="email@trigan.com"
+                      className="form-input w-full rounded-md border-[#A855F7] shadow-sm"
+                      value={email}
+                      onChange={(event) => setEmail(event.target.value)}
+                    />
+                  </div>
+                  <div className="mb-4 ">
+                    <label
+                      htmlFor="email"
+                      className="mb-2 block font-bold text-white"
+                    >
+                      Country
+                    </label>
+                    <select
+                      className="form-input w-full  rounded-md border-[#A855F7] shadow-sm"
+                      value={selectedCountry}
+                      onChange={handleSelectChange}
+                    >
+                      <option value="">Select your country</option>
+                      {countries.map((country) => (
+                        <option key={country} value={country}>
+                          {country}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className=" mb-10 mt-10 w-full">
+                    <button
+                      type="submit"
+                      className="w-full rounded-md bg-[#A855F7] py-2 font-bold text-white"
+                    >
+                      Subscribe
+                    </button>
+                  </div>
+                </form>
 
-              {/* <form className="flex flex-col gap-4 mb-20">
+                {/* <form className="flex flex-col gap-4 mb-20">
                 <h2 className="text-[30px] dark:text-black">Sign up now for early access</h2>
                 <input
                   type="text"
@@ -447,11 +489,11 @@ Early Access Signup is now open! Please keep scrolling.
                   Subscribe
                 </button>
               </form> */}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
     </Suspense>
   )
 }

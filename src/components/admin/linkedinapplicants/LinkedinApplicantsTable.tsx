@@ -46,9 +46,12 @@ export interface ApplicantType {
   created_at: string
   updated_at: string
   linkedin_job_id: string
+  linkedin_job_post_id: string
   name: string
   cv_link: string
   status: string
+  is_invited: boolean
+  is_nda: boolean
 }
 
 export interface MoadalType {

@@ -73,16 +73,19 @@ export const ABtestingListTable = ({
     []
   )
 
+  const onChange = () => console.log('okay')
+
   const [contentToEdit, setContentToEdit] = useState<ABtestContent>()
 
   const [value, setValue] = useState(contentToEdit?.content)
   const rte = (
-    <RichTextEditor
-      value={value}
-      onChange={setValue}
-      onImageUpload={handleImageUpload}
-      id="rte"
-    />
+    <div id="rte">
+      <RichTextEditor
+        value={value as string}
+        onChange={onChange}
+        onImageUpload={handleImageUpload}
+      />
+    </div>
   )
 
   const [key, setKey] = useState(contentToEdit?.key)

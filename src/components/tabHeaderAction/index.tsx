@@ -1,6 +1,7 @@
 import React, { ChangeEventHandler, FormEventHandler, MouseEventHandler } from "react";
 import { Button, createStyles, Input } from '@mantine/core';
 import { IconPlus, IconSearch } from '@tabler/icons';
+import { AiOutlineDelete } from "react-icons/ai";
 
 
 const useStyles = createStyles(() => ({
@@ -11,12 +12,43 @@ const useStyles = createStyles(() => ({
             flexDirection: 'column',
         },
     },
-    searchForm: {
+    searchContainer: {
+        marginRight: "1.5rem",
+        position: "relative",
         display: 'flex',
-        width: '600px',
+        width: '341px',
         '@media only screen and (max-width: 850px)': {
             width: '300px',
         },
+
+        input: {
+            backgroundColor: "#39394B",
+            color: "white",
+            borderRadius: "10px",
+            padding: "12px 20px",
+            paddingRight: "62px",
+            width: "100%",
+            height: "42px",
+        },
+
+        button: {
+            borderRadius: "10px",
+            position: "absolute",
+            right: "0",
+            color: "white",
+            height: "42px",
+            width: "42px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+        }
+    },
+
+    addButton: {
+        backgroundColor: "#A855F7 !important",
+        fontSize: "14px",
+        borderRadius: "10px",
+        padding: "12px 20px",
     },
 }));
 
@@ -30,35 +62,40 @@ interface TableHeaderProps {
     create: {
         onClick: MouseEventHandler<HTMLButtonElement>;
         text: string | JSX.Element
-    }
+    };
+    remove?: MouseEventHandler<HTMLButtonElement>;
 }
 
 const TabHeaderAction: React.FC<TableHeaderProps> = (props) => {
     const { search, create } = props;
-    const { classes } = useStyles();
+    const { classes, cx } = useStyles();
 
     return (
         <section className={classes.topSection}>
-            <form className={classes.searchForm} onSubmit={search.handleSubmit}>
+            <form className={classes.searchContainer} onSubmit={search.handleSubmit}>
                 <Input
                     sx={{ width: '100%' }}
                     placeholder={search.placeholder ?? "Search by title"}
                     value={search.value}
                     onChange={search.onChange}
                 />
-                <Button type="submit" variant="outline">
+                <button type="submit">
                     <IconSearch />
-                </Button>
+                </button>
             </form>
+
             <Button
-                color="green"
+                className={cx(classes.addButton, "mr-5")}
                 variant="filled"
                 onClick={create.onClick}
-                sx={{ backgroundColor: '#40c057 !important', margin: '1rem auto' }}
-                leftIcon={<IconPlus />}
+                rightIcon={<IconPlus />}
             >
                 {create.text}
             </Button>
+
+            <span className="cursor-pointer text-white" onClick={props.remove}>
+                <AiOutlineDelete size={24} />
+            </span>
         </section>
     )
 }

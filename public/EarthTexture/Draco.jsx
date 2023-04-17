@@ -1,7 +1,7 @@
 import React, { memo, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
-import { useLoader } from 'react-three-fiber'
+// import { useLoader } from 'react-three-fiber'
 import { useAnimations, useGLTF } from '@react-three/drei'
 
 import {
@@ -22,13 +22,14 @@ const Model = (props) => {
   const controlRef = useRef()
 
   // const earthGeometry = new THREE.SphereGeometry(1.9, 64, 64)
+//workaround path for blog pages
   const { nodes, materials, animations } = useGLTF('EarthTexture/planet.glb')
 
   const { actions } = useAnimations(animations, group)
   const [Device, setDevice] = useState(30)
 
   // Load the Earth texture
-  const earthTexture = useLoader(THREE.TextureLoader, 'EarthTexture/earth.jpg')
+  // const earthTexture = useLoader(THREE.TextureLoader, 'EarthTexture/earth.jpg')
 
   useFrame(({ clock }) => {
     // Rotate the Earth model over time
@@ -73,6 +74,7 @@ const Model = (props) => {
   )
 }
 
+//workaround path for blog pages
 useGLTF.preload('EarthTexture/planet.glb')
 
 export default Model
