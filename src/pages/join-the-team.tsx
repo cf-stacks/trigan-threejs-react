@@ -295,19 +295,20 @@ const VisionPage = () => {
                   </p>
                 </div>
                 <div className="flex flex-col md:mt-5 md:flex-row">
-                  <div className="hidden w-full items-center justify-center md:flex md:w-4/12">
-                    <div className="w-3/5">
+                  <div className="hidden w-full items-center justify-center md:flex md:w-5/12">
+                    <div className="w-full">
                       <Image
-                        src="/images/city-boy-1.jpg"
+                        src="/images/boy-standing.png"
                         alt="boy-in-the-city"
-                        width={100}
-                        height={50}
+                        width={150}
+                        height={90}
+                        className='rounded-xl'
                         layout="responsive"
                         loading="lazy"
                       />
                     </div>
                   </div>
-                  <div className="w-full text-justify md:w-8/12 md:text-right">
+                  <div className="w-full text-justify md:w-7/12  md:text-right">
                     <div className="px-4 md:px-8">
                       <p className="my-8 text-sm font-normal leading-relaxed text-gray-400">
                         Trigan's community funding mechanism and real-world relevant smart contracts offer a glimpse into the future of small business and local organisation growth and security. By joining Trigan, you can be a part of this exciting new era and take your business or organisation to new heights. The future is now - join Trigan today!
@@ -316,7 +317,7 @@ const VisionPage = () => {
                       <div className="mt-5 text-center md:text-right">
                         <button
                           role="button"
-                          className="lg:text-md rounded-full border bg-red-600 px-4 py-1 text-sm font-bold text-white hover:bg-red-700 md:ml-6 lg:py-2"
+                          className="lg:text-md rounded-full border px-4 py-1 text-sm font-bold text-white hover:bg-red-700 md:ml-6 lg:py-2"
                         >
                           Early Access
                         </button>
