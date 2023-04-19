@@ -50,7 +50,7 @@ const ProjectTimeline = () => {
 
     
     return (
-        <section className="py-10">
+        <section className="">
                 <div className=''>
                     {
                         timelineItems.map((item,index ) => {
@@ -59,16 +59,16 @@ const ProjectTimeline = () => {
                                 className={`${index  % 2 === 0 ?
                                     'justify-start items-start' : 'justify-end items-end'
                                             } first-letter: m-auto flex flex-col `}>
-                                   <div className='py-2 my-2'>
+                                   <div className='py-2 my-2 mb-3'>
                                     <div className={`${index  % 2 === 0 ?
                                                 'justify-start text-start items-start' : 'justify-end text-end items-end'
-                                                        } flex flex-col justify-start items-start w-[600px]`}>
-                                        <h3 className= "text-[#F2F6FB] py-2 font-m_plus_rounded_1c tracking-tighter text-5xl  text-center">
+                                                        } flex flex-col justify-start items-start w-[400px] lg:w-[680px]`}>
+                                        <h3 className= "text-[#F2F6FB] py-2 font-m_plus_rounded_1c tracking-tighter text-4xl md:text-5xl  text-center">
                                             {item.title}
-                                            <span className='bg-gradient-to-r text-[#A855F7] to-violet-500 bg-clip-text text-5xl text-transparent pl-2'>
+                                            <span className='bg-gradient-to-r text-[#A855F7] to-violet-500 bg-clip-text text-4xl md:text-5xl text-transparent pl-2'>
                                                 {item.titleColored} </span></h3>
                                         <p
-                                            className={`text-sm pb-2 font-medium font-m_plus_rounded_1c  w-[80%] text-[#BAC0C6] dark:text-black`}>
+                                            className={`text-sm pb-2 font-medium font-m_plus_rounded_1c  mb-3 w-[92%] text-[#BAC0C6] dark:text-black`}>
                                             {item.description}
                                         </p>
                                     </div>
