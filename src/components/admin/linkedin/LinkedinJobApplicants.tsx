@@ -6,6 +6,7 @@ import {
   createStyles,
   Title,
   Input,
+  Modal,
 } from '@mantine/core'
 import { IconMail, IconPencil, IconSearch } from '@tabler/icons'
 import { useRouter } from 'next/router'
@@ -18,6 +19,10 @@ import { ApplicantsModals } from '../linkedinapplicants/LinkedinApplicantsModals
 import { toast } from 'react-hot-toast'
 import { JobType } from './LinkedinAccountJobs'
 import { ApplicantType } from '../linkedinapplicants/LinkedinApplicantsTable'
+import { Document, Page, pdfjs } from 'react-pdf'
+
+import { useDisclosure } from '@mantine/hooks'
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -76,6 +81,11 @@ const useStyles = createStyles((theme) => ({
       alignItems: 'center',
     },
   },
+
+  pdfView: {
+    height: '80vh',
+    overflowY: 'scroll',
+  },
 }))
 
 export interface ModalType {
@@ -101,6 +111,10 @@ export const LinkedinJobApplicants = ({
   const [page, setPage] = useState(1)
   const [page_size, setPageSize] = useState(20)
 
+  const [pageNumber, setPageNumber] = useState(1)
+
+  const [opened, { open, close }] = useDisclosure(false)
+
   const [modal, setModal] = useState({
     open: false,
     size: 'md',
@@ -111,6 +125,23 @@ export const LinkedinJobApplicants = ({
 
   const statusColors = { ACTIVE: 'green', REJECT: '#fcba03', INVITED: 'blue' }
 
+  const previewModal = (url: string) => {
+    return (
+      <Modal opened={opened} onClose={close} size={'auto'}>
+        <div className="pdfView">
+          <Document file={url}>
+            <Page
+              key={`page_${pageNumber}`}
+              pageNumber={pageNumber}
+              renderAnnotationLayer={false}
+              renderTextLayer={false}
+            />
+          </Document>
+        </div>
+      </Modal>
+    )
+  }
+
   const applicantsList =
     applicants && applicants.length > 0 ? (
       applicants.map((applicant: ApplicantType, index: number) => (
@@ -119,8 +150,30 @@ export const LinkedinJobApplicants = ({
           <td>{new Date(applicant.updated_at).toLocaleDateString()}</td>
           <td>{applicant.linkedin_job_post_id}</td>
           <td>{applicant.name}</td>
-          <td style={{ color: 'purple' }}>
-            <a href={applicant.cv_link}>Link</a>
+          <td
+            style={{
+              color: 'purple',
+              display: 'flex',
+              alignContent: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            {applicant.cv_link && (
+              <>
+                <Button
+                  onClick={() => {
+                    open()
+                  }}
+                  variant="light"
+                  color="blue"
+                >
+                  preview
+                </Button>
+                <a href={applicant.cv_link}>Link</a>
+
+                {previewModal(applicant.cv_link)}
+              </>
+            )}
           </td>
           <td
             style={{
