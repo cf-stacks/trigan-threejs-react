@@ -183,20 +183,51 @@ const VisionPage: React.FC<any> = () => {
                   opportunities and collaborations.
                 </p>
               </div>
-            </div>
-            <div className="feature-box h-[307px] w-[360px] rounded-[40px]  bg-gray-500 md:w-[400px]">
-              <div className="pl-[27px] pt-[50px] md:pl-[39px]">
-                <div className="relative mb-[27px] text-white">
-                  <span className="absolute left-[6.8%] top-[25%] z-10 text-xl">
-                    5
-                  </span>
-                  <Image
-                    src="/images/bubble.svg"
-                    alt="trigan-symbol"
-                    width={60}
-                    height={60}
-                    loading="lazy"
-                  />
+
+              {/* Section #4 */}
+
+              <div className="mt-32 mb-6 sm:px-2">
+                <div className="text-center md:text-right">
+                  <button className="btn mr-2 rounded-full bg-slate-100 bg-opacity-25 py-1 px-3 text-sm text-white">
+                    #REVOLUTIONARY
+                  </button>
+                </div>
+                <div className="mt-5 text-center md:text-right">
+                  <p className="px-3 font-sans text-2xl font-medium text-white sm:text-3xl md:text-4xl lg:text-5xl">
+                    <span className="text-violet-600">The Future </span>
+                    is now
+                  </p>
+                </div>
+                <div className="flex flex-col md:mt-5 md:flex-row">
+                  <div className="hidden w-full items-center justify-center md:flex md:w-5/12">
+                    <div className="w-full">
+                      <Image
+                        src="/images/boy-standing.png"
+                        alt="boy-in-the-city"
+                        width={150}
+                        height={90}
+                        className='rounded-xl'
+                        layout="responsive"
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
+                  <div className="w-full text-justify md:w-7/12  md:text-right">
+                    <div className="px-4 md:px-8">
+                      <p className="my-8 text-sm font-normal leading-relaxed text-gray-400">
+                        Trigan's community funding mechanism and real-world relevant smart contracts offer a glimpse into the future of small business and local organisation growth and security. By joining Trigan, you can be a part of this exciting new era and take your business or organisation to new heights. The future is now - join Trigan today!
+                      </p>
+
+                      <div className="mt-5 text-center md:text-right">
+                        <button
+                          role="button"
+                          className="lg:text-md rounded-full border px-4 py-1 text-sm font-bold text-white hover:bg-red-700 md:ml-6 lg:py-2"
+                        >
+                          Early Access
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <h4 className="pb-[12px] text-2xl">Sense of Purpose</h4>
                 <p className="w-[327px] font-bold text-gray-300 md:w-[342px]">
