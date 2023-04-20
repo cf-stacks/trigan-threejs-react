@@ -64,6 +64,7 @@ const Dashboard: NextPage<DashboardProps> = () => {
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
+            Session: `${localStorage.getItem('session_key')}`
           },
         }
       )
@@ -99,6 +100,7 @@ const Dashboard: NextPage<DashboardProps> = () => {
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
+          Session: `${localStorage.getItem('session_key')}`
         },
       }
     )
@@ -123,6 +125,7 @@ const Dashboard: NextPage<DashboardProps> = () => {
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
+          Session: `${localStorage.getItem('session_key')}`
         },
       }
     )
@@ -143,6 +146,7 @@ const Dashboard: NextPage<DashboardProps> = () => {
           body: formData,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
+            Session: `${localStorage.getItem('session_key')}`
           },
         })
           .then((response) => response.json())

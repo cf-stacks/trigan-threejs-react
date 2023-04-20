@@ -44,6 +44,7 @@ const Comments: NextPage = () => {
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
+            Session: `${localStorage.getItem('session_key')}`
           },
         }
       )

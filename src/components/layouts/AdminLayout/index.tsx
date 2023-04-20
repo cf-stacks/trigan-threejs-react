@@ -93,6 +93,7 @@ const AppProvider = ({ children }: any) => {
       await axios.get(`${TEST_API_URL}/posts`, {
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
+          Session: `${localStorage.getItem('session_key')}`
         },
       })
       setIsLoggedIn(true)

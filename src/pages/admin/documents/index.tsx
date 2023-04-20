@@ -34,6 +34,7 @@ const Dashboard: NextPage<DashboardProps> = () => {
                 withCredentials: true,
                 headers: {
                     Authorization: `${localStorage.getItem('access_token')}`,
+                    Session: `${localStorage.getItem('session_key')}`
                 },
             })
 

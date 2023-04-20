@@ -67,6 +67,7 @@ const ModalCreate: React.FC<CommentsModalsType> = (props) => {
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
+            Session: `${localStorage.getItem('session_key')}`
           },
         }
       )
@@ -165,6 +166,7 @@ const ModalEdit: React.FC<CommentsModalsType> = (props) => {
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
+            Session: `${localStorage.getItem('session_key')}`
           },
         }
       )
@@ -243,6 +245,7 @@ const ModalDelete: React.FC<CommentsModalsType> = (props) => {
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
+            Session: `${localStorage.getItem('session_key')}`
           },
         }
       )
@@ -300,6 +303,7 @@ const ModalUpvote: React.FC<CommentsModalsType> = (props) => {
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
+            Session: `${localStorage.getItem('session_key')}`
           },
         }
       )

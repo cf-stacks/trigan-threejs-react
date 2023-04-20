@@ -47,6 +47,7 @@ const Accounts: NextPage = () => {
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
+          Session: `${localStorage.getItem('session_key')}`
         },
       })
       setAccounts(p.data.Data as []);

@@ -1,15 +1,15 @@
-import { NextPage } from 'next';
-import React, { useCallback, useEffect, useState, Dispatch, SetStateAction } from 'react';
-import { AdminLayout } from '../../../components/layouts/AdminLayout';
-import { Title } from '@mantine/core';
-import axios, { AxiosError } from 'axios';
-import { TEST_API_URL } from '../../../util/constants';
-import toast from 'react-hot-toast';
+import { NextPage } from 'next'
+import React, { useCallback, useEffect, useState, Dispatch, SetStateAction } from 'react'
+import { AdminLayout } from '../../../components/layouts/AdminLayout'
+import { Title } from '@mantine/core'
+import axios, { AxiosError } from 'axios'
+import { TEST_API_URL } from '../../../util/constants'
+import toast from 'react-hot-toast'
 // import { IconPlus, IconSearch } from '@tabler/icons';
-import { useRouter } from 'next/router';
-import TabHeaderAction from "../../../components/tabHeaderAction";
-import { ProposalsTable, MoadalType, ProposalType } from '../../../components/admin/proposals/ProposalsTable';
-import { ProposalsModals } from '../../../components/admin/proposals/ProposalsModals';
+import { useRouter } from 'next/router'
+import TabHeaderAction from "../../../components/tabHeaderAction"
+import { ProposalsTable, MoadalType, ProposalType } from '../../../components/admin/proposals/ProposalsTable'
+import { ProposalsModals } from '../../../components/admin/proposals/ProposalsModals'
 
 // const dummyData = [
 //     {
@@ -29,59 +29,60 @@ import { ProposalsModals } from '../../../components/admin/proposals/ProposalsMo
 // ]
 
 const Proposals: NextPage = () => {
-    const [search, setSearch] = useState('');
-    const [proposals, setProposals] = useState([]);
-    const [fetching, setFetching] = useState(false);
-    const [modal, setModal] = useState({ open: false, size: 'md', type: '' });
-    const [selectedProposal, setSelectedProposal] = useState<ProposalType>();
+    const [search, setSearch] = useState('')
+    const [proposals, setProposals] = useState([])
+    const [fetching, setFetching] = useState(false)
+    const [modal, setModal] = useState({ open: false, size: 'md', type: '' })
+    const [selectedProposal, setSelectedProposal] = useState<ProposalType>()
 
-    const router = useRouter();
+    const router = useRouter()
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-      if (e) e.preventDefault()
-      await fetchFunction()
+        if (e) e.preventDefault()
+        await fetchFunction()
     }
-    
+
     const fetchFunction = useCallback(async () => {
         setFetching(true)
-      // try {
-      //     // This endpoint must be updated
-      //     const p: any = await axios.get(`${TEST_API_URL}/user/proposal/getAll`, {
-      //       withCredentials: true,
-      //       headers: {
-      //         Authorization: `${localStorage.getItem('access_token')}`,
-      //       },
-      //     })
-      //     console.log(p.data.Data);
-      //     setProposals(p.data.Data as [])
-      //   } catch (error) {
-      //     console.log(error)
-      //     const err = error as AxiosError
-      //     if (err.response?.status as number === 401) {
-      //       await router.push('/admin/login')
-      //     }
-      //     toast.error('Something went wrong')
-      //   }
-        setFetching(false);
-    }, [router]);
+        // try {
+        //     // This endpoint must be updated
+        //     const p: any = await axios.get(`${TEST_API_URL}/user/proposal/getAll`, {
+        //       withCredentials: true,
+        //       headers: {
+        //         Authorization: `${localStorage.getItem('access_token')}`,
+        //   Session: `${localStorage.getItem('session_key')}`
+        //       },
+        //     })
+        //     console.log(p.data.Data);
+        //     setProposals(p.data.Data as [])
+        //   } catch (error) {
+        //     console.log(error)
+        //     const err = error as AxiosError
+        //     if (err.response?.status as number === 401) {
+        //       await router.push('/admin/login')
+        //     }
+        //     toast.error('Something went wrong')
+        //   }
+        setFetching(false)
+    }, [router])
 
     useEffect(() => {
-        void fetchFunction();
+        void fetchFunction()
     }, [fetchFunction])
     return (
         <AdminLayout>
             <Title align='center'>Proposals</Title>
-            <TabHeaderAction 
-                search={{ 
-                    value: search, 
-                    onChange: (e) => setSearch(e.target.value), 
+            <TabHeaderAction
+                search={{
+                    value: search,
+                    onChange: (e) => setSearch(e.target.value),
                     handleSubmit: handleSubmit
                 }}
-                create={{onClick: () => setModal({ open: true, type: 'create', size: '' }), text: "Create Proposal"}}
+                create={{ onClick: () => setModal({ open: true, type: 'create', size: '' }), text: "Create Proposal" }}
             />
 
             <section>
-                <ProposalsTable 
+                <ProposalsTable
                     proposals={proposals}
                     fetching={fetching}
                     setModal={setModal as Dispatch<SetStateAction<MoadalType>>}
@@ -90,7 +91,7 @@ const Proposals: NextPage = () => {
             </section>
 
             <div>
-                <ProposalsModals 
+                <ProposalsModals
                     modal={modal as MoadalType}
                     setModal={setModal as Dispatch<SetStateAction<MoadalType>>}
                     selectedProposal={selectedProposal as ProposalType}
@@ -100,6 +101,6 @@ const Proposals: NextPage = () => {
             </div>
         </AdminLayout>
     )
-};
+}
 
 export default Proposals

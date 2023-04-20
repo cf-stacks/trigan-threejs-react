@@ -77,6 +77,7 @@ export const ManageLanguagesModal = ({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
+            Session: `${localStorage.getItem('session_key')}`
           },
         })
 
@@ -103,6 +104,7 @@ export const ManageLanguagesModal = ({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
+            Session: `${localStorage.getItem('session_key')}`
           },
         })
       } else {
@@ -110,6 +112,7 @@ export const ManageLanguagesModal = ({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
+            Session: `${localStorage.getItem('session_key')}`
           },
         })
       }
@@ -126,6 +129,7 @@ export const ManageLanguagesModal = ({
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
+          Session: `${localStorage.getItem('session_key')}`
         },
       })
       toast.success('Deleted Successfully')
