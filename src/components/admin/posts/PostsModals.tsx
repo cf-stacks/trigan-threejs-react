@@ -187,6 +187,7 @@ export const PostsModals = ({
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
+          Session: `${localStorage.getItem('session_key')}`
         },
       })
       void fetchFunction()
@@ -212,6 +213,7 @@ export const PostsModals = ({
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
+          Session: `${localStorage.getItem('session_key')}`
         },
       })
       void fetchFunction()
@@ -238,6 +240,7 @@ export const PostsModals = ({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
+            Session: `${localStorage.getItem('session_key')}`
           },
         }
       )

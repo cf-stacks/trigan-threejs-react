@@ -47,6 +47,14 @@ const Login: React.FC<LoginProps> = () => {
         user.data.Data.Data.acess_token as string
       )
       console.log('saved to lcaol storage')
+
+      // get session key
+      const sessionData = await axios.post(`${TEST_API_URL}/session/create`)
+
+      if (sessionData.data.Success) {
+        localStorage.setItem('session_key', sessionData.data.Data.session as string)
+      }
+
       try {
         checkLoggedIn()
       } catch (error) {

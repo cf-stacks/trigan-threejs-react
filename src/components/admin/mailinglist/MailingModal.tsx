@@ -96,6 +96,7 @@ export const MailingCreateModal = ({
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
+          Session: `${localStorage.getItem('session_key')}`
         },
       })
       toast.success('Created Successfully')
@@ -120,6 +121,7 @@ export const MailingCreateModal = ({
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
+          Session: `${localStorage.getItem('session_key')}`
         },
         params: verfiyMailing
       })

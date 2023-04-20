@@ -19,6 +19,13 @@ export default withSessionRoute(async (req, res) => {
       // access_token: user.Data.access_token,
     }
 
+    // get session key
+    const sessionData = await axios.post(`${TEST_API_URL}/session/create`)
+
+    if (sessionData.data.Success) {
+      localStorage.setItem('session_key', sessionData.data.Data.session as string)
+    }
+
     await req.session.save()
     res.send('Logged in')
   } catch (error: any) {

@@ -124,6 +124,7 @@ export const PostsModals = ({
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
+          Session: `${localStorage.getItem('session_key')}`
         },
       })
       toast.success('Deleted Successfully')
@@ -160,6 +161,7 @@ export const PostsModals = ({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
+            Session: `${localStorage.getItem('session_key')}`
           },
         }
       )
@@ -196,6 +198,7 @@ export const PostsModals = ({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
+            Session: `${localStorage.getItem('session_key')}`
           },
         }
       )
@@ -223,6 +226,7 @@ export const PostsModals = ({
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
             'Content-Type': 'multipart/form-data',
+            Session: `${localStorage.getItem('session_key')}`
           },
         }
       )
@@ -247,6 +251,7 @@ export const PostsModals = ({
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
             'Content-Type': 'multipart/form-data',
+            Session: `${localStorage.getItem('session_key')}`
           },
         }
       )

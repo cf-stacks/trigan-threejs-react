@@ -76,6 +76,7 @@ const ModalCreate: React.FC<UsersModalsType> = (props) => {
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
+          Session: `${localStorage.getItem('session_key')}`
         },
       })
       toast.success('Created Successfully')
@@ -231,6 +232,7 @@ const ModalEdit: React.FC<UsersModalsType> = (props) => {
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
+          Session: `${localStorage.getItem('session_key')}`
         },
       })
       toast.success('Created Successfully')
@@ -355,6 +357,7 @@ const ModalDelete: React.FC<UsersModalsType> = (props) => {
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
+            Session: `${localStorage.getItem('session_key')}`
           },
         }
       )

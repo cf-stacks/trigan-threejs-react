@@ -35,6 +35,7 @@ const Teams: NextPage<TeamsProps> = () => {
         withCredentials: true,
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
+          Session: `${localStorage.getItem('session_key')}`
         },
         params: {
           apiKey: 'g436739d6734gd6734',

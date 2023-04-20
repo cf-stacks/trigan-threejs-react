@@ -64,6 +64,7 @@ export const ABtestingListTable = ({
           body: formData,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
+            Session: `${localStorage.getItem('session_key')}`
           },
         })
           .then((response) => response.json())
@@ -110,6 +111,7 @@ export const ABtestingListTable = ({
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
+          Session: `${localStorage.getItem('session_key')}`
         },
       }
     )
@@ -125,6 +127,7 @@ export const ABtestingListTable = ({
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
+          Session: `${localStorage.getItem('session_key')}`
         },
       }
     )
@@ -165,7 +168,7 @@ export const ABtestingListTable = ({
                 }
                 return accumulator
               },
-              initialValue)
+                initialValue)
 
               const newMaxWeight = (10 - sum * 10) / 10
               if (sum > 0 && sum < 1) {
@@ -261,7 +264,7 @@ export const ABtestingListTable = ({
                         }
                         return accumulator
                       },
-                      initialValue)
+                        initialValue)
                       console.log(sum)
 
                       const newMaxWeight = (10 - sum * 10) / 10

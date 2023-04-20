@@ -26,6 +26,7 @@ export const fetchJobs = async (options?: JobsOptionsType) => {
       withCredentials: true,
       headers: {
         Authorization: `${localStorage.getItem('access_token')}`,
+        Session: `${localStorage.getItem('session_key')}`
       },
       params,
     })
