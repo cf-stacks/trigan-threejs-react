@@ -67,7 +67,7 @@ const DocumentChanges: NextPage<DocumentChangesProps> = () => {
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
+          Session: `${sessionStorage.getItem('session_key')}`
         },
         signal: abortController.current.signal,
       })
@@ -109,7 +109,7 @@ const DocumentChanges: NextPage<DocumentChangesProps> = () => {
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            Session: `${sessionStorage.getItem('session_key')}`
           },
         }
       )

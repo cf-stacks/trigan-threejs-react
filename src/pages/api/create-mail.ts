@@ -14,7 +14,7 @@ export default async function CreateMail(
   try {
     await axios.post(`${API_URL}/mailinglist/create?apiKey=${API_KEY}`, values, {
       headers: {
-        Session: `${localStorage.getItem('session_key')}`
+        Session: `${sessionStorage.getItem('session_key')}`
       }
     })
     res.status(200).json({ success: true })

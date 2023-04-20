@@ -31,7 +31,12 @@ const Post: NextPage<PostProps> = ({ post }) => {
 
   const { data, error } = useSWR(
     `https://test1.trigan.org/api/v1/posts?page-size=${pageSize}&page=${page}&apiKey=g436739d6734gd6734`,
-    fetcher
+    fetcher,
+    {
+      headers: {
+        Session: `${sessionStorage.getItem('session_key')}`
+      }
+    }
   )
 
   const { id } = router.query
@@ -98,9 +103,8 @@ const Post: NextPage<PostProps> = ({ post }) => {
                       onClick={() => setTags(i)}
                     >
                       <span
-                        className={`flex flex flex-row flex-wrap items-center px-2 py-1.5 text-xl font-${
-                          tags === i ? 'semibold' : 'light'
-                        } leading-none text-white hover:cursor-pointer hover:opacity-50`}
+                        className={`flex flex flex-row flex-wrap items-center px-2 py-1.5 text-xl font-${tags === i ? 'semibold' : 'light'
+                          } leading-none text-white hover:cursor-pointer hover:opacity-50`}
                       >
                         {tag}
                       </span>
@@ -297,7 +301,12 @@ const Post: NextPage<PostProps> = ({ post }) => {
 export async function getServerSideProps(context: any) {
   // console.log('id', context.params.id)
   const res = await fetch(
-    `https://test1.trigan.org/api/v1/post/get-one/${context.params.id}?apiKey=g436739d6734gd6734`
+    `https://test1.trigan.org/api/v1/post/get-one/${context.params.id}?apiKey=g436739d6734gd6734`,
+    {
+      headers: {
+        Session: `${sessionStorage.getItem('session_key')}`
+      }
+    }
   )
   let post = await res.json()
   // console.log('post', post)

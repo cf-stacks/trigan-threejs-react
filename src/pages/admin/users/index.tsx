@@ -35,7 +35,7 @@ const Users: NextPage = () => {
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            Session: `${sessionStorage.getItem('session_key')}`
           },
         })
         setUsers(p.data.Data as [])
@@ -57,7 +57,7 @@ const Users: NextPage = () => {
             withCredentials: true,
             headers: {
               Authorization: `${localStorage.getItem('access_token')}`,
-              Session: `${localStorage.getItem('session_key')}`
+              Session: `${sessionStorage.getItem('session_key')}`
             },
             params: {
                 sortBy: sort ? sort.id : undefined,

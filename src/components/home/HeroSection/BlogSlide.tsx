@@ -24,7 +24,12 @@ const BlogSlide = () => {
 
   const { data } = useSWR(
     `https://test1.trigan.org/api/v1/posts?page-size=${pageSize}&page=${page}&apiKey=g436739d6734gd6734`,
-    fetcher
+    fetcher,
+    {
+      headers: {
+        Session: `${sessionStorage.getItem('session_key')}`
+      }
+    }
   )
 
   return !data ? (
@@ -203,7 +208,7 @@ const BlogSlide = () => {
           </span>
         </Swiper>
       </div>
-{/*
+      {/*
       <div className="m-auto mb-10 flex w-[100%] flex-row flex-wrap justify-center">
         {data?.map((BlogPost: any, i: number) => {
           const date = new Date(BlogPost.date_created)

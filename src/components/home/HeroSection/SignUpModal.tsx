@@ -65,7 +65,7 @@ export const SignUpModal = ({
         values,
         {
           headers: {
-            Session: `${localStorage.getItem('session_key')}`
+            Session: `${sessionStorage.getItem('session_key')}`
           }
         },
       )

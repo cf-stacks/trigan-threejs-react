@@ -1,7 +1,7 @@
 /* eslint-disable */
 // @ts-nocheck
 import { Component } from 'react'
-import GlobalLayout from '../components/layouts/GlobalLayout';
+import GlobalLayout from '../components/layouts/GlobalLayout'
 import MultiRangeSlider from '../components/shared/RangeSlider'
 import Stepper from '../components/shared/Stepper'
 import { BuyInstructions } from '../components/BuyInstructions'
@@ -153,7 +153,7 @@ class Buy extends Component {
       method: 'POST',
       url: 'https://auth.trigan.org/api/user/verify',
       data: { address: this.state.kycAddress },
-      headers: { api_key: process.env.NEXT_PUBLIC_WHITELIST_GET_API_KEY },
+      headers: { api_key: process.env.NEXT_PUBLIC_WHITELIST_GET_API_KEY, Session: `${sessionStorage.getItem('session_key')}` },
     })
 
     if (res.data.length === 0) {
@@ -436,7 +436,7 @@ class Buy extends Component {
     if (this.state.wrongChainNotif !== '') {
       return (
         <GlobalLayout showBanner={false}>
-          <SEO title="Buy" description='Buy TriganDao (TED) Token'/>
+          <SEO title="Buy" description='Buy TriganDao (TED) Token' />
           <div className="mx-auto my-14 h-48 max-w-lg p-2.5">
             <div className="flex flex-col items-center justify-center">
               <span className="relative inline-flex">

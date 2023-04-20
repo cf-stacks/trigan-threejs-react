@@ -149,7 +149,12 @@ export async function getServerSideProps() {
 
   try {
     const res = await fetch(
-      'https://test1.trigan.org/api/v1/posts?page-size=5&page=1&apiKey=g436739d6734gd6734'
+      'https://test1.trigan.org/api/v1/posts?page-size=5&page=1&apiKey=g436739d6734gd6734',
+      {
+        headers: {
+          Session: `${sessionStorage.getItem('session_key')}`
+        }
+      }
       /* `${process.env.URL}posts?&apiKey=${process.env.GET_API_KEY}`*/
     )
 
