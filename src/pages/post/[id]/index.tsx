@@ -303,12 +303,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
 export async function getServerSideProps(context: any) {
   // console.log('id', context.params.id)
   const res = await fetch(
-    `https://test1.trigan.org/api/v1/post/get-one/${context.params.id}?apiKey=g436739d6734gd6734`,
-    {
-      headers: {
-        Session: `${sessionStorage.getItem('session_key')}`
-      }
-    }
+    `https://test1.trigan.org/api/v1/post/get-one/${context.params.id}?apiKey=g436739d6734gd6734`
   )
   let post = await res.json()
   // console.log('post', post)

@@ -13,17 +13,12 @@ interface SearchResultProps {
   children?: ReactNode
   posts: BlogPost
 }
-const PostsByDateNoSSR: any = dynamic(() => import('../../../components/Posts/PostsByDate'), { ssr: false })
+const PostsByDateNoSSR:any= dynamic(() => import('../../../components/Posts/PostsByDate'),{ssr:false});
 
-export async function getServerSideProps(context: any) {
-  console.log("context value", context.params.searchresult)
+export async function getServerSideProps(context : any) {
+  console.log("context value",context.params.searchresult);
   const res = await fetch(
-    `https://test1.trigan.org/api/v1/posts/search?apiKey=g436739d6734gd6734&search=${context.params.searchresult}`,
-    {
-      headers: {
-        Session: `${sessionStorage.getItem('session_key')}`
-      }
-    }
+    `https://test1.trigan.org/api/v1/posts/search?apiKey=g436739d6734gd6734&search=${context.params.searchresult}`
   )
   let posts = await res.json()
   console.log(posts, 'postss resjson !!')
