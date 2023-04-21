@@ -22,6 +22,12 @@ export const LINKS = [
         title: 'Contact',
         link: '/contact', 
       },
+
+      {
+        title: 'Join the team',
+        link: '/about/join-the-team',
+        // link: '/about/trigan-citizenship', 
+      }
    /*   {
         title: 'Trigan Citizenship',
         link: '/about/trigan-citizenship', 
