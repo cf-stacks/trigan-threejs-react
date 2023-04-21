@@ -1,11 +1,11 @@
 import axios from 'axios'
-import {ReactNode} from 'react'
-import {useForm} from 'react-hook-form'
-import {toast} from 'react-hot-toast'
-import {ContactUsFormValues} from '../../../types/ContactUsFormValues'
-import {validateEmail} from '../../../util/functions'
-import {TextareaInputField} from '../../shared/Forms/TextareaInputField'
-import {TextInputField} from '../../shared/Forms/TextInputField'
+import { ReactNode } from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-hot-toast'
+import { ContactUsFormValues } from '../../../types/ContactUsFormValues'
+import { validateEmail } from '../../../util/functions'
+import { TextInputField } from '../../shared/Forms/TextInputField'
+import { TextareaInputField } from '../../shared/Forms/TextareaInputField'
 
 interface ContactUsFormProps {
   children?: ReactNode
@@ -17,7 +17,7 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = () => {
     handleSubmit,
     reset,
     formState: {
-      errors: {country, name, email, content, subject},
+      errors: { country, name, email, content, subject },
     },
   } = useForm<ContactUsFormValues>({
     defaultValues: {
@@ -25,19 +25,24 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = () => {
       name: '',
       email: '',
       content: '',
-      subject: ''
+      subject: '',
     },
   })
   const onSubmit = async (values: ContactUsFormValues) => {
-    console.log("Token====>", localStorage.getItem('access_token'))
+    console.log('Token====>', localStorage.getItem('access_token'))
     try {
       // await axios.post(`/api/create-mail`, values)
-      await axios.post(`https://test1.trigan.org/api/v1/mailing-early-access/create?apiKey=ABC123`, values, {
-        withCredentials: true,
-        headers: {
-          Authorization: `${localStorage.getItem('access_token')}`,
-        },
-      })
+      await axios.post(
+        `https://test1.trigan.org/api/v1/mailing-early-access/create?apiKey=ABC123`,
+        values,
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `${localStorage.getItem('access_token')}`,
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+          },
+        }
+      )
       reset()
       toast.success('Message Sent Successfully')
     } catch (e) {
@@ -45,8 +50,10 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = () => {
     }
   }
   return (
-    <div className="md:mt-5 lg:mt-0 home_form_input">
-      <h6 className="py-2 text-xl uppercase text-center md:text-left">Leave us a message</h6>
+    <div className="home_form_input md:mt-5 lg:mt-0">
+      <h6 className="py-2 text-center text-xl uppercase md:text-left">
+        Leave us a message
+      </h6>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-1">
         <TextInputField
           name="name"
@@ -54,7 +61,7 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = () => {
           control={control as any}
           error={name?.message}
           border="border-[#B4BEC8]"
-          style={{"margin-bottom":"5px"}as React.CSSProperties}
+          style={{ 'margin-bottom': '5px' } as React.CSSProperties}
         />
         <TextInputField
           name="subject"
@@ -62,12 +69,12 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = () => {
           control={control as any}
           error={subject?.message}
           border="border-[#B4BEC8]"
-          style={{"margin-bottom":"5px"} as React.CSSProperties}
+          style={{ 'margin-bottom': '5px' } as React.CSSProperties}
         />
         <TextInputField
           name="email"
           placeholder="Email Address"
-          style={{"margin-bottom":"5px"}as React.CSSProperties}
+          style={{ 'margin-bottom': '5px' } as React.CSSProperties}
           control={control as any}
           rules={{
             validate: {
@@ -83,7 +90,7 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = () => {
           control={control as any}
           error={country?.message}
           border="border-[#B4BEC8]"
-          style={{"margin-bottom":"5px"} as React.CSSProperties}
+          style={{ 'margin-bottom': '5px' } as React.CSSProperties}
         />
 
         <TextareaInputField
@@ -92,15 +99,17 @@ export const ContactUsForm: React.FC<ContactUsFormProps> = () => {
           control={control as any}
           error={content?.message}
           border="border-[#B4BEC8]"
-          style={{"margin-bottom":"5px"} as React.CSSProperties}
+          style={{ 'margin-bottom': '5px' } as React.CSSProperties}
         />
-        <div className='flex w-full justify-center pb-4'>
-          <button style={{"background": "#DC2626"} as React.CSSProperties}
-            className="rounded bg-gray-900 px-4 py-1.5 sm:text-sm md:text-lg text-light transition-all hover:bg-gray-900/80 w-full">
+        <div className="flex w-full justify-center pb-4">
+          <button
+            style={{ background: '#DC2626' } as React.CSSProperties}
+            className="w-full rounded bg-gray-900 px-4 py-1.5 text-light transition-all hover:bg-gray-900/80 sm:text-sm md:text-lg"
+          >
             Contact Us
           </button>
         </div>
-      </form> 
-    </div> 
-  ) 
+      </form>
+    </div>
+  )
 }

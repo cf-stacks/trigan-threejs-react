@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from 'react'
 import {
   Button,
-  Modal,
-  Title,
-  TextInput,
-  Textarea,
-  Select,
   Divider,
+  Modal,
+  Select,
+  Title,
   createStyles,
 } from '@mantine/core'
-import { ApplicantType, MoadalType } from './LinkedinApplicantsTable'
 import axios from 'axios'
-import { TEST_API_URL } from '../../../util/constants'
+import React, { useState } from 'react'
 import toast from 'react-hot-toast'
+import { TEST_API_URL } from '../../../util/constants'
+import { ApplicantType, MoadalType } from './LinkedinApplicantsTable'
 
 const useStyles = createStyles(() => ({
   inputContainer: {
@@ -70,7 +68,8 @@ const ModalEdit: React.FC<ApplicantsModalsType> = (props) => {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )

@@ -3,31 +3,30 @@
 
 // the requests are made on ***handleCreate, handleEdit and handleDelete*** functions
 
+import {
+  Button,
+  Divider,
+  Modal,
+  Text,
+  TextInput,
+  Title,
+  createStyles,
+} from '@mantine/core'
+import axios from 'axios'
 import React, {
-  useState,
-  useEffect,
   Dispatch,
   SetStateAction,
   useCallback,
+  useEffect,
+  useState,
 } from 'react'
-import {
-  Button,
-  Modal,
-  Title,
-  TextInput,
-  Divider,
-  createStyles,
-  Text,
-  Avatar,
-} from '@mantine/core'
-import axios from 'axios'
-import { ListItems } from './List'
-import { TEST_API_URL } from '../../../util/constants'
 import toast from 'react-hot-toast'
+import { IoClose } from 'react-icons/io5'
 import { BlogPost } from '../../../types/BlogPost'
 import { getErrorMsg } from '../../../util/api'
+import { TEST_API_URL } from '../../../util/constants'
 import RichTextEditor from '../content/RichText'
-import { IoClose } from 'react-icons/io5'
+import { ListItems } from './List'
 
 const useStyles = createStyles(() => ({
   inputContainer: {
@@ -187,7 +186,8 @@ export const PostsModals = ({
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
+          'Content-Language': `${localStorage.getItem('content-language')}`,
+          Session: `${localStorage.getItem('session_key')}`,
         },
       })
       void fetchFunction()
@@ -213,7 +213,8 @@ export const PostsModals = ({
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
+          'Content-Language': `${localStorage.getItem('content-language')}`,
+          Session: `${localStorage.getItem('session_key')}`,
         },
       })
       void fetchFunction()
@@ -240,7 +241,8 @@ export const PostsModals = ({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )

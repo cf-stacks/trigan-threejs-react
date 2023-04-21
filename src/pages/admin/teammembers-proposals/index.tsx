@@ -1,15 +1,15 @@
-import { Button, createStyles, Input, Title } from '@mantine/core';
-import { IconPlus, IconSearch } from '@tabler/icons';
-import axios, { AxiosError } from 'axios';
-import { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import React, { ReactNode, useCallback, useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
-import { PostsModals } from '../../../components/admin/teammembers-proposal/proposalModal';
-import { PostsTable } from '../../../components/admin/teammembers-proposal/proposalTable';
-import { AdminLayout } from '../../../components/layouts/AdminLayout';
-import { ConfirmModal } from '../../../components/shared/ConfirmModal';
-import { TEST_API_URL } from '../../../util/constants';
+import { Button, createStyles, Input, Title } from '@mantine/core'
+import { IconPlus, IconSearch } from '@tabler/icons'
+import axios, { AxiosError } from 'axios'
+import { NextPage } from 'next'
+import { useRouter } from 'next/router'
+import React, { ReactNode, useCallback, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+import { PostsModals } from '../../../components/admin/teammembers-proposal/proposalModal'
+import { PostsTable } from '../../../components/admin/teammembers-proposal/proposalTable'
+import { AdminLayout } from '../../../components/layouts/AdminLayout'
+import { ConfirmModal } from '../../../components/shared/ConfirmModal'
+import { TEST_API_URL } from '../../../util/constants'
 
 interface DashboardProps {
   children?: ReactNode
@@ -154,7 +154,8 @@ const Dashboard: NextPage<DashboardProps> = () => {
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
           params: {
             search,
@@ -190,7 +191,8 @@ const Dashboard: NextPage<DashboardProps> = () => {
             withCredentials: true,
             headers: {
               Authorization: `${localStorage.getItem('access_token')}`,
-              Session: `${localStorage.getItem('session_key')}`
+              'Content-Language': `${localStorage.getItem('content-language')}`,
+              Session: `${localStorage.getItem('session_key')}`,
             },
           }
         )

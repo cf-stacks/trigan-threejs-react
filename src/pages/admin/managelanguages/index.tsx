@@ -1,15 +1,16 @@
-import { NextPage } from 'next'
-import React, { ReactNode, useCallback, useEffect, useState } from 'react'
-import {
-  AdminLayout,
-} from '../../../components/layouts/AdminLayout'
-import { Button, createStyles, Title } from '@mantine/core'
-import axios from 'axios'
-import { TEST_API_URL } from '../../../util/constants'
-import toast from 'react-hot-toast'
+import { Button, Title, createStyles } from '@mantine/core'
 import { IconPlus } from '@tabler/icons'
+import axios from 'axios'
+import { NextPage } from 'next'
+import { ReactNode, useCallback, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+import {
+  Language,
+  ManageLanguagesModal,
+} from '../../../components/admin/managelanguages/ManageLanguagesModal'
 import { ManageLanguageTable } from '../../../components/admin/managelanguages/ManageLanguagesTable'
-import { Language, ManageLanguagesModal } from '../../../components/admin/managelanguages/ManageLanguagesModal'
+import { AdminLayout } from '../../../components/layouts/AdminLayout'
+import { TEST_API_URL } from '../../../util/constants'
 
 interface DashboardProps {
   children?: ReactNode
@@ -40,13 +41,17 @@ const Dashboard: NextPage<DashboardProps> = () => {
 
   const fetchFunction = useCallback(async () => {
     try {
-      const m = await axios.get<{ Data: Language[] }>(`${TEST_API_URL}/managelanguages/getAll`, {
-        withCredentials: true,
-        headers: {
-          Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
-        },
-      })
+      const m = await axios.get<{ Data: Language[] }>(
+        `${TEST_API_URL}/managelanguages/getAll`,
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `${localStorage.getItem('access_token')}`,
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
+          },
+        }
+      )
 
       setLanguages(m.data.Data || [])
     } catch (error) {
@@ -96,10 +101,7 @@ const Dashboard: NextPage<DashboardProps> = () => {
       </section>
 
       <div>
-        <ManageLanguagesModal
-          modal={modal}
-          setModal={setModal}
-        />
+        <ManageLanguagesModal modal={modal} setModal={setModal} />
       </div>
     </AdminLayout>
   )

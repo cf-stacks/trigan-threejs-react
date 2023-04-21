@@ -1,22 +1,22 @@
-import { NextPage } from 'next'
-import React, { ReactNode, useCallback, useEffect, useState } from 'react'
-import { AdminLayout } from '../../../components/layouts/AdminLayout'
 import {
   Box,
   Button,
   Container,
-  createStyles,
   Modal,
   NumberInput,
   Text,
   TextInput,
   Title,
   Tooltip,
+  createStyles,
 } from '@mantine/core'
-import axios from 'axios'
-import { GET_API_KEY, TEST_API_URL } from '../../../util/constants'
-import toast from 'react-hot-toast'
 import { IconPlus } from '@tabler/icons'
+import axios from 'axios'
+import { NextPage } from 'next'
+import React, { ReactNode, useCallback, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+import { AdminLayout } from '../../../components/layouts/AdminLayout'
+import { GET_API_KEY, TEST_API_URL } from '../../../util/constants'
 // import {
 //   ContentListTable,
 //   DynamicContent,
@@ -65,7 +65,8 @@ const Dashboard: NextPage<DashboardProps> = () => {
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )
@@ -98,7 +99,8 @@ const Dashboard: NextPage<DashboardProps> = () => {
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
+          'Content-Language': `${localStorage.getItem('content-language')}`,
+          Session: `${localStorage.getItem('session_key')}`,
         },
       }
     )
@@ -116,7 +118,8 @@ const Dashboard: NextPage<DashboardProps> = () => {
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
+          'Content-Language': `${localStorage.getItem('content-language')}`,
+          Session: `${localStorage.getItem('session_key')}`,
         },
       }
     )
@@ -137,7 +140,8 @@ const Dashboard: NextPage<DashboardProps> = () => {
           body: formData,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
         })
           .then((response) => response.json())
