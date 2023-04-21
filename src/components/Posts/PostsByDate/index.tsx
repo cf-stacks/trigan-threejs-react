@@ -25,6 +25,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
   //on load, all posts are fetched directly from api and set to state so sidebar can show all tags
   useLayoutEffect(() => {
     fetch('https://test1.trigan.org/api/v1/posts?apiKey=g436739d6734gd6734', {
+      mode: 'no-cors',
       headers: {
         Session: `${sessionStorage.getItem('session_key')}`
       }

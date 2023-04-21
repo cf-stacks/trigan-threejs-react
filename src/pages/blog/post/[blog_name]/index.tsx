@@ -30,19 +30,20 @@ const Post: NextPage<PostProps> = ({ post }) => {
   const [pageSize, setPageSize] = useState(20)
 
   const fetcher = (url: string) =>
-    fetch(url).then(async (r) => {
-      let resPosts = await r.json()
-      return resPosts.posts
-    })
+    fetch(url,
+      {
+        mode: 'no-cors',
+        headers: {
+          Session: `${sessionStorage.getItem('session_key')}`
+        }
+      }).then(async (r) => {
+        let resPosts = await r.json()
+        return resPosts.posts
+      })
 
   const { data, error }: { data: BlogPost[], error: any } = useSWR(
     `https://test1.trigan.org/api/v1/posts?page-size=${pageSize}&page=${page}&apiKey=g436739d6734gd6734`,
-    fetcher,
-    {
-      headers: {
-        Session: `${sessionStorage.getItem('session_key')}`
-      }
-    }
+    fetcher
   )
 
   const { blog_name } = router.query
