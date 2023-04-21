@@ -67,7 +67,7 @@ export const ContentListTable = ({
           body: formData,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            Session: `${sessionStorage.getItem('session_key')}`
           },
         })
           .then((response) => response.json())
@@ -109,7 +109,7 @@ export const ContentListTable = ({
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
+          Session: `${sessionStorage.getItem('session_key')}`
         },
       }
     )

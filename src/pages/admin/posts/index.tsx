@@ -132,7 +132,7 @@ const Dashboard: NextPage<DashboardProps> = () => {
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
+          Session: `${sessionStorage.getItem('session_key')}`
         },
         params: {
             sortBy: sort ? sort.id : undefined,

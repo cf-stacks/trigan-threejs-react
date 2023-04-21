@@ -17,7 +17,7 @@ export const Modal: React.FC<ModalProps> = () => {
           `${AUTH_API_URL}/user/${address}?api_key=${AUTH_API_KEY}`,
           {
             headers: {
-              Session: `${localStorage.getItem('session_key')}`
+              Session: `${sessionStorage.getItem('session_key')}`
             }
           }
         )

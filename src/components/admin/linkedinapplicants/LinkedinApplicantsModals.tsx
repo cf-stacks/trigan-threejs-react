@@ -70,7 +70,7 @@ const ModalEdit: React.FC<ApplicantsModalsType> = (props) => {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            Session: `${sessionStorage.getItem('session_key')}`
           },
         }
       )

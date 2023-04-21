@@ -30,10 +30,16 @@ const Post: NextPage<PostProps> = ({ post }) => {
   const [pageSize, setPageSize] = useState(20)
 
   const fetcher = (url: string) =>
-    fetch(url).then(async (r) => {
-      let resPosts = await r.json()
-      return resPosts.posts
-    })
+    fetch(url,
+      {
+        mode: 'no-cors',
+        headers: {
+          Session: `${sessionStorage.getItem('session_key')}`
+        }
+      }).then(async (r) => {
+        let resPosts = await r.json()
+        return resPosts.posts
+      })
 
   const { data, error }: { data: BlogPost[], error: any } = useSWR(
     `https://test1.trigan.org/api/v1/posts?page-size=${pageSize}&page=${page}&apiKey=g436739d6734gd6734`,
@@ -45,11 +51,11 @@ const Post: NextPage<PostProps> = ({ post }) => {
   //this function now converts base64 to utf-8 on client and on server side to prevent hydration errors
   //also, buffer returns valid characters
   function b64_to_utf8(char: string) {
-    return Buffer.from(char, 'base64').toString('utf-8');
+    return Buffer.from(char, 'base64').toString('utf-8')
   }
 
   //removes duplicate tags and limits categories array length to 1
-  removeDuplicates(post);
+  removeDuplicates(post)
 
   return (
 
@@ -104,7 +110,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                       onClick={() => {
                         router.push({
                           pathname: '/blog',
-                          query: { cat: cat},
+                          query: { cat: cat },
                         })
                       }}
                     >
@@ -131,7 +137,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                       onClick={() => {
                         router.push({
                           pathname: '/blog',
-                          query: { tag: tag},
+                          query: { tag: tag },
                         })
                       }}
                     >
@@ -327,17 +333,22 @@ const Post: NextPage<PostProps> = ({ post }) => {
 function removeDuplicates(post: ApiPostData) {
 
   while (post.data.categories.length > 1) {
-    post.data.categories.pop();
+    post.data.categories.pop()
   }
 
-  post.data.tags=post.data.tags.filter((tag, index) => post.data.tags.indexOf(tag) === index);
+  post.data.tags = post.data.tags.filter((tag, index) => post.data.tags.indexOf(tag) === index)
 
 };
 
 
 export async function getServerSideProps(context: any) {
   const res = await fetch(
-    `https://test1.trigan.org/api/v1/post/get-one/slug/${context.query.blog_name}?apiKey=g436739d6734gd6734`
+    `https://test1.trigan.org/api/v1/post/get-one/slug/${context.query.blog_name}?apiKey=g436739d6734gd6734`,
+    {
+      headers: {
+        Session: `${sessionStorage.getItem('session_key')}`
+      }
+    }
   )
   const post = await res.json()
   return {

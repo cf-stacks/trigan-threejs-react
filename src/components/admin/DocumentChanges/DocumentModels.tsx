@@ -146,7 +146,7 @@ function InputModal({ type, open, document, onClose }: any) {
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
+          Session: `${sessionStorage.getItem('session_key')}`
         },
       })
       toast.success('Created Successfully')
@@ -178,7 +178,7 @@ function InputModal({ type, open, document, onClose }: any) {
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            Session: `${sessionStorage.getItem('session_key')}`
           },
         }
       )
@@ -321,7 +321,7 @@ function DocumentChangesModal({
               withCredentials: true,
               headers: {
                 Authorization: `${localStorage.getItem('access_token')}`,
-                Session: `${localStorage.getItem('session_key')}`
+                Session: `${sessionStorage.getItem('session_key')}`
               },
             }
           )
@@ -345,7 +345,7 @@ function DocumentChangesModal({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            Session: `${sessionStorage.getItem('session_key')}`
           },
         }
       )
@@ -363,7 +363,7 @@ function DocumentChangesModal({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            Session: `${sessionStorage.getItem('session_key')}`
           },
         }
       )
@@ -381,7 +381,7 @@ function DocumentChangesModal({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            Session: `${sessionStorage.getItem('session_key')}`
           },
         }
       )
@@ -408,7 +408,7 @@ function DocumentChangesModal({
             withCredentials: true,
             headers: {
               Authorization: `${localStorage.getItem('access_token')}`,
-              Session: `${localStorage.getItem('session_key')}`
+              Session: `${sessionStorage.getItem('session_key')}`
             },
           }
         )

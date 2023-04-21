@@ -7,11 +7,24 @@ import { PRIMARY_COLOR } from '../util/constants'
 import { EarlyAccessModalProvider } from '../context/EarlyAccessModalContext'
 import { ThemeProvider } from 'next-themes'
 import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { TEST_API_URL } from '../util/constants'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [mounted, setMounted] = useState(false)
+
   useEffect(() => {
-    setMounted(true)
+    (async () => {
+      setMounted(true)
+
+      if (!sessionStorage.getItem('session_key')) {
+        const sessionData = await axios.post(`${TEST_API_URL}/session/create`)
+
+        if (sessionData.data.Success) {
+          sessionStorage.setItem('session_key', sessionData.data.Data.session as string)
+        }
+      }
+    })()
   }, [])
   if (!mounted) return null
   return (
