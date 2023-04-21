@@ -35,6 +35,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
         return resPosts.posts
       })
 
+      //
   const { data, error } = useSWR(
     `https://test1.trigan.org/api/v1/posts?page-size=${pageSize}&page=${page}&apiKey=g436739d6734gd6734`,
     fetcher
