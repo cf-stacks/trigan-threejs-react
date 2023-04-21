@@ -16,10 +16,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     (async () => {
       setMounted(true)
-      const sessionData = await axios.post(`${TEST_API_URL}/session/create`)
 
-      if (sessionData.data.Success) {
-        sessionStorage.setItem('session_key', sessionData.data.Data.session as string)
+      if (!sessionStorage.getItem('session_key')) {
+        const sessionData = await axios.post(`${TEST_API_URL}/session/create`)
+
+        if (sessionData.data.Success) {
+          sessionStorage.setItem('session_key', sessionData.data.Data.session as string)
+        }
       }
     })()
   }, [])
