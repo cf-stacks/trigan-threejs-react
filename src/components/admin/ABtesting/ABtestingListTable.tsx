@@ -64,7 +64,7 @@ export const ABtestingListTable = ({
           body: formData,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${sessionStorage.getItem('session_key')}`
+            Session: `${localStorage.getItem('session_key')}`
           },
         })
           .then((response) => response.json())
@@ -111,7 +111,7 @@ export const ABtestingListTable = ({
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${sessionStorage.getItem('session_key')}`
+          Session: `${localStorage.getItem('session_key')}`
         },
       }
     )
@@ -127,7 +127,7 @@ export const ABtestingListTable = ({
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${sessionStorage.getItem('session_key')}`
+          Session: `${localStorage.getItem('session_key')}`
         },
       }
     )

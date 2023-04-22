@@ -19,14 +19,14 @@ const BlogSlide = () => {
   const fetcher = (url: any) =>
     fetch(url,
       {
-        mode: 'no-cors',
         headers: {
-          Session: `${sessionStorage.getItem('session_key')}`
+          Session: `${localStorage.getItem('session_key')}`
         }
-      }).then(async (r) => {
-        let resPosts = await r.json()
-        return resPosts.posts
-      })
+      }
+    ).then(async (r) => {
+      let resPosts = await r.json()
+      return resPosts.posts
+    })
 
   const { data } = useSWR(
     `https://test1.trigan.org/api/v1/posts?page-size=${pageSize}&page=${page}&apiKey=g436739d6734gd6734`,
