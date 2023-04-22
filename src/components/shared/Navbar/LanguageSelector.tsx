@@ -1,22 +1,22 @@
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { Fragment, useState } from 'react'
-import { languageCountryCode } from './language_country_code'
+import { countryLanguageCode } from './language_country_code'
 
 const LanguageSelector = () => {
   const [isOpen, setOpen] = useState(false)
   const [flagCode, setFlagCode] = useState(
-    localStorage.getItem('countryCode') || 'US'
+    localStorage.getItem('countryCode') || 'GB'
   )
 
-  const setLanguage = (countryCode) => {
+  const setLanguage = (countryCode: string) => {
     setFlagCode(countryCode)
 
     localStorage.setItem('countryCode', countryCode)
 
     localStorage.setItem(
       'content-language',
-      languageCountryCode[countryCode].languages[0]
+      (countryLanguageCode as any)[countryCode].languages[0]
     )
   }
 
@@ -53,31 +53,14 @@ const LanguageSelector = () => {
                     className={`flex w-full items-center rounded-lg px-2 py-2 text-gray-800 ${
                       active && 'bg-gray-200'
                     }`}
-                    onClick={() => setLanguage('US')}
+                    onClick={() => setLanguage('GB')}
                   >
                     <img
                       className="mr-2 h-5 w-5"
                       alt={''}
-                      src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg`}
+                      src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg`}
                     />
-                    United States
-                  </button>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`flex w-full items-center rounded-lg px-2 py-2 text-gray-800 ${
-                      active && 'bg-gray-200'
-                    }`}
-                    onClick={() => setLanguage('IT')}
-                  >
-                    <img
-                      className="mr-2 h-5 w-5"
-                      alt={''}
-                      src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/IT.svg`}
-                    />
-                    Italy
+                    United Kingdom
                   </button>
                 )}
               </Menu.Item>
@@ -104,6 +87,23 @@ const LanguageSelector = () => {
                     className={`flex w-full items-center rounded-lg px-2 py-2 text-gray-800 ${
                       active && 'bg-gray-200'
                     }`}
+                    onClick={() => setLanguage('FR')}
+                  >
+                    <img
+                      className="mr-2 h-5 w-5"
+                      alt={''}
+                      src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/FR.svg`}
+                    />
+                    France
+                  </button>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    className={`flex w-full items-center rounded-lg px-2 py-2 text-gray-800 ${
+                      active && 'bg-gray-200'
+                    }`}
                     onClick={() => setLanguage('DE')}
                   >
                     <img
@@ -121,14 +121,14 @@ const LanguageSelector = () => {
                     className={`flex w-full items-center rounded-lg px-2 py-2 text-gray-800 ${
                       active && 'bg-gray-200'
                     }`}
-                    onClick={() => setLanguage('FR')}
+                    onClick={() => setLanguage('IT')}
                   >
                     <img
                       className="mr-2 h-5 w-5"
                       alt={''}
-                      src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/FR.svg`}
+                      src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/IT.svg`}
                     />
-                    France
+                    Italy
                   </button>
                 )}
               </Menu.Item>
