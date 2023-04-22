@@ -343,12 +343,7 @@ function removeDuplicates(post: ApiPostData) {
 
 export async function getServerSideProps(context: any) {
   const res = await fetch(
-    `https://test1.trigan.org/api/v1/post/get-one/slug/${context.query.blog_name}?apiKey=g436739d6734gd6734`,
-    {
-      headers: {
-        Session: `${sessionStorage.getItem('session_key')}`
-      }
-    }
+    `https://test1.trigan.org/api/v1/post/get-one/slug/${context.query.blog_name}?apiKey=g436739d6734gd6734`
   )
   const post = await res.json()
   return {

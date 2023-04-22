@@ -24,12 +24,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
 
   //on load, all posts are fetched directly from api and set to state so sidebar can show all tags
   useLayoutEffect(() => {
-    fetch('https://test1.trigan.org/api/v1/posts?apiKey=g436739d6734gd6734', {
-      mode: 'no-cors',
-      headers: {
-        Session: `${sessionStorage.getItem('session_key')}`
-      }
-    })
+    fetch('https://test1.trigan.org/api/v1/posts?apiKey=g436739d6734gd6734')
       .then(response => response.json())
       .then(data => setPosts(data))
       .catch(error => console.error(error))
@@ -270,7 +265,7 @@ function removeDuplicates(data: BlogPost) {
   let tagsArrayPosts: any[] = []
   let catsArrayPosts: any[] = []
 
-  data.posts.forEach((post: BlogPost) => {
+  data?.posts?.forEach((post: BlogPost) => {
     for (let i = 0; i < post.tags.length; i++) {
       tagsArrayPosts.push(post.tags[i])
     }
