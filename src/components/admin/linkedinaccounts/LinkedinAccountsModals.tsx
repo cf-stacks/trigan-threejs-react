@@ -69,7 +69,7 @@ const ModalCreate: React.FC<AccountsModalsType> = (props) => {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${sessionStorage.getItem('session_key')}`
+          Session: `${localStorage.getItem('session_key')}`
         },
       })
       toast.success('Created Successfully')
@@ -194,7 +194,7 @@ const ModalEdit: React.FC<AccountsModalsType> = (props) => {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${sessionStorage.getItem('session_key')}`
+          Session: `${localStorage.getItem('session_key')}`
         },
       })
       toast.success('Updated Successfully')
@@ -267,7 +267,7 @@ const ModalDelete: React.FC<AccountsModalsType> = (props) => {
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${sessionStorage.getItem('session_key')}`
+          Session: `${localStorage.getItem('session_key')}`
         },
       })
       toast.success('Deleted Successfully')

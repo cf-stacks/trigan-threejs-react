@@ -45,7 +45,7 @@ const Applicants: NextPage = () => {
                 withCredentials: true,
                 headers: {
                   Authorization: `${localStorage.getItem('access_token')}`,
-                  Session: `${sessionStorage.getItem('session_key')}`
+                  Session: `${localStorage.getItem('session_key')}`
                 },
               }
           );

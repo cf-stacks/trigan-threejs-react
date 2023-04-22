@@ -96,7 +96,7 @@ export const MilestoneModals = ({
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${sessionStorage.getItem('session_key')}`
+          Session: `${localStorage.getItem('session_key')}`
         },
       })
       void fetchFunction()
@@ -121,7 +121,7 @@ export const MilestoneModals = ({
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${sessionStorage.getItem('session_key')}`
+          Session: `${localStorage.getItem('session_key')}`
         },
       })
       void fetchFunction()
@@ -147,7 +147,7 @@ export const MilestoneModals = ({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${sessionStorage.getItem('session_key')}`
+            Session: `${localStorage.getItem('session_key')}`
           },
         }
       )
@@ -167,7 +167,7 @@ export const MilestoneModals = ({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${sessionStorage.getItem('session_key')}`
+            Session: `${localStorage.getItem('session_key')}`
           },
         }
       )
@@ -184,7 +184,7 @@ export const MilestoneModals = ({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${sessionStorage.getItem('session_key')}`
+            Session: `${localStorage.getItem('session_key')}`
           },
         }
       )

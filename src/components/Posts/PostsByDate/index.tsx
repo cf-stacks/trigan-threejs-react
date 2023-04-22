@@ -24,7 +24,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
     fetch('https://test1.trigan.org/api/v1/posts?apiKey=g436739d6734gd6734',
       {
         headers: {
-          Session: `${sessionStorage.getItem('session_key')}`
+          Session: `${localStorage.getItem('session_key')}`
         }
       }
     )

@@ -153,7 +153,7 @@ class Buy extends Component {
       method: 'POST',
       url: 'https://auth.trigan.org/api/user/verify',
       data: { address: this.state.kycAddress },
-      headers: { api_key: process.env.NEXT_PUBLIC_WHITELIST_GET_API_KEY, Session: `${sessionStorage.getItem('session_key')}` },
+      headers: { api_key: process.env.NEXT_PUBLIC_WHITELIST_GET_API_KEY, Session: `${localStorage.getItem('session_key')}` },
     })
 
     if (res.data.length === 0) {

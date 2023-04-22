@@ -29,7 +29,7 @@ export const fetchApplicants = async (options?: ApplicantOptionsType) => {
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${sessionStorage.getItem('session_key')}`
+          Session: `${localStorage.getItem('session_key')}`
         },
         params,
       }

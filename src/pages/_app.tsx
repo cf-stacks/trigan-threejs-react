@@ -17,11 +17,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     (async () => {
       setMounted(true)
 
-      if (!sessionStorage.getItem('session_key')) {
+      if (!localStorage.getItem('session_key')) {
         const sessionData = await axios.post(`${TEST_API_URL}/session/create`)
 
         if (sessionData.data.Success) {
-          sessionStorage.setItem('session_key', sessionData.data.Data.session as string)
+          localStorage.setItem('session_key', sessionData.data.Data.session as string)
         }
       }
     })()

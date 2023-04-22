@@ -33,7 +33,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
     fetch(url,
       {
         headers: {
-          Session: `${sessionStorage.getItem('session_key')}`
+          Session: `${localStorage.getItem('session_key')}`
         }
       }
     ).then(async (r) => {
