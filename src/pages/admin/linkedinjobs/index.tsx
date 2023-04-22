@@ -18,7 +18,6 @@ const Jobs: NextPage = () => {
         fetcher: async (url: string) => {
             const res = await fetch(url,
                 {
-                    mode: 'no-cors',
                     headers: {
                         Authorization: `${localStorage.getItem('access_token')}`,
                         Session: `${sessionStorage.getItem('session_key')}`

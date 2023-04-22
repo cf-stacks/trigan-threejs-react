@@ -4,9 +4,6 @@ import { BlogPost } from '../../../types/BlogPost'
 import { FadeInWhenVisible } from '../../shared/FadeInWhenVisible'
 import Link from 'next/link'
 import router, { useRouter } from 'next/router'
-import useSWR from 'swr'
-// import Image from 'next/image'
-
 interface PostsByDateProps {
   children?: ReactNode
   posts: BlogPost
@@ -24,7 +21,13 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
 
   //on load, all posts are fetched directly from api and set to state so sidebar can show all tags
   useLayoutEffect(() => {
-    fetch('https://test1.trigan.org/api/v1/posts?apiKey=g436739d6734gd6734')
+    fetch('https://test1.trigan.org/api/v1/posts?apiKey=g436739d6734gd6734',
+      {
+        headers: {
+          Session: `${sessionStorage.getItem('session_key')}`
+        }
+      }
+    )
       .then(response => response.json())
       .then(data => setPosts(data))
       .catch(error => console.error(error))
