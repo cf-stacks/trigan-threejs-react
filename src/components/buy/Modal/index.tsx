@@ -14,7 +14,12 @@ export const Modal: React.FC<ModalProps> = () => {
     if (address) {
       try {
         const { data } = await axios.get(
-          `${AUTH_API_URL}/user/${address}?api_key=${AUTH_API_KEY}`
+          `${AUTH_API_URL}/user/${address}?api_key=${AUTH_API_KEY}`,
+          {
+            headers: {
+              Session: `${localStorage.getItem('session_key')}`
+            }
+          }
         )
         console.log('data: ', data)
       } catch (e) {

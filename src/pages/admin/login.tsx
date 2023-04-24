@@ -47,6 +47,7 @@ const Login: React.FC<LoginProps> = () => {
         user.data.Data.Data.acess_token as string
       )
       console.log('saved to lcaol storage')
+
       try {
         checkLoggedIn()
       } catch (error) {

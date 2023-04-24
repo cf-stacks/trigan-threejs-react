@@ -62,7 +62,12 @@ export const SignUpModal = ({
     try {
       await axios.post(
         `${TEST_API_URL}/mailing-early-access/create?apiKey=ABC123`,
-        values
+        values,
+        {
+          headers: {
+            Session: `${localStorage.getItem('session_key')}`
+          }
+        },
       )
       reset()
       toast.success('Signup Request Received!')

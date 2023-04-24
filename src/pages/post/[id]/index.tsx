@@ -24,7 +24,13 @@ const Post: NextPage<PostProps> = ({ post }) => {
   const [pageSize, setPageSize] = useState(20)
 
   const fetcher = (url: string) =>
-    fetch(url).then(async (r) => {
+    fetch(url,
+      {
+        headers: {
+          Session: `${localStorage.getItem('session_key')}`
+        }
+      }
+    ).then(async (r) => {
       let resPosts = await r.json()
       return resPosts.posts
     })
@@ -98,9 +104,8 @@ const Post: NextPage<PostProps> = ({ post }) => {
                       onClick={() => setTags(i)}
                     >
                       <span
-                        className={`flex flex flex-row flex-wrap items-center px-2 py-1.5 text-xl font-${
-                          tags === i ? 'semibold' : 'light'
-                        } leading-none text-white hover:cursor-pointer hover:opacity-50`}
+                        className={`flex flex flex-row flex-wrap items-center px-2 py-1.5 text-xl font-${tags === i ? 'semibold' : 'light'
+                          } leading-none text-white hover:cursor-pointer hover:opacity-50`}
                       >
                         {tag}
                       </span>

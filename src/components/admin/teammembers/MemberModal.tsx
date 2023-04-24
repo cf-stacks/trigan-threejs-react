@@ -124,6 +124,7 @@ export const PostsModals = ({
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
+          Session: `${localStorage.getItem('session_key')}`
         },
       })
       toast.success('Deleted Successfully')
@@ -160,6 +161,7 @@ export const PostsModals = ({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
+            Session: `${localStorage.getItem('session_key')}`
           },
         }
       )
@@ -196,11 +198,12 @@ export const PostsModals = ({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
+            Session: `${localStorage.getItem('session_key')}`
           },
         }
       )
       toast.success('Created Successfully')
-      void fetchFunction();
+      void fetchFunction()
       setModal({ ...modal, open: false })
     } catch (error) {
       toast.error(getErrorMsg(error))
@@ -223,6 +226,7 @@ export const PostsModals = ({
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
             'Content-Type': 'multipart/form-data',
+            Session: `${localStorage.getItem('session_key')}`
           },
         }
       )
@@ -247,6 +251,7 @@ export const PostsModals = ({
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
             'Content-Type': 'multipart/form-data',
+            Session: `${localStorage.getItem('session_key')}`
           },
         }
       )
@@ -694,7 +699,7 @@ export const PostsModals = ({
               type="submit"
               color="blue"
               mr={'1rem'}
-              //   onClick={handleEditIcon}
+            //   onClick={handleEditIcon}
             >
               Update
             </Button>

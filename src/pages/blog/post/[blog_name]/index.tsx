@@ -30,7 +30,13 @@ const Post: NextPage<PostProps> = ({ post }) => {
   const [pageSize, setPageSize] = useState(20)
 
   const fetcher = (url: string) =>
-    fetch(url).then(async (r) => {
+    fetch(url,
+      {
+        headers: {
+          Session: `${localStorage.getItem('session_key')}`
+        }
+      }
+    ).then(async (r) => {
       let resPosts = await r.json()
       return resPosts.posts
     })
@@ -45,11 +51,11 @@ const Post: NextPage<PostProps> = ({ post }) => {
   //this function now converts base64 to utf-8 on client and on server side to prevent hydration errors
   //also, buffer returns valid characters
   function b64_to_utf8(char: string) {
-    return Buffer.from(char, 'base64').toString('utf-8');
+    return Buffer.from(char, 'base64').toString('utf-8')
   }
 
   //removes duplicate tags and limits categories array length to 1
-  removeDuplicates(post);
+  removeDuplicates(post)
 
   return (
 
@@ -104,7 +110,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                       onClick={() => {
                         router.push({
                           pathname: '/blog',
-                          query: { cat: cat},
+                          query: { cat: cat },
                         })
                       }}
                     >
@@ -131,7 +137,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                       onClick={() => {
                         router.push({
                           pathname: '/blog',
-                          query: { tag: tag},
+                          query: { tag: tag },
                         })
                       }}
                     >
@@ -327,10 +333,10 @@ const Post: NextPage<PostProps> = ({ post }) => {
 function removeDuplicates(post: ApiPostData) {
 
   while (post.data.categories.length > 1) {
-    post.data.categories.pop();
+    post.data.categories.pop()
   }
 
-  post.data.tags=post.data.tags.filter((tag, index) => post.data.tags.indexOf(tag) === index);
+  post.data.tags = post.data.tags.filter((tag, index) => post.data.tags.indexOf(tag) === index)
 
 };
 
