@@ -3,6 +3,10 @@ export const LINKS = [
     title: 'About',
     additionalLinks: [
       {
+        title: 'About us',
+        link: '/about/about-us', 
+      },
+      {
         title:'Trigan Videos',
         link:'/#triganVideos',
       },
@@ -23,11 +27,7 @@ export const LINKS = [
         link: '/contact', 
       },
 
-      {
-        title: 'Join the team',
-        link: '/about/join-the-team',
-        // link: '/about/trigan-citizenship', 
-      }
+  
    /*   {
         title: 'Trigan Citizenship',
         link: '/about/trigan-citizenship', 
