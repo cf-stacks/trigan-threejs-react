@@ -17,6 +17,7 @@ import {
 } from '../../../services/linkedin-applicants'
 import { useColumns } from '../../../table-columns/applicants'
 import Table from '../../Table'
+import { PdfPreview } from '../PdfPreview'
 import { SearchInput } from '../SearchInput'
 import { ApplicantsModals } from '../linkedinapplicants/LinkedinApplicantsModals'
 import { JobType } from './LinkedinAccountJobs'
@@ -50,6 +51,8 @@ export const LinkedinJobApplicants = ({
   const [applicants, setApplicants] = useState([])
   const [applicant, setApplicant] = useState<ApplicantType>()
   const [selectedCvLink, setSelectedCvLink] = useState('')
+  const [pdfDocument, setPdfDocument] = useState('')
+  const [loadingPdf, setLoadingPdf] = useState(false)
 
   const [fetchingApplicants, setFetchingApplicant] = useState(false)
 
@@ -185,6 +188,12 @@ export const LinkedinJobApplicants = ({
         )}
       </div>
       <div>
+        <PdfPreview
+          pdfDocument={pdfDocument}
+          loadingPdf={loadingPdf}
+          cvLink={selectedCvLink}
+          setSelectedCvLink={setSelectedCvLink}
+        />
         <ApplicantsModals
           modal={modal as ModalType}
           setModal={setModal as Dispatch<SetStateAction<ModalType>>}

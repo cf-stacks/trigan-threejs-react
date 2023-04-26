@@ -9,11 +9,12 @@ const dateFormatter = (value: string) => moment(value).format('DD/MM/YYYY')
 interface Arguments {
   edit: (applicant: ApplicantType) => void
   remove: (applicant: ApplicantType) => void
+  previewPdf: (cvLink: string) => void
 }
 
 const columnHelper = createColumnHelper<ApplicantType>()
 
-export const useColumns = ({ edit, remove }: Arguments) => {
+export const useColumns = ({ edit, remove, previewPdf }: Arguments) => {
   const columns: ColumnDef<ApplicantType, any>[] = useMemo(
     () => [
       columnHelper.accessor('created_at', {
@@ -32,6 +33,19 @@ export const useColumns = ({ edit, remove }: Arguments) => {
       }),
       columnHelper.accessor('cv_link', {
         header: 'CV Link',
+        cell: ({ getValue }) => {
+          return (
+            !!getValue() && (
+              <button
+                className="inline-flex items-center rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4"
+                hidden={!!getValue()}
+                onClick={() => previewPdf(getValue())}
+              >
+                preview
+              </button>
+            )
+          )
+        },
       }),
       columnHelper.accessor('applicant_link', {
         header: 'Applicant Link',
@@ -77,7 +91,7 @@ export const useColumns = ({ edit, remove }: Arguments) => {
         ),
       }),
     ],
-    [edit, remove]
+    [edit, remove, previewPdf]
   )
   return columns
 }
