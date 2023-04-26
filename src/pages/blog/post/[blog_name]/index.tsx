@@ -141,7 +141,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                   {moment(post.data.date_created).format('LL')}
                 </p>
                 <p className="mr-10">/</p>
-                <p>{avReadTime.average_speed} Min read</p>
+                <p>{Math.round(avReadTime.average_speed)} Min read</p>
               </div>
               <h6 className="full-width-container text-lg font-medium leading-loose">
                 <ReactMarkdown>{b64_to_utf8(post.data.content)}</ReactMarkdown>
