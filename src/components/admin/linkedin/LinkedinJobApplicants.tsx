@@ -1,97 +1,43 @@
-import { SetStateAction, useState, Dispatch, useEffect } from 'react'
-import {
-  Table,
-  Loader,
-  Button,
-  createStyles,
-  Title,
-  Input,
-  Modal,
-} from '@mantine/core'
-import { IconMail, IconPencil, IconSearch } from '@tabler/icons'
+import { Title } from '@mantine/core'
+import { Pagination } from 'antd'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { Pagination, PaginationProps } from 'antd'
 import {
-  ApplicantOptionsType,
-  fetchApplicants,
-} from '../../../services/linkedin-applicants'
-import { ApplicantsModals } from '../linkedinapplicants/LinkedinApplicantsModals'
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
 import { toast } from 'react-hot-toast'
+import {
+  ApplicantListOptionsType,
+  fetchApplicants,
+  fetchPdf,
+} from '../../../services/linkedin-applicants'
+import { useColumns } from '../../../table-columns/applicants'
+import Table from '../../Table'
+import { SearchInput } from '../SearchInput'
+import { ApplicantsModals } from '../linkedinapplicants/LinkedinApplicantsModals'
 import { JobType } from './LinkedinAccountJobs'
-import { ApplicantType } from '../linkedinapplicants/LinkedinApplicantsTable'
-import { Document, Page, pdfjs } from 'react-pdf'
-
-import { useDisclosure } from '@mantine/hooks'
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
-
-const useStyles = createStyles((theme) => ({
-  header: {
-    position: 'sticky',
-    top: 0,
-    backgroundColor:
-      theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
-    transition: 'box-shadow 150ms ease',
-
-    '&::after': {
-      content: '""',
-      position: 'absolute',
-      left: 0,
-      right: 0,
-      bottom: 0,
-      borderBottom: `1px solid ${
-        theme.colorScheme === 'dark'
-          ? theme.colors.dark[3]
-          : theme.colors.gray[2]
-      }`,
-    },
-  },
-
-  '& *': {
-    fontSize: '0.75rem',
-  },
-
-  searchContainer: {
-    marginRight: '1.5rem',
-    position: 'relative',
-    display: 'flex',
-    width: '341px',
-    '@media only screen and (max-width: 850px)': {
-      width: '300px',
-    },
-
-    input: {
-      backgroundColor: '#39394B',
-      color: 'white',
-      borderRadius: '10px',
-      padding: '12px 20px',
-      paddingRight: '62px',
-      width: '100%',
-      height: '42px',
-    },
-
-    button: {
-      borderRadius: '10px',
-      position: 'absolute',
-      right: '0',
-      color: 'white',
-      height: '42px',
-      width: '42px',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-  },
-
-  pdfView: {
-    height: '80vh',
-    overflowY: 'scroll',
-  },
-}))
 
 export interface ModalType {
   open: boolean
   size?: string
   type: 'edit'
+}
+
+export interface ApplicantType {
+  id: string
+  created_at: string
+  updated_at: string
+  linkedin_job_post_id: string
+  name: string
+  cv_link: string
+  applicant_link: string
+  status: string
+  is_invited: boolean
+  is_nda: boolean
 }
 
 interface ApplicantsTableProps {
@@ -102,233 +48,151 @@ export const LinkedinJobApplicants = ({
   selectedJob,
 }: ApplicantsTableProps) => {
   const [applicants, setApplicants] = useState([])
-  const [selectedApplicant, setSelectedApplicant] = useState<ApplicantType>()
+  const [applicant, setApplicant] = useState<ApplicantType>()
+  const [selectedCvLink, setSelectedCvLink] = useState('')
 
-  const [fetchingApplicant, setFetchingApplicant] = useState(false)
+  const [fetchingApplicants, setFetchingApplicant] = useState(false)
 
-  const [totalCountApplicants, setCountApplicants] = useState(0)
+  const [pagination, setPagination] = useState({ pageIndex: 1, pageSize: 20 })
+
+  const [totalCount, setTotalCount] = useState(0)
   const [search, setSearch] = useState('')
-  const [page, setPage] = useState(1)
-  const [page_size, setPageSize] = useState(20)
-
-  const [pageNumber, setPageNumber] = useState(1)
-
-  const [opened, { open, close }] = useDisclosure(false)
 
   const [modal, setModal] = useState({
     open: false,
     size: 'md',
     type: '',
   })
-  const { classes, cx } = useStyles()
   const router = useRouter()
 
-  const statusColors = { ACTIVE: 'green', REJECT: '#fcba03', INVITED: 'blue' }
-
-  const previewModal = (url: string) => {
-    return (
-      <Modal opened={opened} onClose={close} size={'auto'}>
-        <div className="pdfView">
-          <Document file={url}>
-            <Page
-              key={`page_${pageNumber}`}
-              pageNumber={pageNumber}
-              renderAnnotationLayer={false}
-              renderTextLayer={false}
-            />
-          </Document>
-        </div>
-      </Modal>
-    )
+  const previewPdf = (url: string) => {
+    setSelectedCvLink(url)
   }
 
-  const applicantsList =
-    applicants && applicants.length > 0 ? (
-      applicants.map((applicant: ApplicantType, index: number) => (
-        <tr key={index}>
-          <td>{new Date(applicant.created_at).toLocaleDateString()}</td>
-          <td>{new Date(applicant.updated_at).toLocaleDateString()}</td>
-          <td>{applicant.linkedin_job_post_id}</td>
-          <td>{applicant.name}</td>
-          <td
-            style={{
-              color: 'purple',
-              display: 'flex',
-              alignContent: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            {applicant.cv_link && (
-              <>
-                <Button
-                  onClick={() => {
-                    open()
-                  }}
-                  variant="light"
-                  color="blue"
-                >
-                  preview
-                </Button>
-                <a href={applicant.cv_link}>Link</a>
+  const columns = useColumns({
+    edit: (applicant: ApplicantType) => {
+      setApplicant(applicant)
+      setModal({ open: true, size: 'md', type: 'edit' })
+    },
+    remove: (applicant: ApplicantType) => {
+      setApplicant(applicant)
+      setModal({ open: true, size: 'md', type: 'delete' })
+    },
+    previewPdf,
+  })
 
-                {previewModal(applicant.cv_link)}
-              </>
-            )}
-          </td>
-          <td
-            style={{
-              color:
-                statusColors[applicant.status as keyof typeof statusColors],
-            }}
-          >
-            {applicant.status}
-          </td>
-          <td>{applicant.is_invited ? 'Yes' : 'No'}</td>
-          <td>{applicant.is_nda ? 'Yes' : 'No'}</td>
-          <td>
-            <Button.Group>
-              <Button
-                onClick={() => {
-                  setModal({ open: true, size: 'md', type: 'edit' })
-                  setSelectedApplicant(applicant)
-                }}
-                variant="light"
-                color="blue"
-              >
-                <IconPencil style={{ zIndex: -1 }} />
-              </Button>
-              <Button onClick={() => {}} variant="light" color="blue">
-                <IconMail style={{ zIndex: -1 }} />
-              </Button>
-            </Button.Group>
-          </td>
-        </tr>
-      ))
-    ) : (
-      <tr>
-        <td colSpan={9}>No Items</td>
-      </tr>
-    )
+  const fetchData = useCallback(
+    async (options: ApplicantListOptionsType) => {
+      setFetchingApplicant(true)
+      try {
+        const data = await fetchApplicants(options)
+        setApplicants(data.Data)
+        setTotalCount(data.Meta.total_count)
+      } catch (error: any) {
+        if ((error.response?.status as number) === 401) {
+          await router.push('/admin/login')
+        }
+        toast.error('Something went wrong')
+      }
+      setFetchingApplicant(false)
+    },
+    [router]
+  )
+
+  const fetchDoc = useCallback(
+    async (url: string) => {
+      if (selectedCvLink) {
+        setLoadingPdf(true)
+        try {
+          const response = await fetchPdf({ url })
+          setPdfDocument(response)
+        } catch (error: any) {
+          if ((error.response?.status as number) === 401) {
+            await router.push('/admin/login')
+          }
+          if ((error.response?.status as number) === 403) {
+            setSelectedCvLink('')
+          }
+          toast.error('Something went wrong')
+        }
+        setLoadingPdf(false)
+      }
+    },
+    [selectedCvLink]
+  )
+
+  useEffect(() => {
+    void fetchData({ id: selectedJob.id, ...pagination })
+  }, [fetchData, pagination])
+
+  useEffect(() => {
+    if (selectedCvLink) {
+      fetchDoc(selectedCvLink)
+    }
+  }, [selectedCvLink])
 
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     if (e) e.preventDefault()
-    fetchData({ search })
+    await fetchData({ search })
   }
 
-  const fetchData = async (options: ApplicantOptionsType) => {
-    setFetchingApplicant(true)
-    try {
-      const data = await fetchApplicants(options)
-      setApplicants(data.Data)
-      setCountApplicants(data.Meta.total_count)
-    } catch (error: any) {
-      if ((error.response?.status as number) === 401) {
-        await router.push('/admin/login')
-      }
-      toast.error('Something went wrong')
-    } finally {
-      setFetchingApplicant(false)
-    }
+  const handlePaginationChange = (pageIndex: number, pageSize: number) => {
+    setPagination({ pageSize, pageIndex })
   }
-
-  const handlePaginationChange = (page: number) => {
-    setPage(page)
-  }
-
-  const handlePageSizeChange: PaginationProps['onShowSizeChange'] = (
-    current,
-    pageSize
-  ) => {
-    setPage(1)
-    setPageSize(pageSize)
-  }
-
-  useEffect(() => {
-    return () => {
-      fetchData({ id: selectedJob.id })
-    }
-  }, [router])
-
-  useEffect(() => {
-    void fetchData({ page, page_size })
-  }, [page, page_size])
-
-  if (fetchingApplicant)
-    return (
-      <main
-        style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
-      >
-        <Loader />
-      </main>
-    )
 
   return (
     <section>
-      <Title align="center">Linkedin Applicants</Title>
-      <form className={classes.searchContainer} onSubmit={handleSearch}>
-        <Input
-          sx={{ width: '100%' }}
-          placeholder={'Search by Name'}
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+      <Head>
+        <title>Linkedin Applicants</title>
+      </Head>
+      <div className="mb-8 flex items-center justify-between">
+        <Title size={24} align="center" className="text-white">
+          Linkedin Jobs
+        </Title>
+        <SearchInput
+          handleSearch={handleSearch}
+          search={search}
+          setSearch={setSearch}
+          placeholder="Search by Name"
+          disabled={fetchingApplicants || applicants.length === 0}
         />
-        <button type="submit">
-          <IconSearch />
-        </button>
-      </form>
-      <Table
-        sx={{
-          minWidth: 700,
-          '& td': {
-            maxWidth: '200px',
-            wordWrap: 'break-word',
-          },
-          '& th': {
-            textTransform: 'capitalize',
-          },
-        }}
-      >
-        <thead className={cx(classes.header)}>
-          <tr>
-            <th>created at</th>
-            <th>updated at</th>
-            <th>linkedin job id</th>
-            <th>name</th>
-            <th>cv link</th>
-            <th>status</th>
-            <th>is invited</th>
-            <th>is nda</th>
-            <th colSpan={2} align="right">
-              actions
-            </th>
-          </tr>
-        </thead>
-        <tbody>{applicantsList}</tbody>
-      </Table>
-
-      <Pagination
-        current={page}
-        pageSize={page_size}
-        total={totalCountApplicants}
-        onChange={handlePaginationChange}
-        showSizeChanger
-        onShowSizeChange={handlePageSizeChange}
-      />
-
+      </div>
+      <div className="flex flex-col justify-between">
+        {fetchingApplicants || applicants.length > 0 ? (
+          <>
+            <Table
+              loading={fetchingApplicants}
+              columns={columns}
+              data={applicants}
+              state={{ pagination }}
+              manualPagination
+              pageCount={totalCount}
+              enableSorting={false}
+            />
+            <Pagination
+              current={pagination.pageIndex}
+              pageSize={pagination.pageSize}
+              total={totalCount}
+              onChange={handlePaginationChange}
+              showSizeChanger
+              onShowSizeChange={handlePaginationChange}
+            />
+          </>
+        ) : (
+          <Title size={14} className="text-white">
+            No data
+          </Title>
+        )}
+      </div>
       <div>
         <ApplicantsModals
           modal={modal as ModalType}
           setModal={setModal as Dispatch<SetStateAction<ModalType>>}
-          selectedApplicant={selectedApplicant as ApplicantType}
+          selectedApplicant={applicant as ApplicantType}
           setSelectedApplicant={
-            setSelectedApplicant as Dispatch<SetStateAction<ApplicantType>>
+            setApplicant as Dispatch<SetStateAction<ApplicantType>>
           }
-          fetchFunction={() =>
-            fetchApplicants({
-              page,
-              page_size,
-            })
-          }
+          fetchFunction={() => fetchApplicants(pagination)}
         />
       </div>
     </section>
