@@ -4,25 +4,23 @@
 
 // the requests are made on ***handleCreate, handleEdit and handleDelete*** functions
 
-import React, { useState, useEffect } from 'react'
 import {
+  Avatar,
   Button,
+  Divider,
+  FileInput,
   Modal,
-  Title,
   TextInput,
   Textarea,
-  Divider,
+  Title,
   createStyles,
-  FileInput,
-  Avatar,
 } from '@mantine/core'
 import axios from 'axios'
-import { ListItems } from './List'
-import { TEST_API_URL } from '../../../util/constants'
+import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
-import { BlogPost } from '../../../types/BlogPost'
-import { useRouter } from 'next/router'
 import { getErrorMsg } from '../../../util/api'
+import { TEST_API_URL } from '../../../util/constants'
+import { ListItems } from './List'
 
 const useStyles = createStyles(() => ({
   inputContainer: {
@@ -125,7 +123,8 @@ export const PostsModals = ({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )
@@ -156,17 +155,14 @@ export const PostsModals = ({
       position,
     }
     try {
-      await axios.post(
-        `${TEST_API_URL}/teammember-proposal/create`,
-        newPost,
-        {
-          withCredentials: true,
-          headers: {
-            Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
-          },
-        }
-      )
+      await axios.post(`${TEST_API_URL}/teammember-proposal/create`, newPost, {
+        withCredentials: true,
+        headers: {
+          Authorization: `${localStorage.getItem('access_token')}`,
+          'Content-Language': `${localStorage.getItem('content-language')}`,
+          Session: `${localStorage.getItem('session_key')}`,
+        },
+      })
       toast.success('Created Successfully')
       void fetchFunction()
       setModal({ ...modal, open: false })
@@ -200,7 +196,8 @@ export const PostsModals = ({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )
@@ -225,8 +222,9 @@ export const PostsModals = ({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
+            'Content-Language': `${localStorage.getItem('content-language')}`,
             'Content-Type': 'multipart/form-data',
-            Session: `${localStorage.getItem('session_key')}`
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )
@@ -250,8 +248,9 @@ export const PostsModals = ({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
+            'Content-Language': `${localStorage.getItem('content-language')}`,
             'Content-Type': 'multipart/form-data',
-            Session: `${localStorage.getItem('session_key')}`
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )
@@ -560,12 +559,14 @@ export const PostsModals = ({
               <div>
                 <FileInput
                   label="Icon"
-                  onChange={()=>setIconFile}
+                  onChange={() => setIconFile}
                   placeholder="Pick file"
                 />
                 <Avatar
                   src={
-                    iconFile ? URL.createObjectURL(imageFile as Blob) : selectedPost.icon
+                    iconFile
+                      ? URL.createObjectURL(imageFile as Blob)
+                      : selectedPost.icon
                   }
                   alt="icon"
                   style={{
@@ -663,7 +664,9 @@ export const PostsModals = ({
             <div className={classes.formChild}>
               <Avatar
                 src={
-                  iconFile ? URL.createObjectURL(iconFile as Blob) : selectedPost?.icon
+                  iconFile
+                    ? URL.createObjectURL(iconFile as Blob)
+                    : selectedPost?.icon
                 }
                 alt="icon"
                 style={{

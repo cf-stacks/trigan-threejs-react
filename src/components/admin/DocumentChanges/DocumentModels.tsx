@@ -14,7 +14,7 @@ import {
   Table,
   Textarea,
   TextInput,
-  Title
+  Title,
 } from '@mantine/core'
 import { IconCheck, IconDownload, IconEye, IconFiles } from '@tabler/icons'
 import axios from 'axios'
@@ -146,7 +146,8 @@ function InputModal({ type, open, document, onClose }: any) {
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
+          'Content-Language': `${localStorage.getItem('content-language')}`,
+          Session: `${localStorage.getItem('session_key')}`,
         },
       })
       toast.success('Created Successfully')
@@ -178,7 +179,8 @@ function InputModal({ type, open, document, onClose }: any) {
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )
@@ -321,7 +323,10 @@ function DocumentChangesModal({
               withCredentials: true,
               headers: {
                 Authorization: `${localStorage.getItem('access_token')}`,
-                Session: `${localStorage.getItem('session_key')}`
+                'Content-Language': `${localStorage.getItem(
+                  'content-language'
+                )}`,
+                Session: `${localStorage.getItem('session_key')}`,
               },
             }
           )
@@ -345,7 +350,8 @@ function DocumentChangesModal({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )
@@ -363,7 +369,8 @@ function DocumentChangesModal({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )
@@ -381,7 +388,8 @@ function DocumentChangesModal({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )
@@ -408,7 +416,8 @@ function DocumentChangesModal({
             withCredentials: true,
             headers: {
               Authorization: `${localStorage.getItem('access_token')}`,
-              Session: `${localStorage.getItem('session_key')}`
+              'Content-Language': `${localStorage.getItem('content-language')}`,
+              Session: `${localStorage.getItem('session_key')}`,
             },
           }
         )

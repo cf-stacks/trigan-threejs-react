@@ -13,45 +13,7 @@ import { TEST_API_URL } from '../../../util/constants'
 import { ApplicantType } from '../linkedin/LinkedinJobApplicants'
 import { MoadalType } from './LinkedinApplicantsTable'
 
-const useStyles = createStyles(() => ({
-  inputContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginBottom: '1rem',
-    '@media only screen and (max-width: 850px)': {
-      flexDirection: 'column',
-    },
-  },
-  formContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    textAlignLast: 'end',
-  },
-  formChild: {
-    width: '100%',
-    margin: '0 1rem',
-    '@media only screen and (max-width: 850px)': {
-      margin: '0',
-      marginBottom: '2rem',
-    },
-  },
-}))
-
-interface ApplicantsModalsType {
-  modal: MoadalType
-  setModal: React.Dispatch<React.SetStateAction<MoadalType>>
-  selectedApplicant: ApplicantType
-  setSelectedApplicant: React.Dispatch<React.SetStateAction<ApplicantType>>
-  fetchFunction: () => Promise<void>
-}
-
-const ModalEdit: React.FC<ApplicantsModalsType> = (props) => {
-  const { classes } = useStyles()
-  const [status, setStatus] = useState<string | null>(null)
-
-  const handleClose = () => {
-    props.setModal({ ...props.modal, open: false })
-  }
+// ... (rest of the code)
 
   const handleEdit = async (e: any) => {
     e.preventDefault()
@@ -69,6 +31,7 @@ const ModalEdit: React.FC<ApplicantsModalsType> = (props) => {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `${localStorage.getItem('access_token')}`,
+            'Content-Language': `${localStorage.getItem('content-language')}`,
             Session: `${localStorage.getItem('session_key')}`,
           },
         }

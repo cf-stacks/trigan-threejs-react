@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react'
 import {
   Button,
-  Modal,
-  Title,
-  TextInput,
   Divider,
+  Modal,
+  TextInput,
+  Title,
   createStyles,
 } from '@mantine/core'
 import axios from 'axios'
-import { TEST_API_URL } from '../../../util/constants'
+import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
-import { determineAxios } from '../../../util/determines'
 import { getErrorMsg } from '../../../util/api'
+import { TEST_API_URL } from '../../../util/constants'
 
 const useStyles = createStyles(() => ({
   inputContainer: {
@@ -23,8 +22,8 @@ const useStyles = createStyles(() => ({
       flexDirection: 'column',
     },
     '> div': {
-      margin: '1rem'
-    }
+      margin: '1rem',
+    },
   },
   formContainer: {
     display: 'flex',
@@ -65,7 +64,7 @@ export const ManageLanguagesModal = ({
   const defaultLanguage: Language = {
     english: '',
     alpha2: '',
-    'alpha3-b': ''
+    'alpha3-b': '',
   }
   const [language, setLanguage] = useState<Language>(defaultLanguage)
   const { classes } = useStyles()
@@ -73,13 +72,17 @@ export const ManageLanguagesModal = ({
   useEffect(() => {
     if (modal.type === 'edit' && modal.open) {
       const getById = async () => {
-        const m = await axios.get<{ Data: Language }>(`${TEST_API_URL}/managelanguages/get/${modal.id}`, {
-          withCredentials: true,
-          headers: {
-            Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
-          },
-        })
+        const m = await axios.get<{ Data: Language }>(
+          `${TEST_API_URL}/managelanguages/get/${modal.id}`,
+          {
+            withCredentials: true,
+            headers: {
+              Authorization: `${localStorage.getItem('access_token')}`,
+              'Content-Language': `${localStorage.getItem('content-language')}`,
+              Session: `${localStorage.getItem('session_key')}`,
+            },
+          }
+        )
 
         setLanguage(m.data.Data)
       }
@@ -96,27 +99,39 @@ export const ManageLanguagesModal = ({
       const payload = {
         english: language.english,
         alpha2: language.alpha2,
-        ['alpha3-b']: language['alpha3-b']
+        ['alpha3-b']: language['alpha3-b'],
       }
 
       if (modal.type === 'edit') {
-        data = await axios.put(`${TEST_API_URL}/managelanguages/${language.id}`, payload, {
-          withCredentials: true,
-          headers: {
-            Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
-          },
-        })
+        data = await axios.put(
+          `${TEST_API_URL}/managelanguages/${language.id}`,
+          payload,
+          {
+            withCredentials: true,
+            headers: {
+              Authorization: `${localStorage.getItem('access_token')}`,
+              'Content-Language': `${localStorage.getItem('content-language')}`,
+              Session: `${localStorage.getItem('session_key')}`,
+            },
+          }
+        )
       } else {
-        data = await axios.post(`${TEST_API_URL}/managelanguages/create`, payload, {
-          withCredentials: true,
-          headers: {
-            Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
-          },
-        })
+        data = await axios.post(
+          `${TEST_API_URL}/managelanguages/create`,
+          payload,
+          {
+            withCredentials: true,
+            headers: {
+              Authorization: `${localStorage.getItem('access_token')}`,
+              'Content-Language': `${localStorage.getItem('content-language')}`,
+              Session: `${localStorage.getItem('session_key')}`,
+            },
+          }
+        )
       }
-      toast.success(`${modal.type === 'edit' ? 'Edited' : 'Created'} Successfully`)
+      toast.success(
+        `${modal.type === 'edit' ? 'Edited' : 'Created'} Successfully`
+      )
     } catch (error) {
       toast.error(getErrorMsg(error))
     }
@@ -125,13 +140,17 @@ export const ManageLanguagesModal = ({
 
   const handleDelete = async () => {
     try {
-      const data = await axios.delete(`${TEST_API_URL}/managelanguages/${modal.id}`, {
-        withCredentials: true,
-        headers: {
-          Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
-        },
-      })
+      const data = await axios.delete(
+        `${TEST_API_URL}/managelanguages/${modal.id}`,
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `${localStorage.getItem('access_token')}`,
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
+          },
+        }
+      )
       toast.success('Deleted Successfully')
     } catch (error) {
       toast.error(getErrorMsg(error))
@@ -171,17 +190,23 @@ export const ManageLanguagesModal = ({
             <TextInput
               label="English"
               value={language.english}
-              onChange={(e) => setLanguage({ ...language, english: e.target.value })}
+              onChange={(e) =>
+                setLanguage({ ...language, english: e.target.value })
+              }
             />
             <TextInput
               label="alpha2"
               value={language.alpha2}
-              onChange={(e) => setLanguage({ ...language, alpha2: e.target.value })}
+              onChange={(e) =>
+                setLanguage({ ...language, alpha2: e.target.value })
+              }
             />
             <TextInput
               label="alpha3-b"
               value={language['alpha3-b']}
-              onChange={(e) => setLanguage({ ...language, ['alpha3-b']: e.target.value })}
+              onChange={(e) =>
+                setLanguage({ ...language, ['alpha3-b']: e.target.value })
+              }
             />
           </section>
           <Divider />
@@ -239,7 +264,11 @@ export const ManageLanguagesModal = ({
           >
             Delete
           </Button>
-          <Button variant="outline" color="gray" onClick={() => setModal({ ...modal, open: false, id: undefined })}>
+          <Button
+            variant="outline"
+            color="gray"
+            onClick={() => setModal({ ...modal, open: false, id: undefined })}
+          >
             cancel
           </Button>
         </div>
