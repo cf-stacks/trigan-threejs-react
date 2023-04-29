@@ -6,6 +6,11 @@ import { SEO } from '../components/shared/SEO'
 import JoinTheTeamSlider from '../components/home/JoinTheTeamSlider'
 
 const VisionPage: React.FC<any> = () => {
+ var disablePage = process.env.NEXT_PUBLIC_DISABLE_PAGE;
+   if(disablePage === 'true')
+    {
+        return null;
+    }
   return (
     <div>
       <SEO
