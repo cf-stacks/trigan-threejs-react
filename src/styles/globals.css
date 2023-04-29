@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@700&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@700&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -7,7 +7,7 @@
 body,
 html {
   scroll-behavior: smooth;
-  font-family: 'Roboto Flex', sans-serif;
+  font-family: "Roboto Flex", sans-serif;
   position: relative;
   transition: 0.4s;
 }
@@ -18,7 +18,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-family: "M PLUS Rounded 1c", sans-serif;
   color: white;
 }
 /*edit ahmed*/
@@ -108,11 +108,7 @@ h6 {
   flex-direction: column;
   gap: 15px;
   height: 320px;
-  background: linear-gradient(
-    126.08deg,
-    rgba(255, 255, 255, 0.3) 13.84%,
-    rgba(255, 255, 255, 0.1) 74.14%
-  ) !important;
+  background: linear-gradient(126.08deg, rgba(255, 255, 255, 0.3) 13.84%, rgba(255, 255, 255, 0.1) 74.14%) !important;
 }
 .horizontalCard .purple {
   width: 50px;
@@ -148,18 +144,10 @@ h6 {
   /* top: 800px !important; */
 }
 .swiper-button-prev.swiper-button-disabled {
-  background: linear-gradient(
-    126.08deg,
-    rgba(255, 255, 255, 0.3) 13.84%,
-    rgba(255, 255, 255, 0.1) 74.14%
-  ) !important;
+  background: linear-gradient(126.08deg, rgba(255, 255, 255, 0.3) 13.84%, rgba(255, 255, 255, 0.1) 74.14%) !important;
 }
 .swiper-button-next.swiper-button-disabled {
-  background: linear-gradient(
-    126.08deg,
-    rgba(255, 255, 255, 0.3) 13.84%,
-    rgba(255, 255, 255, 0.1) 74.14%
-  ) !important;
+  background: linear-gradient(126.08deg, rgba(255, 255, 255, 0.3) 13.84%, rgba(255, 255, 255, 0.1) 74.14%) !important;
 }
 .swiper-button-next:after,
 .swiper-button-prev:after,
@@ -225,22 +213,21 @@ h6 {
 }
 
 .background-form {
-  background-image: url('../assets/city-form.png');
+  background-image: url("../assets/ImageDefault.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  height: 350px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .border-gradient-r-black-violet {
   border-bottom-style: solid;
-  border-image: linear-gradient(
-    to right,
-    transparent,
-    transparent,
-    transparent,
-    violet
-  );
+  border-image: linear-gradient(to right, transparent, transparent, transparent, violet);
   border-image-slice: 1;
   border-bottom-width: 4px;
   z-index: -1;
@@ -248,13 +235,7 @@ h6 {
 
 .border-gradient-l-black-violet {
   border-bottom-style: solid;
-  border-image: linear-gradient(
-    to left,
-    transparent,
-    transparent,
-    transparent,
-    violet
-  );
+  border-image: linear-gradient(to left, transparent, transparent, transparent, violet);
   border-image-slice: 1;
   border-bottom-width: 4px;
   z-index: -1;
@@ -464,7 +445,6 @@ h6 {
     @apply mx-auto flex cursor-pointer rounded-lg bg-red-600 px-4 py-2 text-light opacity-100 transition duration-200 hover:scale-110 hover:shadow-lg;
   }
 
-
   .tokensform {
     @apply mr-1 h-12 w-full rounded-sm bg-white bg-opacity-90 pl-4;
   }
@@ -482,28 +462,23 @@ h6 {
   }
 
   .filter-grey {
-    filter: invert(85%) sepia(8%) saturate(755%) hue-rotate(194deg)
-      brightness(87%) contrast(88%);
+    filter: invert(85%) sepia(8%) saturate(755%) hue-rotate(194deg) brightness(87%) contrast(88%);
   }
 
   .filter-primary {
-    filter: invert(19%) sepia(92%) saturate(5054%) hue-rotate(253deg)
-      brightness(95%) contrast(93%);
+    filter: invert(19%) sepia(92%) saturate(5054%) hue-rotate(253deg) brightness(95%) contrast(93%);
   }
 
   .filter-secondary {
-    filter: invert(9%) sepia(26%) saturate(4361%) hue-rotate(218deg)
-      brightness(94%) contrast(98%);
+    filter: invert(9%) sepia(26%) saturate(4361%) hue-rotate(218deg) brightness(94%) contrast(98%);
   }
 
   .filter-light-gray {
-    filter: invert(99%) sepia(29%) saturate(5020%) hue-rotate(180deg)
-      brightness(111%) contrast(94%);
+    filter: invert(99%) sepia(29%) saturate(5020%) hue-rotate(180deg) brightness(111%) contrast(94%);
   }
 
   .filter-lighter-gray {
-    filter: invert(92%) sepia(5%) saturate(5766%) hue-rotate(189deg)
-      brightness(100%) contrast(96%);
+    filter: invert(92%) sepia(5%) saturate(5766%) hue-rotate(189deg) brightness(100%) contrast(96%);
   }
 
   .animation-delay-2000 {
