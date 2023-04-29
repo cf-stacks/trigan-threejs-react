@@ -15,6 +15,11 @@ interface CareersProps {
 }
 
 export const Careers: React.FC<CareersProps> = () => {
+ var disablePage = process.env.NEXT_PUBLIC_DISABLE_PAGE;
+   if(disablePage === 'true')
+    {
+        return null;
+    }
   const selectOptions: SelectOptions[] = [
     {
       title: 'Software Development',

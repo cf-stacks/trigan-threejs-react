@@ -9,6 +9,11 @@ import ProjectContent from '../components/project/projectContent'
 import { ThemeProvider } from 'next-themes'
 
 const newpage = () => {
+   var disablePage = process.env.NEXT_PUBLIC_DISABLE_PAGE;
+   if(disablePage === 'true')
+    {
+        return null;
+    }
   return (
     <div>
      <ThemeProvider attribute="class" enableSystem={true}> 
