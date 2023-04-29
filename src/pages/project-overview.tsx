@@ -8,6 +8,11 @@ import 'react-lazy-load-image-component/src/effects/blur.css'
 import ProjectContent from '../components/project/projectContent'
 
 const newpage = () => {
+   var disablePage = process.env.NEXT_PUBLIC_DISABLE_PAGE;
+   if(disablePage === 'true')
+    {
+        return null;
+    }
   return (
     <div>
       
