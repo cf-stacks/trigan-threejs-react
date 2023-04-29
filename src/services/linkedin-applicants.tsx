@@ -1,18 +1,23 @@
 import axios, { AxiosError } from 'axios'
 import { TEST_API_URL } from '../util/constants'
 
-export interface ApplicantOptionsType {
+export interface ApplicantListOptionsType {
   id?: string
-  page?: number
-  page_size?: number
+  pageIndex?: number
+  pageSize?: number
   search?: string
 }
 
-export const fetchApplicants = async (options?: ApplicantOptionsType) => {
+export interface ApplicantPDFOptionsType {
+  url: string
+}
+
+export const fetchApplicants = async (options?: ApplicantListOptionsType) => {
   let params = {}
 
   if (options) {
-    const { id, page, page_size, search } = options
+    const { id, pageIndex: page, pageSize: page_size, search } = options
+
     params = search
       ? { search }
       : {
@@ -29,7 +34,7 @@ export const fetchApplicants = async (options?: ApplicantOptionsType) => {
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
+          Session: `${localStorage.getItem('session_key')}`,
         },
         params,
       }
@@ -38,5 +43,21 @@ export const fetchApplicants = async (options?: ApplicantOptionsType) => {
   } catch (error) {
     console.log(error)
     return error as AxiosError
+  }
+}
+
+export const fetchPdf = async (options: ApplicantPDFOptionsType) => {
+  const { url } = options
+
+  try {
+    const response: any = await axios({
+      method: 'GET',
+      url,
+      responseType: 'arraybuffer',
+    })
+    return response.data
+  } catch (error) {
+    console.log(error)
+    throw error as AxiosError
   }
 }

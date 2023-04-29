@@ -1,7 +1,5 @@
 import { NextPage } from 'next'
-import { useState, Dispatch, SetStateAction } from 'react'
-import { AdminLayout } from '../../../components/layouts/AdminLayout'
-import { LinkedinJobApplicants } from '../../../components/admin/linkedin/LinkedinJobApplicants'
+import { Dispatch, SetStateAction, useState } from 'react'
 import {
   JobType,
   LinkedinAccountJobs,
@@ -10,15 +8,17 @@ import {
   AccountType,
   LinkedinAccounts,
 } from '../../../components/admin/linkedin/LinkedinAccounts'
+import { LinkedinJobApplicants } from '../../../components/admin/linkedin/LinkedinJobApplicants'
+import { AdminLayout } from '../../../components/layouts/AdminLayout'
 
 const Linkedin: NextPage = () => {
-  const [selectedAccount, setSelectedAccount] = useState<AccountType>()
+  const [selectedAccount, setSelectedAccount] = useState<AccountType | null>()
   const [selectedJob, setSelectedJob] = useState<JobType>()
 
   return (
     <AdminLayout>
       <LinkedinAccounts
-        selectedAccount={selectedAccount as AccountType}
+        selectedAccount={selectedAccount && (selectedAccount as AccountType)}
         setSelectedAccount={
           setSelectedAccount as Dispatch<SetStateAction<AccountType | null>>
         }
