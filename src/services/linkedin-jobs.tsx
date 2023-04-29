@@ -3,8 +3,8 @@ import { TEST_API_URL } from '../util/constants'
 
 export interface JobsOptionsType {
   id?: string
-  page?: number
-  page_size?: number
+  pageIndex?: number
+  pageSize?: number
   search?: string
 }
 
@@ -12,7 +12,8 @@ export const fetchJobs = async (options?: JobsOptionsType) => {
   let params = {}
 
   if (options) {
-    const { id, page, page_size, search } = options
+    const { id, pageIndex: page, pageSize: page_size, search } = options
+
     params = search
       ? { search }
       : {
@@ -34,6 +35,6 @@ export const fetchJobs = async (options?: JobsOptionsType) => {
     return response.data
   } catch (error) {
     console.log(error)
-    return error as AxiosError
+    throw error as AxiosError
   }
 }

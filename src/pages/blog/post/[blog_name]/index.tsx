@@ -24,13 +24,24 @@ interface ApiPostData {
 }
 
 const Post: NextPage<PostProps> = ({ post }) => {
+  post.data.id_post = "642ed4a0c3f02c2121235d36";
   const router = useRouter()
   const [tags, setTags] = useState(0)
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(20)
+  const [avReadTime, setAvReadTime] = useState({
+                                                  "average_speed": 0,
+                                                  "num_of_record": 0
+                                                });
 
   const fetcher = (url: string) =>
-    fetch(url).then(async (r) => {
+    fetch(url,
+      {
+        headers: {
+          Session: `${localStorage.getItem('session_key')}`
+        }
+      }
+    ).then(async (r) => {
       let resPosts = await r.json()
       return resPosts.posts
     })
@@ -39,17 +50,62 @@ const Post: NextPage<PostProps> = ({ post }) => {
     `https://test1.trigan.org/api/v1/posts?page-size=${pageSize}&page=${page}&apiKey=g436739d6734gd6734`,
     fetcher
   )
-
+  
   const { blog_name } = router.query
 
   //this function now converts base64 to utf-8 on client and on server side to prevent hydration errors
   //also, buffer returns valid characters
   function b64_to_utf8(char: string) {
-    return Buffer.from(char, 'base64').toString('utf-8');
+    return Buffer.from(char, 'base64').toString('utf-8')
   }
 
   //removes duplicate tags and limits categories array length to 1
   removeDuplicates(post);
+
+  const httpHeader ={ headers:{
+    Authorization: `${localStorage.getItem('access_token')}`,
+    Session: `${localStorage.getItem('session_key')}`
+  }}
+
+  const trackReadingTime = () => {
+    fetch(`https://test1.trigan.org/api/v1/reading-speed/user?object_id=${post.data.id_post}&object_type=post`,httpHeader)
+    .then((response) => response.json())
+    .then((result) => console.log(result))
+    .catch(() => new Error('Time tracking failed'));
+  }
+  
+  
+  const createSpeedRecord = ()=>{
+    fetch(`https://test1.trigan.org/api/v1/reading-speed/create`,
+          {...httpHeader,method:"POST"})
+    .then((response) => response.json())
+    .then((result) => { 
+
+          console.log(result);
+    })
+    .catch(() => new Error('Time tracking failed'));
+  }
+
+  useEffect(()=>{
+
+    
+
+    fetch(`https://test1.trigan.org/api/v1/reading-speed/average?object_id=${post.data.id_post}&object_type=post`,httpHeader)
+    .then((response) => response.json())
+    .then((result) => { 
+      console.log(result);
+      
+      if(result.Data.average_speed>=0)
+      {
+        setAvReadTime(result.Data);
+        trackReadingTime();
+        // createSpeedRecord();
+      }
+      else {}
+    })
+    .catch(() => new Error('Upload failed'));
+      
+  },[]);
 
   return (
 
@@ -85,7 +141,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                   {moment(post.data.date_created).format('LL')}
                 </p>
                 <p className="mr-10">/</p>
-                <p>5 Min read</p>
+                <p>{Math.round(avReadTime.average_speed)} Min read</p>
               </div>
               <h6 className="full-width-container text-lg font-medium leading-loose">
                 <ReactMarkdown>{b64_to_utf8(post.data.content)}</ReactMarkdown>
@@ -104,7 +160,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                       onClick={() => {
                         router.push({
                           pathname: '/blog',
-                          query: { cat: cat},
+                          query: { cat: cat },
                         })
                       }}
                     >
@@ -131,7 +187,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                       onClick={() => {
                         router.push({
                           pathname: '/blog',
-                          query: { tag: tag},
+                          query: { tag: tag },
                         })
                       }}
                     >
@@ -327,10 +383,10 @@ const Post: NextPage<PostProps> = ({ post }) => {
 function removeDuplicates(post: ApiPostData) {
 
   while (post.data.categories.length > 1) {
-    post.data.categories.pop();
+    post.data.categories.pop()
   }
 
-  post.data.tags=post.data.tags.filter((tag, index) => post.data.tags.indexOf(tag) === index);
+  post.data.tags = post.data.tags.filter((tag, index) => post.data.tags.indexOf(tag) === index)
 
 };
 

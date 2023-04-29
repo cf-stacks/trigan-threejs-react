@@ -17,7 +17,13 @@ const BlogSlide = () => {
   const [pageSize, setPageSize] = useState(20)
 
   const fetcher = (url: any) =>
-    fetch(url).then(async (r) => {
+    fetch(url,
+      {
+        headers: {
+          Session: `${localStorage.getItem('session_key')}`
+        }
+      }
+    ).then(async (r) => {
       let resPosts = await r.json()
       return resPosts.posts
     })
@@ -203,7 +209,7 @@ const BlogSlide = () => {
           </span>
         </Swiper>
       </div>
-{/*
+      {/*
       <div className="m-auto mb-10 flex w-[100%] flex-row flex-wrap justify-center">
         {data?.map((BlogPost: any, i: number) => {
           const date = new Date(BlogPost.date_created)

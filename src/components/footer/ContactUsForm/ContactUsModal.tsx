@@ -52,6 +52,7 @@ export const ContactUsModal: React.FC<ContactUsModalProps> = () => {
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
             'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`
           },
         }
       )

@@ -2,8 +2,8 @@ import axios, { AxiosError } from 'axios'
 import { TEST_API_URL } from '../util/constants'
 
 export interface AccountsOptionsType {
-  page?: number
-  page_size?: number
+  pageIndex?: number
+  pageSize?: number
   search?: string
 }
 
@@ -11,7 +11,8 @@ export const fetchAccounts = async (options?: AccountsOptionsType) => {
   let params = {}
 
   if (options) {
-    const { page, page_size, search } = options
+    const { pageIndex: page, pageSize: page_size, search } = options
+
     params = search
       ? { search }
       : {
@@ -35,6 +36,6 @@ export const fetchAccounts = async (options?: AccountsOptionsType) => {
     return response.data
   } catch (error) {
     console.log(error)
-    return error as AxiosError
+    throw error as AxiosError
   }
 }

@@ -42,13 +42,12 @@ const useStyles = createStyles((theme) => ({
 
 export interface ApplicantType {
   id: string
-  creator_id: string
   created_at: string
   updated_at: string
-  linkedin_job_id: string
   linkedin_job_post_id: string
   name: string
   cv_link: string
+  applicant_link: string
   status: string
   is_invited: boolean
   is_nda: boolean
@@ -83,13 +82,15 @@ export const ApplicantsTable = ({
       applicants.map((element: ApplicantType, index: number) => (
         <tr key={index}>
           <th>{element.id}</th>
-          <th>{element.creator_id}</th>
           <td>{new Date(element.created_at).toLocaleDateString()}</td>
           <td>{new Date(element.updated_at).toLocaleDateString()}</td>
-          <th>{element.linkedin_job_id}</th>
+          <th>{element.linkedin_job_post_id}</th>
           <th>{element.name}</th>
           <th style={{ color: 'purple' }}>
             <a href={element.cv_link}>Link</a>
+          </th>
+          <th style={{ color: 'purple' }}>
+            <a href={element.applicant_link}>Link</a>
           </th>
           <th
             style={{
@@ -153,12 +154,12 @@ export const ApplicantsTable = ({
         <thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
           <tr>
             <th>id</th>
-            <th>creator id</th>
             <th>created at</th>
             <th>updated at</th>
-            <th>linkedin job id</th>
+            <th>linkedin job post id</th>
             <th>name</th>
             <th>cv link</th>
+            <th>applicant link</th>
             <th>status</th>
             <th colSpan={2} align="right">
               actions

@@ -698,7 +698,7 @@ export const PostsModals = ({
               type="submit"
               color="blue"
               mr={'1rem'}
-              //   onClick={handleEditIcon}
+            //   onClick={handleEditIcon}
             >
               Update
             </Button>
