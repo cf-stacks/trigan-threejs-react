@@ -62,7 +62,7 @@ export const SearchInput = ({
         onChange={(e) => setSearch(e.target.value)}
         disabled={disabled}
       />
-      <button type="submit">
+      <button type="submit" disabled={disabled}>
         <IconSearch />
       </button>
     </form>
