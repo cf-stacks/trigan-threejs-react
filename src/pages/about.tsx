@@ -4,6 +4,11 @@ import React, { lazy, Suspense } from 'react'
 import GlobalLayout from '../components/layouts/GlobalLayout';
 
 const About = () => {
+  var disablePage = process.env.NEXT_PUBLIC_DISABLE_PAGE;
+   if(disablePage === 'true')
+    {
+        return null;
+    }
   return (
     <div className='dark:bg-white'>
       <SEO title="About" description='About Trigan' />
