@@ -5,6 +5,11 @@ import GlobalLayout from '../components/layouts/GlobalLayout';
 import { SEO } from '../components/shared/SEO'
 
 const IntroductionPage = () => {
+  var disablePage = process.env.NEXT_PUBLIC_DISABLE_PAGE;
+   if(disablePage === 'true')
+    {
+        return null;
+    }
   return (
     <div>
       <SEO
