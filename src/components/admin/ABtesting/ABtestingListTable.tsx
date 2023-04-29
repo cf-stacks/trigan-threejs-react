@@ -1,17 +1,16 @@
 import {
   Box,
   Button,
+  Container,
   Loader,
   Modal,
-  Table,
-  Container,
   NumberInput,
-  TypographyStylesProvider,
-  TextInput,
+  Table,
   Text,
+  TextInput,
   Tooltip,
+  TypographyStylesProvider,
 } from '@mantine/core'
-import { IconHelp, IconQuestionMark } from '@tabler/icons'
 import axios from 'axios'
 import { useCallback, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -64,7 +63,8 @@ export const ABtestingListTable = ({
           body: formData,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
         })
           .then((response) => response.json())
@@ -111,7 +111,8 @@ export const ABtestingListTable = ({
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
+          'Content-Language': `${localStorage.getItem('content-language')}`,
+          Session: `${localStorage.getItem('session_key')}`,
         },
       }
     )
@@ -127,7 +128,8 @@ export const ABtestingListTable = ({
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
+          'Content-Language': `${localStorage.getItem('content-language')}`,
+          Session: `${localStorage.getItem('session_key')}`,
         },
       }
     )
@@ -168,7 +170,7 @@ export const ABtestingListTable = ({
                 }
                 return accumulator
               },
-                initialValue)
+              initialValue)
 
               const newMaxWeight = (10 - sum * 10) / 10
               if (sum > 0 && sum < 1) {
@@ -264,7 +266,7 @@ export const ABtestingListTable = ({
                         }
                         return accumulator
                       },
-                        initialValue)
+                      initialValue)
                       console.log(sum)
 
                       const newMaxWeight = (10 - sum * 10) / 10

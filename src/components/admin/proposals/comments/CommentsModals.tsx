@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react'
 import {
   Button,
-  Modal,
-  Title,
-  TextInput,
-  Textarea,
   Divider,
+  Modal,
+  Textarea,
+  Title,
   createStyles,
 } from '@mantine/core'
-import { MoadalType, CommentType } from './CommentsTable'
 import axios from 'axios'
-import { TEST_API_URL } from '../../../../util/constants'
-import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+import { TEST_API_URL } from '../../../../util/constants'
+import { CommentType, MoadalType } from './CommentsTable'
 
 const useStyles = createStyles(() => ({
   inputContainer: {
@@ -67,7 +66,8 @@ const ModalCreate: React.FC<CommentsModalsType> = (props) => {
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )
@@ -166,7 +166,8 @@ const ModalEdit: React.FC<CommentsModalsType> = (props) => {
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )
@@ -245,7 +246,8 @@ const ModalDelete: React.FC<CommentsModalsType> = (props) => {
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )
@@ -303,7 +305,8 @@ const ModalUpvote: React.FC<CommentsModalsType> = (props) => {
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )

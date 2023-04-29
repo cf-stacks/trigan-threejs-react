@@ -4,25 +4,23 @@
 
 // the requests are made on ***handleCreate, handleEdit and handleDelete*** functions
 
-import React, { useState, useEffect } from 'react'
 import {
+  Avatar,
   Button,
+  Divider,
+  FileInput,
   Modal,
-  Title,
   TextInput,
   Textarea,
-  Divider,
+  Title,
   createStyles,
-  FileInput,
-  Avatar,
 } from '@mantine/core'
 import axios from 'axios'
-import { ListItems } from './List'
-import { TEST_API_URL } from '../../../util/constants'
+import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
-import { BlogPost } from '../../../types/BlogPost'
-import { useRouter } from 'next/router'
 import { getErrorMsg } from '../../../util/api'
+import { TEST_API_URL } from '../../../util/constants'
+import { ListItems } from './List'
 
 const useStyles = createStyles(() => ({
   inputContainer: {
@@ -124,7 +122,8 @@ export const PostsModals = ({
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
+          'Content-Language': `${localStorage.getItem('content-language')}`,
+          Session: `${localStorage.getItem('session_key')}`,
         },
       })
       toast.success('Deleted Successfully')
@@ -154,17 +153,14 @@ export const PostsModals = ({
       position,
     }
     try {
-      await axios.post(
-        `${TEST_API_URL}/teammember/create`,
-        newPost,
-        {
-          withCredentials: true,
-          headers: {
-            Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
-          },
-        }
-      )
+      await axios.post(`${TEST_API_URL}/teammember/create`, newPost, {
+        withCredentials: true,
+        headers: {
+          Authorization: `${localStorage.getItem('access_token')}`,
+          'Content-Language': `${localStorage.getItem('content-language')}`,
+          Session: `${localStorage.getItem('session_key')}`,
+        },
+      })
       toast.success('Created Successfully')
       void fetchFunction()
       setModal({ ...modal, open: false })
@@ -198,7 +194,8 @@ export const PostsModals = ({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )
@@ -225,8 +222,9 @@ export const PostsModals = ({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
+            'Content-Language': `${localStorage.getItem('content-language')}`,
             'Content-Type': 'multipart/form-data',
-            Session: `${localStorage.getItem('session_key')}`
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )
@@ -250,8 +248,9 @@ export const PostsModals = ({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
+            'Content-Language': `${localStorage.getItem('content-language')}`,
             'Content-Type': 'multipart/form-data',
-            Session: `${localStorage.getItem('session_key')}`
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )

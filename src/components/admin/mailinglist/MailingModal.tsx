@@ -1,17 +1,16 @@
-import React, { useState } from 'react'
 import {
   Button,
-  Modal,
-  Title,
-  TextInput,
   Divider,
+  Modal,
+  TextInput,
+  Title,
   createStyles,
 } from '@mantine/core'
 import axios from 'axios'
-import { TEST_API_URL } from '../../../util/constants'
+import React, { useState } from 'react'
 import toast from 'react-hot-toast'
-import { determineAxios } from '../../../util/determines'
 import { getErrorMsg } from '../../../util/api'
+import { TEST_API_URL } from '../../../util/constants'
 import { MailingData } from './MailingListTable'
 
 const useStyles = createStyles(() => ({
@@ -24,8 +23,8 @@ const useStyles = createStyles(() => ({
       flexDirection: 'column',
     },
     '> div': {
-      margin: '1rem'
-    }
+      margin: '1rem',
+    },
   },
   formContainer: {
     display: 'flex',
@@ -78,27 +77,33 @@ export const MailingCreateModal = ({
     code: '',
   }
   const [mailing, setMailing] = useState<Mailing>(defaultMailing)
-  const [verfiyMailing, setVerifyMailing] = useState<VerifyMailing>(defaultVerifyMailing)
+  const [verfiyMailing, setVerifyMailing] =
+    useState<VerifyMailing>(defaultVerifyMailing)
 
   const { classes } = useStyles()
 
   const handleCreate = async (e: any) => {
     e.preventDefault()
     const validate = RegExp(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g)
-                
+
     if (!validate.test(mailing.email)) {
       toast.error('Email is invalid')
       return
     }
 
     try {
-      const data = await axios.post(`${TEST_API_URL}/mailinglist/create`, mailing, {
-        withCredentials: true,
-        headers: {
-          Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
-        },
-      })
+      const data = await axios.post(
+        `${TEST_API_URL}/mailinglist/create`,
+        mailing,
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `${localStorage.getItem('access_token')}`,
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
+          },
+        }
+      )
       toast.success('Created Successfully')
       setMailing(defaultMailing)
       setModal({ ...modal, open: false, type: 'reload' })
@@ -110,21 +115,25 @@ export const MailingCreateModal = ({
   const handleVerify = async (e: any) => {
     e.preventDefault()
     const validate = RegExp(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g)
-                
+
     if (!validate.test(verfiyMailing.email)) {
       toast.error('Email is invalid')
       return
     }
 
     try {
-      const m = await axios.get<{ Data: MailingData }>(`${TEST_API_URL}/mailinglist/verify`, {
-        withCredentials: true,
-        headers: {
-          Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
-        },
-        params: verfiyMailing
-      })
+      const m = await axios.get<{ Data: MailingData }>(
+        `${TEST_API_URL}/mailinglist/verify`,
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `${localStorage.getItem('access_token')}`,
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
+          },
+          params: verfiyMailing,
+        }
+      )
       toast.success(`${m.data.Data.email} is verified Successfully`)
       setVerifyMailing(defaultVerifyMailing)
       setModal({ ...modal, open: false, type: 'reload' })
@@ -165,22 +174,28 @@ export const MailingCreateModal = ({
             <TextInput
               label="Country"
               value={mailing.country}
-              onChange={(e) => setMailing({ ...mailing , country: e.target.value })}
+              onChange={(e) =>
+                setMailing({ ...mailing, country: e.target.value })
+              }
             />
             <TextInput
               label="Email"
               value={mailing.email}
-              onChange={(e) => setMailing({ ...mailing , email: e.target.value })}
+              onChange={(e) =>
+                setMailing({ ...mailing, email: e.target.value })
+              }
             />
             <TextInput
               label="Message"
               value={mailing.message}
-              onChange={(e) => setMailing({ ...mailing , message: e.target.value })}
+              onChange={(e) =>
+                setMailing({ ...mailing, message: e.target.value })
+              }
             />
             <TextInput
               label="Name"
               value={mailing.name}
-              onChange={(e) => setMailing({ ...mailing , name: e.target.value })}
+              onChange={(e) => setMailing({ ...mailing, name: e.target.value })}
             />
           </section>
           <Divider />
@@ -212,7 +227,7 @@ export const MailingCreateModal = ({
       </Modal>
     )
 
-    if (modal.type === 'verify')
+  if (modal.type === 'verify')
     return (
       <Modal
         opened={modal.open}
@@ -238,12 +253,16 @@ export const MailingCreateModal = ({
             <TextInput
               label="Email"
               value={verfiyMailing.email}
-              onChange={(e) => setVerifyMailing({ ...verfiyMailing , email: e.target.value })}
+              onChange={(e) =>
+                setVerifyMailing({ ...verfiyMailing, email: e.target.value })
+              }
             />
             <TextInput
               label="Code"
               value={verfiyMailing.code}
-              onChange={(e) => setVerifyMailing({ ...verfiyMailing , code: e.target.value })}
+              onChange={(e) =>
+                setVerifyMailing({ ...verfiyMailing, code: e.target.value })
+              }
             />
           </section>
           <Divider />
