@@ -17,6 +17,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
   
   const router = useRouter()
   const [selectedTag, setSelectedTag] = useState(0)
+  const[sidebarShow,setSidebarShow]=useState(false);
   const mockPosts: any[] = posts.posts ?? []
   const tagsArray: any[] = ['Agriculture', 'Web3', 'Crypto', 'Metavarse']
   const [allPosts, setPosts] = useState(null)
@@ -73,8 +74,10 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
           )
         })}
       </div>
-      <div className="flex check">
-        <div className="mb-10 flex w-2/3 flex-row flex-wrap justify-center col-span-4 postSec">
+      
+      <button className='mobileButton' onClick={e=>setSidebarShow(!sidebarShow)}><img src='https://cdn.shopify.com/s/files/1/2439/4751/products/Arrow-450x200.jpg?v=1608697847&width=600'/></button>
+      <div className="flex check" >
+        <div className={`mb-10  flex w-2/3 flex-row flex-wrap justify-center col-span-4 ${!sidebarShow ? `postSec` : `hideit` } `}>
           {
             mockPosts.length === 0 ?
               <div className='text-white text-[16px]'>No posts to display</div> :
@@ -136,7 +139,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                                 </svg>
                               </div>
                               <div>
-                                <span className="leftRight text-xs font-light text-white font" >
+                                <span className="leftRight text-xs font-light text-white font tag" >
                                   Tags:
                                 </span>
                               </div>
@@ -186,7 +189,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
               })}
         </div>
 
-        <div className=' w-1/3 flex justify-center media'>
+        <div  className={`w-1/3 flex justify-center ${sidebarShow ? `media` : `hideit` }`}>
           {/*UX dynamic sidebar width for when there are less than 2 posts*/}
           <div className={`ml-4 mt-[40px] flex h-[1200px] w-[${mockPosts.length < 2 ? '100%' : '70%'}]  flex-col bg-[#212529]`}>
             <div className="flex flex-col items-center py-16">
