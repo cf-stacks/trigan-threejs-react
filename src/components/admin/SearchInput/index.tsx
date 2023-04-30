@@ -12,7 +12,6 @@ interface SearchInputProps {
 
 const useStyles = createStyles((theme) => ({
   searchContainer: {
-    marginRight: '1.5rem',
     position: 'relative',
     display: 'flex',
     width: '341px',

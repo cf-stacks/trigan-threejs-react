@@ -150,7 +150,7 @@ export const LinkedinJobApplicants = ({
       </Head>
       <div className="mb-8 flex items-center justify-between">
         <Title size={24} align="center" className="text-white">
-          Linkedin Jobs
+          Linkedin Applicants
         </Title>
         <SearchInput
           handleSearch={handleSearch}
