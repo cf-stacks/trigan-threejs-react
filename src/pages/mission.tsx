@@ -3,12 +3,14 @@ import 'react-lazy-load-image-component/src/effects/blur.css'
 import React, { lazy, Suspense } from 'react'
 import GlobalLayout from '../components/layouts/GlobalLayout';
 import { SEO } from '../components/shared/SEO'
+import { useRouter } from "next/router";
 
 const IntroductionPage = () => {
   var disablePage = process.env.NEXT_PUBLIC_DISABLE_PAGE;
+ const router=useRouter();
    if(disablePage === 'true')
     {
-        return null;
+        router.push("/")
     }
   return (
     <div>
