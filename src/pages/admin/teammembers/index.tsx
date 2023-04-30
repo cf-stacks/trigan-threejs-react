@@ -1,15 +1,15 @@
-import { NextPage } from 'next'
-import React, { ReactNode, useCallback, useEffect, useState } from 'react'
-import { AdminLayout } from '../../../components/layouts/AdminLayout'
 import { Title } from '@mantine/core'
 import axios, { AxiosError } from 'axios'
-import { TEST_API_URL } from '../../../util/constants'
+import { NextPage } from 'next'
+import React, { ReactNode, useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
-import { PostsTable } from '../../../components/admin/teammembers/MemberTable'
 import { PostsModals } from '../../../components/admin/teammembers/MemberModal'
+import { PostsTable } from '../../../components/admin/teammembers/MemberTable'
+import { AdminLayout } from '../../../components/layouts/AdminLayout'
+import { TEST_API_URL } from '../../../util/constants'
 // import { IconPlus, IconSearch } from '@tabler/icons'
-import TabHeaderAction from '../../../components/tabHeaderAction';
 import { useRouter } from 'next/router'
+import TabHeaderAction from '../../../components/tabHeaderAction'
 
 interface DashboardProps {
   children?: ReactNode
@@ -120,7 +120,6 @@ const Dashboard: NextPage<DashboardProps> = () => {
   const [fetching, setFetching] = useState(true)
   const [modal, setModal] = useState({ open: false, size: 'md', type: '' })
   const [selectedPost, setSelectedPost] = useState<any>({})
-  
 
   const router = useRouter()
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -137,7 +136,8 @@ const Dashboard: NextPage<DashboardProps> = () => {
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
           params: {
             search,
@@ -167,15 +167,15 @@ const Dashboard: NextPage<DashboardProps> = () => {
   return (
     <AdminLayout>
       <Title align={'center'}>Team Members</Title>
-      <TabHeaderAction 
+      <TabHeaderAction
         search={{
           value: search,
           onChange: (e) => setSearch(e.target.value),
-          handleSubmit: handleSubmit
+          handleSubmit: handleSubmit,
         }}
         create={{
-          text: "Add Team Member",
-          onClick: () => setModal({ open: true, type: 'create', size: '' })
+          text: 'Add Team Member',
+          onClick: () => setModal({ open: true, type: 'create', size: '' }),
         }}
       />
 

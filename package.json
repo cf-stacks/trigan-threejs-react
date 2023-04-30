@@ -21,6 +21,8 @@
     "postbuild": "rimraf ./next/**/*.js.map"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.14",
+    "@heroicons/react": "^2.0.17",
     "@mantine/core": "^5.10.5",
     "@mantine/hooks": "^5.10.0",
     "@mantine/rte": "^5.10.0",

@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react'
 import {
   Button,
-  Modal,
-  Title,
-  TextInput,
-  Textarea,
   Divider,
+  Modal,
+  TextInput,
+  Title,
   createStyles,
 } from '@mantine/core'
-import { MoadalType, AccountType } from './LinkedinAccountsTable'
 import axios from 'axios'
-import { TEST_API_URL } from '../../../util/constants'
+import React, { useState } from 'react'
 import toast from 'react-hot-toast'
+import { TEST_API_URL } from '../../../util/constants'
+import { AccountType, MoadalType } from './LinkedinAccountsTable'
 
 const useStyles = createStyles(() => ({
   inputContainer: {
@@ -69,7 +68,8 @@ const ModalCreate: React.FC<AccountsModalsType> = (props) => {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
+          'Content-Language': `${localStorage.getItem('content-language')}`,
+          Session: `${localStorage.getItem('session_key')}`,
         },
       })
       toast.success('Created Successfully')
@@ -185,18 +185,23 @@ const ModalEdit: React.FC<AccountsModalsType> = (props) => {
     e.preventDefault()
     const updatedAccount = {
       name,
-      id: props.selectedAccount.id
-    };
+      id: props.selectedAccount.id,
+    }
 
     try {
-      await axios.put(`${TEST_API_URL}/linkedin-account/update`, updatedAccount, {
-        withCredentials: true,
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
-        },
-      })
+      await axios.put(
+        `${TEST_API_URL}/linkedin-account/update`,
+        updatedAccount,
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `${localStorage.getItem('access_token')}`,
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
+          },
+        }
+      )
       toast.success('Updated Successfully')
       handleClose()
       void props.fetchFunction()
@@ -263,13 +268,17 @@ const ModalDelete: React.FC<AccountsModalsType> = (props) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`${TEST_API_URL}/linkedin-account/delete/${props.selectedAccount.id}`, {
-        withCredentials: true,
-        headers: {
-          Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
-        },
-      })
+      await axios.delete(
+        `${TEST_API_URL}/linkedin-account/delete/${props.selectedAccount.id}`,
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `${localStorage.getItem('access_token')}`,
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
+          },
+        }
+      )
       toast.success('Deleted Successfully')
       handleClose()
       void props.fetchFunction()

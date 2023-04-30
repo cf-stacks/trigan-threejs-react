@@ -3,23 +3,22 @@
 
 // the requests are made on ***handleCreate, handleEdit and handleDelete*** functions
 
-import React, { useState, useEffect } from 'react'
 import {
   Button,
+  Divider,
   Modal,
-  Title,
   TextInput,
   Textarea,
-  Divider,
+  Title,
   createStyles,
 } from '@mantine/core'
 import axios from 'axios'
-import { ListItems } from './List'
-import { TEST_API_URL } from '../../../util/constants'
+import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { BlogPost } from '../../../types/BlogPost'
-import { useRouter } from 'next/router'
 import { getErrorMsg } from '../../../util/api'
+import { TEST_API_URL } from '../../../util/constants'
+import { ListItems } from './List'
 
 const useStyles = createStyles(() => ({
   inputContainer: {
@@ -108,7 +107,8 @@ export const PostsProposalModals = ({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )
@@ -135,7 +135,8 @@ export const PostsProposalModals = ({
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
+          'Content-Language': `${localStorage.getItem('content-language')}`,
+          Session: `${localStorage.getItem('session_key')}`,
         },
       })
       void fetchFunction()
@@ -162,7 +163,8 @@ export const PostsProposalModals = ({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )
@@ -182,7 +184,8 @@ export const PostsProposalModals = ({
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )
@@ -197,7 +200,8 @@ export const PostsProposalModals = ({
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
+          'Content-Language': `${localStorage.getItem('content-language')}`,
+          Session: `${localStorage.getItem('session_key')}`,
         },
       })
     } catch (error) {

@@ -46,8 +46,8 @@ interface ApplicantsModalsType {
 }
 
 const ModalEdit: React.FC<ApplicantsModalsType> = (props) => {
-  const { classes } = useStyles()
-  const [status, setStatus] = useState<string | null>(null)
+  const { classes } = useStyles(); // Remove curly braces here
+  const [status, setStatus] = useState<string | null>(null);
 
   const handleClose = () => {
     props.setModal({ ...props.modal, open: false })
@@ -69,6 +69,7 @@ const ModalEdit: React.FC<ApplicantsModalsType> = (props) => {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `${localStorage.getItem('access_token')}`,
+            'Content-Language': `${localStorage.getItem('content-language')}`,
             Session: `${localStorage.getItem('session_key')}`,
           },
         }

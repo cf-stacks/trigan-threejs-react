@@ -1,15 +1,15 @@
-import { NextPage } from 'next'
-import React, { ReactNode, useCallback, useEffect, useState } from 'react'
-import { AdminLayout } from '../../../components/layouts/AdminLayout'
 import { Title } from '@mantine/core'
 import axios, { AxiosError } from 'axios'
-import { TEST_API_URL } from '../../../util/constants'
+import { NextPage } from 'next'
+import React, { ReactNode, useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
-import { MilestoneTable } from '../../../components/admin/milestones/MilestoneTable'
 import { MilestoneModals } from '../../../components/admin/milestones/MilestoneModals'
+import { MilestoneTable } from '../../../components/admin/milestones/MilestoneTable'
+import { AdminLayout } from '../../../components/layouts/AdminLayout'
+import { TEST_API_URL } from '../../../util/constants'
 // import { IconPlus, IconSearch } from '@tabler/icons'
-import TabHeaderAction from '../../../components/tabHeaderAction'
 import { useRouter } from 'next/router'
+import TabHeaderAction from '../../../components/tabHeaderAction'
 
 interface DashboardProps {
   children?: ReactNode
@@ -37,7 +37,8 @@ const Dashboard: NextPage<DashboardProps> = () => {
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
+          'Content-Language': `${localStorage.getItem('content-language')}`,
+          Session: `${localStorage.getItem('session_key')}`,
         },
       })
       setMilestones(p.data.Data)

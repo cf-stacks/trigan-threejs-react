@@ -1,16 +1,16 @@
-import { NextPage } from 'next';
-import React, { ReactNode, useCallback, useEffect, useState } from 'react';
-import { AdminLayout } from '../../../components/layouts/AdminLayout';
-import { Title } from '@mantine/core';
-import axios, { AxiosError } from 'axios';  
-import { TEST_API_URL } from '../../../util/constants';
-import toast from 'react-hot-toast';
-import { PostsModals } from '../../../components/admin/posts/PostsModals';
-import TabHeaderAction from "../../../components/tabHeaderAction"
-import { useRouter } from 'next/router';
-import {ColumnSort, SortingState} from '@tanstack/react-table';
-import Table from '../../../components/Table';
-import {useColumns} from '../../../table-columns/posts';
+import { Title } from '@mantine/core'
+import { ColumnSort, SortingState } from '@tanstack/react-table'
+import axios, { AxiosError } from 'axios'
+import { NextPage } from 'next'
+import { useRouter } from 'next/router'
+import React, { ReactNode, useCallback, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+import Table from '../../../components/Table'
+import { PostsModals } from '../../../components/admin/posts/PostsModals'
+import { AdminLayout } from '../../../components/layouts/AdminLayout'
+import TabHeaderAction from '../../../components/tabHeaderAction'
+import { useColumns } from '../../../table-columns/posts'
+import { TEST_API_URL } from '../../../util/constants'
 
 interface DashboardProps {
   children?: ReactNode
@@ -124,37 +124,43 @@ const Dashboard: NextPage<DashboardProps> = () => {
 
   const router = useRouter()
 
-  const fetchFunction = useCallback(async ({ sort }: { sort?: ColumnSort }) => {
-    setFetching(true)
-    console.log("request senttt")
-    try {
-      const p: any = await axios.get(`${TEST_API_URL}/posts?is_preview=false`, {
-        withCredentials: true,
-        headers: {
-          Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
-        },
-        params: {
-            sortBy: sort ? sort.id : undefined,
-            order: sort ? sort.desc ? "desc" : "asc" : undefined,
-        },
-      })
+  const fetchFunction = useCallback(
+    async ({ sort }: { sort?: ColumnSort }) => {
+      setFetching(true)
+      console.log('request senttt')
+      try {
+        const p: any = await axios.get(
+          `${TEST_API_URL}/posts?is_preview=false`,
+          {
+            withCredentials: true,
+            headers: {
+              Authorization: `${localStorage.getItem('access_token')}`,
+              'Content-Language': `${localStorage.getItem('content-language')}`,
+              Session: `${localStorage.getItem('session_key')}`,
+            },
+            params: {
+              sortBy: sort ? sort.id : undefined,
+              order: sort ? (sort.desc ? 'desc' : 'asc') : undefined,
+            },
+          }
+        )
 
-      console.log(p);
-      setPosts(p.data.posts)
-      console.log(p);
-
-    } catch (error) {
-      console.log(error)
-      const err = error as AxiosError
-      if ((err.response?.status as number) === 401) {
-        await router.push('/admin/login')
+        console.log(p)
+        setPosts(p.data.posts)
+        console.log(p)
+      } catch (error) {
+        console.log(error)
+        const err = error as AxiosError
+        if ((err.response?.status as number) === 401) {
+          await router.push('/admin/login')
+        }
+        toast.error('Something went wrong')
       }
-      toast.error('Something went wrong');
-    }
 
-    setFetching(false)
-  }, [router])
+      setFetching(false)
+    },
+    [router]
+  )
 
   const [rowSelection, setRowSelection] = useState({})
   const [sorting, setSorting] = useState<SortingState>([])
@@ -162,22 +168,22 @@ const Dashboard: NextPage<DashboardProps> = () => {
   const columns = useColumns({
     edit: useCallback(() => {}, []),
     remove: useCallback(() => {}, []),
-  });
+  })
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     if (e) e.preventDefault()
-    const [sortField] = sorting;
+    const [sortField] = sorting
     await fetchFunction({ sort: sortField })
   }
 
   useEffect(() => {
-    const [sortField] = sorting;
-    void fetchFunction({ sort: sortField });
+    const [sortField] = sorting
+    void fetchFunction({ sort: sortField })
   }, [fetchFunction, sorting])
 
   const refetch = useCallback(async () => {
-    const [sortField] = sorting;
-    void fetchFunction({ sort: sortField });
+    const [sortField] = sorting
+    void fetchFunction({ sort: sortField })
   }, [fetchFunction, sorting])
 
   const searchPosts = async (term: string) => {
@@ -190,15 +196,15 @@ const Dashboard: NextPage<DashboardProps> = () => {
         )
       )
     } else {
-      const [sortField] = sorting;
+      const [sortField] = sorting
       await fetchFunction({ sort: sortField })
     }
   }
 
   return (
     <AdminLayout>
-      <div className='flex justify-between items-center mb-8'>
-        <Title size={24} align='center' className='text-white'>
+      <div className="mb-8 flex items-center justify-between">
+        <Title size={24} align="center" className="text-white">
           Posts
         </Title>
 

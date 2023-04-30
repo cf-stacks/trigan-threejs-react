@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react'
 import {
   Button,
-  Modal,
-  Title,
-  TextInput,
-  Textarea,
   Divider,
+  Modal,
+  TextInput,
+  Title,
   createStyles,
 } from '@mantine/core'
-import { MoadalType, UserType } from './UsersTable'
 import axios from 'axios'
-import { TEST_API_URL } from '../../../util/constants'
+import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
+import { TEST_API_URL } from '../../../util/constants'
+import { MoadalType, UserType } from './UsersTable'
 
 const useStyles = createStyles(() => ({
   inputContainer: {
@@ -76,7 +75,8 @@ const ModalCreate: React.FC<UsersModalsType> = (props) => {
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
+          'Content-Language': `${localStorage.getItem('content-language')}`,
+          Session: `${localStorage.getItem('session_key')}`,
         },
       })
       toast.success('Created Successfully')
@@ -185,7 +185,7 @@ const ModalCreate: React.FC<UsersModalsType> = (props) => {
             </div>
             <div className={classes.inputContainer}>
               <TextInput
-                type={"number"}
+                type={'number'}
                 label="RoleId"
                 value={role_id.toString()}
                 onChange={(e) => setRoleId(parseInt(e.target.value))}
@@ -232,7 +232,8 @@ const ModalEdit: React.FC<UsersModalsType> = (props) => {
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
+          'Content-Language': `${localStorage.getItem('content-language')}`,
+          Session: `${localStorage.getItem('session_key')}`,
         },
       })
       toast.success('Created Successfully')
@@ -314,7 +315,7 @@ const ModalEdit: React.FC<UsersModalsType> = (props) => {
             </div>{' '}
             <div className={classes.inputContainer}>
               <TextInput
-               type={"number"}
+                type={'number'}
                 label="Role Id"
                 value={user.role_id}
                 onChange={(e) =>
@@ -357,7 +358,8 @@ const ModalDelete: React.FC<UsersModalsType> = (props) => {
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )

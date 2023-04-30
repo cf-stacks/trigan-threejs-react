@@ -7,7 +7,7 @@ import React, {
   useCallback,
   useEffect,
   useRef,
-  useState
+  useState,
 } from 'react'
 import toast from 'react-hot-toast'
 import { DocumentModals } from '../../../components/admin/DocumentChanges/DocumentModels'
@@ -67,7 +67,8 @@ const DocumentChanges: NextPage<DocumentChangesProps> = () => {
         withCredentials: true,
         headers: {
           Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
+          'Content-Language': `${localStorage.getItem('content-language')}`,
+          Session: `${localStorage.getItem('session_key')}`,
         },
         signal: abortController.current.signal,
       })
@@ -109,7 +110,8 @@ const DocumentChanges: NextPage<DocumentChangesProps> = () => {
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )

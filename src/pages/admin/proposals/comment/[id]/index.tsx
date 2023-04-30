@@ -1,24 +1,25 @@
+import { Title } from '@mantine/core'
+import axios, { AxiosError } from 'axios'
 import { NextPage } from 'next'
 import React, {
+  Dispatch,
+  SetStateAction,
   useCallback,
   useEffect,
   useState,
-  Dispatch,
-  SetStateAction,
 } from 'react'
-import { AdminLayout } from '../../../../../components/layouts/AdminLayout'
-import { Title } from '@mantine/core'
-import axios, { AxiosError } from 'axios'
-import { TEST_API_URL } from '../../../../../util/constants'
 import toast from 'react-hot-toast'
+import { AdminLayout } from '../../../../../components/layouts/AdminLayout'
+import { TEST_API_URL } from '../../../../../util/constants'
 // import { IconPlus, IconSearch } from '@tabler/icons'
 import { useRouter } from 'next/router'
-import TabHeaderAction from '../../../../../components/tabHeaderAction'
+import { CommentsModals } from '../../../../../components/admin/proposals/comments/CommentsModals'
 import {
+  CommentsTable,
+  CommentType,
   MoadalType,
 } from '../../../../../components/admin/proposals/comments/CommentsTable'
-import { CommentsModals } from '../../../../../components/admin/proposals/comments/CommentsModals'
-import { CommentsTable, CommentType } from '../../../../../components/admin/proposals/comments/CommentsTable'
+import TabHeaderAction from '../../../../../components/tabHeaderAction'
 
 const Comments: NextPage = () => {
   const [search, setSearch] = useState('')
@@ -27,8 +28,8 @@ const Comments: NextPage = () => {
   const [modal, setModal] = useState({ open: false, size: 'md', type: '' })
   const [selectedComment, setSelectedComment] = useState<CommentType>()
 
-  const router = useRouter();
-  const id = router.query.id;
+  const router = useRouter()
+  const id = router.query.id
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     if (e) e.preventDefault()
@@ -44,7 +45,8 @@ const Comments: NextPage = () => {
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
-            Session: `${localStorage.getItem('session_key')}`
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
           },
         }
       )

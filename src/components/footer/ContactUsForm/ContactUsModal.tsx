@@ -7,8 +7,8 @@ import { IEarlyAccessModalContext } from '../../../context/EarlyAccessModalConte
 import useEarlyAccessModal from '../../../hooks/useEarlyAccessModal'
 import { ContactUsFormValues } from '../../../types/ContactUsFormValues'
 import { validateEmail } from '../../../util/functions'
-import { TextareaInputField } from '../../shared/Forms/TextareaInputField'
 import { TextInputField } from '../../shared/Forms/TextInputField'
+import { TextareaInputField } from '../../shared/Forms/TextareaInputField'
 
 interface ContactUsFormProps {
   children?: ReactNode
@@ -51,6 +51,7 @@ export const ContactUsModal: React.FC<ContactUsModalProps> = () => {
           withCredentials: true,
           headers: {
             Authorization: `${localStorage.getItem('access_token')}`,
+            'Content-Language': `${localStorage.getItem('content-language')}`,
             Session: `${localStorage.getItem('session_key')}`
           },
         }

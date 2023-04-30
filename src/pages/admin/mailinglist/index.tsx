@@ -1,15 +1,16 @@
-import { NextPage } from 'next'
-import React, { ReactNode, useCallback, useEffect, useState } from 'react'
-import {
-  AdminLayout,
-} from '../../../components/layouts/AdminLayout'
-import { Button, createStyles, Title } from '@mantine/core'
-import axios from 'axios'
-import { TEST_API_URL } from '../../../util/constants'
-import toast from 'react-hot-toast'
+import { Button, Title, createStyles } from '@mantine/core'
 import { IconPlus } from '@tabler/icons'
-import { MailingData, MailingListTable } from '../../../components/admin/mailinglist/MailingListTable'
+import axios from 'axios'
+import { NextPage } from 'next'
+import { ReactNode, useCallback, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+import {
+  MailingData,
+  MailingListTable,
+} from '../../../components/admin/mailinglist/MailingListTable'
 import { MailingCreateModal } from '../../../components/admin/mailinglist/MailingModal'
+import { AdminLayout } from '../../../components/layouts/AdminLayout'
+import { TEST_API_URL } from '../../../util/constants'
 
 interface DashboardProps {
   children?: ReactNode
@@ -40,13 +41,17 @@ const Dashboard: NextPage<DashboardProps> = () => {
 
   const fetchFunction = useCallback(async () => {
     try {
-      const m = await axios.get<{ Data: MailingData[]}>(`${TEST_API_URL}/mailinglist/get`, {
-        withCredentials: true,
-        headers: {
-          Authorization: `${localStorage.getItem('access_token')}`,
-          Session: `${localStorage.getItem('session_key')}`
-        },
-      })
+      const m = await axios.get<{ Data: MailingData[] }>(
+        `${TEST_API_URL}/mailinglist/get`,
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `${localStorage.getItem('access_token')}`,
+            'Content-Language': `${localStorage.getItem('content-language')}`,
+            Session: `${localStorage.getItem('session_key')}`,
+          },
+        }
+      )
 
       setMailings(m.data.Data || [])
     } catch (error) {
@@ -104,10 +109,7 @@ const Dashboard: NextPage<DashboardProps> = () => {
       </section>
 
       <div>
-        <MailingCreateModal
-          modal={modal}
-          setModal={setModal}
-        />
+        <MailingCreateModal modal={modal} setModal={setModal} />
       </div>
     </AdminLayout>
   )
