@@ -107,6 +107,12 @@ export const LinkedinAccounts = ({
     return setSelectedAccount(null)
   }, [rowSelection])
 
+  useEffect(() => {
+    if (!selectedAccount) {
+      setRowSelection({})
+    }
+  }, [selectedAccount])
+
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     if (e) e.preventDefault()
     await fetchData({ search })
@@ -168,6 +174,7 @@ export const LinkedinAccounts = ({
               onChange={handlePageSizeChange}
               showSizeChanger
               onShowSizeChange={handlePaginationChange}
+              hideOnSinglePage={true}
             />
             <div>
               <AccountsModals
@@ -182,7 +189,10 @@ export const LinkedinAccounts = ({
             </div>
           </>
         ) : (
-          <Title size={14} className="text-white">
+          <Title
+            size={14}
+            className="mb-4 bg-[#39394B] py-5 text-center text-white"
+          >
             No data
           </Title>
         )}
