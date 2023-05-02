@@ -13,8 +13,11 @@ interface PostsByDateProps {
 
 
 const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
+  
+  
   const router = useRouter()
   const [selectedTag, setSelectedTag] = useState(0)
+  const[sidebarShow,setSidebarShow]=useState(false);
   const mockPosts: any[] = posts.posts ?? []
   const tagsArray: any[] = ['Agriculture', 'Web3', 'Crypto', 'Metavarse']
   const [allPosts, setPosts] = useState(null)
@@ -53,7 +56,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
 
   return (
     <>
-      <div className="mb-8 mt-16 flex w-[100%] flex-wrap justify-center">
+      <div className="mb-8 mt-16 flex w-[100%] flex-wrap justify-center tags ">
         {tagsArray.map((tag, i) => {
           return (
             <div
@@ -71,8 +74,10 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
           )
         })}
       </div>
-      <div className='flex'>
-        <div className="mb-10 flex w-2/3 flex-row flex-wrap justify-center col-span-4">
+      
+      <button className='mobileButton' onClick={e=>setSidebarShow(!sidebarShow)}><img src='https://cdn.shopify.com/s/files/1/2439/4751/products/Arrow-450x200.jpg?v=1608697847&width=600'/></button>
+      <div className="flex check" >
+        <div className={`mb-10  flex w-2/3 flex-row flex-wrap justify-center col-span-4 ${!sidebarShow ? `postSec` : `hideit` } `}>
           {
             mockPosts.length === 0 ?
               <div className='text-white text-[16px]'>No posts to display</div> :
@@ -85,7 +90,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                 return (
                   <div
                     key={i}
-                    className={` m-10 mt-10 flex grid h-[696px] w-[400px] justify-around overflow-hidden rounded-[15px] bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black max-[600px]:justify-center md:flex  md:px-1`}
+                    className={` m-10 mt-10 flex grid h-[696px] w-[400px] justify-around overflow-hidden rounded-[15px] bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black max-[600px]:justify-center md:flex  md:px-1 post font`}
                   >
                     <FadeInWhenVisible duration={(i + 1) * 0.2}>
                       <div
@@ -93,7 +98,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                         className="overflow-hidden"
                       >
                         <div>
-                          <div className="flex flex-col">
+                          <div className="flex flex-col ">
                             <Link
                               href="/blog/post/[blog_name]"
                               passHref
@@ -112,9 +117,9 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                                 />
                               </div>
                             </Link>
-                            <div className="flex w-[400px] flex-col gap-2 px-8 py-4">
+                            <div className="flex w-[400px] flex-col gap-2 px-8 py-4 padding" >
                               <div className="flex w-full justify-between">
-                                <pre className="text-[12px] font-thin text-[#909090]">
+                                <pre className="text-[12px] font-thin font leftRight text-[#909090]">
                                   {date.toLocaleDateString('en-US')}
                                 </pre>
                                 <svg
@@ -134,11 +139,11 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                                 </svg>
                               </div>
                               <div>
-                                <span className="text-xs font-light text-white">
+                                <span className="leftRight text-xs font-light text-white font tag" >
                                   Tags:
                                 </span>
                               </div>
-                              <div className="flex w-[400px] flex-row flex-wrap">
+                              <div className="flex w-[400px] leftRight  flex-row flex-wrap font">
                                 {uniqueTags.map((tag: string, index: number) => {
                                   return (
                                     <div key={index} className="mb-2 mr-2 w-max ">
@@ -154,13 +159,17 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                                 passHref
                                 as={`/blog/post/${BlogPost.slug_id}`}
                               >
-                                <h2 className=" text-2xl font-semibold text-white hover:cursor-pointer hover:text-grey">
+                                <div className='leftRight'>
+                                <h2 className="font text-2xl font-semibold text-white hover:cursor-pointer hover:text-grey">
                                   {BlogPost.title}
                                 </h2>
+                                </div>
                               </Link>
-                              <p className="flex flex-wrap text-[16px] font-normal text-white">
+                              <div className='leftRight'>
+                              <p className="flex wrap font flex-wrap text-[16px] font-normal text-white">
                                 {BlogPost.short_description}
                               </p>
+                              </div>
                               <Link
                                 href="/blog/post/[blog_name]"
                                 passHref
@@ -180,18 +189,18 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
               })}
         </div>
 
-        <div className=' w-1/3 flex justify-center'>
+        <div  className={`w-1/3 flex justify-center ${sidebarShow ? `media` : `hideit` }`}>
           {/*UX dynamic sidebar width for when there are less than 2 posts*/}
           <div className={`ml-4 mt-[40px] flex h-[1200px] w-[${mockPosts.length < 2 ? '100%' : '70%'}]  flex-col bg-[#212529]`}>
             <div className="flex flex-col items-center py-16">
-              <h6 className=" mb-6 border-b-2 border-[#848484] pb-3 text-2xl">
+              <h6 className=" mb-6 border-b-2 border-[#848484] pb-3 text-2xl font">
                 Categories:
               </h6>
               {catsArrayPosts.map((cat: string, i: any) => {
                 return (
                   <div
                     key={i}
-                    className="w-max py-4"
+                    className="w-max py-4  font"
                     onClick={() => {
                       router.push({
                         pathname: '/blog',
@@ -200,7 +209,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                     }}
                   >
                     <span
-                      className={`flex flex flex-row flex-wrap items-center px-2 py-1.5 text-xl font-light leading-none text-white hover:cursor-pointer hover:opacity-50`}
+                      className={`flex font flex flex-row flex-wrap items-center px-2 py-1.5 text-xl font-light leading-none text-white hover:cursor-pointer hover:opacity-50`}
                     >
                       {cat}
                     </span>
@@ -211,14 +220,14 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
             </div>
 
             <div className="flex flex-col items-center py-16">
-              <h6 className=" mb-6 border-b-2 border-[#848484] pb-3 text-2xl">
+              <h6 className=" mb-6 border-b-2 border-[#848484] pb-3 text-2xl font">
                 Tags:
               </h6>
               {tagsArrayPosts.map((tag: string, i: any) => {
                 return (
                   <div
                     key={i}
-                    className="w-max py-4"
+                    className="w-max font py-4"
                     onClick={() => {
                       router.push({
                         pathname: '/blog',
@@ -227,7 +236,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                     }}
                   >
                     <span
-                      className={`flex flex flex-row flex-wrap items-center px-2 py-1.5 text-xl font-light leading-none text-white hover:cursor-pointer hover:opacity-50`}
+                      className={`font flex flex flex-row flex-wrap items-center px-2 py-1.5 text-xl font-light leading-none text-white hover:cursor-pointer hover:opacity-50`}
                     >
                       {tag}
                     </span>
@@ -239,17 +248,17 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
             <div className="h-[1px] w-full bg-[#5B5B5B]" />
             <div className="flex flex-col items-center py-16">
               <Link href="/admin/login" passHref as={``}>
-                <h2 className=" py-4 text-xl font-light text-white underline hover:cursor-pointer hover:text-grey">
+                <h2 className="font py-4 text-xl font-light text-white underline hover:cursor-pointer hover:text-grey">
                   Login/Register
                 </h2>
               </Link>
               <Link href="/post/[id]" passHref as={``}>
-                <h2 className=" py-4 text-xl font-light text-white underline hover:cursor-pointer hover:text-grey">
+                <h2 className=" py-4 font text-xl font-light text-white underline hover:cursor-pointer hover:text-grey">
                   Edit post
                 </h2>
               </Link>
               <Link href="/blog" passHref as={``}>
-                <h2 className=" py-4 text-xl font-light text-white underline hover:cursor-pointer hover:text-grey">
+                <h2 className=" py-4 text-xl font font-light text-white underline hover:cursor-pointer hover:text-grey">
                   Create Post
                 </h2>
               </Link>

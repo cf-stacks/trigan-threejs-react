@@ -3,8 +3,15 @@ import React from 'react'
 import 'react-lazy-load-image-component/src/effects/blur.css'
 import GlobalLayout from '../components/layouts/GlobalLayout';
 import { SEO } from '../components/shared/SEO'
+import { useRouter } from "next/router";
 
 const VisionPage = () => {
+  var disablePage = process.env.NEXT_PUBLIC_DISABLE_PAGE;
+ const router=useRouter();
+   if(disablePage === 'true')
+    {
+        router.push("/");
+    }
   return (
     <div>
       <SEO

@@ -21,6 +21,10 @@ h6 {
   font-family: "M PLUS Rounded 1c", sans-serif;
   color: white;
 }
+
+.mobileButton{
+  display: none;
+}
 /*edit ahmed*/
 ::-webkit-scrollbar {
   width: 4px;
@@ -865,5 +869,74 @@ h6 {
     margin-left: 5px;
     position: relative;
     right: 41px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  
+ 
+  .post{
+      width:20rem;
+      /* margin-left: 30rem; */ 
+
+  }
+  .postSec
+  {
+    margin-left: 15%;
+    width: 20rem;
+  }
+  .check
+  {
+    width:25rem;
+    align-items: center;
+      justify-content: center;
+      display: block;
+   
+  
+  }
+  .tag
+  {
+    flex-wrap:wrap;
+  }
+  .padding
+  {
+    padding: 2rem;
+  }
+  .leftRight
+  {
+    padding-left:4rem;
+    padding-right:5rem;
+  }
+  .wrap
+  {
+    flex-wrap: wrap;
+  }
+  .mobileButton
+  {
+    display: block;
+    width: 3rem;
+    height: 4rem;
+    border-radius: 7rem;
+    position: fixed;
+  }
+  .tags
+  {
+    margin-left: 9rem;
+    width:50%;
+    gap:10px;
+    
+  }
+  .media
+  {
+    width: 20rem;
+    margin-left: 10%;
+    
+  }
+  .hideit
+  {
+  display: none;
+  }
+  .font
+  {
+    font-size: medium;
   }
 }

@@ -9,12 +9,19 @@ import { RegistrationForm } from '../types/RegistrationForm'
 import { SelectOptionsField } from '../components/shared/Forms/SelectOptionsField'
 import { SelectOptions } from '../types/SelectOption'
 import { FileInputFiled } from '../components/shared/Forms/FileInputField'
+import { useRouter } from 'next/router'
 
 interface CareersProps {
   children?: ReactNode
 }
 
 export const Careers: React.FC<CareersProps> = () => {
+ var disablePage = process.env.NEXT_PUBLIC_DISABLE_PAGE;
+ const router = useRouter()
+   if(disablePage === 'true')
+    {
+        router.push("/");
+    }
   const selectOptions: SelectOptions[] = [
     {
       title: 'Software Development',
