@@ -101,10 +101,8 @@ const Post: NextPage<PostProps> = ({ post }) => {
   }
 
   useEffect(()=>{
-
     // console.log(post);
     // createSpeedRecord();
-    
     fetch(`https://test1.trigan.org/api/v1/reading-speed/average?object_id=${post.data.id_post}&object_type=post`,httpHeader)
     .then((response) => response.json())
     .then((result) => { 
