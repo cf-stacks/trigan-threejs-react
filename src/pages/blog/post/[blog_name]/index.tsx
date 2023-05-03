@@ -24,7 +24,7 @@ interface ApiPostData {
 }
 
 const Post: NextPage<PostProps> = ({ post }) => {
-  post.data.id_post = "642ed4a0c3f02c2121235d36";
+  // post.data.id_post = "642ed4a0c3f02c2121235d36";
   const router = useRouter()
   const [tags, setTags] = useState(0)
   const [page, setPage] = useState(1)
@@ -50,7 +50,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
     `https://test1.trigan.org/api/v1/posts?page-size=${pageSize}&page=${page}&apiKey=g436739d6734gd6734`,
     fetcher
   )
-  
+ 
   const { blog_name } = router.query
 
   //this function now converts base64 to utf-8 on client and on server side to prevent hydration errors
@@ -68,6 +68,8 @@ const Post: NextPage<PostProps> = ({ post }) => {
   }}
 
   const trackReadingTime = () => {
+    // post.data.id_post = "642ed4a0c3f02c2121235d36";
+    console.log(post.data);
     fetch(`https://test1.trigan.org/api/v1/reading-speed/user?object_id=${post.data.id_post}&object_type=post`,httpHeader)
     .then((response) => response.json())
     .then((result) => console.log(result))
@@ -76,6 +78,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
   
   
   const createSpeedRecord = ()=>{
+    
     fetch(`https://test1.trigan.org/api/v1/reading-speed/create`,
           {...httpHeader,method:"POST"})
     .then((response) => response.json())
@@ -87,9 +90,6 @@ const Post: NextPage<PostProps> = ({ post }) => {
   }
 
   useEffect(()=>{
-
-    
-
     fetch(`https://test1.trigan.org/api/v1/reading-speed/average?object_id=${post.data.id_post}&object_type=post`,httpHeader)
     .then((response) => response.json())
     .then((result) => { 
@@ -141,7 +141,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                   {moment(post.data.date_created).format('LL')}
                 </p>
                 <p className="mr-10">/</p>
-                <p>{Math.round(avReadTime.average_speed)} Min read</p>
+                <p>{avReadTime.average_speed} Min read</p>
               </div>
               <h6 className="full-width-container text-lg font-medium leading-loose">
                 <ReactMarkdown>{b64_to_utf8(post.data.content)}</ReactMarkdown>
