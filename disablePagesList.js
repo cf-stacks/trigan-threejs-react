@@ -1,0 +1,1 @@
+module.exports = ['about', 'careers', 'decision-making', 'introduction', 'about-us','introduction-2', 'introduction-3', 'investors', 'join-the-team', 'mission', 'projectold', 'project2', 'project-overview', 'social-impact', 'social-impact-alt', 'support-the-project', 'vision'];

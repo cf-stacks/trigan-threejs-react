@@ -4,14 +4,18 @@ import React, { lazy, Suspense } from 'react'
 import GlobalLayout from '../components/layouts/GlobalLayout';
 import { SEO } from '../components/shared/SEO';
 import { useRouter } from "next/router";
+import disablePagesList from "../../disablePagesList";
 
 const IntroductionPage = () => {
-    var disablePage = process.env.NEXT_PUBLIC_DISABLE_PAGE;
+    
     const router = useRouter()
-   if(disablePage === 'true')
-    {
-        router.push("/")
-    }
+   const currentUrl = new URL(import.meta.url);
+  const currentFilename = currentUrl.pathname.split('/').pop()?.replace(".tsx","");
+  if(currentFilename && disablePagesList.includes(currentFilename))
+  {
+      router.push("/");    
+  }
+  else
     return (
         <div>
       <SEO title="Empowering Charities and the Third Sector with Trigan: A Game-Changing Blockchain Solution" description="Trigan's innovative blockchain technology offers a new way for charities and third sector organisations to operate more effectively and achieve greater impact. Find out how Trigan can transform your organisation's operations and make a real difference in the world." />

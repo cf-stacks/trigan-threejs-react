@@ -10,18 +10,16 @@ import { SelectOptionsField } from '../components/shared/Forms/SelectOptionsFiel
 import { SelectOptions } from '../types/SelectOption'
 import { FileInputFiled } from '../components/shared/Forms/FileInputField'
 import { useRouter } from 'next/router'
+import disablePagesList from '../../disablePagesList'
 
 interface CareersProps {
   children?: ReactNode
 }
 
 export const Careers: React.FC<CareersProps> = () => {
- var disablePage = process.env.NEXT_PUBLIC_DISABLE_PAGE;
+ 
  const router = useRouter()
-   if(disablePage === 'true')
-    {
-        router.push("/");
-    }
+ 
   const selectOptions: SelectOptions[] = [
     {
       title: 'Software Development',
@@ -68,6 +66,14 @@ export const Careers: React.FC<CareersProps> = () => {
       toast.error('Something Went Wrong')
     }
   }
+  const currentUrl = new URL(import.meta.url);
+  const currentFilename = currentUrl.pathname.split('/').pop()?.replace(".tsx","");
+  if(currentFilename && disablePagesList.includes(currentFilename))
+  {
+      router.push("/");  
+      return <div></div>;  
+  }
+  else
   return (
     <GlobalLayout>
       <div

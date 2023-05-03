@@ -4,14 +4,19 @@ import 'react-lazy-load-image-component/src/effects/blur.css'
 import GlobalLayout from '../components/layouts/GlobalLayout';
 import { SEO } from '../components/shared/SEO'
 import { useRouter } from "next/router";
+import disablePagesList from "../../disablePagesList";
 
 const VisionPage = () => {
-  var disablePage = process.env.NEXT_PUBLIC_DISABLE_PAGE;
- const router=useRouter();
-   if(disablePage === 'true')
-    {
-        router.push("/");
-    }
+  const router=useRouter();
+   const currentUrl = new URL(import.meta.url);
+  const currentFilename = currentUrl.pathname.split('/').pop()?.replace(".tsx","");
+  if(currentFilename && disablePagesList.includes(currentFilename))
+  {
+      router.push("/");  
+      return <div></div>;  
+  }
+  else
+
   return (
     <div>
       <SEO

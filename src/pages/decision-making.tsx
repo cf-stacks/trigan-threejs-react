@@ -4,14 +4,18 @@ import React, { lazy, Suspense } from 'react'
 import GlobalLayout from '../components/layouts/GlobalLayout';
 import { SEO } from '../components/shared/SEO'
 import { useRouter } from "next/router";
+import disablePagesList from "../../disablePagesList";
 
 const IntroductionPage = () => {
-  var disablePage = process.env.NEXT_PUBLIC_DISABLE_PAGE;
+  
   const router = useRouter()
-   if(disablePage === 'true')
-    {
-        router.push("/");
-    }
+    const currentUrl = new URL(import.meta.url);
+  const currentFilename = currentUrl.pathname.split('/').pop()?.replace(".tsx","");
+  if(currentFilename && disablePagesList.includes(currentFilename))
+  {
+      router.push("/");    
+  }
+  else
   return (
     <div>
       <SEO
