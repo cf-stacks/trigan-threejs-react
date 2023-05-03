@@ -67,9 +67,9 @@ const Post: NextPage<PostProps> = ({ post }) => {
     Session: `${localStorage.getItem('session_key')}`
   }}
 
-  const trackReadingTime = () => {
+  const readingSpeedForUSer = () => {
     // post.data.id_post = "642ed4a0c3f02c2121235d36";
-    console.log(post.data);
+
     fetch(`https://test1.trigan.org/api/v1/reading-speed/user?object_id=${post.data.id_post}&object_type=post`,httpHeader)
     .then((response) => response.json())
     .then((result) => console.log(result))
@@ -78,30 +78,46 @@ const Post: NextPage<PostProps> = ({ post }) => {
   
   
   const createSpeedRecord = ()=>{
-    
+    var createdata = {
+      "object_id": post.data.id_post,
+      "object_type": "post",
+      "reading_speed": 12
+    }
     fetch(`https://test1.trigan.org/api/v1/reading-speed/create`,
-          {...httpHeader,method:"POST"})
+          {
+            headers:{
+              Authorization: `${localStorage.getItem('access_token')}`,
+              Session: `${localStorage.getItem('session_key')}`,
+              'Content-Type': 'application/json'
+            },
+            method:"POST",
+            body:JSON.stringify(createdata)
+          })
     .then((response) => response.json())
     .then((result) => { 
-
-          console.log(result);
+        readingSpeedForUSer();
     })
     .catch(() => new Error('Time tracking failed'));
   }
 
   useEffect(()=>{
+
+    // console.log(post);
+    // createSpeedRecord();
+    
     fetch(`https://test1.trigan.org/api/v1/reading-speed/average?object_id=${post.data.id_post}&object_type=post`,httpHeader)
     .then((response) => response.json())
     .then((result) => { 
-      console.log(result);
       
-      if(result.Data.average_speed>=0)
+     
+      if(result.Data.average_speed<=0)
       {
-        setAvReadTime(result.Data);
-        trackReadingTime();
-        // createSpeedRecord();
+        createSpeedRecord();
       }
-      else {}
+      else {
+        readingSpeedForUSer();
+        setAvReadTime(result.Data);
+      }
     })
     .catch(() => new Error('Upload failed'));
       
