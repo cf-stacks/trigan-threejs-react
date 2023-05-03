@@ -5,14 +5,13 @@ import useSWR from 'swr'
 import { ThemeProvider } from 'next-themes'
 import { Title } from '../../../../components/shared/Title'
 import GlobalLayout from '../../../../components/layouts/GlobalLayout'
-import { useRouter } from 'next/router'
+import { useRouter,Router } from 'next/router'
 import { wrap } from 'module'
 import ReactMarkdown from 'react-markdown'
 import moment from 'moment'
 import Link from 'next/link'
 import { FadeInWhenVisible } from '../../../../components/shared/FadeInWhenVisible'
 import dynamic from 'next/dynamic'
-
 interface PostProps {
   children?: ReactNode,
   post: ApiPostData
@@ -95,31 +94,27 @@ const Post: NextPage<PostProps> = ({ post }) => {
           })
     .then((response) => response.json())
     .then((result) => { 
-        readingSpeedForUSer();
+      console.log("createSpeedRecord=========",result);  
+      // readingSpeedForUSer();
     })
     .catch(() => new Error('Time tracking failed'));
   }
 
   useEffect(()=>{
-    // console.log(post);
-    // createSpeedRecord();
+    console.log("useEffect========="+post.data.id_post+":");
+
     fetch(`https://test1.trigan.org/api/v1/reading-speed/average?object_id=${post.data.id_post}&object_type=post`,httpHeader)
-    .then((response) => response.json())
-    .then((result) => { 
-      
-     
-      if(result.Data.average_speed<=0)
-      {
-        createSpeedRecord();
-      }
-      else {
-        readingSpeedForUSer();
-        setAvReadTime(result.Data);
-      }
-    })
-    .catch(() => new Error('Upload failed'));
-      
-  },[]);
+      .then((response) => response.json())
+      .then((result) => { 
+        console.log("average========="+post.data.id_post+":",result);  
+      })
+      .catch(() => new Error('Upload failed'));
+
+    return () => {
+      createSpeedRecord()
+    };
+
+  },[post.data.id_post]);
 
   return (
 
