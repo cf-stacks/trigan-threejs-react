@@ -12,7 +12,6 @@ interface SearchInputProps {
 
 const useStyles = createStyles((theme) => ({
   searchContainer: {
-    marginRight: '1.5rem',
     position: 'relative',
     display: 'flex',
     width: '341px',
@@ -62,7 +61,7 @@ export const SearchInput = ({
         onChange={(e) => setSearch(e.target.value)}
         disabled={disabled}
       />
-      <button type="submit">
+      <button type="submit" disabled={disabled}>
         <IconSearch />
       </button>
     </form>

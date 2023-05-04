@@ -43,13 +43,9 @@ export const PdfPreview = ({
       {loadingPdf ? (
         <Loader />
       ) : (
-        <Document
-          file={pdfDocument}
-          onLoadSuccess={onDocumentLoadSuccess}
-          wrap={false}
-        >
+        <>
           {numPages && numPages > 1 && (
-            <div className="align-center my-10 flex justify-center">
+            <div className="align-center flex justify-center">
               <button
                 className="mr-3 inline-flex items-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                 onClick={() => handlePreviousPage()}
@@ -67,16 +63,25 @@ export const PdfPreview = ({
               </button>
             </div>
           )}
-          <a className="float-right" href={cvLink} target="_blank">
-            <IconDownload />
-          </a>
-          <Page
-            key={`page_${pageNumber}`}
-            pageNumber={pageNumber}
-            renderAnnotationLayer={false}
-            renderTextLayer={false}
-          />
-        </Document>
+          <div className="flex justify-end">
+            <a href={cvLink} target="_blank">
+              <IconDownload />
+            </a>
+          </div>
+          <Document
+            file={pdfDocument}
+            onLoadSuccess={onDocumentLoadSuccess}
+            wrap={false}
+          >
+            <Page
+              key={`page_${pageNumber}`}
+              pageNumber={pageNumber}
+              renderAnnotationLayer={false}
+              renderTextLayer={false}
+              onLoadError={console.error}
+            />
+          </Document>
+        </>
       )}
     </Modal>
   )

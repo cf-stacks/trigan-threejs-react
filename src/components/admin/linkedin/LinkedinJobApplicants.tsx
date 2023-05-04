@@ -1,4 +1,4 @@
-import { Title } from '@mantine/core'
+import { Button, Title } from '@mantine/core'
 import { Pagination } from 'antd'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -43,10 +43,12 @@ export interface ApplicantType {
 
 interface ApplicantsTableProps {
   selectedJob: JobType
+  setSelectedJob: React.Dispatch<React.SetStateAction<JobType | null>>
 }
 
 export const LinkedinJobApplicants = ({
   selectedJob,
+  setSelectedJob,
 }: ApplicantsTableProps) => {
   const [applicants, setApplicants] = useState([])
   const [applicant, setApplicant] = useState<ApplicantType>()
@@ -150,7 +152,7 @@ export const LinkedinJobApplicants = ({
       </Head>
       <div className="mb-8 flex items-center justify-between">
         <Title size={24} align="center" className="text-white">
-          Linkedin Jobs
+          Linkedin Applicants
         </Title>
         <SearchInput
           handleSearch={handleSearch}
@@ -172,6 +174,19 @@ export const LinkedinJobApplicants = ({
               pageCount={totalCount}
               enableSorting={false}
             />
+          </>
+        ) : (
+          <Title
+            size={14}
+            className="mb-4 bg-[#39394B] py-5 text-center text-white"
+          >
+            No data
+          </Title>
+        )}
+      </div>
+      {!fetchingApplicants && (
+        <div className="flex flex-row items-center justify-between">
+          <div>
             <Pagination
               current={pagination.pageIndex}
               pageSize={pagination.pageSize}
@@ -179,14 +194,20 @@ export const LinkedinJobApplicants = ({
               onChange={handlePaginationChange}
               showSizeChanger
               onShowSizeChange={handlePaginationChange}
+              hideOnSinglePage={true}
             />
-          </>
-        ) : (
-          <Title size={14} className="text-white">
-            No data
-          </Title>
-        )}
-      </div>
+          </div>
+          <Button
+            radius="lg"
+            onClick={() => {
+              setSelectedJob(null)
+            }}
+            className="w-48 bg-[#39A0ED]"
+          >
+            Back to Jobs
+          </Button>
+        </div>
+      )}
       <div>
         <PdfPreview
           pdfDocument={pdfDocument}

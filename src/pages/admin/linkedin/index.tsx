@@ -27,13 +27,21 @@ const Linkedin: NextPage = () => {
         <LinkedinAccountJobs
           accountID={selectedAccount.id}
           selectedJob={selectedJob as JobType}
+          setSelectedAccount={
+            setSelectedAccount as Dispatch<SetStateAction<AccountType | null>>
+          }
           setSelectedJob={
             setSelectedJob as Dispatch<SetStateAction<JobType | null>>
           }
         />
       )}
       {!!selectedAccount && !!selectedJob && (
-        <LinkedinJobApplicants selectedJob={selectedJob as JobType} />
+        <LinkedinJobApplicants
+          setSelectedJob={
+            setSelectedJob as Dispatch<SetStateAction<JobType | null>>
+          }
+          selectedJob={selectedJob as JobType}
+        />
       )}
     </AdminLayout>
   )

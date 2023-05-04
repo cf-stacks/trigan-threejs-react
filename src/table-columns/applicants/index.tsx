@@ -65,7 +65,7 @@ export const useColumns = ({ edit, remove, previewPdf }: Arguments) => {
         header: 'Status',
       }),
       columnHelper.accessor('is_invited', {
-        header: 'Is Active',
+        header: 'Is Invited ',
         cell: ({ getValue }) => (getValue() ? 'Yes' : 'No'),
       }),
       columnHelper.accessor('is_nda', {

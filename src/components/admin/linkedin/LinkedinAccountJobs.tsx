@@ -1,4 +1,4 @@
-import { Title } from '@mantine/core'
+import { Button, Title } from '@mantine/core'
 import { Pagination } from 'antd'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -9,6 +9,7 @@ import { useColumns } from '../../../table-columns/jobs'
 import Table from '../../Table'
 import { SearchInput } from '../SearchInput'
 import { SelectedItemHeader } from './SelectedItemHeader'
+import { AccountType } from './LinkedinAccounts'
 
 export interface JobType {
   id: string
@@ -28,12 +29,14 @@ interface JobsTableProps {
   accountID: string
   selectedJob: JobType
   setSelectedJob: React.Dispatch<React.SetStateAction<JobType | null>>
+  setSelectedAccount: React.Dispatch<React.SetStateAction<AccountType | null>>
 }
 
 export const LinkedinAccountJobs = ({
   accountID,
   selectedJob,
   setSelectedJob,
+  setSelectedAccount,
 }: JobsTableProps) => {
   const [jobs, setJobs] = useState([])
 
@@ -97,6 +100,12 @@ export const LinkedinAccountJobs = ({
     }
   }, [rowSelection])
 
+  useEffect(() => {
+    if (!selectedJob) {
+      setRowSelection({})
+    }
+  }, [selectedJob])
+
   return selectedJob ? (
     <SelectedItemHeader
       setItemSelected={setRowSelection}
@@ -123,31 +132,49 @@ export const LinkedinAccountJobs = ({
       </div>
       <div className="my-8 flex flex-col justify-between">
         {fetchingJobs || jobs.length > 0 ? (
-          <>
-            <Table
-              loading={fetchingJobs}
-              columns={columns}
-              data={jobs}
-              state={{ rowSelection, pagination }}
-              enableRowSelection={true}
-              onRowSelectionChange={setRowSelection}
-              manualPagination
-              pageCount={totalCount}
-              enableSorting={false}
-            />
-            <Pagination
-              current={pagination.pageIndex}
-              pageSize={pagination.pageSize}
-              total={totalCount}
-              onChange={handlePaginationChange}
-              showSizeChanger
-              onShowSizeChange={handlePaginationChange}
-            />
-          </>
+          <Table
+            loading={fetchingJobs}
+            columns={columns}
+            data={jobs}
+            state={{ rowSelection, pagination }}
+            enableRowSelection={true}
+            onRowSelectionChange={setRowSelection}
+            manualPagination
+            pageCount={totalCount}
+            enableSorting={false}
+          />
         ) : (
-          <Title size={14} className="text-white">
+          <Title
+            size={14}
+            className="mb-4 bg-[#39394B] py-5 text-center text-white"
+          >
             No data
           </Title>
+        )}
+        {!fetchingJobs && (
+          <div className="flex flex-row items-center justify-between">
+            <div>
+              <Pagination
+                current={pagination.pageIndex}
+                pageSize={pagination.pageSize}
+                total={totalCount}
+                onChange={handlePaginationChange}
+                showSizeChanger
+                onShowSizeChange={handlePaginationChange}
+                hideOnSinglePage={true}
+              />
+            </div>
+            <Button
+              radius="lg"
+              onClick={() => {
+                setRowSelection({})
+                setSelectedAccount(null)
+              }}
+              className="w-48 bg-[#39A0ED]"
+            >
+              Back to Accounts
+            </Button>
+          </div>
         )}
       </div>
     </section>
