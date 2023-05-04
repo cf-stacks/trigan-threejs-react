@@ -46,20 +46,37 @@ const HiringRole = () => {
         void fetchFunction()
     }, [fetchFunction])
 
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        if (e) e.preventDefault()
+        try {
+            axios.get(`${TEST_API_URL}/hiring-role/get?search=${search}`, {
+                withCredentials: true,
+                headers: {
+                    Authorization: `${localStorage.getItem('access_token')}`,
+                    'Content-Language': `${localStorage.getItem('content-language')}`,
+                    Session: `${localStorage.getItem('session_key')}`,
+                },
+            })
+                .then((res) => {
+                    setHiring(res.data)
+                    console.log(res.data)
+                }
+            )
+            
+        } catch (error) {
+            toast.error('results not found')
+        }
+    }
+
     return (
 
         <AdminLayout>
             <Title align="center">Hiring role</Title>
             <TabHeaderAction
                 search={{
-                    value: '',
-                    onChange: () => { 
-
-                    },
-                    placeholder: 'Search',
-                    handleSubmit: () => {
-                        alert('search')
-                     },
+                    value: search,
+                    onChange: (e) => setSearch(e.target.value),
+                    handleSubmit: handleSubmit,
                 }}
                 create={{
                     onClick: () => setModal({ open: true, type: 'create', size: '' }),

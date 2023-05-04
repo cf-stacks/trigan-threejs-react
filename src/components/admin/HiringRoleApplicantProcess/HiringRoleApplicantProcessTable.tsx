@@ -60,7 +60,8 @@ export const HiringRoleApplicantProcessTable = ({
                     <td>{element.hiring_role_applicant_id}</td>
                     <td>{element.hiring_role_process_id}</td>
                     <th>{element.hiring_role_process_step_id}</th>
-                    <td>{element.is_admin_approved}</td>
+                    <td>{element.is_admin_approved ? 'true' : 'false'
+                    }</td>
                     <td>{element.video_response}</td>
                     <td>{new Date(element.created_at as Date).toLocaleDateString()}</td>
                     <td>{new Date(element.updated_at as Date).toLocaleDateString()}</td>
