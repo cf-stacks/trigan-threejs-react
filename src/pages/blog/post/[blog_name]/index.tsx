@@ -67,7 +67,6 @@ const Post: NextPage<PostProps> = ({ post }) => {
   }}
 
   const readingSpeedForUSer = () => {
-    // post.data.id_post = "642ed4a0c3f02c2121235d36";
 
     fetch(`https://test1.trigan.org/api/v1/reading-speed/user?object_id=${post.data.id_post}&object_type=post`,httpHeader)
     .then((response) => response.json())
@@ -76,11 +75,11 @@ const Post: NextPage<PostProps> = ({ post }) => {
   }
   
   
-  const createSpeedRecord = ()=>{
+  const createSpeedRecord = (spenttime)=>{
     var createdata = {
       "object_id": post.data.id_post,
       "object_type": "post",
-      "reading_speed": 12
+      "reading_speed":  Math.floor(spenttime / 1000)
     }
     fetch(`https://test1.trigan.org/api/v1/reading-speed/create`,
           {
@@ -94,24 +93,27 @@ const Post: NextPage<PostProps> = ({ post }) => {
           })
     .then((response) => response.json())
     .then((result) => { 
-      console.log("createSpeedRecord=========",result);  
-      // readingSpeedForUSer();
+
     })
     .catch(() => new Error('Time tracking failed'));
   }
 
   useEffect(()=>{
-    console.log("useEffect========="+post.data.id_post+":");
+
+    const starttime = Date.now();
+    
 
     fetch(`https://test1.trigan.org/api/v1/reading-speed/average?object_id=${post.data.id_post}&object_type=post`,httpHeader)
       .then((response) => response.json())
       .then((result) => { 
-        console.log("average========="+post.data.id_post+":",result);  
+
       })
       .catch(() => new Error('Upload failed'));
 
     return () => {
-      createSpeedRecord()
+      const endtime = Date.now();
+      const spenttime = endtime - starttime;
+      createSpeedRecord(spenttime);
     };
 
   },[post.data.id_post]);
