@@ -225,6 +225,7 @@ export const HiringRoleApplicantModals = ({
                     Session: `${localStorage.getItem('session_key')}`,
                 },
             })
+            alert('update fn')
             toast.success('Created Successfully')
             setModal({ ...modal, open: false })
             void fetchFunction()

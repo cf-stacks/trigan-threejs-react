@@ -116,7 +116,7 @@ export const HiringRoleApplicantProcessModals = ({
     const handleDelete = async () => {
         try {
             await axios.delete(
-                `${TEST_API_URL}/hiring-role-applicant/delete/${selectedDocument.id}`,
+                `${TEST_API_URL}/hiring-role-applicant-process-history/delete/${selectedDocument.id}`,
                 {
                     withCredentials: true,
                     headers: {
@@ -126,6 +126,7 @@ export const HiringRoleApplicantProcessModals = ({
                     },
                 }
             )
+            alert('delete function')
             toast.success('Deleted Successfully')
             setModal({ ...modal, open: false })
             void fetchFunction()
