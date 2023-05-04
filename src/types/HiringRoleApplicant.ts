@@ -11,7 +11,7 @@ export interface HiringRoleApplicant {
     nationality: string
     qualification: string
     skill: string
-    hiringRoleId: string
+    hiring_role_id: string
     time_spend: string
     created_by: string
     updated_by: string

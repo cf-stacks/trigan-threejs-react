@@ -73,7 +73,7 @@ export const HiringRoleApplicantModals = ({
     const [nationality, setNationality] = useState('')
     const [qualification, setQualification] = useState('')
     const [skill, setSkill] = useState('')
-    const [hiringRoleId, setHiringRoleId] = useState('')
+    const [hiring_role_id, setHiring_role_id] = useState('')
     const [time_spend, setTime_spend] = useState('')
     const [created_by, setCreated_by] = useState('')
     const [updated_by, setUpdated_by] = useState('')
@@ -98,7 +98,7 @@ export const HiringRoleApplicantModals = ({
             setNationality('')
             setQualification('')
             setSkill('')
-            setHiringRoleId('')
+            setHiring_role_id('')
             setTime_spend('')
             setCreated_by('')
             setUpdated_by('')
@@ -119,7 +119,7 @@ export const HiringRoleApplicantModals = ({
         setNationality(selectedDocument.nationality)
         setQualification(selectedDocument.qualification)
         setSkill(selectedDocument.skill)
-        setHiringRoleId(selectedDocument.hiringRoleId)
+        setHiring_role_id(selectedDocument.hiring_role_id)
         setTime_spend(selectedDocument.time_spend)
         setCreated_by(selectedDocument.created_by)
         setUpdated_by(selectedDocument.updated_by)
@@ -165,7 +165,7 @@ export const HiringRoleApplicantModals = ({
             nationality,
             qualification,
             skill,
-            hiringRoleId,
+            hiring_role_id,
             time_spend,
         }
 
@@ -199,7 +199,7 @@ export const HiringRoleApplicantModals = ({
             id: selectedDocument.id,
             contribution_plan,
             country,
-            hiringRoleId,
+            hiring_role_id,
             email,
             first_name,
             interest_topic,
@@ -279,8 +279,8 @@ export const HiringRoleApplicantModals = ({
                             <div className={classes.inputContainer}>
                                 <TextInput
                                     label="hiring role ID"
-                                    value={hiringRoleId}
-                                    onChange={(e) => setHiringRoleId(e.target.value)}
+                                    value={hiring_role_id}
+                                    onChange={(e) => setHiring_role_id(e.target.value)}
                                 />
                             </div>
                             <div className={classes.inputContainer}>
@@ -460,8 +460,8 @@ export const HiringRoleApplicantModals = ({
                             <div className={classes.inputContainer}>
                                 <TextInput
                                     label="hiring role ID"
-                                    value={hiringRoleId}
-                                    onChange={(e) => setHiringRoleId(e.target.value)}
+                                    value={hiring_role_id}
+                                    onChange={(e) => setHiring_role_id(e.target.value)}
                                 />
                             </div>
                             <div className={classes.inputContainer}>

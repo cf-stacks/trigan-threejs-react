@@ -16,7 +16,7 @@ import {
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
-import { HiringRoleApplicant } from '../../../types/HiringRoleApplicant'
+import { HiringRoleApplicantProcess } from '../../../types/HiringRoleApplicantProcess'
 import { TEST_API_URL } from '../../../util/constants'
 
 const useStyles = createStyles(() => ({
@@ -51,7 +51,7 @@ interface Imodal {
 interface IDocumentModals {
     modal: Imodal
     setModal: React.Dispatch<React.SetStateAction<Imodal>>
-    selectedDocument: HiringRoleApplicant
+    selectedDocument: HiringRoleApplicantProcess
     setSelectedDocument: React.Dispatch<React.SetStateAction<Record<string, any>>>
     fetchFunction: () => Promise<void>
 }
@@ -320,7 +320,7 @@ export const HiringRoleApplicantProcessModals = ({
                 withCloseButton={false}
             >
                 <Title order={4}>
-                    Are you sure you want to delete {selectedDocument.first_name} ?
+                    Are you sure you want to delete {selectedDocument.hiring_role_applicant_id} ?
                 </Title>
                 <div
                     style={{
@@ -354,7 +354,7 @@ export const HiringRoleApplicantProcessModals = ({
                 padding={0}
             >
                 <Title mb={'2rem'} sx={{ padding: '20px' }}>
-                    Editing {selectedDocument.first_name}
+                    Editing {selectedDocument.hiring_role_applicant_id}
                 </Title>
                 <form
                     style={{
