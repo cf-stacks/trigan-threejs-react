@@ -5,14 +5,13 @@ import useSWR from 'swr'
 import { ThemeProvider } from 'next-themes'
 import { Title } from '../../../../components/shared/Title'
 import GlobalLayout from '../../../../components/layouts/GlobalLayout'
-import { useRouter } from 'next/router'
+import { useRouter,Router } from 'next/router'
 import { wrap } from 'module'
 import ReactMarkdown from 'react-markdown'
 import moment from 'moment'
 import Link from 'next/link'
 import { FadeInWhenVisible } from '../../../../components/shared/FadeInWhenVisible'
 import dynamic from 'next/dynamic'
-
 interface PostProps {
   children?: ReactNode,
   post: ApiPostData
@@ -24,7 +23,7 @@ interface ApiPostData {
 }
 
 const Post: NextPage<PostProps> = ({ post }) => {
-  post.data.id_post = "642ed4a0c3f02c2121235d36";
+  // post.data.id_post = "642ed4a0c3f02c2121235d36";
   const router = useRouter()
   const [tags, setTags] = useState(0)
   const [page, setPage] = useState(1)
@@ -50,7 +49,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
     `https://test1.trigan.org/api/v1/posts?page-size=${pageSize}&page=${page}&apiKey=g436739d6734gd6734`,
     fetcher
   )
-  
+ 
   const { blog_name } = router.query
 
   //this function now converts base64 to utf-8 on client and on server side to prevent hydration errors
@@ -67,7 +66,8 @@ const Post: NextPage<PostProps> = ({ post }) => {
     Session: `${localStorage.getItem('session_key')}`
   }}
 
-  const trackReadingTime = () => {
+  const readingSpeedForUSer = () => {
+
     fetch(`https://test1.trigan.org/api/v1/reading-speed/user?object_id=${post.data.id_post}&object_type=post`,httpHeader)
     .then((response) => response.json())
     .then((result) => console.log(result))
@@ -75,37 +75,48 @@ const Post: NextPage<PostProps> = ({ post }) => {
   }
   
   
-  const createSpeedRecord = ()=>{
+  const createSpeedRecord = (spenttime)=>{
+    var createdata = {
+      "object_id": post.data.id_post,
+      "object_type": "post",
+      "reading_speed":  Math.floor(spenttime / 1000)
+    }
     fetch(`https://test1.trigan.org/api/v1/reading-speed/create`,
-          {...httpHeader,method:"POST"})
+          {
+            headers:{
+              Authorization: `${localStorage.getItem('access_token')}`,
+              Session: `${localStorage.getItem('session_key')}`,
+              'Content-Type': 'application/json'
+            },
+            method:"POST",
+            body:JSON.stringify(createdata)
+          })
     .then((response) => response.json())
     .then((result) => { 
 
-          console.log(result);
     })
     .catch(() => new Error('Time tracking failed'));
   }
 
   useEffect(()=>{
 
+    const starttime = Date.now();
     
 
     fetch(`https://test1.trigan.org/api/v1/reading-speed/average?object_id=${post.data.id_post}&object_type=post`,httpHeader)
-    .then((response) => response.json())
-    .then((result) => { 
-      console.log(result);
-      
-      if(result.Data.average_speed>=0)
-      {
-        setAvReadTime(result.Data);
-        trackReadingTime();
-        // createSpeedRecord();
-      }
-      else {}
-    })
-    .catch(() => new Error('Upload failed'));
-      
-  },[]);
+      .then((response) => response.json())
+      .then((result) => { 
+
+      })
+      .catch(() => new Error('Upload failed'));
+
+    return () => {
+      const endtime = Date.now();
+      const spenttime = endtime - starttime;
+      createSpeedRecord(spenttime);
+    };
+
+  },[post.data.id_post]);
 
   return (
 
@@ -141,7 +152,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
                   {moment(post.data.date_created).format('LL')}
                 </p>
                 <p className="mr-10">/</p>
-                <p>{Math.round(avReadTime.average_speed)} Min read</p>
+                <p>{avReadTime.average_speed} Min read</p>
               </div>
               <h6 className="full-width-container text-lg font-medium leading-loose">
                 <ReactMarkdown>{b64_to_utf8(post.data.content)}</ReactMarkdown>
