@@ -48,4 +48,9 @@ export const navLinks: NavLinkItem[] = [
   { icon: IconBrandLinkedin, url: 'linkedinaccounts', label: 'LinkedIn accounts' },
   { icon: IconBriefcase, url: 'linkedinjobs', label: 'LinkedIn jobs' },
   { icon: IconFiles, url: 'linkedinapplicants', label: 'LinkedIn applicants' },
+  { icon: IconFiles, url: 'hiring-role', label: 'Hiring Role' },
+  { icon: IconFiles, url: 'hiring-role-process', label: 'Hiring Role Process' },
+  { icon: IconFiles, url: 'hiring-role-process-step', label: 'Hiring Role Process Step' },
+  { icon: IconFiles, url: 'hiring-role-applicant', label: 'Hiring Role Applicant' },
+  { icon: IconFiles, url: 'hiring-role-applicant-process', label: 'Hiring Role Applicant Process' },
 ]

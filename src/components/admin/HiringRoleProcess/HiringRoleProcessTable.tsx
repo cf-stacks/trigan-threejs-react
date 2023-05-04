@@ -44,7 +44,7 @@ const useStyles = createStyles((theme) => ({
     },
 }))
 
-export const  DocumentTable = ({
+export const HiringRoleProcessTable = ({
     documents,
     fetching,
     setModal,
@@ -56,11 +56,11 @@ export const  DocumentTable = ({
         documents?.Data?.length > 0 ? (
             documents?.Data?.map((element: any, index: number) => (
                 <tr key={index}>
-                    <td>{element.type}</td>
+                    <td>{element.name}</td>
                     <td>{element.description}</td>
-                    <td>{element.created_by}</td>
-                    <td>{element.updated_by}</td>
-                    <td>{element.deleted_by}</td>
+                    <td>{element.creator_id}</td>
+                    <td>{element.updater_id}</td>
+                    <td>{element.deleted_id}</td>
                     <td>{new Date(element.created_at as Date).toLocaleDateString()}</td>
                     <td>{new Date(element.updated_at as Date).toLocaleDateString()}</td>
                     <td>
@@ -124,12 +124,11 @@ export const  DocumentTable = ({
             >
                 <thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
                     <tr>
-                        <th>type</th>
+                        <th>name</th>
                         <th >description</th>
                         {/* colSpan={2} align="right" */}
-                        <th>created_by</th>
-                        <th>updated_by</th>
-                        <th>deleted_by</th>
+                        <th>creator_id</th>
+                        <th>updater_id</th>
                         <th>created_at</th>
                         <th>updated_at</th>
                         <th colSpan={2} align="right">

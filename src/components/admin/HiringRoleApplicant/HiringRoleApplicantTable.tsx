@@ -1,12 +1,6 @@
+import { Button, createStyles, Loader, ScrollArea, Table } from '@mantine/core'
+import { IconHistory, IconPencil } from '@tabler/icons'
 import { useState } from 'react'
-import {
-    Table,
-    Loader,
-    Button,
-    createStyles,
-    ScrollArea,
-} from '@mantine/core'
-import { IconPencil, IconX } from '@tabler/icons'
 
 const useStyles = createStyles((theme) => ({
     header: {
@@ -44,7 +38,7 @@ const useStyles = createStyles((theme) => ({
     },
 }))
 
-export const  DocumentTable = ({
+export const HiringRoleApplicantTable = ({
     documents,
     fetching,
     setModal,
@@ -52,15 +46,36 @@ export const  DocumentTable = ({
 }: any) => {
     const { classes, cx } = useStyles()
     const [scrolled, setScrolled] = useState(false)
+//     {
+//   "contribution_plan": "string",
+//   "country": "string",
+//   "email": "string",
+//   "first_name": "string",
+//   "interest_topic": "string",
+//   "joining_reason": "string",
+//   "known_about_trigan": "string",
+//   "last_name": "string",
+//   "nationality": "string",
+//   "qualification": "string",
+//   "skill": "string",
+//   "time_spend": "string"
+// }
     const newdocuments =
         documents?.Data?.length > 0 ? (
             documents?.Data?.map((element: any, index: number) => (
                 <tr key={index}>
-                    <td>{element.type}</td>
-                    <td>{element.description}</td>
-                    <td>{element.created_by}</td>
-                    <td>{element.updated_by}</td>
-                    <td>{element.deleted_by}</td>
+                    <td>{element.contribution_plan}</td>
+                    <td>{element.country}</td>
+                    <th>{element.email}</th>
+                    <td>{element.first_name}</td>
+                    <td>{element.last_name}</td>
+                    <td>{element.interest_topic}</td>
+                    <td>{element.joining_reason}</td>
+                    <td>{element.known_about_trigan}</td>
+                    <td>{element.nationality}</td>
+                    <td>{element.qualification}</td>
+                    <td>{element.skill}</td>
+                    <td>{element.time_spend}</td>
                     <td>{new Date(element.created_at as Date).toLocaleDateString()}</td>
                     <td>{new Date(element.updated_at as Date).toLocaleDateString()}</td>
                     <td>
@@ -69,11 +84,12 @@ export const  DocumentTable = ({
                                 onClick={() => {
                                     setModal({ open: true, type: 'edit' })
                                     setSelectedDocument(element)
-                                }}
+                                }
+                                }
                                 variant="light"
                                 color="blue"
                             >
-                                <IconPencil style={{ zIndex: -1 }} />
+                                <IconPencil />
                             </Button>
                             <Button
                                 onClick={() => {
@@ -83,7 +99,7 @@ export const  DocumentTable = ({
                                 variant="light"
                                 color="red"
                             >
-                                <IconX style={{ zIndex: -1 }} />
+                                <IconHistory />
                             </Button>
                         </Button.Group>
                     </td>
@@ -124,17 +140,20 @@ export const  DocumentTable = ({
             >
                 <thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
                     <tr>
-                        <th>type</th>
-                        <th >description</th>
+                        <th>contribution plan</th>
+                        <th>country</th>
+                        <th>email</th>
+                        <th>first name</th>
+                        <th>intrest topic</th>
+                        <th>joining reason</th>
+                        <th>know about trigan</th>
+                        <th>qualification</th>
+                        <th>skill</th>
+                        <th>time spen</th>
                         {/* colSpan={2} align="right" */}
-                        <th>created_by</th>
-                        <th>updated_by</th>
-                        <th>deleted_by</th>
                         <th>created_at</th>
                         <th>updated_at</th>
-                        <th colSpan={2} align="right">
-                            actions
-                        </th>
+                        <th colSpan={2}>actions</th>
                     </tr>
                 </thead>
                 <tbody>{newdocuments}</tbody>
@@ -142,3 +161,18 @@ export const  DocumentTable = ({
         </ScrollArea>
     )
 }
+
+// {
+//   "contribution_plan": "string",
+//   "country": "string",
+//   "email": "string",
+//   "first_name": "string",
+//   "interest_topic": "string",
+//   "joining_reason": "string",
+//   "known_about_trigan": "string",
+//   "last_name": "string",
+//   "nationality": "string",
+//   "qualification": "string",
+//   "skill": "string",
+//   "time_spend": "string"
+// }
