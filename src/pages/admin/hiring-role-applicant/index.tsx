@@ -71,7 +71,7 @@ const HiringRoleApplicant = () => {
 
     return (
         <AdminLayout>
-            <Title align={'center'}>Documents</Title>
+            <Title align={'center'}>Hiring role applicant</Title>
             <TabHeaderAction
                 search={{
                     value: search,

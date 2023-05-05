@@ -126,7 +126,7 @@ export const HiringRoleApplicantProcessModals = ({
                     },
                 }
             )
-            alert('delete function')
+         
             toast.success('Deleted Successfully')
             setModal({ ...modal, open: false })
             void fetchFunction()
@@ -193,6 +193,7 @@ export const HiringRoleApplicantProcessModals = ({
                     Session: `${localStorage.getItem('session_key')}`,
                 },
             })
+            alert('Updated Successfully')
             toast.success('Created Successfully')
             setModal({ ...modal, open: false })
             void fetchFunction()
