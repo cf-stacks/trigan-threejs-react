@@ -419,9 +419,32 @@ export const HiringRoleModals = ({
                         <div className={classes.formChild}>
                             <div className={classes.inputContainer}>
                                 <TextInput
+                                    label="Admin assigned to"
+                                    value={admin_assigned_to}
+                                    onChange={(e) => setAdmin_assigned_to(e.currentTarget.value)}
+                                />
+                            </div>
+                            <div className={classes.inputContainer}>
+                                <TextInput
+                                    label="Category"
+                                    value={category}
+
+                                    onChange={(e) => setCategory(e.currentTarget.value)}
+                                />
+                            </div>
+                            <div className={classes.inputContainer}>
+                                <TextInput
                                     label="title"
                                     value={title}
+
                                     onChange={(e) => setTitle(e.currentTarget.value)}
+                                />
+                            </div>
+                            <div className={classes.inputContainer}>
+                                <TextInput
+                                    label="Expiry"
+                                    value={expiry}
+                                    onChange={(e) => setExpiry(e.currentTarget.value)}
                                 />
                             </div>
                             <Textarea
@@ -433,7 +456,44 @@ export const HiringRoleModals = ({
                                     setDescription(e.currentTarget.value)
                                 }
                             />
-                         
+                            <div className={classes.inputContainer}>
+                                <TextInput
+                                    label="Hiring role process id"
+
+                                    value={hiring_role_process_id}
+                                    onChange={(e) => setHiring_role_process_id(e.currentTarget.value)}
+                                />
+                            </div>
+                            <div className={classes.inputContainer}>
+                                <TextInput
+                                    label="Responsibility"
+
+                                    value={responsibility}
+                                    onChange={(e) => setResponsibility(e.currentTarget.value)}
+                                />
+                            </div>
+                            <div className={classes.inputContainer}>
+                                <TextInput
+                                    label="Short description"
+                                    value={short_description}
+                                    onChange={(e) => setShort_description(e.currentTarget.value)}
+                                />
+                            </div>
+                            <div className={classes.inputContainer}>
+                                <TextInput
+                                    label="Tag"
+                                    value={tag}
+                                    onChange={(e) => setTag(e.currentTarget.value)}
+                                />
+                            </div>
+                            <div className={classes.inputContainer}>
+                                <TextInput
+                                    label="Title"
+                                    value={title}
+                                    onChange={(e) => setTitle(e.currentTarget.value)}
+                                />
+                            </div>
+
                         </div>
                     </section>
                     <Divider />
