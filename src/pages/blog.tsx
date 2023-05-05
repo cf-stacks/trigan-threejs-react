@@ -24,14 +24,15 @@ import PostSearch from '../components/Posts/PostSearch'
 import dynamic from 'next/dynamic'
 import { useFrame } from '@react-three/fiber'
 import { Head } from 'next/document'
+import useSWR from 'swr'
 
 const VideoHeader = dynamic(
   () => import('../components/home/HeroSection/VideoHeader')
 )
 
-interface BlogProps {
-  posts: BlogPost
-}
+// interface BlogProps {
+//   posts: BlogPost
+// }
 
 const PostsByDateNoSSR: any = dynamic(
   () => import('../components/Posts/PostsByDate'),
@@ -40,6 +41,8 @@ const PostsByDateNoSSR: any = dynamic(
 
 const Blog: NextPage<BlogProps> = ({ posts }) => {
   const router = useRouter()
+  const [page, setPage] = useState(1)
+  const [allPosts, setAllPosts] = useState(posts)
 
   // const handleSearch = async (title: string) => {
   //   await router.push('/PostSearch')
@@ -60,6 +63,23 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
     posts.posts = handleCatQuery(posts, cat)
   } else {
     console.log('incorrect query')
+  }
+
+  const loadMore = async (e) => {
+    let data = null
+    setPage((prev) => prev + 1)
+    try {
+      const res = await fetch(
+        `https://test1.trigan.org/api/v1/posts?page-size=5&page=${
+          page + 1
+        }&apiKey=g436739d6734gd6734`
+      )
+
+      data = await res.json()
+      setAllPosts(data)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (
@@ -95,12 +115,15 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
                 </div>
               </section>
             ) : (
-              <PostsByDateNoSSR posts={posts} />
+              <PostsByDateNoSSR posts={allPosts} />
             )}
 
             <div className="mb-20 mt-10 flex w-[100%] flex-wrap justify-center">
               <Link href="/blog" passHref as={``}>
-                <div className="mr-6 w-max hover:cursor-pointer hover:opacity-50">
+                <div
+                  className="mr-6 w-max hover:cursor-pointer hover:opacity-50"
+                  onClick={loadMore}
+                >
                   <span
                     className={`border-1 flex h-[46px] flex-row flex-wrap items-center rounded-full border border-[#fff] bg-[#DC2626] px-7 py-1.5 text-[16px] font-medium capitalize text-white`}
                   >
