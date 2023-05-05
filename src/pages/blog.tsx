@@ -74,7 +74,8 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
     setCountLoad((prev) => prev + 1)
     setIsloading(true)
     let data = null
-    if (page === 4) {
+    //change 3 = (total posts - 5)'i am assuming 8 posts have been given to me'
+    if (page === 3) {
       setPage(1)
     } else {
       setPage((prev) => prev + 1)
