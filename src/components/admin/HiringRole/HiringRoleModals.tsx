@@ -268,7 +268,7 @@ export const HiringRoleModals = ({
                             </div>
                             <div className={classes.inputContainer}>
                                 <TextInput
-                                    label="title"
+                                    label="Title"
                                     value={title}
 
                                     onChange={(e) => setTitle(e.currentTarget.value)}
@@ -320,13 +320,7 @@ export const HiringRoleModals = ({
                                     onChange={(e) => setTag(e.currentTarget.value)}
                                 />
                             </div>
-                            <div className={classes.inputContainer}>
-                                <TextInput
-                                    label="Title"
-                                    value={title}
-                                    onChange={(e) => setTitle(e.currentTarget.value)}
-                                />
-                            </div>
+                          
                             
                         </div>
                     </section>
@@ -486,13 +480,7 @@ export const HiringRoleModals = ({
                                     onChange={(e) => setTag(e.currentTarget.value)}
                                 />
                             </div>
-                            <div className={classes.inputContainer}>
-                                <TextInput
-                                    label="Title"
-                                    value={title}
-                                    onChange={(e) => setTitle(e.currentTarget.value)}
-                                />
-                            </div>
+                          
 
                         </div>
                     </section>

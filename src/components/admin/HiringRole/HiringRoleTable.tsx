@@ -51,8 +51,6 @@ export const HiringRoleTable = ({
             documents?.Data?.map((element: any, index: number) => (
                 <tr key={index}>
                     <td>{element.title}</td>
-                    <td>{new Date(element.created_at as Date).toLocaleDateString()}</td>
-                    <td>{new Date(element.updated_at as Date).toLocaleDateString()}</td>
                     <td>{element.short_description}</td>
                     <td>{element.description}</td>
                     <td>{element.tag}</td>
@@ -91,8 +89,6 @@ export const HiringRoleTable = ({
         ) : documents?.Success === 'true' ? (
                 <tr>
                     <td>{documents?.Data?.title}</td>
-                    <td>{new Date(documents?.Data?.created_at as Date).toLocaleDateString()}</td>
-                    <td>{new Date(documents?.Data?.updated_at as Date).toLocaleDateString()}</td>
                     <td>{documents?.Data?.short_description}</td>
                     <td>{documents?.Data?.description}</td>
                     <td>{documents?.Data?.tag}</td>
@@ -163,8 +159,6 @@ export const HiringRoleTable = ({
                 <thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
                     <tr>
                         <th>title</th>
-                        <th>created_at</th>
-                        <th>updated_at</th>
                         <th>short descriptoin</th>
                         <th>description</th>
                         <th>tags</th>

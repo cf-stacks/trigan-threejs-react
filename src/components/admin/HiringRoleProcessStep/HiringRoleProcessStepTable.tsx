@@ -77,8 +77,8 @@ export const HiringRoleProcessStepTable = ({
                                 variant="light"
                                 color="red"
                             >
-                                <IconHistory />
-                            </Button>
+                                <IconX style={{ zIndex: -1 }} />
+                                </Button>
                         </Button.Group>
                     </td>
                 </tr>
