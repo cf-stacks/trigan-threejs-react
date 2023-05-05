@@ -54,7 +54,8 @@ export const HiringRoleProcessStepTable = ({
                     <td>{element.description}</td>
                     <td>{element.step_order}</td>
                     <td>{element.is_admin_required ? 'true' : 'false'}</td>
-            
+                    <td>{new Date(element.created_at as Date).toLocaleDateString()}</td>
+                    <td>{new Date(element.updated_at as Date).toLocaleDateString()}</td>
                     <td>
                         <Button.Group>
                             <Button
@@ -88,7 +89,8 @@ export const HiringRoleProcessStepTable = ({
                     <td>{documents?.Data?.description}</td>
                     <td>{documents?.Data?.step_order}</td>
                     <td>{documents?.Data?.is_admin_required ? 'true':'false'}</td>
-             
+                    <td>{new Date(documents?.Data?.created_at as Date).toLocaleDateString()}</td>
+                    <td>{new Date(documents?.Data?.updated_at as Date).toLocaleDateString()}</td>
                     <td>
                         <Button.Group>
                             <Button
@@ -156,7 +158,8 @@ export const HiringRoleProcessStepTable = ({
                         <th>step order</th>
                         <th>is admin required</th>
                         {/* colSpan={2} align="right" */}
-
+                        <th>created at</th>
+                        <th>updated at</th>
                         <th colSpan={2}>actions</th>
                     </tr>
                 </thead>

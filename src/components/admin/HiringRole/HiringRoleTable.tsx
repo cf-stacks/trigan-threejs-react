@@ -59,6 +59,8 @@ export const HiringRoleTable = ({
                     <th>{element.expiry}</th>
                     <th>{element.hiring_role_process_id}</th>
                     <th>{element.responsibility}</th>
+                    <th>{new Date(element.created_at).toLocaleDateString()}</th>
+                    <th>{new Date(element.updated_at).toLocaleDateString()}</th>
                     <td>
                         <Button.Group>
                             <Button
@@ -97,6 +99,8 @@ export const HiringRoleTable = ({
                     <td>{documents?.Data?.expiry}</td>
                     <td>{documents?.Data?.hiring_role_process_id}</td>
                     <td>{documents?.Data?.responsibility}</td>
+                    <td>{new Date(documents?.Data?.created_at).toLocaleDateString()}</td>
+                    <td>{new Date(documents?.Data?.updated_at).toLocaleDateString()}</td>
                     <td>
                         <Button.Group>
                             <Button
@@ -168,6 +172,8 @@ export const HiringRoleTable = ({
                         <th>hiring role id</th>
                         <th>responsibility</th>
                         {/* colSpan={2} align="right" */}
+                        <th>created at</th>
+                        <th>updated at</th>
                         <th colSpan={2}>actions</th>
                     </tr>
                 </thead>

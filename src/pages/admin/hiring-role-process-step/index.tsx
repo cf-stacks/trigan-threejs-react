@@ -78,7 +78,7 @@ const HiringRoleProcess = () => {
                     handleSubmit: handleSubmit,
                 }}
                 create={{
-                    text: 'Create Documents',
+                    text: 'Create Role process step',
                     onClick: () => setModal({ open: true, type: 'create', size: '' }),
                 }}
             />

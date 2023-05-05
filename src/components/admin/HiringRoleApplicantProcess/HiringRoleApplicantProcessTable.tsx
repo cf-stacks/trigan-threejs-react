@@ -54,10 +54,10 @@ export const HiringRoleApplicantProcessTable = ({
                     <td>{element.hiring_role_applicant_id}</td>
                     <td>{element.hiring_role_process_id}</td>
                     <th>{element.hiring_role_process_step_id}</th>
-                    <td>{element.is_admin_approved ? 'true' : 'false'
-                    }</td>
+                    <td>{element.is_admin_approved ? 'true' : 'false'}</td>
                     <td>{element.video_response}</td>
-      
+                    <td>{new Date(element.created_at as Date).toLocaleDateString()}</td>
+                    <td>{new Date(element.updated_at as Date).toLocaleDateString()}</td>
                     <td>
                         <Button.Group>
                             <Button
@@ -93,7 +93,8 @@ export const HiringRoleApplicantProcessTable = ({
                     <td>{documents?.Data?.is_admin_approved ? 'true' : 'false'
                     }</td>
                     <td>{documents?.Data?.video_response}</td>
-               
+                    <td>{new Date(documents?.Data?.created_at as Date).toLocaleDateString()}</td>
+                    <td>{new Date(documents?.Data?.updated_at as Date).toLocaleDateString()}</td>
                     <td>
                         <Button.Group>
                             <Button
@@ -164,6 +165,8 @@ export const HiringRoleApplicantProcessTable = ({
                         <th>is admin approved</th>
                         <th>video response</th>
                         {/* colSpan={2} align="right" */}
+                        <th>created at</th>
+                        <th>updated at</th>
                         <th colSpan={2}>actions</th>
                     </tr>
                 </thead>
