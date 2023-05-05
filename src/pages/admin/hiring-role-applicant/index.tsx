@@ -59,7 +59,7 @@ const HiringRoleApplicant = () => {
                 },
             })
                 .then((res) => {
-                    setDocuments(res.data.Data)
+                    setDocuments(res.data)
                  
                 }
                 )
