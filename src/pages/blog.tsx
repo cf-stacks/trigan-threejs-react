@@ -25,6 +25,8 @@ import dynamic from 'next/dynamic'
 import { useFrame } from '@react-three/fiber'
 import { Head } from 'next/document'
 import useSWR from 'swr'
+import { AnimationBlob } from '../components/shared/AnimationBlob'
+import { RoundProgressBar } from '../components/shared/RoundProgessBar'
 
 const VideoHeader = dynamic(
   () => import('../components/home/HeroSection/VideoHeader')
@@ -43,6 +45,8 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
   const router = useRouter()
   const [page, setPage] = useState(1)
   const [allPosts, setAllPosts] = useState(posts)
+  const [isLoading, setIsloading] = useState(false)
+  const [countLoad, setCountLoad] = useState(0)
 
   // const handleSearch = async (title: string) => {
   //   await router.push('/PostSearch')
@@ -66,8 +70,16 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
   }
 
   const loadMore = async (e) => {
+    e.preventDefault()
+    setCountLoad((prev) => prev + 1)
+    setIsloading(true)
     let data = null
-    setPage((prev) => prev + 1)
+    if (page === 4) {
+      setPage(1)
+    } else {
+      setPage((prev) => prev + 1)
+    }
+
     try {
       const res = await fetch(
         `https://test1.trigan.org/api/v1/posts?page-size=5&page=${
@@ -79,6 +91,8 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
       setAllPosts(data)
     } catch (e) {
       console.log(e)
+    } finally {
+      setIsloading(false)
     }
   }
 
@@ -122,16 +136,17 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
               <Link href="/blog" passHref as={``}>
                 <div
                   className="mr-6 w-max hover:cursor-pointer hover:opacity-50"
-                  onClick={loadMore}
+                  onClick={(e) => loadMore(e)}
                 >
                   <span
-                    className={`border-1 flex h-[46px] flex-row flex-wrap items-center rounded-full border border-[#fff] bg-[#DC2626] px-7 py-1.5 text-[16px] font-medium capitalize text-white`}
+                    className={`border-1 flex h-fit flex-row flex-wrap items-center rounded-full border border-[#fff] bg-[#DC2626] px-7 py-1.5 text-[16px] font-medium capitalize text-white`}
                   >
-                    Load More
+                    {isLoading ? <RoundProgressBar /> : 'Load More'}
                   </span>
                 </div>
               </Link>
             </div>
+
             {/* check which functionality of this blogHeader component, which will render the post cards will be this component or <PostsByDate posts={posts} />. Or should you render the 2? what's the difference, because they seem to be the same content*/}
             {/* <BlogHeader /> */}
           </GlobalLayout>
