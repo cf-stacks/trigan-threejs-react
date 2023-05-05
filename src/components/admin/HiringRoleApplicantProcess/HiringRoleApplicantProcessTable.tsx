@@ -92,11 +92,50 @@ export const HiringRoleApplicantProcessTable = ({
                     </td>
                 </tr>
             ))
+        ) : documents?.Success == 'true' ? (
+                <tr>
+                    <td>{documents?.Data?.hiring_role_applicant_id}</td>
+                    <td>{documents?.Data?.hiring_role_process_id}</td>
+                    <th>{documents?.Data?.hiring_role_process_step_id}</th>
+                    <td>{documents?.Data?.is_admin_approved ? 'true' : 'false'
+                    }</td>
+                    <td>{documents?.Data?.video_response}</td>
+                    <td>{new Date(documents?.Data?.created_at as Date).toLocaleDateString()}</td>
+                    <td>{new Date(documents?.Data?.updated_at as Date).toLocaleDateString()}</td>
+                    <td>
+                        <Button.Group>
+                            <Button
+                                onClick={() => {
+                                    setModal({ open: true, type: 'edit' })
+                                    setSelectedDocument(documents?.Data)
+                                }
+                                }
+                                variant="light"
+                                color="blue"
+                            >
+                                <IconPencil />
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    setModal({ open: true, type: 'delete' })
+                                    setSelectedDocument(documents?.Data)
+                                }}
+                                variant="light"
+                                color="red"
+                            >
+                                <IconHistory />
+                            </Button>
+                        </Button.Group>
+                    </td>
+            </tr>
         ) : (
-            <tr>
-                <td colSpan={9}>No Items</td>
+                    <tr>
+                        <td colSpan={8}>No data found</td>
             </tr>
         )
+    
+                        
+
 
     if (fetching)
         return (

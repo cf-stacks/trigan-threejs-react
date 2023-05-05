@@ -19,7 +19,7 @@ const HiringRoleProcess = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         if (e) e.preventDefault()
         try {
-            axios.get(`${TEST_API_URL}/hiring-role-process-step/get?search=${search}`, {
+            axios.get(`${TEST_API_URL}/hiring-role-process-step/get/${search}`, {
                 withCredentials: true,
                 headers: {
                     Authorization: `${localStorage.getItem('access_token')}`,
@@ -65,6 +65,7 @@ const HiringRoleProcess = () => {
 
     useEffect(() => {
         void fetchFunction()
+        void handleSubmit
     }, [fetchFunction])
 
     return (

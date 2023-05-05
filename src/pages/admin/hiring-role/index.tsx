@@ -31,6 +31,7 @@ const HiringRole = () => {
 
             setHiring(p.data)
             console.log(p)
+            
         } catch (error) {
             console.log(error)
             const err = error as AxiosError
@@ -49,7 +50,7 @@ const HiringRole = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         if (e) e.preventDefault()
         try {
-            axios.get(`${TEST_API_URL}/hiring-role/get?search=${search}`, {
+            axios.get(`${TEST_API_URL}/hiring-role/get/${search}`, {
                 withCredentials: true,
                 headers: {
                     Authorization: `${localStorage.getItem('access_token')}`,
@@ -59,7 +60,7 @@ const HiringRole = () => {
             })
                 .then((res) => {
                     setHiring(res.data)
-                    console.log(res.data)
+                    console.log(res.data,'res')
                 }
             )
             
@@ -67,6 +68,7 @@ const HiringRole = () => {
             toast.error('results not found')
         }
     }
+
 
     return (
 

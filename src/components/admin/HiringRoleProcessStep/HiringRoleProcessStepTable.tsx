@@ -82,11 +82,45 @@ export const HiringRoleProcessStepTable = ({
                     </td>
                 </tr>
             ))
+        ) : documents?.Success == 'true' ? (
+                <tr>
+                    <td>{documents?.Data?.name}</td>
+                    <td>{documents?.Data?.description}</td>
+
+                    <td>{new Date(documents?.Data?.created_at as Date).toLocaleDateString()}</td>
+                    <td>{new Date(documents?.Data?.updated_at as Date).toLocaleDateString()}</td>
+                    <td>
+                        <Button.Group>
+                            <Button
+                                onClick={() => {
+                                    setModal({ open: true, type: 'edit' })
+                                    setSelectedDocument(documents?.Data)
+                                }
+                                }
+                                variant="light"
+                                color="blue"
+                            >
+                                <IconPencil />
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    setModal({ open: true, type: 'delete' })
+                                    setSelectedDocument(documents?.Data)
+                                }}
+                                variant="light"
+                                color="red"
+                            >
+                                <IconHistory />
+                            </Button>
+                        </Button.Group>
+                    </td>
+            </tr>
         ) : (
-            <tr>
-                <td colSpan={9}>No Items</td>
+                    <tr>
+                        <td colSpan={6}>No data found</td>
             </tr>
         )
+    
 
     if (fetching)
         return (

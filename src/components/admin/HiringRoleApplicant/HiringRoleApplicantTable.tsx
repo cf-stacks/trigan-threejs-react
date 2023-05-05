@@ -46,20 +46,7 @@ export const HiringRoleApplicantTable = ({
 }: any) => {
     const { classes, cx } = useStyles()
     const [scrolled, setScrolled] = useState(false)
-//     {
-//   "contribution_plan": "string",
-//   "country": "string",
-//   "email": "string",
-//   "first_name": "string",
-//   "interest_topic": "string",
-//   "joining_reason": "string",
-//   "known_about_trigan": "string",
-//   "last_name": "string",
-//   "nationality": "string",
-//   "qualification": "string",
-//   "skill": "string",
-//   "time_spend": "string"
-// }
+
     const newdocuments =
         documents?.Data?.length > 0 ? (
             documents?.Data?.map((element: any, index: number) => (
@@ -105,11 +92,57 @@ export const HiringRoleApplicantTable = ({
                     </td>
                 </tr>
             ))
+        ) : documents?.Success == 'true' ? (
+                <tr>
+                    <td>{documents?.Data?.contribution_plan}</td>
+                    <td>{documents?.Data?.country}</td>
+                    <th>{documents?.Data?.email}</th>
+                    <td>{documents?.Data?.first_name}</td>
+                    <td>{documents?.Data?.last_name}</td>
+                    <td>{documents?.Data?.interest_topic}</td>
+                    <td>{documents?.Data?.joining_reason}</td>
+                    <td>{documents?.Data?.known_about_trigan}</td>
+                    <td>{documents?.Data?.nationality}</td>
+                    <td>{documents?.Data?.qualification}</td>
+                    <td>{documents?.Data?.skill}</td>
+                    <td>{documents?.Data?.time_spend}</td>
+                    <td>{new Date(documents?.Data?.created_at as Date).toLocaleDateString()}</td>
+                    <td>{new Date(documents?.Data?.updated_at as Date).toLocaleDateString()}</td>
+                    <td>
+                        <Button.Group>
+                            <Button
+                                onClick={() => {
+                                    setModal({ open: true, type: 'edit' })
+                                    setSelectedDocument(documents?.Data)
+                                }
+                                }
+                                variant="light"
+                                color="blue"
+                            >
+                                <IconPencil />
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    setModal({ open: true, type: 'delete' })
+                                    setSelectedDocument(documents?.Data)
+                                }
+                                }
+                                variant="light"
+                                color="red"
+                            >
+                                <IconHistory />
+                            </Button>
+                        </Button.Group>
+                    </td>
+            </tr>
         ) : (
-            <tr>
-                <td colSpan={9}>No Items</td>
+                    <tr>
+                        <td colSpan={13} style={{ textAlign: 'center' }}>
+                            No Data Found
+                        </td>
             </tr>
         )
+    
 
     if (fetching)
         return (

@@ -61,7 +61,6 @@ export const HiringRoleApplicantModals = ({
     setSelectedDocument,
     fetchFunction,
 }: IDocumentModals) => {
-   
     const [contribution_plan, setContribution_plan] = useState('')
     const [country, setCountry] = useState('')
     const [email, setEmail] = useState('')

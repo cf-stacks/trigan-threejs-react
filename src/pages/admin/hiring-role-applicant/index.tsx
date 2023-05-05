@@ -50,7 +50,7 @@ const HiringRoleApplicant = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         if (e) e.preventDefault()
         try {
-            axios.get(`${TEST_API_URL}/hiring-role-applicant/get?search=${search}`, {
+            axios.get(`${TEST_API_URL}/hiring-role-applicant/get/${search}`, {
                 withCredentials: true,
                 headers: {
                     Authorization: `${localStorage.getItem('access_token')}`,
@@ -59,8 +59,8 @@ const HiringRoleApplicant = () => {
                 },
             })
                 .then((res) => {
-                    setDocuments(res.data)
-                    console.log(res.data)
+                    setDocuments(res.data.Data)
+                 
                 }
                 )
 
@@ -79,7 +79,7 @@ const HiringRoleApplicant = () => {
                     handleSubmit: handleSubmit,
                 }}
                 create={{
-                    text: 'Create Documents',
+                    text: 'Create new hiring role applicant',
                     onClick: () => setModal({ open: true, type: 'create', size: '' }),
                 }}
             />
