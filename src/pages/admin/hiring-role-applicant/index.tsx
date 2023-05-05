@@ -50,6 +50,10 @@ const HiringRoleApplicant = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         if (e) e.preventDefault()
         try {
+            if (search === '') {
+                await fetchFunction()
+                return
+            }
             axios.get(`${TEST_API_URL}/hiring-role-applicant/get/${search}`, {
                 withCredentials: true,
                 headers: {

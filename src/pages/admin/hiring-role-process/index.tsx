@@ -18,27 +18,7 @@ const HiringRoleProcess = () => {
     const router = useRouter()
    
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        if (e) e.preventDefault()
-        try {
-            axios.get(`${TEST_API_URL}/hiring-role-process/get/${search}`, {
-                withCredentials: true,
-                headers: {
-                    Authorization: `${localStorage.getItem('access_token')}`,
-                    'Content-Language': `${localStorage.getItem('content-language')}`,
-                    Session: `${localStorage.getItem('session_key')}`,
-                },
-            })
-                .then((res) => {
-                    setDocuments(res.data)
-                    console.log(documents)
-                }
-                )
 
-        } catch (error) {
-            toast.error('results not found')
-        }
-    }
     console.log(documents)
     const fetchFunction = useCallback(async () => {
         setFetching(true)
@@ -64,6 +44,32 @@ const HiringRoleProcess = () => {
         }
         setFetching(false)
     }, [router])
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        if (e) e.preventDefault()
+        try {
+            if (search === '') {
+                await fetchFunction()
+                return;
+            }
+            axios.get(`${TEST_API_URL}/hiring-role-process/get/${search}`, {
+                withCredentials: true,
+                headers: {
+                    Authorization: `${localStorage.getItem('access_token')}`,
+                    'Content-Language': `${localStorage.getItem('content-language')}`,
+                    Session: `${localStorage.getItem('session_key')}`,
+                },
+            })
+                .then((res) => {
+                    setDocuments(res.data)
+                    console.log(documents)
+                }
+                )
+
+        } catch (error) {
+            toast.error('results not found')
+        }
+    }
 
     useEffect(() => {
         void fetchFunction()
