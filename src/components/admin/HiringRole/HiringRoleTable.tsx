@@ -1,5 +1,5 @@
 import { Button, createStyles, Loader, ScrollArea, Table } from '@mantine/core'
-import { IconHistory, IconPencil } from '@tabler/icons'
+import { IconHistory, IconPencil, IconX } from '@tabler/icons'
 import { useState } from 'react'
 
 const useStyles = createStyles((theme) => ({
@@ -50,16 +50,17 @@ export const HiringRoleTable = ({
         documents?.Data?.length > 0 ? (
             documents?.Data?.map((element: any, index: number) => (
                 <tr key={index}>
-                    <td>{element.admin_assigned_to}</td>
-                    <td>{element.category}</td>
+                    <td>{element.title}</td>
+                    <td>{new Date(element.created_at as Date).toLocaleDateString()}</td>
+                    <td>{new Date(element.updated_at as Date).toLocaleDateString()}</td>
+                    <td>{element.short_description}</td>
                     <td>{element.description}</td>
+                    <td>{element.tag}</td>
+                    <td>{element.category}</td>
+                    <td>{element.admin_assigned_to}</td>
                     <th>{element.expiry}</th>
                     <th>{element.hiring_role_process_id}</th>
                     <th>{element.responsibility}</th>
-                    <td>{element.short_description}</td>
-                    <td>{element.tag}</td>
-                    <td>{new Date(element.created_at as Date).toLocaleDateString()}</td>
-                    <td>{new Date(element.updated_at as Date).toLocaleDateString()}</td>
                     <td>
                         <Button.Group>
                             <Button
@@ -81,7 +82,7 @@ export const HiringRoleTable = ({
                                 variant="light"
                                 color="red"
                             >
-                                <IconHistory />
+                                <IconX style={{ zIndex: -1 }} />
                             </Button>
                         </Button.Group>
                     </td>
@@ -89,16 +90,17 @@ export const HiringRoleTable = ({
             ))
         ) : documents?.Success === 'true' ? (
                 <tr>
-                    <td>{documents?.Data?.admin_assigned_to}</td>
-                    <td>{documents?.Data?.category}</td>
+                    <td>{documents?.Data?.title}</td>
+                    <td>{new Date(documents?.Data?.created_at as Date).toLocaleDateString()}</td>
+                    <td>{new Date(documents?.Data?.updated_at as Date).toLocaleDateString()}</td>
+                    <td>{documents?.Data?.short_description}</td>
                     <td>{documents?.Data?.description}</td>
+                    <td>{documents?.Data?.tag}</td>
+                    <td>{documents?.Data?.category}</td>
+                    <td>{documents?.Data?.admin_assigned_to}</td>
                     <td>{documents?.Data?.expiry}</td>
                     <td>{documents?.Data?.hiring_role_process_id}</td>
                     <td>{documents?.Data?.responsibility}</td>
-                    <td>{documents?.Data?.short_description}</td>
-                    <td>{documents?.Data?.tag}</td>
-                    <td>{new Date(documents?.Data?.created_at as Date).toLocaleDateString()}</td>
-                    <td>{new Date(documents?.Data?.updated_at as Date).toLocaleDateString()}</td>
                     <td>
                         <Button.Group>
                             <Button
@@ -119,7 +121,7 @@ export const HiringRoleTable = ({
                                 variant="light"
                                 color="red"
                             >
-                                <IconHistory />
+                                <IconX style={{ zIndex: -1 }} /> <IconHistory />
                             </Button>
                         </Button.Group>
                     </td>
@@ -160,17 +162,18 @@ export const HiringRoleTable = ({
             >
                 <thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
                     <tr>
-                        <th>admin assigned to</th>
-                        <th>category</th>
+                        <th>title</th>
+                        <th>created_at</th>
+                        <th>updated_at</th>
+                        <th>short descriptoin</th>
                         <th>description</th>
+                        <th>tags</th>
+                        <th>category</th>
+                        <th>admin assigned to</th>
                         <th>expiry</th>
                         <th>hiring role id</th>
                         <th>responsibility</th>
-                        <th>short descriptoin</th>
-                        <th>tags</th>
                         {/* colSpan={2} align="right" */}
-                        <th>created_at</th>
-                        <th>updated_at</th>
                         <th colSpan={2}>actions</th>
                     </tr>
                 </thead>

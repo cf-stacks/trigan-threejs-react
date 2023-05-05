@@ -1,5 +1,5 @@
 import { Button, createStyles, Loader, ScrollArea, Table } from '@mantine/core'
-import { IconHistory, IconPencil } from '@tabler/icons'
+import { IconHistory, IconPencil, IconX } from '@tabler/icons'
 import { useState } from 'react'
 
 const useStyles = createStyles((theme) => ({
@@ -44,13 +44,7 @@ export const HiringRoleApplicantProcessTable = ({
     setModal,
     setSelectedDocument,
 }: any) => {
-    // {
-    //     "hiring_role_applicant_id": "string",
-    //         "hiring_role_process_id": "string",
-    //             "hiring_role_process_step_id": "string",
-    //                 "is_admin_approved": true,
-    //                     "video_response": "string"
-    // }
+
     const { classes, cx } = useStyles()
     const [scrolled, setScrolled] = useState(false)
     const newdocuments =
@@ -86,7 +80,7 @@ export const HiringRoleApplicantProcessTable = ({
                                 variant="light"
                                 color="red"
                             >
-                                <IconHistory />
+                                <IconX style={{ zIndex: -1 }} />
                             </Button>
                         </Button.Group>
                     </td>
@@ -123,7 +117,7 @@ export const HiringRoleApplicantProcessTable = ({
                                 variant="light"
                                 color="red"
                             >
-                                <IconHistory />
+                                <IconX style={{ zIndex: -1 }} />
                             </Button>
                         </Button.Group>
                     </td>

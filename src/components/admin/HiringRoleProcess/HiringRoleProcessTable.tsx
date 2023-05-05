@@ -60,7 +60,6 @@ export const HiringRoleProcessTable = ({
                     <td>{element.description}</td>
                     <td>{element.creator_id}</td>
                     <td>{element.updater_id}</td>
-                    <td>{element.deleted_id}</td>
                     <td>{new Date(element.created_at as Date).toLocaleDateString()}</td>
                     <td>{new Date(element.updated_at as Date).toLocaleDateString()}</td>
                     <td>
@@ -95,7 +94,6 @@ export const HiringRoleProcessTable = ({
                     <td>{documents?.Data?.description}</td>
                     <td>{documents?.Data?.creator_id}</td>
                     <td>{documents?.Data?.updater_id}</td>
-                    <td>{documents?.Data?.deleted_id}</td>
                     <td>{new Date(documents?.Data?.created_at as Date).toLocaleDateString()}</td>
                     <td>{new Date(documents?.Data?.updated_at as Date).toLocaleDateString()}</td>
                     <td>

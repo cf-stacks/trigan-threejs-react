@@ -268,6 +268,14 @@ export const HiringRoleModals = ({
                             </div>
                             <div className={classes.inputContainer}>
                                 <TextInput
+                                    label="title"
+                                    value={title}
+
+                                    onChange={(e) => setTitle(e.currentTarget.value)}
+                                />
+                            </div>
+                            <div className={classes.inputContainer}>
+                                <TextInput
                                     label="Expiry"
                                     value={expiry}
                                     onChange={(e) => setExpiry(e.currentTarget.value)}
@@ -361,7 +369,7 @@ export const HiringRoleModals = ({
                 withCloseButton={false}
             >
                 <Title order={4}>
-                    Are you sure you want to delete {selectedDocument.description} ? // type
+                    Are you sure you want to delete {selectedDocument.title} ? 
                 </Title>
                 <div
                     style={{
@@ -409,13 +417,13 @@ export const HiringRoleModals = ({
                         style={{ padding: '0 20px 20px' }}
                     >
                         <div className={classes.formChild}>
-                            {/* <div className={classes.inputContainer}>
+                            <div className={classes.inputContainer}>
                                 <TextInput
-                                    label="Type"
-                                    value={type}
-                                    onChange={(e) => setType(e.target.value)}
+                                    label="title"
+                                    value={title}
+                                    onChange={(e) => setTitle(e.currentTarget.value)}
                                 />
-                            </div> */}
+                            </div>
                             <Textarea
                                 label="Description"
                                 minRows={4}
@@ -425,31 +433,7 @@ export const HiringRoleModals = ({
                                     setDescription(e.currentTarget.value)
                                 }
                             />
-                            <TextInput
-                                label="Created_by"
-                                value={created_by}
-                                onChange={(e) => setCreated_by(e.target.value)}
-                            />
-                            <TextInput
-                                label="Updated_by"
-                                value={updated_by}
-                                onChange={(e) => setUpdated_by(e.target.value)}
-                            />
-                            <TextInput
-                                label="Deleted_by"
-                                value={deleted_by}
-                                onChange={(e) => setDeleted_by(e.target.value)}
-                            />
-                            <TextInput
-                                label="Created_at"
-                                value={created_at}
-                                onChange={(e) => setCreated_at(e.target.value)}
-                            />
-                            <TextInput
-                                label="Updated_at"
-                                value={updated_at}
-                                onChange={(e) => setUpdated_at(e.target.value)}
-                            />
+                         
                         </div>
                     </section>
                     <Divider />

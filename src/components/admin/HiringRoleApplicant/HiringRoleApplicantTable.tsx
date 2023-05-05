@@ -1,5 +1,5 @@
 import { Button, createStyles, Loader, ScrollArea, Table } from '@mantine/core'
-import { IconHistory, IconPencil } from '@tabler/icons'
+import { IconHistory, IconPencil, IconX } from '@tabler/icons'
 import { useState } from 'react'
 
 const useStyles = createStyles((theme) => ({
@@ -56,6 +56,7 @@ export const HiringRoleApplicantTable = ({
                     <th>{element.email}</th>
                     <td>{element.first_name}</td>
                     <td>{element.last_name}</td>
+                    <td>{element.hiring_role_id}</td>
                     <td>{element.interest_topic}</td>
                     <td>{element.joining_reason}</td>
                     <td>{element.known_about_trigan}</td>
@@ -86,7 +87,7 @@ export const HiringRoleApplicantTable = ({
                                 variant="light"
                                 color="red"
                             >
-                                <IconHistory />
+                                <IconX style={{ zIndex: -1 }} />
                             </Button>
                         </Button.Group>
                     </td>
@@ -99,6 +100,7 @@ export const HiringRoleApplicantTable = ({
                     <th>{documents?.Data?.email}</th>
                     <td>{documents?.Data?.first_name}</td>
                     <td>{documents?.Data?.last_name}</td>
+                    <td>{documents?.Data?.hiring_role_id}</td>
                     <td>{documents?.Data?.interest_topic}</td>
                     <td>{documents?.Data?.joining_reason}</td>
                     <td>{documents?.Data?.known_about_trigan}</td>
@@ -130,7 +132,7 @@ export const HiringRoleApplicantTable = ({
                                 variant="light"
                                 color="red"
                             >
-                                <IconHistory />
+                                <IconX style={{ zIndex: -1 }} />
                             </Button>
                         </Button.Group>
                     </td>
@@ -177,12 +179,15 @@ export const HiringRoleApplicantTable = ({
                         <th>country</th>
                         <th>email</th>
                         <th>first name</th>
+                        <th>last name</th>
+                        <th>Hiring role ID</th>
                         <th>intrest topic</th>
                         <th>joining reason</th>
                         <th>know about trigan</th>
+                        <th>Nationality</th>
                         <th>qualification</th>
                         <th>skill</th>
-                        <th>time spen</th>
+                        <th>time spend</th>
                         {/* colSpan={2} align="right" */}
                         <th>created_at</th>
                         <th>updated_at</th>

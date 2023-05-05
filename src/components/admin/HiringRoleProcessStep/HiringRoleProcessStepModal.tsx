@@ -265,6 +265,7 @@ export const HiringRoleProcessStepModals = ({
                                     onChange={(e) => setHiring_role_process_id(e.target.value)}
                                 />
                             </div>
+                            <label htmlFor="is_admin_required">Is Admin Required</label>
                             <Switch
                                 label="Is Admin Required"
                                 checked={is_admin_required}
@@ -274,7 +275,8 @@ export const HiringRoleProcessStepModals = ({
                             <Input
                                 type='number'
                                 value={step_order}
-                                onChange={(e) => setStep_order(parseInt(e.target.value))}                            />
+                                onChange={(e) => setStep_order(parseInt(e.target.value))}
+                            />
                         </div>
                     </section>
                     <Divider />
@@ -370,6 +372,18 @@ export const HiringRoleProcessStepModals = ({
                                     onChange={(e) => setName(e.target.value)}
                                 />
                             </div>
+                            <label htmlFor="step_order">Step Order</label>
+                            <Input
+                                type='number'
+                                value={step_order}
+                                onChange={(e) => setStep_order(parseInt(e.target.value))} />
+                            <Switch
+                                label="Is Admin Required"
+                                checked={is_admin_required}
+                                onChange={(e) => setIs_admin_required(e.target.checked)}
+                            />
+                            
+                            
                             <Textarea
                                 label="Description"
                                 minRows={4}
@@ -379,31 +393,7 @@ export const HiringRoleProcessStepModals = ({
                                     setDescription(e.currentTarget.value)
                                 }
                             />
-                            <TextInput
-                                label="Created_by"
-                                value={created_by}
-                                onChange={(e) => setCreated_by(e.target.value)}
-                            />
-                            <TextInput
-                                label="Updated_by"
-                                value={updated_by}
-                                onChange={(e) => setUpdated_by(e.target.value)}
-                            />
-                            <TextInput
-                                label="Deleted_by"
-                                value={deleted_by}
-                                onChange={(e) => setDeleted_by(e.target.value)}
-                            />
-                            <TextInput
-                                label="Created_at"
-                                value={created_at}
-                                onChange={(e) => setCreated_at(e.target.value)}
-                            />
-                            <TextInput
-                                label="Updated_at"
-                                value={updated_at}
-                                onChange={(e) => setUpdated_at(e.target.value)}
-                            />
+                           
                         </div>
                     </section>
                     <Divider />

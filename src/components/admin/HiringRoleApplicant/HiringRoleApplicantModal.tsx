@@ -544,31 +544,7 @@ export const HiringRoleApplicantModals = ({
                                     onChange={(e) => setTime_spend(e.target.value)}
                                 />
                             </div>
-                            <TextInput
-                                label="Created_by"
-                                value={created_by}
-                                onChange={(e) => setCreated_by(e.target.value)}
-                            />
-                            <TextInput
-                                label="Updated_by"
-                                value={updated_by}
-                                onChange={(e) => setUpdated_by(e.target.value)}
-                            />
-                            <TextInput
-                                label="Deleted_by"
-                                value={deleted_by}
-                                onChange={(e) => setDeleted_by(e.target.value)}
-                            />
-                            <TextInput
-                                label="Created_at"
-                                value={created_at}
-                                onChange={(e) => setCreated_at(e.target.value)}
-                            />
-                            <TextInput
-                                label="Updated_at"
-                                value={updated_at}
-                                onChange={(e) => setUpdated_at(e.target.value)}
-                            />
+                            
                         </div>
                     </section>
                     <Divider />
