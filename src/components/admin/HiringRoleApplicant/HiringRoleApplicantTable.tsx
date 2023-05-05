@@ -64,8 +64,7 @@ export const HiringRoleApplicantTable = ({
                     <td>{element.qualification}</td>
                     <td>{element.skill}</td>
                     <td>{element.time_spend}</td>
-                    <td>{new Date(element.created_at as Date).toLocaleDateString()}</td>
-                    <td>{new Date(element.updated_at as Date).toLocaleDateString()}</td>
+   
                     <td>
                         <Button.Group>
                             <Button
@@ -108,8 +107,7 @@ export const HiringRoleApplicantTable = ({
                     <td>{documents?.Data?.qualification}</td>
                     <td>{documents?.Data?.skill}</td>
                     <td>{documents?.Data?.time_spend}</td>
-                    <td>{new Date(documents?.Data?.created_at as Date).toLocaleDateString()}</td>
-                    <td>{new Date(documents?.Data?.updated_at as Date).toLocaleDateString()}</td>
+    
                     <td>
                         <Button.Group>
                             <Button
@@ -189,8 +187,6 @@ export const HiringRoleApplicantTable = ({
                         <th>skill</th>
                         <th>time spend</th>
                         {/* colSpan={2} align="right" */}
-                        <th>created_at</th>
-                        <th>updated_at</th>
                         <th colSpan={2}>actions</th>
                     </tr>
                 </thead>

@@ -60,8 +60,6 @@ export const HiringRoleProcessTable = ({
                     <td>{element.description}</td>
                     <td>{element.creator_id}</td>
                     <td>{element.updater_id}</td>
-                    <td>{new Date(element.created_at as Date).toLocaleDateString()}</td>
-                    <td>{new Date(element.updated_at as Date).toLocaleDateString()}</td>
                     <td>
                         <Button.Group>
                             <Button
@@ -94,8 +92,6 @@ export const HiringRoleProcessTable = ({
                     <td>{documents?.Data?.description}</td>
                     <td>{documents?.Data?.creator_id}</td>
                     <td>{documents?.Data?.updater_id}</td>
-                    <td>{new Date(documents?.Data?.created_at as Date).toLocaleDateString()}</td>
-                    <td>{new Date(documents?.Data?.updated_at as Date).toLocaleDateString()}</td>
                     <td>
                         <Button.Group>
                             <Button
@@ -163,8 +159,6 @@ export const HiringRoleProcessTable = ({
                         {/* colSpan={2} align="right" */}
                         <th>creator_id</th>
                         <th>updater_id</th>
-                        <th>created_at</th>
-                        <th>updated_at</th>
                         <th colSpan={2} align="right">
                             actions
                         </th>
