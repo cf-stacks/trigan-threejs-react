@@ -8,6 +8,8 @@ import { HiringRoleModals } from '../../../components/admin/HiringRole/HiringRol
 import axios, { AxiosError } from 'axios'
 import { Router, useRouter } from 'next/router'
 import { toast } from 'react-hot-toast'
+import { Pagination, PaginationProps } from 'antd'
+
 const HiringRole = () => {
     const [hiring, setHiring] = useState<any>([])
     const [fetching, setFetching] = useState(false)
@@ -15,12 +17,16 @@ const HiringRole = () => {
     const [selectedDocument, setSelectedDocument] = useState<any>({})
     const [search, setSearch] = useState('')
 
+    const [totalCount, setCount] = useState(0)
+    const [page, setPage] = useState(1)
+    const [pageSize, setPageSize] = useState(20)
+
     const router = useRouter()
 
-    const fetchFunction = useCallback(async () => {
+    const fetchFunction = useCallback(async (page:number,pageSize:number) => {
         setFetching(true)
         try {
-            const p: any = await axios.get(`${TEST_API_URL}/hiring-role/get`, {
+            const p: any = await axios.get(`${TEST_API_URL}/hiring-role/get?page=${page}&page_size=${pageSize}`, {
                 withCredentials: true,
                 headers: {
                     Authorization: `${localStorage.getItem('access_token')}`,
@@ -28,9 +34,8 @@ const HiringRole = () => {
                     Session: `${localStorage.getItem('session_key')}`,
                 },
             })
-
             setHiring(p.data)
-            
+            setCount(p.data.Meta.total_count) 
         } catch (error) {
             const err = error as AxiosError
             if ((err.response?.status as number) === 401) {
@@ -41,15 +46,27 @@ const HiringRole = () => {
         setFetching(false)
     }, [router])
 
+    const handlePageSizeChange: PaginationProps['onShowSizeChange'] = (
+        current,
+        pageSize
+    ) => {
+        setPage(1)
+        setPageSize(pageSize)
+    }
+
+    const handlePaginationChange = (page: number) => {
+        setPage(page)
+    }
+
     useEffect(() => {
-        void fetchFunction()
-    }, [fetchFunction])
+        void fetchFunction(page, pageSize)
+    }, [fetchFunction, page, pageSize])
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
             if (search == '') {
-                await fetchFunction()
+                await fetchFunction(page, pageSize)
                 return
             }
             const response = await axios.get(`${TEST_API_URL}/hiring-role/get/${search}`, {
@@ -94,22 +111,30 @@ const HiringRole = () => {
                 setModal={setModal}
                 setSelectedDocument={setSelectedDocument}
             />
+
+
             <div>
-
-
             <HiringRoleModals
                 modal={modal}
                 setModal={setModal}
                 selectedDocument={selectedDocument}
                 setSelectedDocument={setSelectedDocument}
-                fetchFunction={fetchFunction}
+                fetchFunction={() => fetchFunction(page, pageSize)}
                 />
             
             </div>
+            <Pagination
+                current={page}
+                pageSize={pageSize}
+                total={totalCount}
+                onChange={handlePaginationChange}
+                showSizeChanger
+                onShowSizeChange={handlePageSizeChange}
+            />
             
         </AdminLayout>
 
     )
 }
 
-export default HiringRole
+export default HiringRole      
