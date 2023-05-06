@@ -8,6 +8,7 @@ import { HiringRoleProcessStepModals } from '../../../components/admin/HiringRol
 import axios, { AxiosError } from 'axios'
 import { Router, useRouter } from 'next/router'
 import { toast } from 'react-hot-toast'
+import { AnyARecord } from 'dns'
 
 const HiringRoleProcess = () => {
     const [search, setSearch] = useState('')
@@ -44,13 +45,13 @@ const HiringRoleProcess = () => {
     }, [router])
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-         e.preventDefault()
+        e.preventDefault()
         try {
             if (search == '') {
                 await fetchFunction()
                 return
             }
-            axios.get(`${TEST_API_URL}/hiring-role-process-step/get/${search}`, {
+            const response = await axios.get(`${TEST_API_URL}/hiring-role-process-step/get/${search}`, {
                 withCredentials: true,
                 headers: {
                     Authorization: `${localStorage.getItem('access_token')}`,
@@ -58,15 +59,14 @@ const HiringRoleProcess = () => {
                     Session: `${localStorage.getItem('session_key')}`,
                 },
             })
-                    
-                .then((res) => {
-                    setDocuments(res.data)
-                    console.log(res.data)
-                }
-                )
-
-        } catch (error) {
-            toast.error('results not found')
+            setDocuments(response.data)
+            console.log(response.data)
+        } catch (error:any) {
+            if (error.response && error.response.status === 400) {
+                setDocuments(null)
+            } else {
+                toast.error('results not found')
+            }
         }
     }
 

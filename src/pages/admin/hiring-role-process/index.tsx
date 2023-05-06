@@ -46,13 +46,13 @@ const HiringRoleProcess = () => {
     }, [router])
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        if (e) e.preventDefault()
+        e.preventDefault()
         try {
-            if (search === '') {
+            if (search == '') {
                 await fetchFunction()
-                return;
+                return
             }
-            axios.get(`${TEST_API_URL}/hiring-role-process/get/${search}`, {
+            const response = await axios.get(`${TEST_API_URL}/hiring-role-process/get/${search}`, {
                 withCredentials: true,
                 headers: {
                     Authorization: `${localStorage.getItem('access_token')}`,
@@ -60,16 +60,17 @@ const HiringRoleProcess = () => {
                     Session: `${localStorage.getItem('session_key')}`,
                 },
             })
-                .then((res) => {
-                    setDocuments(res.data)
-                    console.log(documents)
-                }
-                )
-
-        } catch (error) {
-            toast.error('results not found')
+            setDocuments(response.data)
+            console.log(response.data)
+        } catch (error: any) {
+            if (error.response && error.response.status === 400) {
+                setDocuments(null)
+            } else {
+                toast.error('results not found')
+            }
         }
     }
+
 
     useEffect(() => {
         void fetchFunction()
