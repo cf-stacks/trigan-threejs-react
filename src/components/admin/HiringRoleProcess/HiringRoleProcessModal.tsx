@@ -199,7 +199,7 @@ export const HiringRoleProcessModals = ({
                 padding={0}
             >
                 <Title mb={'2rem'} sx={{ padding: '20px' }}>
-                    Create a new documets
+                Create new document
                 </Title>
                 <form
                     style={{
