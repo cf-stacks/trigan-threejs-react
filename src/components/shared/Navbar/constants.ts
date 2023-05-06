@@ -19,6 +19,10 @@ export const LINKS = [
         link:'/#ourSolution',
       },
       {
+        title: 'Join The Team',
+        link: '/join-the-team',
+      },
+      {
         title: 'Our Team',
         link: '/teams',
       },
@@ -42,6 +46,11 @@ export const LINKS = [
     title: 'Blog',
     link: '/blog',
   },
+  {
+    title: 'Project',
+    link: '/project',
+  },
+ 
   /* {
     title: 'Project',
     link:"/project",
