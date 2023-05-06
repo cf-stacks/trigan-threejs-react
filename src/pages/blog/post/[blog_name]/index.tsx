@@ -12,6 +12,7 @@ import moment from 'moment'
 import Link from 'next/link'
 import { FadeInWhenVisible } from '../../../../components/shared/FadeInWhenVisible'
 import dynamic from 'next/dynamic'
+import SocialMediaLinks from '../../../../components/shared/SocialMediaButton'
 interface PostProps {
   children?: ReactNode
   post: ApiPostData
@@ -227,7 +228,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
               </div>
             </div>
           </div>
-          <div className="my-16 flex flex-col items-center">
+          <div className="relative my-16 flex w-full flex-col items-center">
             <Link href="/blog" passHref as={``}>
               <div className="mr-6 w-max hover:cursor-pointer hover:opacity-50">
                 <span
@@ -252,6 +253,11 @@ const Post: NextPage<PostProps> = ({ post }) => {
                 </span>
               </div>
             </Link>
+
+            {/* social media sharing buttons */}
+            <div className="absolute left-[35%] top-12">
+              <SocialMediaLinks />
+            </div>
             <div className="flex pb-10 pt-5 text-lg text-white">
               <p className="mr-10">{post.data.votes} &nbsp;likes</p>
               <p className="mr-10">/</p>
