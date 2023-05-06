@@ -46,7 +46,6 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
   const [page, setPage] = useState(1)
   const [allPosts, setAllPosts] = useState(posts)
   const [isLoading, setIsloading] = useState(false)
-  const [countLoad, setCountLoad] = useState(0)
 
   // const handleSearch = async (title: string) => {
   //   await router.push('/PostSearch')
@@ -71,15 +70,12 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
 
   const loadMore = async (e) => {
     e.preventDefault()
-    setCountLoad((prev) => prev + 1)
+    // setCountLoad((prev) => prev + 1)
     setIsloading(true)
     let data = null
     //change 3 = (total posts - 5)'i am assuming 8 posts have been given to me'
-    if (page === 3) {
-      setPage(1)
-    } else {
-      setPage((prev) => prev + 1)
-    }
+
+    setPage((prev) => prev + 1)
 
     try {
       const res = await fetch(
@@ -89,6 +85,9 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
       )
 
       data = await res.json()
+      if (data['posts'].length < 5) {
+        setPage(1)
+      }
       setAllPosts(data)
     } catch (e) {
       console.log(e)
