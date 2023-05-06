@@ -30,10 +30,8 @@ const HiringRole = () => {
             })
 
             setHiring(p.data)
-            console.log(p)
             
         } catch (error) {
-            console.log(error)
             const err = error as AxiosError
             if ((err.response?.status as number) === 401) {
                 await router.push('/admin/login')
@@ -63,7 +61,6 @@ const HiringRole = () => {
                 },
             })
             setHiring(response.data)
-            console.log(response.data)
         } catch (error: any) {
             if (error.response && error.response.status === 400) {
                 setHiring(null)

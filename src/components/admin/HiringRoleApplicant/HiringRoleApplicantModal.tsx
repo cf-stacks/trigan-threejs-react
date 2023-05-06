@@ -142,7 +142,6 @@ export const HiringRoleApplicantModals = ({
                     },
                 }
             )
-            alert('Deleted Successfully')
             toast.success('Deleted Successfully')
             setModal({ ...modal, open: false })
             void fetchFunction()
@@ -230,7 +229,6 @@ export const HiringRoleApplicantModals = ({
             setModal({ ...modal, open: false })
             void fetchFunction()
         } catch (error) {
-            alert(error)
             toast.error('An error occured')
         }
     }

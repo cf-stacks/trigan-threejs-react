@@ -17,7 +17,6 @@ const HiringRoleApplicantProcess = () => {
     const [selectedDocument, setSelectedDocument] = useState<any>({})
     const router = useRouter()
    
-    console.log(documents)
     const fetchFunction = useCallback(async () => {
         setFetching(true)
         try {
@@ -31,9 +30,7 @@ const HiringRoleApplicantProcess = () => {
             })
 
             setDocuments(p.data)
-            // console.log(p)
         } catch (error) {
-            console.log(error)
             const err = error as AxiosError
             if ((err.response?.status as number) === 401) {
                 await router.push('/admin/login')
@@ -63,7 +60,6 @@ const HiringRoleApplicantProcess = () => {
                 },
             })
             setDocuments(response.data)
-            console.log(response.data)
         } catch (error: any) {
             if (error.response && error.response.status === 400) {
                 setDocuments(null)

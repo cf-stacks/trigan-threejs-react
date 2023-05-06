@@ -175,7 +175,6 @@ export const HiringRoleModals = ({
             } else errMsg = String(error)
             toast.error(errMsg)
             toast.error('An error occured')
-            console.log(selectedDocument, 'ss')
 
         }
     }
