@@ -44,7 +44,7 @@ const useStyles = createStyles((theme) => ({
     },
 }))
 
-export const  DocumentTable = ({
+export const HiringRoleProcessTable = ({
     documents,
     fetching,
     setModal,
@@ -56,11 +56,10 @@ export const  DocumentTable = ({
         documents?.Data?.length > 0 ? (
             documents?.Data?.map((element: any, index: number) => (
                 <tr key={index}>
-                    <td>{element.type}</td>
+                    <td>{element.name}</td>
                     <td>{element.description}</td>
-                    <td>{element.created_by}</td>
-                    <td>{element.updated_by}</td>
-                    <td>{element.deleted_by}</td>
+                    <td>{element.creator_id}</td>
+                    <td>{element.updater_id}</td>
                     <td>{new Date(element.created_at as Date).toLocaleDateString()}</td>
                     <td>{new Date(element.updated_at as Date).toLocaleDateString()}</td>
                     <td>
@@ -89,11 +88,46 @@ export const  DocumentTable = ({
                     </td>
                 </tr>
             ))
-        ) : (
-            <tr>
-                <td colSpan={9}>No Items</td>
+        ) : documents?.Success == 'true' ? (
+                <tr>
+                    <td>{documents?.Data?.name}</td>
+                    <td>{documents?.Data?.description}</td>
+                    <td>{documents?.Data?.creator_id}</td>
+                    <td>{documents?.Data?.updater_id}</td>
+                    <td>{new Date(documents?.Data?.created_at as Date).toLocaleDateString()}</td>
+                    <td>{new Date(documents?.Data?.updated_at as Date).toLocaleDateString()}</td>
+                    <td>
+                        <Button.Group>
+                            <Button
+                                onClick={() => {
+                                    setModal({ open: true, type: 'edit' })
+                                    setSelectedDocument(documents?.Data)
+                                }}
+                                variant="light"
+                                color="blue"
+                            >
+                                <IconPencil style={{ zIndex: -1 }} />
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    setModal({ open: true, type: 'delete' })
+                                    setSelectedDocument(documents?.Data)
+                                }}
+                                variant="light"
+                                color="red"
+                            >
+                                <IconX style={{ zIndex: -1 }} />
+                            </Button>
+                        </Button.Group>
+                    </td>
             </tr>
-        )
+        ) : (
+                    <tr>
+                        <td colSpan={8} style={{ textAlign: 'center' }}>
+                            No Data
+                        </td>
+            </tr>
+                )
 
     if (fetching)
         return (
@@ -124,14 +158,13 @@ export const  DocumentTable = ({
             >
                 <thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
                     <tr>
-                        <th>type</th>
+                        <th>name</th>
                         <th >description</th>
                         {/* colSpan={2} align="right" */}
-                        <th>created_by</th>
-                        <th>updated_by</th>
-                        <th>deleted_by</th>
-                        <th>created_at</th>
-                        <th>updated_at</th>
+                        <th>creator id</th>
+                        <th>updater id</th>
+                        <th>created at</th>
+                        <th>updated at</th>
                         <th colSpan={2} align="right">
                             actions
                         </th>

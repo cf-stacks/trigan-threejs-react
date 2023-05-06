@@ -38,7 +38,7 @@ const Dashboard: NextPage<DashboardProps> = () => {
           Session: `${localStorage.getItem('session_key')}`,
         },
       })
-
+      
       setDocuments(p.data)
       // console.log(p)
     } catch (error) {

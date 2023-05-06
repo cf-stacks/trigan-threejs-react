@@ -1,12 +1,6 @@
+import { Button, createStyles, Loader, ScrollArea, Table } from '@mantine/core'
+import { IconHistory, IconPencil, IconX } from '@tabler/icons'
 import { useState } from 'react'
-import {
-    Table,
-    Loader,
-    Button,
-    createStyles,
-    ScrollArea,
-} from '@mantine/core'
-import { IconPencil, IconX } from '@tabler/icons'
 
 const useStyles = createStyles((theme) => ({
     header: {
@@ -44,23 +38,24 @@ const useStyles = createStyles((theme) => ({
     },
 }))
 
-export const  DocumentTable = ({
+export const HiringRoleApplicantProcessTable = ({
     documents,
     fetching,
     setModal,
     setSelectedDocument,
 }: any) => {
+
     const { classes, cx } = useStyles()
     const [scrolled, setScrolled] = useState(false)
     const newdocuments =
         documents?.Data?.length > 0 ? (
             documents?.Data?.map((element: any, index: number) => (
                 <tr key={index}>
-                    <td>{element.type}</td>
-                    <td>{element.description}</td>
-                    <td>{element.created_by}</td>
-                    <td>{element.updated_by}</td>
-                    <td>{element.deleted_by}</td>
+                    <td>{element.hiring_role_applicant_id}</td>
+                    <td>{element.hiring_role_process_id}</td>
+                    <th>{element.hiring_role_process_step_id}</th>
+                    <td>{element.is_admin_approved ? 'true' : 'false'}</td>
+                    <td>{element.video_response}</td>
                     <td>{new Date(element.created_at as Date).toLocaleDateString()}</td>
                     <td>{new Date(element.updated_at as Date).toLocaleDateString()}</td>
                     <td>
@@ -69,11 +64,12 @@ export const  DocumentTable = ({
                                 onClick={() => {
                                     setModal({ open: true, type: 'edit' })
                                     setSelectedDocument(element)
-                                }}
+                                }
+                                }
                                 variant="light"
                                 color="blue"
                             >
-                                <IconPencil style={{ zIndex: -1 }} />
+                                <IconPencil />
                             </Button>
                             <Button
                                 onClick={() => {
@@ -89,11 +85,50 @@ export const  DocumentTable = ({
                     </td>
                 </tr>
             ))
+        ) : documents?.Success == 'true' ? (
+                <tr>
+                    <td>{documents?.Data?.hiring_role_applicant_id}</td>
+                    <td>{documents?.Data?.hiring_role_process_id}</td>
+                    <th>{documents?.Data?.hiring_role_process_step_id}</th>
+                    <td>{documents?.Data?.is_admin_approved ? 'true' : 'false'
+                    }</td>
+                    <td>{documents?.Data?.video_response}</td>
+                    <td>{new Date(documents?.Data?.created_at as Date).toLocaleDateString()}</td>
+                    <td>{new Date(documents?.Data?.updated_at as Date).toLocaleDateString()}</td>
+                    <td>
+                        <Button.Group>
+                            <Button
+                                onClick={() => {
+                                    setModal({ open: true, type: 'edit' })
+                                    setSelectedDocument(documents?.Data)
+                                }
+                                }
+                                variant="light"
+                                color="blue"
+                            >
+                                <IconPencil />
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    setModal({ open: true, type: 'delete' })
+                                    setSelectedDocument(documents?.Data)
+                                }}
+                                variant="light"
+                                color="red"
+                            >
+                                <IconX style={{ zIndex: -1 }} />
+                            </Button>
+                        </Button.Group>
+                    </td>
+            </tr>
         ) : (
-            <tr>
-                <td colSpan={9}>No Items</td>
+                    <tr>
+                        <td colSpan={8}>No data found</td>
             </tr>
         )
+    
+                        
+
 
     if (fetching)
         return (
@@ -124,17 +159,15 @@ export const  DocumentTable = ({
             >
                 <thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
                     <tr>
-                        <th>type</th>
-                        <th >description</th>
+                        <th>hiring role application id</th>
+                        <th>hiring role process id</th>
+                        <th>hiring role process step id</th>
+                        <th>is admin approved</th>
+                        <th>video response</th>
                         {/* colSpan={2} align="right" */}
-                        <th>created_by</th>
-                        <th>updated_by</th>
-                        <th>deleted_by</th>
-                        <th>created_at</th>
-                        <th>updated_at</th>
-                        <th colSpan={2} align="right">
-                            actions
-                        </th>
+                        <th>created at</th>
+                        <th>updated at</th>
+                        <th colSpan={2}>actions</th>
                     </tr>
                 </thead>
                 <tbody>{newdocuments}</tbody>
@@ -142,3 +175,12 @@ export const  DocumentTable = ({
         </ScrollArea>
     )
 }
+
+
+// {
+//   "hiring_role_applicant_id": "string",
+//   "hiring_role_process_id": "string",
+//   "hiring_role_process_step_id": "string",
+//   "is_admin_approved": true,
+//   "video_response": "string"
+// }

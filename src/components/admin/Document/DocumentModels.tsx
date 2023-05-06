@@ -133,7 +133,7 @@ export const DocumentModals = ({
           Session: `${localStorage.getItem('session_key')}`,
         },
       })
-      toast.success('Created Successfully')
+       toast.success('Created Successfully')
       setModal({ ...modal, open: false })
       void fetchFunction()
     } catch (error) {
