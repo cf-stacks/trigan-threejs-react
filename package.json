@@ -46,6 +46,7 @@
     "framer-motion": "^7.6.19",
     "glob": "^8.0.3",
     "gsap": "^3.11.3",
+    "html-to-text": "^9.0.5",
     "iron-session": "^6.1.2",
     "math.gl": "^3.6.3",
     "moment": "^2.29.4",

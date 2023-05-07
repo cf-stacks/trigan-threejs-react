@@ -13,6 +13,7 @@ import Link from 'next/link'
 import { FadeInWhenVisible } from '../../../../components/shared/FadeInWhenVisible'
 import dynamic from 'next/dynamic'
 import SocialMediaLinks from '../../../../components/shared/SocialMediaButton'
+const { htmlToText } = require('html-to-text')
 interface PostProps {
   children?: ReactNode
   post: ApiPostData
@@ -97,6 +98,36 @@ const Post: NextPage<PostProps> = ({ post }) => {
       .catch(() => new Error('Time tracking failed'))
   }
 
+  function parseHtmlToText(html: string): string {
+    const element = document.createElement('div')
+    element.innerHTML = html
+
+    function getTextNodes(node: Node): Node[] {
+      const nodes: Node[] = []
+
+      if (node.nodeType === Node.TEXT_NODE) {
+        nodes.push(node)
+      } else {
+        const children = node.childNodes
+        for (let i = 0; i < children.length; i++) {
+          nodes.push(...getTextNodes(children[i]))
+        }
+      }
+
+      return nodes
+    }
+
+    const textNodes = getTextNodes(element)
+    const rawText = textNodes
+      .map((node) => node.textContent?.trim() ?? '')
+      .join('\n')
+
+    const bulletRegex = /^[•\-\*\u2022]\s*/gm
+    const sanitizedText = rawText.replace(bulletRegex, '')
+
+    return sanitizedText
+  }
+
   useEffect(() => {
     const starttime = Date.now()
 
@@ -150,7 +181,10 @@ const Post: NextPage<PostProps> = ({ post }) => {
                 <p>{(avReadTime.average_speed / 60).toFixed(2)} Min read</p>
               </div>
               <h6 className="full-width-container text-lg font-medium leading-loose">
-                <ReactMarkdown>{b64_to_utf8(post.data.content)}</ReactMarkdown>
+                {/* <ReactMarkdown>{b64_to_utf8(post.data.content)}</ReactMarkdown> */}
+                <ReactMarkdown>
+                  {htmlToText(b64_to_utf8(post.data.content))}
+                </ReactMarkdown>
               </h6>
             </div>
             <div className="ml-4 mt-[180px] flex max-h-[900px] w-1/4 flex-col bg-[#212529]">
