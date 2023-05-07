@@ -72,7 +72,7 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
     e.preventDefault()
     // setCountLoad((prev) => prev + 1)
     setIsloading(true)
-    let data = null
+    // let data = null
     //change 3 = (total posts - 5)'i am assuming 8 posts have been given to me'
 
     setPage((prev) => prev + 1)
@@ -84,11 +84,15 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
         }&apiKey=g436739d6734gd6734`
       )
 
-      data = await res.json()
-      if (data['posts'].length < 5) {
-        setPage(1)
+      const data = await res.json()
+      // console.log('data = ', data)
+
+      if (data['posts'] !== null) {
+        setAllPosts((prev: any) => {
+          prev['posts'].push(...data['posts'])
+          return prev
+        })
       }
-      setAllPosts(data)
     } catch (e) {
       console.log(e)
     } finally {
