@@ -16,13 +16,14 @@ import { Canvas } from '@react-three/fiber'
 import { Cloud } from '@react-three/drei'
 
 const Model = (props) => {
+  const { isPlaying } = props
   const group = useRef()
   const earthRef = useRef()
   const cloudRef = useRef()
   const controlRef = useRef()
 
   // const earthGeometry = new THREE.SphereGeometry(1.9, 64, 64)
-//workaround path for blog pages
+  //workaround path for blog pages
   const { nodes, materials, animations } = useGLTF('EarthTexture/planet.glb')
 
   const { actions } = useAnimations(animations, group)
@@ -32,6 +33,11 @@ const Model = (props) => {
   // const earthTexture = useLoader(THREE.TextureLoader, 'EarthTexture/earth.jpg')
 
   useFrame(({ clock }) => {
+    // if (!isPlaying) {
+    //   clock.stop()
+    // } else {
+    //   clock.start()
+    // }
     // Rotate the Earth model over time
     const elapsedTime = clock.getElapsedTime()
     earthRef.current.rotation.y = elapsedTime / 2.5 / 8
