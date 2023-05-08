@@ -36,6 +36,7 @@ export const navLinks: NavLinkItem[] = [
     ],
   },
   { icon: IconUserPlus, url: 'users', label: "Users" },
+  { icon: IconUserPlus, url: 'admin-invitations', label: 'Admin Invitations' },
   { icon: IconArticle, url: 'posts', label: "Posts" },
   { icon: IconSchema, url: 'posts-proposal', label: 'Posts proposal' },
   { icon: IconArrowSharpTurnRight, url: 'milestones', label: 'Milestones' },
