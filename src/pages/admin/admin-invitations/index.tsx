@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react'
 import Head from 'next/head'
 import { ColumnSort, SortingState } from '@tanstack/react-table'
 import toast from 'react-hot-toast'
@@ -14,6 +14,7 @@ import { useColumns } from '../../../table-columns/admin-invitations'
 import CreateOrUpdateAdminInvitationModal from '../../../components/admin/adminInvitations/CreateOrUpdateAdminInvitationModal'
 import { AdminInvitation } from '../../../types/AdminInvitation'
 import DeleteAdminInvitationModal from '../../../components/admin/adminInvitations/DeleteAdminInvitationModal'
+import { useAdminContext } from '../../../context/AdminContext'
 
 const Admins = () => {
   const [search, setSearch] = useState('')
@@ -25,6 +26,19 @@ const Admins = () => {
     useState<AdminInvitation | null>(null)
 
   const router = useRouter()
+
+  const { user }: any = useAdminContext()
+
+  // check whether user is super admin
+  useLayoutEffect(() => {
+    if (user) {
+      if (user.role_id !== 1) {
+        router.push('/admin/main')
+      }
+    } else {
+      router.push('/admin/main')
+    }
+  }, [])
 
   const columns = useColumns({
     edit: useCallback(
@@ -79,6 +93,7 @@ const Admins = () => {
     async ({ sort }: { sort?: ColumnSort }) => {
       setFetching(true)
       try {
+        const sortOrderPrefix = sort?.desc ? '-' : ''
         const { data } = await axios.get(
           `${TEST_API_URL}/admin-invitation/get`,
           {
@@ -86,8 +101,7 @@ const Admins = () => {
               Authorization: `${localStorage.getItem('access_token')}`,
             },
             params: {
-              sort: sort?.id,
-              order: sort ? (sort.desc ? 'desc' : 'asc') : undefined,
+              sort: sort?.id ? `${sortOrderPrefix}${sort.id}` : null,
             },
           }
         )

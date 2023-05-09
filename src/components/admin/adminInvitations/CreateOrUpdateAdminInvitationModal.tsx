@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
-import { Button, Divider, Modal, TextInput, Title } from '@mantine/core'
+import { Button, Divider, Loader, Modal, TextInput, Title } from '@mantine/core'
 
 import { TEST_API_URL } from '../../../util/constants'
 import { AdminInvitation } from '../../../types/AdminInvitation'
@@ -25,6 +25,8 @@ const CreateOrUpdateAdminInvitationModal = ({
 }: CreateAdminInvitationModalProps) => {
   const [email, setEmail] = useState('')
   const [fetching, setFetching] = useState(false)
+  const [adminInvitationDetails, setAdminInvitationDetails] =
+    useState<AdminInvitation | null>(null)
 
   const reset = () => {
     setModal('')
@@ -32,9 +34,30 @@ const CreateOrUpdateAdminInvitationModal = ({
     setSelectedAdminInvitation(null)
   }
 
+  const getAdminInvitationById = async (id: string) => {
+    setFetching(true)
+    try {
+      const { data } = await axios.get(
+        `${TEST_API_URL}/admin-invitation/get/${id}`,
+        {
+          headers: {
+            Authorization: `${localStorage.getItem('access_token')}`,
+          },
+        }
+      )
+      const currentAdminInvitation = data.Data
+      setAdminInvitationDetails(currentAdminInvitation)
+      setEmail(currentAdminInvitation.email)
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.Data?.Message || error.message
+      toast.error(errorMessage)
+    }
+    setFetching(false)
+  }
+
   useEffect(() => {
     if (modal === 'edit') {
-      setEmail(selectedAdminInvitation?.email || '')
+      getAdminInvitationById(selectedAdminInvitation?.id as string)
     } else {
       setEmail('')
     }
@@ -58,7 +81,7 @@ const CreateOrUpdateAdminInvitationModal = ({
       } else {
         await axios.put(
           `${TEST_API_URL}/admin-invitation/update`,
-          { ...selectedAdminInvitation, email, role_id: 2 },
+          { ...adminInvitationDetails, email, role_id: 2 },
           {
             headers: {
               Authorization: `${localStorage.getItem('access_token')}`,
@@ -77,59 +100,63 @@ const CreateOrUpdateAdminInvitationModal = ({
   }
 
   return (
-    <Modal
-      opened={['create', 'edit'].includes(modal)}
-      onClose={reset}
-      withCloseButton={false}
-      padding={0}
-      closeOnEscape={false}
-      closeOnClickOutside={false}
-      centered={true}
-    >
-      <Title mb={'0.75rem'} sx={{ padding: '20px' }}>
-        {modal === 'edit' ? 'Update Invite' : 'Invite Admin'}
-      </Title>
-      <form className="flex flex-col" onSubmit={handleCreateOrUpdate}>
-        <section style={{ padding: '0 20px 20px' }}>
-          <div>
-            <div className="pb-3">
-              <TextInput
-                label="Email"
-                value={email}
-                required
-                onChange={(e) => setEmail(e.target.value)}
-                withAsterisk
-                type="email"
-                classNames={{ input: 'text-black' }}
-              />
-            </div>
+    <>
+      <Modal
+        opened={['create', 'edit'].includes(modal)}
+        onClose={reset}
+        withCloseButton={false}
+        padding={0}
+        closeOnEscape={false}
+        closeOnClickOutside={false}
+        centered={true}
+      >
+        <Title mb={'0.75rem'} sx={{ padding: '20px' }}>
+          {modal === 'edit' ? 'Update Invite' : 'Invite Admin'}
+        </Title>
+        <form className="flex flex-col" onSubmit={handleCreateOrUpdate}>
+          <section style={{ padding: '0 20px 20px' }}>
             <div>
-              <TextInput type="number" label="Role Id" value="2" disabled />
+              <div className="pb-3">
+                <TextInput
+                  disabled={fetching}
+                  label="Email"
+                  value={email}
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                  withAsterisk
+                  type="email"
+                  classNames={{ input: 'text-black' }}
+                />
+              </div>
+              <div>
+                <TextInput type="number" label="Role Id" value="2" disabled />
+              </div>
             </div>
+          </section>
+          <Divider />
+          <div className="flex justify-end p-[20px]">
+            {fetching && <Loader className="mx-4" />}
+            <Button
+              variant="outline"
+              type="submit"
+              color="green"
+              mr="1rem"
+              disabled={fetching}
+            >
+              {modal === 'edit' ? 'Update Invite' : 'Create Invite'}
+            </Button>
+            <Button
+              variant="outline"
+              color="blue"
+              onClick={reset}
+              disabled={fetching}
+            >
+              Cancel
+            </Button>
           </div>
-        </section>
-        <Divider />
-        <div className="flex justify-end p-[20px]">
-          <Button
-            variant="outline"
-            type="submit"
-            color="green"
-            mr="1rem"
-            disabled={fetching}
-          >
-            {modal === 'edit' ? 'Update Invite' : 'Create Invite'}
-          </Button>
-          <Button
-            variant="outline"
-            color="blue"
-            onClick={reset}
-            disabled={fetching}
-          >
-            Cancel
-          </Button>
-        </div>
-      </form>
-    </Modal>
+        </form>
+      </Modal>
+    </>
   )
 }
 

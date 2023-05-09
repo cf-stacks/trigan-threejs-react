@@ -5,6 +5,7 @@ import { Dispatch, SetStateAction, useMemo } from 'react'
 import { v4 as uuid } from 'uuid'
 import NavigationLink from './Link'
 import { navLinks } from './navLinks'
+import { useAdminContext } from '../../../../context/AdminContext'
 
 interface NavigationProps {
   isOpen: boolean
@@ -13,10 +14,13 @@ interface NavigationProps {
 
 const Navigation = ({ isOpen, setIsOpen }: NavigationProps) => {
   const { push } = useRouter()
+  const { user }: any = useAdminContext()
   const links = useMemo(() => {
-    return navLinks.map((item, key) => (
-      <NavigationLink key={uuid()} item={item} smallSize={!isOpen} />
-    ))
+    return navLinks
+      .filter((item) => !(item.roleIds && !item.roleIds.includes(user?.role_id)))
+      .map((item, key) => (
+        <NavigationLink key={uuid()} item={item} smallSize={!isOpen} />
+      ))
   }, [isOpen])
 
   return (
