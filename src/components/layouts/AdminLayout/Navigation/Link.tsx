@@ -80,7 +80,7 @@ const NavigationLink = ({
             isActive,
         })}
         onClick={() => {
-          push(`/admin/${url}`);
+          url&&push(`/admin/${url}`);
           onClick?.();
         }}
       >

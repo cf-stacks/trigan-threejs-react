@@ -143,7 +143,7 @@ export const PostsTable = ({
               variant="light"
               color="blue"
             >
-              <IconPencil style={{ zIndex: -1 }} />
+              <IconPencil style={{ zIndex: 90 }} />
             </Button>
             <Button
               onClick={() => {
@@ -153,7 +153,7 @@ export const PostsTable = ({
               variant="light"
               color="red"
             >
-              <IconX style={{ zIndex: -1 }} />
+              <IconX style={{ zIndex: 90 }} />
             </Button>
             {!element.is_approved ? (
               <Button
@@ -161,7 +161,7 @@ export const PostsTable = ({
                 variant="light"
                 color="green"
               >
-                <IconCheck style={{ zIndex: -1 }} />
+                <IconCheck style={{ zIndex: 90 }} />
               </Button>
             ) : null}
           </Button.Group>
@@ -201,7 +201,7 @@ export const PostsTable = ({
           },
         }}
       >
-        <thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
+        <thead className={cx(classes.header, { [classes.scrolled]: scrolled })} style={{ zIndex: 120 }}>
           <tr>
             <th>Title</th>
             <th>Name</th>

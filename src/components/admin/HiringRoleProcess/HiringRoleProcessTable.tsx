@@ -72,7 +72,7 @@ export const HiringRoleProcessTable = ({
                                 variant="light"
                                 color="blue"
                             >
-                                <IconPencil style={{ zIndex: -1 }} />
+                                <IconPencil style={{ zIndex: 90 }} />
                             </Button>
                             <Button
                                 onClick={() => {
@@ -82,7 +82,7 @@ export const HiringRoleProcessTable = ({
                                 variant="light"
                                 color="red"
                             >
-                                <IconX style={{ zIndex: -1 }} />
+                                <IconX style={{ zIndex: 90 }} />
                             </Button>
                         </Button.Group>
                     </td>
@@ -106,7 +106,7 @@ export const HiringRoleProcessTable = ({
                                 variant="light"
                                 color="blue"
                             >
-                                <IconPencil style={{ zIndex: -1 }} />
+                                <IconPencil style={{ zIndex: 90 }} />
                             </Button>
                             <Button
                                 onClick={() => {
@@ -116,7 +116,7 @@ export const HiringRoleProcessTable = ({
                                 variant="light"
                                 color="red"
                             >
-                                <IconX style={{ zIndex: -1 }} />
+                                <IconX style={{ zIndex: 90 }} />
                             </Button>
                         </Button.Group>
                     </td>
@@ -156,7 +156,7 @@ export const HiringRoleProcessTable = ({
                     },
                 }}
             >
-                <thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
+                <thead className={cx(classes.header, { [classes.scrolled]: scrolled })} style={{ zIndex: 120 }}>
                     <tr>
                         <th>name</th>
                         <th >description</th>

@@ -102,7 +102,7 @@ export const MailingListTable = ({
           },
         }}
       >
-        <thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
+        <thead className={cx(classes.header, { [classes.scrolled]: scrolled })} style={{ zIndex: 120 }}>
           <tr>
             <td>id</td>
             <td>country</td>

@@ -79,7 +79,7 @@ export const HiringRoleApplicantProcessTable = ({
                                 variant="light"
                                 color="red"
                             >
-                                <IconX style={{ zIndex: -1 }} />
+                                <IconX style={{ zIndex: 90 }} />
                             </Button>
                         </Button.Group>
                     </td>
@@ -116,7 +116,7 @@ export const HiringRoleApplicantProcessTable = ({
                                 variant="light"
                                 color="red"
                             >
-                                <IconX style={{ zIndex: -1 }} />
+                                <IconX style={{ zIndex: 90 }} />
                             </Button>
                         </Button.Group>
                     </td>
@@ -157,7 +157,7 @@ export const HiringRoleApplicantProcessTable = ({
                     },
                 }}
             >
-                <thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
+                <thead className={cx(classes.header, { [classes.scrolled]: scrolled })} style={{ zIndex: 120 }}>
                     <tr>
                         <th>hiring role application id</th>
                         <th>hiring role process id</th>

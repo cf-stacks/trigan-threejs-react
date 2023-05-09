@@ -38,6 +38,7 @@ const Navigation = ({ isOpen, setIsOpen }: NavigationProps) => {
       style={{
         overflowY: 'scroll',
         backgroundColor: '#39394B',
+        zIndex:200,
         transition: 'width 0.25s',
       }}
       width={{ base: isOpen ? 218 : 80 }}
@@ -82,7 +83,7 @@ const Navigation = ({ isOpen, setIsOpen }: NavigationProps) => {
       <Navbar.Section>
         <Stack justify="center" spacing={0}>
           <NavigationLink
-            item={{ icon: IconLogout, url: 'Logout' }}
+            item={{ icon: IconLogout, url: '' }}
             onClick={() => {
               localStorage.removeItem('access_token')
               push('/admin/login')

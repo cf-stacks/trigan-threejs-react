@@ -160,7 +160,7 @@ export const ContentListTable = ({
   return dynamicContents.length > 0 ? (
     <>
       <Table>
-        <thead>
+        <thead style={{ zIndex: 120 }}>
           <tr>
             <th>Key</th>
             <th>Name</th>

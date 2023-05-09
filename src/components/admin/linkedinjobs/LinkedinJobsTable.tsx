@@ -124,7 +124,7 @@ export const JobsTable = ({ jobs: users, fetching }: AccountsTableProps) => {
           },
         }}
       >
-        <thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
+        <thead className={cx(classes.header, { [classes.scrolled]: scrolled })} style={{ zIndex: 120 }}>
           <tr>
             <th>id</th>
             <th>creator id</th>
