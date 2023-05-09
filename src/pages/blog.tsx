@@ -32,9 +32,9 @@ const VideoHeader = dynamic(
   () => import('../components/home/HeroSection/VideoHeader')
 )
 
-// interface BlogProps {
-//   posts: BlogPost
-// }
+interface BlogProps {
+  posts: BlogPost
+}
 
 const PostsByDateNoSSR: any = dynamic(
   () => import('../components/Posts/PostsByDate'),
@@ -68,7 +68,7 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
     console.log('incorrect query')
   }
 
-  const loadMore = async (e) => {
+  const loadMore = async (e: any) => {
     e.preventDefault()
     // setCountLoad((prev) => prev + 1)
     setIsloading(true)
