@@ -95,7 +95,7 @@ export const AccountsTable = ({
                 variant="light"
                 color="blue"
               >
-                <IconPencil style={{ zIndex: -1 }} />
+                <IconPencil style={{ zIndex: 90 }} />
               </Button>
               <Button
                 onClick={() => {
@@ -105,7 +105,7 @@ export const AccountsTable = ({
                 variant="light"
                 color="red"
               >
-                <IconX style={{ zIndex: -1 }} />
+                <IconX style={{ zIndex: 90 }} />
               </Button>
             </Button.Group>
           </td>

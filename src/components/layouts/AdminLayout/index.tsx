@@ -122,6 +122,7 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
             main: {
               backgroundColor: '#222131',
               paddingTop: 35,
+              width:'auto!important',
               paddingLeft: 218 + 30,
             },
           })}

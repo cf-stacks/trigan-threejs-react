@@ -75,7 +75,7 @@ export const ManageLanguageTable = ({
                 variant="light"
                 color="blue"
               >
-                <IconPencil style={{ zIndex: -1 }} />
+                <IconPencil style={{ zIndex: 90 }} />
               </Button>
               <Button
                 onClick={() => {
@@ -85,7 +85,7 @@ export const ManageLanguageTable = ({
                 variant="light"
                 color="red"
               >
-                <IconX style={{ zIndex: -1 }} />
+                <IconX style={{ zIndex: 90 }} />
               </Button>
             </Button.Group></td>
         </tr>
@@ -123,7 +123,7 @@ export const ManageLanguageTable = ({
           },
         }}
       >
-        <thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
+        <thead className={cx(classes.header, { [classes.scrolled]: scrolled })} style={{ zIndex: 120 }}>
           <tr>
             <td>id</td>
             <td>English</td>

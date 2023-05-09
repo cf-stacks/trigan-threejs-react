@@ -108,7 +108,7 @@ export const DocumentTable = ({
           },
         }}
       >
-        <thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
+        <thead className={cx(classes.header, { [classes.scrolled]: scrolled })} style={{ zIndex: 120 }}>
           <tr>
             <th>type</th>
             <th>description</th>
