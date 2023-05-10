@@ -17,6 +17,7 @@ import { useTheme } from 'next-themes'
 
 interface SupportersSectionProps {
   children?: ReactNode
+  isPlaying?: boolean
 }
 
 interface ParallaxProps {
@@ -24,7 +25,8 @@ interface ParallaxProps {
   baseVelocity: number
 }
 
-export const SupportersSection: React.FC<SupportersSectionProps> = () => {
+export const SupportersSection: React.FC<SupportersSectionProps> = (props) => {
+  const { isPlaying } = props
   const [top, setTop] = useState<boolean>(true)
   const baseVelocity = 1.5
   const baseX = useMotionValue(0)
@@ -46,21 +48,23 @@ export const SupportersSection: React.FC<SupportersSectionProps> = () => {
 
   const directionFactor = useRef<number>(1)
   useAnimationFrame((t, delta) => {
-    let moveBy = directionFactor.current * baseVelocity * (delta / 1000)
+    if (isPlaying) {
+      let moveBy = directionFactor.current * baseVelocity * (delta / 1000)
 
-    /**
-     * This is what changes the direction of the scroll once we
-     * switch scrolling directions.
-     */
-    if (velocityFactor.get() < 0) {
-      directionFactor.current = -1
-    } else if (velocityFactor.get() > 0) {
-      directionFactor.current = 1
+      /**
+       * This is what changes the direction of the scroll once we
+       * switch scrolling directions.
+       */
+      if (velocityFactor.get() < 0) {
+        directionFactor.current = -1
+      } else if (velocityFactor.get() > 0) {
+        directionFactor.current = 1
+      }
+
+      moveBy += directionFactor.current * moveBy * velocityFactor.get()
+
+      baseX.set(baseX.get() + moveBy)
     }
-
-    moveBy += directionFactor.current * moveBy * velocityFactor.get()
-
-    baseX.set(baseX.get() + moveBy)
   })
 
   useEffect(() => {
@@ -114,7 +118,7 @@ export const SupportersSection: React.FC<SupportersSectionProps> = () => {
   return (
     <>
       <motion.div
-        style={ { marginTop: '50px' } }
+        style={{ marginTop: '50px' }}
         className={` parallax supporter_sec from-gradient-grey-1 flex h-[180px] w-full cursor-grab flex-wrap  overflow-hidden  bg-gradient-to-r to-gradient-grey-2 px-5 ${
           !top &&
           'from-gradient-dark-grey-1 to-gradient-dark-grey-3 bg-gradient-to-r'

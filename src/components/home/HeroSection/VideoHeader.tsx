@@ -10,31 +10,44 @@ import { motion, MotionConfig } from 'framer-motion'
 // import MoonModel from '../../../../public/MoonTexture/Moon'
 import Combined from '../../../../public/assets/CombinedPlanets.jsx'
 import { useTheme } from 'next-themes'
+import * as THREE from 'three'
 
 const Spinner = () => {
-  return <Html>
-    <svg aria-hidden="true" className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600" viewBox="0 0 100 101" fill="#A855F7" xmlns="http://www.w3.org/2000/svg">
-      <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
-      <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
-    </svg>
-    <span className="sr-only">Loading...</span>
-  </Html>
+  return (
+    <Html>
+      <svg
+        aria-hidden="true"
+        className="mr-2 h-8 w-8 animate-spin text-gray-200 dark:text-gray-600"
+        viewBox="0 0 100 101"
+        fill="#A855F7"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+          fill="currentColor"
+        />
+        <path
+          d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+          fill="currentFill"
+        />
+      </svg>
+      <span className="sr-only">Loading...</span>
+    </Html>
+  )
 }
 
 const Logo = () => (
-
   <motion.div
     transition={{ delay: 5, duration: 5, ease: 'easeInOut' }}
-    exit={{ opacity: 0 , transition: { duration: 5, delay: 5 } }}
-    className="w-[100%] h-[100%] m-auto flex justify-center align-center"
-    >
-
+    exit={{ opacity: 0, transition: { duration: 5, delay: 5 } }}
+    className="align-center m-auto flex h-[100%] w-[100%] justify-center"
+  >
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="white"
       id="HeroLogo"
       viewBox="80 0 1000 1000"
-      className="flex m-auto justify-center align-center w-[300px] md2:w-[500px]"
+      className="align-center m-auto flex w-[300px] justify-center md2:w-[500px]"
     >
       <path d="M535.57 593.55C530.35 597.22 528.79 604.27 531.98 609.79L566.42 669.45C574.1 682.75 593.3 682.75 600.98 669.45L702.83 493.03C706.72 486.29 698.73 478.98 692.36 483.45L535.57 593.55Z" />
       <path d="M633.68 315.11L758.77 373.24C764.67 375.98 771.7 373.76 774.95 368.13L814.47 299.69C820.91 288.53 812.86 274.59 799.98 274.59L583.71 274.59L583.71 274.59C574.9 274.59 572.25 286.57 580.24 290.28L633.68 315.11Z" />
@@ -48,10 +61,9 @@ const Logo = () => (
       <path d="M884.35 891.08C876.48 891.08 872.15 886.75 872.15 878.88L872.15 770.67C872.15 762.8 876.48 758.47 884.35 758.47L890.88 758.47C897.53 758.47 901.83 760.85 905.58 766.64L957.46 845.64L957.46 770.66C957.46 762.79 961.79 758.46 969.66 758.46L974.17 758.46C982.04 758.46 986.37 762.79 986.37 770.66L986.37 878.87C986.37 886.74 982.04 891.07 974.17 891.07L967.89 891.07C961.24 891.07 956.77 888.32 953.19 882.9L901.12 803.59L901.12 878.87C901.12 886.74 896.79 891.07 888.92 891.07L884.35 891.08L884.35 891.08Z" />
     </svg>
   </motion.div>
-
 )
-const VideoHeader = (props:any) => {
-  const {isScroll} = props;
+const VideoHeader = (props: any) => {
+  const { isScroll } = props
   const index = useRef(0)
   const [playAnimation, setPlayAnimation] = useState(false)
   const [currentItem, setCurrentItem] = useState(Logo)
@@ -59,102 +71,117 @@ const VideoHeader = (props:any) => {
   const [bgDisplay, setBgDisplay] = useState(true)
   const [renderCompanyCards, setRenderCompanyCards] = useState(false)
 
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [time, setTime] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true)
+  const [time, setTime] = useState(0)
 
   const { systemTheme, theme, setTheme } = useTheme()
   const currentTheme = theme === 'system' ? systemTheme : theme
 
-  useEffect(() => {
+  function stopAllAnimations() {
+    const scene = new THREE.Scene()
 
-    if(isScroll){
-      window.addEventListener('scroll', () => {
-      var factor = Math.max(0, (2000 - window.scrollY) / 2000)
-      if (window.scrollY < 1300) factor = 1
-      document.documentElement.style.setProperty('--headerOpacity', factor.toString())
-      document.documentElement.style.setProperty('--headerScale', factor.toString())
-      if (window.scrollY > window.screen.height * 1.5) setBgDisplay(false)
-      else setBgDisplay(true)
+    scene.traverse((object) => {
+      if (object instanceof THREE.Mesh && object.userData.animation) {
+        object.userData.animation.stop()
+      }
     })
-    const timer = setInterval(() => {
-      switch (index.current) {
-        case 0:
-          setCurrentItem(
-            <div className="flex justify-center h-[150px]">
-              <h1
-                id="header1"
-                className={`flex-wrap text-center font-m_plus_rounded_1c font-semibold uppercase md:font-bold`}
-              >
-                <pre className="mt-[25px] text-[25px] font-bold font-m_plus_rounded_1c dark:text-purple-500">
-                  THE URBAN BLOCKCHAIN
-                </pre>
-                <span className="text-[35px] font-bold font-m_plus_rounded_1c dark:text-purple-500">
-                  POWERED BY AI
-                </span>
-              </h1>
-            </div>
-          )
-          break
+  }
 
-        case 1:
-          setCurrentItem(
-            <div className="flex justify-center h-[150px]">
-              <h1
-                id="header1"
-                className={`text-center font-m_plus_rounded_1c font-semibold uppercase md:font-bold`}
-              >
-                <pre className="mt-[25px] text-[25px] font-bold font-m_plus_rounded_1c dark:text-purple-500  max-[400px]:text-[22px]">
-                  INNOVATING BEYOND
-                </pre>
-                <span className="text-[35px] font-bold font-m_plus_rounded_1c dark:text-purple-500">
-                  PoW AND PoS.
-                </span>
-              </h1>
-            </div>
-          )
-          break
-        case 2:
-          setCurrentItem(
-            <div className="flex justify-center h-[150px]">
-              <h1
-                id="header1"
-                className={`text-center font-m_plus_rounded_1c font-semibold uppercase md:font-bold`}
-              >
-                <pre className="mt-[25px] text-[25px] font-bold font-m_plus_rounded_1c dark:text-purple-500  max-[400px]:text-[22px]">
-                  REDEFINING BLOCKCHAIN FOR
-                </pre>
-                <span className="text-[35px] font-bold font-m_plus_rounded_1c dark:text-purple-500">
-                  A FAIRER FUTURE
-                </span>
-              </h1>
-            </div>
-          )
-          break
-        case 3:
-          setCurrentItem(
-            <div className="flex justify-center h-[150px]">
-              <h1
-                id="header1"
-                className={`text-center font-m_plus_rounded_1c font-semibold uppercase md:font-bold`}
-              >
-                <pre className="mt-[30px] text-[22px] font-bold font-m_plus_rounded_1c dark:text-purple-500 max-[400px]:text-[18px]">
-                  INTRODUCING THE FUTURE
-                </pre>
-                <span className="text-[35px] font-bold font-m_plus_rounded_1c dark:text-purple-500">
-                  OF LIVING
-                </span>
-              </h1>
-            </div>
-          )
-          break
-      }
-      if (index.current === 3) {
-        index.current = 0
-      } else {
-        index.current = Number(index.current) + 1
-      }
-    }, 3000)
-    return () => clearInterval(timer)
+  useEffect(() => {
+    if (isScroll) {
+      window.addEventListener('scroll', () => {
+        var factor = Math.max(0, (2000 - window.scrollY) / 2000)
+        if (window.scrollY < 1300) factor = 1
+        document.documentElement.style.setProperty(
+          '--headerOpacity',
+          factor.toString()
+        )
+        document.documentElement.style.setProperty(
+          '--headerScale',
+          factor.toString()
+        )
+        if (window.scrollY > window.screen.height * 1.5) setBgDisplay(false)
+        else setBgDisplay(true)
+      })
+      const timer = setInterval(() => {
+        switch (index.current) {
+          case 0:
+            setCurrentItem(
+              <div className="flex h-[150px] justify-center">
+                <h1
+                  id="header1"
+                  className={`flex-wrap text-center font-m_plus_rounded_1c font-semibold uppercase md:font-bold`}
+                >
+                  <pre className="mt-[25px] font-m_plus_rounded_1c text-[25px] font-bold dark:text-purple-500">
+                    THE URBAN BLOCKCHAIN
+                  </pre>
+                  <span className="font-m_plus_rounded_1c text-[35px] font-bold dark:text-purple-500">
+                    POWERED BY AI
+                  </span>
+                </h1>
+              </div>
+            )
+            break
+
+          case 1:
+            setCurrentItem(
+              <div className="flex h-[150px] justify-center">
+                <h1
+                  id="header1"
+                  className={`text-center font-m_plus_rounded_1c font-semibold uppercase md:font-bold`}
+                >
+                  <pre className="mt-[25px] font-m_plus_rounded_1c text-[25px] font-bold dark:text-purple-500  max-[400px]:text-[22px]">
+                    INNOVATING BEYOND
+                  </pre>
+                  <span className="font-m_plus_rounded_1c text-[35px] font-bold dark:text-purple-500">
+                    PoW AND PoS.
+                  </span>
+                </h1>
+              </div>
+            )
+            break
+          case 2:
+            setCurrentItem(
+              <div className="flex h-[150px] justify-center">
+                <h1
+                  id="header1"
+                  className={`text-center font-m_plus_rounded_1c font-semibold uppercase md:font-bold`}
+                >
+                  <pre className="mt-[25px] font-m_plus_rounded_1c text-[25px] font-bold dark:text-purple-500  max-[400px]:text-[22px]">
+                    REDEFINING BLOCKCHAIN FOR
+                  </pre>
+                  <span className="font-m_plus_rounded_1c text-[35px] font-bold dark:text-purple-500">
+                    A FAIRER FUTURE
+                  </span>
+                </h1>
+              </div>
+            )
+            break
+          case 3:
+            setCurrentItem(
+              <div className="flex h-[150px] justify-center">
+                <h1
+                  id="header1"
+                  className={`text-center font-m_plus_rounded_1c font-semibold uppercase md:font-bold`}
+                >
+                  <pre className="mt-[30px] font-m_plus_rounded_1c text-[22px] font-bold dark:text-purple-500 max-[400px]:text-[18px]">
+                    INTRODUCING THE FUTURE
+                  </pre>
+                  <span className="font-m_plus_rounded_1c text-[35px] font-bold dark:text-purple-500">
+                    OF LIVING
+                  </span>
+                </h1>
+              </div>
+            )
+            break
+        }
+        if (index.current === 3) {
+          index.current = 0
+        } else {
+          index.current = Number(index.current) + 1
+        }
+      }, 3000)
+      return () => clearInterval(timer)
     }
   }, [])
 
@@ -170,7 +197,6 @@ const VideoHeader = (props:any) => {
       window.addEventListener('load', onPageLoad)
       return () => window.removeEventListener('load', onPageLoad)
     }
-    
   }, [])
 
   function delayRenderCompanyCards() {
@@ -181,76 +207,107 @@ const VideoHeader = (props:any) => {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 h-screen w-screen bg-black dark:bg-white`}>
+      <header
+        className={`fixed left-0 top-0 h-screen w-screen bg-black dark:bg-white`}
+      >
         {/* Moon and Earth combined component */}
         {/* if it's in dark mode it shouldn't render the animation of the planet and the moon, if it's in light mode then it should render the animation */}
-        {currentTheme === "dark"
-          ? null
-          :
-          (
-            <Canvas>
-              {/* <ambientLight intensity={0.001} color="#ffffff" /> */}
+        {currentTheme === 'dark' ? null : (
+          <Canvas>
+            {/* <ambientLight intensity={0.001} color="#ffffff" /> */}
 
-              <directionalLight
-                position={[-3, 2, 0]}
-                intensity={0.85}
-                color="purple"
-              />
-              <ambientLight intensity={0.251} color="purple" />
+            <directionalLight
+              position={[-3, 2, 0]}
+              intensity={0.85}
+              color="purple"
+            />
+            <ambientLight intensity={0.251} color="purple" />
 
-              <Suspense fallback={<Spinner />}>
-                <>
-                  <Combined time={time} setTime={setTime} isPlaying={isPlaying} isScroll={isScroll}/>
-                  <Stars
-                    radius={300}
-                    depth={60}
-                    count={1000}
-                    factor={5}
-                    saturation={0}
-                  />
-                </>
-              </Suspense>
-              <directionalLight args={['#b6c7f2', 3]} position={[-10, 5, -1]} />
-
-            </Canvas>
-          )
-        }
+            <Suspense fallback={<Spinner />}>
+              <>
+                <Combined
+                  time={time}
+                  setTime={setTime}
+                  isPlaying={isPlaying}
+                  isScroll={isScroll}
+                />
+                <Stars
+                  radius={300}
+                  depth={60}
+                  count={1000}
+                  factor={5}
+                  saturation={0}
+                />
+              </>
+            </Suspense>
+            <directionalLight args={['#b6c7f2', 3]} position={[-10, 5, -1]} />
+          </Canvas>
+        )}
 
         <div
-          className={`absolute top-0 left-0 flex h-screen w-screen m-auto scale-[var(--headerScale)] flex-col text-white opacity-[var(--headerOpacity)]`}
+          className={`absolute left-0 top-0 m-auto flex h-screen w-screen scale-[var(--headerScale)] flex-col text-white opacity-[var(--headerOpacity)]`}
           style={{
             transitionTimingFunction: 'ease',
             justifyContent: 'space-between',
             margin: 'auto',
           }}
         >
-          <div className="flex flex-col align-center justify-end  w-full h-[500px] m-auto max-[500px]:w-[300px]">
+          <div className="align-center m-auto flex h-[500px]  w-full flex-col justify-end max-[500px]:w-[300px]">
             {isScroll ? currentItem : null}
 
-          {isScroll ?
-            <div className="flex flex-col items-center w-full">
-              <button className="rounded-full w-fit border bg-transparent py-2 px-4  font-m_plus_rounded_1c font-bold text-white hover:bg-gray-400 dark:text-purple-500 dark:hover:text-black">
-                <a href="/project">Learn More</a>
-              </button>
-              <button className="opacity-50 rounded-full w-[80px] flex justify-center items-center  h-10 mt-3 border bg-transparent px-4 text-center  font-m_plus_rounded_1c font-bold text-white hover:bg-gray-400 dark:text-purple-500 dark:hover:text-black"
-                onClick={() => setIsPlaying(p => !p)}>
-                {isPlaying ? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ffffff" className="w-6 h-6">
-                  <path fillRule="evenodd" d="M6.75 5.25a.75.75 0 01.75-.75H9a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75V5.25zm7.5 0A.75.75 0 0115 4.5h1.5a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H15a.75.75 0 01-.75-.75V5.25z" clipRule="evenodd" />
-                </svg>
-                  : <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ffffff" className="w-5 h-5">
-                    <path fillRule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clipRule="evenodd" />
-                  </svg>}
-              </button>
-            </div>: null}
+            {isScroll ? (
+              <div className="flex w-full flex-col items-center">
+                <button className="w-fit rounded-full border bg-transparent px-4 py-2  font-m_plus_rounded_1c font-bold text-white hover:bg-gray-400 dark:text-purple-500 dark:hover:text-black">
+                  <a href="/project">Learn More</a>
+                </button>
+                <button
+                  className="mt-3 flex h-10 w-[80px] items-center justify-center  rounded-full border bg-transparent px-4 text-center font-m_plus_rounded_1c  font-bold text-white opacity-50 hover:bg-gray-400 dark:text-purple-500 dark:hover:text-black"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setIsPlaying((p) => !p)
+                    setPlayAnimation((p) => !p)
+                    stopAllAnimations()
+                  }}
+                >
+                  {isPlaying ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="#ffffff"
+                      className="h-6 w-6"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M6.75 5.25a.75.75 0 01.75-.75H9a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75V5.25zm7.5 0A.75.75 0 0115 4.5h1.5a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H15a.75.75 0 01-.75-.75V5.25z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="#ffffff"
+                      className="h-5 w-5"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  )}
+                </button>
+              </div>
+            ) : null}
           </div>
 
-          {isScroll && renderCompanyCards ? (<SupportersSection />) : null}
-
+          {isScroll && renderCompanyCards ? (
+            <SupportersSection isPlaying={isPlaying} />
+          ) : null}
         </div>
         <div>
           <SignUpModal modal={modal} setModal={setModal} />
         </div>
-
       </header>
     </>
   )
