@@ -38,13 +38,17 @@ const Login = () => {
       )
       const userDetails = user.data.Data?.Data?.user
       // check whether user is an admin or super admin user
-      if(![1,2].includes(userDetails.role_id)){
+      if (![1, 2].includes(userDetails.role_id)) {
         setFetching(false)
         return toast.error('Invalid credentials')
       }
       localStorage.setItem(
         'access_token',
         user.data.Data.Data.acess_token as string
+      )
+      localStorage.setItem(
+        'username',
+        user.data.Data.Data.user.username as string
       )
       setIsLoggedIn(true)
       setUser(user.data.Data?.Data?.user)
@@ -60,6 +64,7 @@ const Login = () => {
     }
     setFetching(false)
   }
+
   return (
     <>
       <Container size={420} my={40}>

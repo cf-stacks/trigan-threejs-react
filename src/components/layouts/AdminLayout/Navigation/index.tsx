@@ -21,7 +21,7 @@ const Navigation = ({ isOpen, setIsOpen }: NavigationProps) => {
       .map((item, key) => (
         <NavigationLink key={uuid()} item={item} smallSize={!isOpen} />
       ))
-  }, [isOpen])
+  }, [isOpen, user.role_id])
 
   return (
     <Navbar

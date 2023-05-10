@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Head from 'next/head'
 import { ColumnSort, SortingState } from '@tanstack/react-table'
 import toast from 'react-hot-toast'
@@ -29,21 +29,19 @@ const Admins = () => {
 
   const { user }: any = useAdminContext()
 
-  // check whether user is super admin
-  useLayoutEffect(() => {
-    if (user) {
+  // check whether user is super admin and
+  // redirect to main page if normal or admin user
+  useEffect(() => {
+    if (user.role_id) {
       if (user.role_id !== 1) {
         router.push('/admin/main')
       }
-    } else {
-      router.push('/admin/main')
     }
-  }, [])
+  }, [user])
 
   const columns = useColumns({
     edit: useCallback(
       (adminInvitation) => {
-        console.log(adminInvitation)
         setModal('edit')
         setSelectedAdminInvitation(adminInvitation)
       },
