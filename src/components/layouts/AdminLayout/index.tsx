@@ -1,8 +1,6 @@
 import { AppShell, MantineProvider, createStyles } from '@mantine/core'
-import axios from 'axios'
 import { useRouter } from 'next/router'
-import React, { ReactNode, useContext, useEffect, useState } from 'react'
-import { TEST_API_URL } from '../../../util/constants'
+import React, { ReactNode, useEffect, useState } from 'react'
 import Navigation from './Navigation'
 
 interface AdminLayoutProps {
@@ -67,40 +65,6 @@ const useStyles = createStyles((theme) => ({
   },
 }))
 
-//Creating admin context
-const AppContext = React.createContext({})
-const AppProvider = ({ children }: any) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [user, setUser] = useState({})
-  const checkLoggedIn = async () => {
-    console.log('checking if logged in')
-    try {
-      await axios.get(`${TEST_API_URL}/posts`, {
-        headers: {
-          Authorization: `${localStorage.getItem('access_token')}`,
-          'Content-Language': `${localStorage.getItem('content-language')}`,
-          Session: `${localStorage.getItem('session_key')}`,
-        },
-      })
-      setIsLoggedIn(true)
-      return true
-    } catch (error) {
-      setUser({})
-      setIsLoggedIn(false)
-      return false
-    }
-  }
-
-  return (
-    <AppContext.Provider value={{ isLoggedIn, user, checkLoggedIn }}>
-      {children}
-    </AppContext.Provider>
-  )
-}
-export const useAdminContext = () => {
-  return useContext(AppContext)
-}
-
 export const AdminLayout = ({ children }: AdminLayoutProps) => {
   const { push } = useRouter()
   const { classes } = useStyles()
@@ -113,21 +77,20 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
   }, [push])
 
   return (
-    <AppProvider>
-      <MantineProvider theme={{ colorScheme: 'dark' }}>
-        <AppShell
-          padding="md"
-          navbar={<Navigation isOpen={isOpen} setIsOpen={setIsOpen} />}
-          styles={(theme) => ({
-            main: {
-              backgroundColor: '#222131',
-              paddingTop: 35,
-              width:'auto!important',
-              paddingLeft: 218 + 30,
-            },
-          })}
-        >
-          {/*
+    <MantineProvider theme={{ colorScheme: 'dark' }}>
+      <AppShell
+        padding="md"
+        navbar={<Navigation isOpen={isOpen} setIsOpen={setIsOpen} />}
+        styles={(theme) => ({
+          main: {
+            backgroundColor: '#222131',
+            paddingTop: 35,
+            width: 'auto!important',
+            paddingLeft: 218 + 30,
+          },
+        })}
+      >
+        {/*
           <Center
             sx={{
               position: 'fixed',
@@ -143,10 +106,9 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
             </Button>
           </Center>
               */}
-          <main className={classes.main}>{children}</main>
-        </AppShell>
-      </MantineProvider>
-    </AppProvider>
+        <main className={classes.main}>{children}</main>
+      </AppShell>
+    </MantineProvider>
   )
 }
 

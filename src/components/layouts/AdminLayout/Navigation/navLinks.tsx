@@ -20,7 +20,8 @@ export interface NavLinkItem {
   icon: TablerIcon,
   url: string
   label?: string
-  links?: NavLinkItem[]
+  links?: NavLinkItem[],
+  roleIds?: number[]
 }
 
 export const navLinks: NavLinkItem[] = [
@@ -36,6 +37,7 @@ export const navLinks: NavLinkItem[] = [
     ],
   },
   { icon: IconUserPlus, url: 'users', label: "Users" },
+  { icon: IconUserPlus, url: 'admin-invitations', label: 'Admin Invitations', roleIds: [1] },
   { icon: IconArticle, url: 'posts', label: "Posts" },
   { icon: IconSchema, url: 'posts-proposal', label: 'Posts proposal' },
   { icon: IconArrowSharpTurnRight, url: 'milestones', label: 'Milestones' },
