@@ -15,6 +15,7 @@ import CreateOrUpdateAdminInvitationModal from '../../../components/admin/adminI
 import { AdminInvitation } from '../../../types/AdminInvitation'
 import DeleteAdminInvitationModal from '../../../components/admin/adminInvitations/DeleteAdminInvitationModal'
 import { useAdminContext } from '../../../context/AdminContext'
+import { Pagination, PaginationProps } from 'antd'
 
 const Admins = () => {
   const [search, setSearch] = useState('')
@@ -24,6 +25,9 @@ const Admins = () => {
   const [sorting, setSorting] = useState<SortingState>([])
   const [selectedAdminInvitation, setSelectedAdminInvitation] =
     useState<AdminInvitation | null>(null)
+  const [totalCount, setCount] = useState(0)
+  const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(10)
 
   const router = useRouter()
 
@@ -88,7 +92,11 @@ const Admins = () => {
   }, [router])
 
   const fetchAdminInvitations = useCallback(
-    async ({ sort }: { sort?: ColumnSort }) => {
+    async (
+      { sort }: { sort?: ColumnSort },
+      currentPage = page,
+      currentPageSize = pageSize
+    ) => {
       setFetching(true)
       try {
         const sortOrderPrefix = sort?.desc ? '-' : ''
@@ -100,10 +108,13 @@ const Admins = () => {
             },
             params: {
               sort: sort?.id ? `${sortOrderPrefix}${sort.id}` : null,
+              page: currentPage,
+              page_size: currentPageSize,
             },
           }
         )
         setUsers(data.Data as [])
+        setCount(data.Meta.total_count)
       } catch (error) {
         const err = error as AxiosError
         if ((err.response?.status as number) === 401) {
@@ -118,13 +129,31 @@ const Admins = () => {
 
   useEffect(() => {
     const [sortField] = sorting
+    console.log('inside effect', sorting)
     void fetchAdminInvitations({ sort: sortField })
   }, [fetchAdminInvitations, sorting])
+
+  useEffect(() => {
+    const [sortField] = sorting
+    void fetchAdminInvitations({ sort: sortField }, page, pageSize)
+  }, [page, pageSize])
 
   const refetch = useCallback(async () => {
     const [sortField] = sorting
     void fetchAdminInvitations({ sort: sortField })
   }, [fetchAdminInvitations, sorting])
+
+  const handlePaginationChange = (currentPage: number) => {
+    setPage(currentPage)
+  }
+
+  const handlePageSizeChange: PaginationProps['onShowSizeChange'] = (
+    current,
+    currentPageSize
+  ) => {
+    setPage(1)
+    setPageSize(currentPageSize)
+  }
 
   return (
     <AdminLayout>
@@ -173,6 +202,15 @@ const Admins = () => {
         fetchFunction={refetch}
         selectedAdminInvitation={selectedAdminInvitation}
         setSelectedAdminInvitation={setSelectedAdminInvitation}
+      />
+
+      <Pagination
+        current={page}
+        pageSize={pageSize}
+        total={totalCount}
+        onChange={handlePaginationChange}
+        showSizeChanger
+        onShowSizeChange={handlePageSizeChange}
       />
     </AdminLayout>
   )
