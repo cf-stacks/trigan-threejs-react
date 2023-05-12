@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { TEST_API_URL } from '../util/constants'
 import {AppProvider} from "../context/AdminContext";
+import CookieConsent from "react-cookie-consent";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [mounted, setMounted] = useState(false)
@@ -48,7 +49,14 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ThemeProvider attribute="class" enableSystem={true}>
         <EarlyAccessModalProvider>
             <AppProvider>
-                <Component {...pageProps} />
+            <Component {...pageProps} />
+            <CookieConsent
+              location="bottom"
+              buttonText="I accept"
+              cookieName="cookieConsent"
+            >
+                This website uses cookies to enhance the user experience.
+            </CookieConsent>
             </AppProvider>
         </EarlyAccessModalProvider>
       </ThemeProvider>

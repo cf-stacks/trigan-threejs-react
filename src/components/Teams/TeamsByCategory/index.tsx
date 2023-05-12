@@ -7,6 +7,7 @@ import TeamCard from './components/TeamCardnew'
 import TeamCardF from './components/foundercard/founderCard'
 import TeamCardL from './components/leadershipcard/TeamCard'
 
+
 import Modal from 'react-modal'
 import { TeamSocialIcon } from '../TeamSocialIcon'
 import { IoCloseCircle } from 'react-icons/io5'
@@ -47,7 +48,7 @@ const TeamsByCategory: React.FC<TeamsByCategoryProps> = ({
       {/* EXECUTIVE  */}
       {category === 'all' ? (
         <>      
-          <p className="my-6 text-center text-3xl font-semibold text-white dark:text-black">
+          <p className="my-6 text-center text-3xl font-semibold text-white dark:text-bla">
             EXECUTIVE
           </p>
           <div className=" grid max-w-[950px] gap-4 pt-8 sm:grid-cols-2 md:px-12">
@@ -67,7 +68,7 @@ const TeamsByCategory: React.FC<TeamsByCategoryProps> = ({
                 ></TeamCardL>
               ))}
            </div>         
-           <div className=" grid max-w-[950px] gap-4 pt-8 sm:grid-cols-2 md:px-12">     
+           <div className=" grid max-w-[950px] gap-4 pt-8 sm:grid-cols-2 md:px-12 ">     
 
             {teams
               .map((group) => group.members)
@@ -226,7 +227,7 @@ const TeamsByCategory: React.FC<TeamsByCategoryProps> = ({
                         </div>
 
                         <div className="my-2 mb-2">
-                          <p className="mb-2 whitespace-pre text-base font-semibold leading-tight text-[#A855F7] lg:text-lg">
+                          <p className="mb-2 whitespace-pre text-base bg-red-400 font-semibold leading-tight text-[#A855F7] lg:text-lg">
                             {selectedMember?.title}
                           </p>
                           <p className="pt-2 text-zinc-100">

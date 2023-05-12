@@ -47,7 +47,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
 
   return (
     <>
-      <div className="tags mb-8 mt-16 flex w-[100%] flex-wrap justify-center ">
+      <div className="tags mb-8 mt-16 flex w-full flex-wrap justify-center line-clamp-2">
         {tagsArray.map((tag, i) => {
           return (
             <div
@@ -68,127 +68,94 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
       </div>
 
       <button
+        title="Show sidebar"
         className="mobileButton"
         onClick={(e) => setSidebarShow(!sidebarShow)}
       >
-        <img src="https://cdn.shopify.com/s/files/1/2439/4751/products/Arrow-450x200.jpg?v=1608697847&width=600" />
+        <img alt="image" src="https://cdn.shopify.com/s/files/1/2439/4751/products/Arrow-450x200.jpg?v=1608697847&width=600" />
       </button>
-      <div className="check flex">
+      <div className="check flex justify-center mx-auto lg:ml-8">
         <div
-          className={`col-span-4  mb-10 flex w-2/3 flex-row flex-wrap justify-center ${
+          className={`col-span-4  mb-1 flex w-2/3 flex-row flex-wrap justify-center ${
             !sidebarShow ? `postSec` : `hideit`
           } `}
         >
-          {mockPosts.length === 0 ? (
-            <div className="text-[16px] text-white">No posts to display</div>
-          ) : (
-            mockPosts.map((BlogPost, i) => {
-              const date = new Date(BlogPost.date_created)
-              let tags = BlogPost.tags
-              const uniqueTags = tags.filter((e: any, i: any) => {
-                return tags.indexOf(e) === i
-              })
-              return (
-                <div
-                  key={i}
-                  className={` post font m-10 mt-10 flex grid h-[696px] w-[400px] justify-around overflow-hidden rounded-[15px] bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black  max-[600px]:justify-center md:flex md:px-1`}
-                >
-                  <FadeInWhenVisible duration={(i + 1) * 0.2}>
-                    <div
-                      id={BlogPost.id_post.toString()}
-                      className="overflow-hidden"
-                    >
-                      <div>
-                        <div className="flex flex-col ">
-                          <Link
-                            href="/blog/post/[blog_name]"
-                            passHref
-                            as={`/blog/post/${BlogPost.slug_id}`}
-                          >
-                            <div className="m-auto h-[263px] w-[400px] hover:cursor-pointer">
-                              <img
-                                loading="lazy"
-                                src={
-                                  BlogPost?.image_url
-                                    ? BlogPost.image_url
-                                    : 'https://contentsnare.com/wp-content/uploads/2021/12/1964-dummy-text-image-generators-1024x576.jpg'
-                                }
-                                alt="Dummy photo"
-                                className="h-full w-full rounded-[15px] object-cover shadow-lg"
-                              />
-                            </div>
-                          </Link>
-                          <div className="padding flex w-[400px] flex-col gap-2 px-8 py-4">
-                            <div className="flex w-full justify-between">
-                              <pre className="font leftRight text-[12px] font-thin text-[#909090]">
-                                {date.toLocaleDateString('en-US')}
-                              </pre>
-                              <svg
-                                width="21"
-                                height="19"
-                                viewBox="0 0 21 19"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M17.8665 3.2466C17.4409 2.82077 16.9355 2.48297 16.3793 2.2525C15.8231 2.02203 15.2269 1.90341 14.6248 1.90341C14.0227 1.90341 13.4266 2.02203 12.8704 2.2525C12.3141 2.48297 11.8088 2.82077 11.3831 3.2466L10.4998 4.12993L9.61648 3.2466C8.75674 2.38686 7.59068 1.90386 6.37481 1.90386C5.15895 1.90386 3.99289 2.38686 3.13315 3.2466C2.2734 4.10634 1.79041 5.27241 1.79041 6.48827C1.79041 7.70413 2.2734 8.87019 3.13315 9.72993L4.01648 10.6133L10.4998 17.0966L16.9831 10.6133L17.8665 9.72993C18.2923 9.3043 18.6301 8.79894 18.8606 8.24273C19.091 7.68651 19.2097 7.09034 19.2097 6.48827C19.2097 5.88619 19.091 5.29002 18.8606 4.7338C18.6301 4.17759 18.2923 3.67223 17.8665 3.2466Z"
-                                  stroke="#909090"
-                                  strokeWidth="2"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                              </svg>
-                            </div>
-                            <div>
-                              <span className="leftRight font tag text-xs font-light text-white">
-                                Tags:
-                              </span>
-                            </div>
-                            <div className="leftRight font flex  w-[400px] flex-row flex-wrap">
-                              {uniqueTags.map((tag: string, index: number) => {
-                                return (
-                                  <div key={index} className="mb-2 mr-2 w-max ">
-                                    <span className="flex flex-row flex-wrap items-center rounded-full bg-[#4D5154] px-2 py-1.5 text-xs font-medium uppercase leading-none text-white">
-                                      {`#${tag}`}
-                                    </span>
-                                  </div>
-                                )
-                              })}
-                            </div>
-                            <Link
-                              href="/blog/post/[blog_name]"
-                              passHref
-                              as={`/blog/post/${BlogPost.slug_id}`}
-                            >
-                              <div className="leftRight">
-                                <h2 className="font text-2xl font-semibold text-white hover:cursor-pointer hover:text-grey">
-                                  {BlogPost.title}
-                                </h2>
-                              </div>
-                            </Link>
-                            <div className="leftRight">
-                              <p className="wrap font flex flex-wrap text-[16px] font-normal text-white">
-                                {BlogPost.short_description}
-                              </p>
-                            </div>
-                            <Link
-                              href="/blog/post/[blog_name]"
-                              passHref
-                              as={`/blog/post/${BlogPost.slug_id}`}
-                            >
-                              <h2 className=" text-lg font-normal text-[#DC2626] underline hover:cursor-pointer hover:text-grey">
-                                Read More
-                              </h2>
-                            </Link>
-                          </div>
-                        </div>
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+            
+            {mockPosts.length === 0 ? (
+              <div className="text-[16px] text-white text-center">No posts to display</div>
+            ) : (  
+              mockPosts.map((BlogPost, i) => {
+                return (
+                  <div
+                    key={i}
+                    className="post  lg:h-[36rem] rounded-[15px] pb-4  bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black"
+                  >
+                    <Link
+                      href="/blog/post/[blog_name]"
+                      passHref
+                      as={`/blog/post/${BlogPost.slug_id}`}
+                      >
+                      <div className="cursor-pointer">
+                        <img
+                          loading="lazy"
+                          src={
+                            BlogPost?.image_url
+                            ? BlogPost.image_url
+                            : 'https://contentsnare.com/wp-content/uploads/2021/12/1964-dummy-text-image-generators-1024x576.jpg'
+                          }
+                          alt="Dummy photo"
+                          className="h-full w-full rounded-t-[15px] object-cover shadow-"
+                        />
                       </div>
+                    </Link>
+                    <div className="lg:p-4 mx-2">
+                      <pre className="font lg:px-3 px-1 text-[12px] font-thin text-[#909090]">
+                        {new Date(BlogPost.date_created).toLocaleDateString('en-US')}
+                      </pre>
+                      <div className="mt-2">
+                        <span className="lg:px-3 px-1 font tag text-xs font-light text-white">
+                          Tags:
+                        </span>
+                      </div>
+                      <div className="lg:px-3 px-1 font justify-start flex flex-row flex-wrap mt-1 ">
+                        {BlogPost.tags.map((tag:any, index:any) => (
+                          <div key={index} className="mb-2 mr-2 flex-shrink-0">
+                            <span className="flex flex-row items-center rounded-full bg-[#4D5154] px-2 py-1.5 text-xs font-medium uppercase leading-none text-white">
+                              {`#${tag}`}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                      <Link
+                        href="/blog/post/[blog_name]"
+                        passHref
+                        as={`/blog/post/${BlogPost.slug_id}`}
+                      >
+                        <h2 className="text-2xl lg:px-3 px-1 font-semibold text-white mt-4 hover:cursor-pointer hover:text-grey">
+                          {BlogPost.title}
+                        </h2>
+                      </Link>
+                      <p className="wrap font lg:px-3 px-1 text-[16px] font-normal text-white mt-2 line-clamp-3">
+                        {BlogPost.short_description}
+                      </p>
+                      <Link
+                        href="/blog/post/[blog_name]"
+                        passHref
+                        as={`/blog/post/${BlogPost.slug_id}`}
+                        >
+                        <h2 className="text-lg font-normal text-[#DC2626] underline mt-2 hover:cursor-pointer hover:text-grey">
+                          Read More
+                        </h2>
+                      </Link>
                     </div>
-                  </FadeInWhenVisible>
-                </div>
-              )
+                  </div>
+              
+              
+              );
             })
-          )}
+            )}
+          </div>
         </div>
 
         <div
@@ -198,7 +165,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
         >
           {/*UX dynamic sidebar width for when there are less than 2 posts*/}
           <div
-            className={`ml-4 mt-[40px] flex h-[1200px] w-[${
+            className={`ml-4 mt-[40px] flex  h-fit w-[${
               mockPosts.length < 2 ? '100%' : '70%'
             }]  flex-col bg-[#212529]`}
           >
@@ -219,7 +186,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                     }}
                   >
                     <span
-                      className={`font flex flex flex-row flex-wrap items-center px-2 py-1.5 text-xl font-light leading-none text-white hover:cursor-pointer hover:opacity-50`}
+                      className={`font flex  flex-row flex-wrap items-center px-2 py-1.5 text-xl font-light leading-none text-white hover:cursor-pointer hover:opacity-50`}
                     >
                       {cat}
                     </span>

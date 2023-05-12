@@ -103,7 +103,7 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
   return (
     <div className="relative">
       <VideoHeader isScroll={false} />
-      <div className="dark:bg-white ">
+      <div className="dark:bg-white">
         <div
           id="blog"
           className="relative mt-[100px] flex w-full flex-col items-center gap-20"
