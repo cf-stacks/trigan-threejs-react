@@ -3,10 +3,11 @@ import { createStyles, Tooltip, UnstyledButton } from "@mantine/core";
 import { useMemo } from "react";
 import {NavLinkItem} from "./navLinks";
 import { IconCaretDown, IconCaretUp } from "@tabler/icons";
+import { white } from "tailwindcss/colors";
 
 const useStyles = createStyles((theme) => ({
   navigationLink: {
-    color: "#61616F",
+    color:"white",
     display: "flex",
     justifyContent: "space-between",
     padding: "14px 30px",
@@ -96,13 +97,14 @@ const NavigationLink = ({
       {isActive && links?.map(({ url, label, icon: Icon }, index) => (
         <UnstyledButton
           key={`${url}-${index}`}
-          className="flex"
           onClick={() => {
             push(`/admin/${url}`);
           }}
-          // className={cx(classes.link, {
-          //   [classes.active]: item.label === active,
-          // })}
+          sx={{color:white,display:'flex!important',justifyContent:"flex-start"}}
+          className={cx(classes.navigationLink, smallSize && "small", {
+            [classes.active]:
+              isActive,
+          })}
         >
           <Icon stroke={0.5} />
 
