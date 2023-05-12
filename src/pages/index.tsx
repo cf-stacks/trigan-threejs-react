@@ -8,7 +8,6 @@ import dynamic from 'next/dynamic'
 import GlobalLayout from '../components/layouts/GlobalLayout'
 import { useTheme } from 'next-themes'
 
-
 // const HeroSection = lazy(() => import('../components/home/HeroSection/index'))
 const AboutSection = lazy(() => import('../components/home/AboutSection/index'))
 import HeroSection from '../components/home/HeroSection/index'
@@ -62,5 +61,4 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-export default dynamic (() => Promise.resolve(Home), {ssr: false})
-
+export default dynamic(() => Promise.resolve(Home), { ssr: false })

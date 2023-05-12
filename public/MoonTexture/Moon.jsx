@@ -10,6 +10,11 @@ function MoonModel({ time, isPlaying }) {
   const moonRef = React.useRef()
 
   useFrame(({ clock }) => {
+    // if (!isPlaying) {
+    //   clock.stop()
+    // } else {
+    //   clock.start()
+    // }
     if (clock.running) {
       // Rotation of the Moon around its orbit
       moon.rotation.y += 0.0025

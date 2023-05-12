@@ -9,6 +9,7 @@ import { ThemeProvider } from 'next-themes'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { TEST_API_URL } from '../util/constants'
+import {AppProvider} from "../context/AdminContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [mounted, setMounted] = useState(false)
@@ -46,7 +47,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Toaster />
       <ThemeProvider attribute="class" enableSystem={true}>
         <EarlyAccessModalProvider>
-          <Component {...pageProps} />
+            <AppProvider>
+                <Component {...pageProps} />
+            </AppProvider>
         </EarlyAccessModalProvider>
       </ThemeProvider>
     </>

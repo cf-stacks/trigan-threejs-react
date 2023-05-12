@@ -24,6 +24,9 @@ import PostSearch from '../components/Posts/PostSearch'
 import dynamic from 'next/dynamic'
 import { useFrame } from '@react-three/fiber'
 import { Head } from 'next/document'
+import useSWR from 'swr'
+import { AnimationBlob } from '../components/shared/AnimationBlob'
+import { RoundProgressBar } from '../components/shared/RoundProgessBar'
 
 const VideoHeader = dynamic(
   () => import('../components/home/HeroSection/VideoHeader')
@@ -40,6 +43,9 @@ const PostsByDateNoSSR: any = dynamic(
 
 const Blog: NextPage<BlogProps> = ({ posts }) => {
   const router = useRouter()
+  const [page, setPage] = useState(1)
+  const [allPosts, setAllPosts] = useState(posts)
+  const [isLoading, setIsloading] = useState(false)
 
   // const handleSearch = async (title: string) => {
   //   await router.push('/PostSearch')
@@ -60,6 +66,38 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
     posts.posts = handleCatQuery(posts, cat)
   } else {
     console.log('incorrect query')
+  }
+
+  const loadMore = async (e: any) => {
+    e.preventDefault()
+    // setCountLoad((prev) => prev + 1)
+    setIsloading(true)
+    // let data = null
+    //change 3 = (total posts - 5)'i am assuming 8 posts have been given to me'
+
+    setPage((prev) => prev + 1)
+
+    try {
+      const res = await fetch(
+        `https://test1.trigan.org/api/v1/posts?page-size=5&page=${
+          page + 1
+        }&apiKey=g436739d6734gd6734`
+      )
+
+      const data = await res.json()
+      // console.log('data = ', data)
+
+      if (data['posts'] !== null) {
+        setAllPosts((prev: any) => {
+          prev['posts'].push(...data['posts'])
+          return prev
+        })
+      }
+    } catch (e) {
+      console.log(e)
+    } finally {
+      setIsloading(false)
+    }
   }
 
   return (
@@ -95,20 +133,24 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
                 </div>
               </section>
             ) : (
-              <PostsByDateNoSSR posts={posts} />
+              <PostsByDateNoSSR posts={allPosts} />
             )}
 
             <div className="mb-20 mt-10 flex w-[100%] flex-wrap justify-center">
               <Link href="/blog" passHref as={``}>
-                <div className="mr-6 w-max hover:cursor-pointer hover:opacity-50">
+                <div
+                  className="mr-6 w-max hover:cursor-pointer hover:opacity-50"
+                  onClick={(e) => loadMore(e)}
+                >
                   <span
-                    className={`border-1 flex h-[46px] flex-row flex-wrap items-center rounded-full border border-[#fff] bg-[#DC2626] px-7 py-1.5 text-[16px] font-medium capitalize text-white`}
+                    className={`border-1 flex h-fit flex-row flex-wrap items-center rounded-full border border-[#fff] bg-[#DC2626] px-7 py-1.5 text-[16px] font-medium capitalize text-white`}
                   >
-                    Load More
+                    {isLoading ? <RoundProgressBar /> : 'Load More'}
                   </span>
                 </div>
               </Link>
             </div>
+
             {/* check which functionality of this blogHeader component, which will render the post cards will be this component or <PostsByDate posts={posts} />. Or should you render the 2? what's the difference, because they seem to be the same content*/}
             {/* <BlogHeader /> */}
           </GlobalLayout>

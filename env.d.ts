@@ -8,6 +8,7 @@ declare global {
       URL: string;
       GET_API_KEY: string;
       NEXT_PUBLIC_PROJECT_ID: string;
+      NEXT_PUBLIC_DISABLE_PAGE: string;
     }
   }
 }

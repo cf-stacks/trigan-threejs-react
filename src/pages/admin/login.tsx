@@ -1,8 +1,6 @@
-import { API_KEY, TEST_API_URL } from '../../util/constants'
-import { ReactNode, useState } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-
 import {
   TextInput,
   PasswordInput,
@@ -12,23 +10,21 @@ import {
   Button,
 } from '@mantine/core'
 import toast from 'react-hot-toast'
-import { useAdminContext } from '../../components/layouts/AdminLayout'
 import { getErrorMsg } from '../../util/api'
 
-interface LoginProps {
-  children?: ReactNode
-}
+import { useAdminContext } from '../../context/AdminContext'
+import { TEST_API_URL } from '../../util/constants'
 
-const Login: React.FC<LoginProps> = () => {
+const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { checkLoggedIn }: any = useAdminContext()
+  const { setIsLoggedIn, setUser }: any = useAdminContext()
   const router = useRouter()
+  const [fetching, setFetching] = useState(false)
 
   const onSubmit = async (e: any) => {
     e.preventDefault()
-    console.log('were in')
-    console.log(password, email)
+    setFetching(true)
     try {
       const user: any = await axios.post(
         `${TEST_API_URL}/auth/login`,
@@ -40,32 +36,35 @@ const Login: React.FC<LoginProps> = () => {
           headers: { 'Content-Type': 'application/json' },
         }
       )
-      console.log('request Done')
-      console.log(user)
+      const userDetails = user.data.Data?.Data?.user
+      // check whether user is an admin or super admin user
+      if (![1, 2].includes(userDetails.role_id)) {
+        setFetching(false)
+        return toast.error('Invalid credentials')
+      }
       localStorage.setItem(
         'access_token',
         user.data.Data.Data.acess_token as string
       )
-      console.log('saved to lcaol storage')
-
-      try {
-        checkLoggedIn()
-      } catch (error) {
-        console.log('error chcek Logged in')
-      }
-      console.log('checked if logged in')
-      console.log('ok')
+      localStorage.setItem(
+        'username',
+        user.data.Data.Data.user.username as string
+      )
+      setIsLoggedIn(true)
+      setUser(user.data.Data?.Data?.user)
       void router.push('/admin/main')
     } catch (error: any) {
-      console.log('problem')
-      console.log('error', error.response)
-      if (error.response.status === 401) {
+      setIsLoggedIn(false)
+      setUser({})
+      if (error.response?.status === 401) {
         toast.error('Wrong username or password')
       } else {
         toast.error(getErrorMsg(error))
       }
     }
+    setFetching(false)
   }
+
   return (
     <>
       <Container size={420} my={40}>
@@ -101,6 +100,7 @@ const Login: React.FC<LoginProps> = () => {
               type="submit"
               fullWidth
               mt="xl"
+              disabled={fetching}
             >
               Sign in
             </Button>

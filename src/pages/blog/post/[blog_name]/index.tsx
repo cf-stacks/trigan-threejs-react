@@ -5,15 +5,17 @@ import useSWR from 'swr'
 import { ThemeProvider } from 'next-themes'
 import { Title } from '../../../../components/shared/Title'
 import GlobalLayout from '../../../../components/layouts/GlobalLayout'
-import { useRouter,Router } from 'next/router'
+import { useRouter, Router } from 'next/router'
 import { wrap } from 'module'
 import ReactMarkdown from 'react-markdown'
 import moment from 'moment'
 import Link from 'next/link'
 import { FadeInWhenVisible } from '../../../../components/shared/FadeInWhenVisible'
 import dynamic from 'next/dynamic'
+import SocialMediaLinks from '../../../../components/shared/SocialMediaButton'
+const { htmlToText } = require('html-to-text')
 interface PostProps {
-  children?: ReactNode,
+  children?: ReactNode
   post: ApiPostData
 }
 
@@ -29,27 +31,25 @@ const Post: NextPage<PostProps> = ({ post }) => {
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(20)
   const [avReadTime, setAvReadTime] = useState({
-                                                  "average_speed": 0,
-                                                  "num_of_record": 0
-                                                });
+    average_speed: 0,
+    num_of_record: 0,
+  })
 
   const fetcher = (url: string) =>
-    fetch(url,
-      {
-        headers: {
-          Session: `${localStorage.getItem('session_key')}`
-        }
-      }
-    ).then(async (r) => {
+    fetch(url, {
+      headers: {
+        Session: `${localStorage.getItem('session_key')}`,
+      },
+    }).then(async (r) => {
       let resPosts = await r.json()
       return resPosts.posts
     })
 
-  const { data, error }: { data: BlogPost[], error: any } = useSWR(
+  const { data, error }: { data: BlogPost[]; error: any } = useSWR(
     `https://test1.trigan.org/api/v1/posts?page-size=${pageSize}&page=${page}&apiKey=g436739d6734gd6734`,
     fetcher
   )
- 
+
   const { blog_name } = router.query
 
   //this function now converts base64 to utf-8 on client and on server side to prevent hydration errors
@@ -59,74 +59,100 @@ const Post: NextPage<PostProps> = ({ post }) => {
   }
 
   //removes duplicate tags and limits categories array length to 1
-  removeDuplicates(post);
+  removeDuplicates(post)
 
-  const httpHeader ={ headers:{
-    Authorization: `${localStorage.getItem('access_token')}`,
-    Session: `${localStorage.getItem('session_key')}`
-  }}
+  const httpHeader = {
+    headers: {
+      Authorization: `${localStorage.getItem('access_token')}`,
+      Session: `${localStorage.getItem('session_key')}`,
+    },
+  }
 
   const readingSpeedForUSer = () => {
-
-    fetch(`https://test1.trigan.org/api/v1/reading-speed/user?object_id=${post.data.id_post}&object_type=post`,httpHeader)
-    .then((response) => response.json())
-    .then((result) => console.log(result))
-    .catch(() => new Error('Time tracking failed'));
-  }
-  
-  
-  const createSpeedRecord = (spenttime:number)=>{
-    const createdata = {
-      "object_id": post.data.id_post,
-      "object_type": "post",
-      "reading_speed":  Math.floor(spenttime / 1000)
-    }
-    fetch(`https://test1.trigan.org/api/v1/reading-speed/create`,
-          {
-            headers:{
-              Authorization: `${localStorage.getItem('access_token')}`,
-              Session: `${localStorage.getItem('session_key')}`,
-              'Content-Type': 'application/json'
-            },
-            method:"POST",
-            body:JSON.stringify(createdata)
-          })
-    .then((response) => response.json())
-    .then((result) => { 
-
-    })
-    .catch(() => new Error('Time tracking failed'));
-  }
-
-  useEffect(()=>{
-
-    const starttime = Date.now();
-    
-
-    fetch(`https://test1.trigan.org/api/v1/reading-speed/average?object_id=${post.data.id_post}&object_type=post`,httpHeader)
+    fetch(
+      `https://test1.trigan.org/api/v1/reading-speed/user?object_id=${post.data.id_post}&object_type=post`,
+      httpHeader
+    )
       .then((response) => response.json())
-      .then((result) => { 
+      .then((result) => console.log(result))
+      .catch(() => new Error('Time tracking failed'))
+  }
 
-      })
-      .catch(() => new Error('Upload failed'));
+  const createSpeedRecord = (spenttime: number) => {
+    const createdata = {
+      object_id: post.data.id_post,
+      object_type: 'post',
+      reading_speed: Math.floor(spenttime / 1000),
+    }
+    fetch(`https://test1.trigan.org/api/v1/reading-speed/create`, {
+      headers: {
+        Authorization: `${localStorage.getItem('access_token')}`,
+        Session: `${localStorage.getItem('session_key')}`,
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify(createdata),
+    })
+      .then((response) => response.json())
+      .then((result) => {})
+      .catch(() => new Error('Time tracking failed'))
+  }
+
+  function parseHtmlToText(html: string): string {
+    const element = document.createElement('div')
+    element.innerHTML = html
+
+    function getTextNodes(node: Node): Node[] {
+      const nodes: Node[] = []
+
+      if (node.nodeType === Node.TEXT_NODE) {
+        nodes.push(node)
+      } else {
+        const children = node.childNodes
+        for (let i = 0; i < children.length; i++) {
+          nodes.push(...getTextNodes(children[i]))
+        }
+      }
+
+      return nodes
+    }
+
+    const textNodes = getTextNodes(element)
+    const rawText = textNodes
+      .map((node) => node.textContent?.trim() ?? '')
+      .join('\n')
+
+    const bulletRegex = /^[•\-\*\u2022]\s*/gm
+    const sanitizedText = rawText.replace(bulletRegex, '')
+
+    return sanitizedText
+  }
+
+  useEffect(() => {
+    const starttime = Date.now()
+
+    fetch(
+      `https://test1.trigan.org/api/v1/reading-speed/average?object_id=${post.data.id_post}&object_type=post`,
+      httpHeader
+    )
+      .then((response) => response.json())
+      .then((result) => {})
+      .catch(() => new Error('Upload failed'))
 
     return () => {
-      const endtime = Date.now();
-      const spenttime = endtime - starttime;
-      createSpeedRecord(spenttime);
-    };
-
-  },[post.data.id_post]);
+      const endtime = Date.now()
+      const spenttime = endtime - starttime
+      createSpeedRecord(spenttime)
+    }
+  }, [post.data.id_post])
 
   return (
-
     <ThemeProvider attribute="class" enableSystem={true}>
       <GlobalLayout>
         <div
           id={post?.data.id_post}
           className="my-5 px-16 dark:bg-light-grey md:mx-auto "
         >
-
           <div className="mb-12 mt-[180px] flex w-[100%] flex-wrap justify-center">
             <span
               className={`flex h-[46px] flex-row flex-wrap items-center rounded-full border border-[#fff] bg-[#DC2626] px-7 py-1.5 text-[16px] font-medium capitalize text-white`}
@@ -152,10 +178,13 @@ const Post: NextPage<PostProps> = ({ post }) => {
                   {moment(post.data.date_created).format('LL')}
                 </p>
                 <p className="mr-10">/</p>
-                <p>{(avReadTime.average_speed/60).toFixed(2)} Min read</p>
+                <p>{(avReadTime.average_speed / 60).toFixed(2)} Min read</p>
               </div>
               <h6 className="full-width-container text-lg font-medium leading-loose">
-                <ReactMarkdown>{b64_to_utf8(post.data.content)}</ReactMarkdown>
+                {/* <ReactMarkdown>{b64_to_utf8(post.data.content)}</ReactMarkdown> */}
+                <ReactMarkdown>
+                  {htmlToText(b64_to_utf8(post.data.content))}
+                </ReactMarkdown>
               </h6>
             </div>
             <div className="ml-4 mt-[180px] flex max-h-[900px] w-1/4 flex-col bg-[#212529]">
@@ -176,19 +205,19 @@ const Post: NextPage<PostProps> = ({ post }) => {
                       }}
                     >
                       <span
-                        className={`flex flex flex-row flex-wrap items-center px-2 py-1.5 text-xl font-${tags === i ? 'semibold' : 'light'
-                          } leading-none text-white hover:cursor-pointer hover:opacity-50`}
+                        className={`flex flex flex-row flex-wrap items-center px-2 py-1.5 text-xl font-${
+                          tags === i ? 'semibold' : 'light'
+                        } leading-none text-white hover:cursor-pointer hover:opacity-50`}
                       >
                         {cat}
                       </span>
                     </div>
                   )
                 })}
-
               </div>
               <div className="flex flex-col items-center py-16">
                 <h6 className=" mb-6 border-b-2 border-[#848484] pb-3 text-2xl">
-                  Tags:
+                  Tag:
                 </h6>
                 {post.data.tags.map((tag: string, i: any) => {
                   return (
@@ -203,15 +232,15 @@ const Post: NextPage<PostProps> = ({ post }) => {
                       }}
                     >
                       <span
-                        className={`flex flex flex-row flex-wrap items-center px-2 py-1.5 text-xl font-${tags === i ? 'semibold' : 'light'
-                          } leading-none text-white hover:cursor-pointer hover:opacity-50`}
+                        className={`flex flex flex-row flex-wrap items-center px-2 py-1.5 text-xl font-${
+                          tags === i ? 'semibold' : 'light'
+                        } leading-none text-white hover:cursor-pointer hover:opacity-50`}
                       >
                         {tag}
                       </span>
                     </div>
                   )
                 })}
-
               </div>
               <div className="h-[1px] w-full bg-[#5B5B5B]" />
               <div className="flex flex-col items-center py-16">
@@ -233,7 +262,7 @@ const Post: NextPage<PostProps> = ({ post }) => {
               </div>
             </div>
           </div>
-          <div className="my-16 flex flex-col items-center">
+          <div className="relative my-16 flex w-full flex-col items-center">
             <Link href="/blog" passHref as={``}>
               <div className="mr-6 w-max hover:cursor-pointer hover:opacity-50">
                 <span
@@ -258,6 +287,11 @@ const Post: NextPage<PostProps> = ({ post }) => {
                 </span>
               </div>
             </Link>
+
+            {/* social media sharing buttons */}
+            <div className="absolute left-[35%] top-12">
+              <SocialMediaLinks />
+            </div>
             <div className="flex pb-10 pt-5 text-lg text-white">
               <p className="mr-10">{post.data.votes} &nbsp;likes</p>
               <p className="mr-10">/</p>
@@ -290,7 +324,6 @@ const Post: NextPage<PostProps> = ({ post }) => {
                   <div
                     className={`c mr-4 mt-20 flex grid h-[696px] w-[400px] justify-around overflow-hidden rounded-[15px] bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black max-[600px]:justify-center md:flex  md:px-1`}
                   >
-
                     <FadeInWhenVisible duration={(i + 1) * 0.2}>
                       <div
                         id={BlogPost.id_post.toString()}
@@ -392,15 +425,14 @@ const Post: NextPage<PostProps> = ({ post }) => {
 }
 
 function removeDuplicates(post: ApiPostData) {
-
   while (post.data.categories.length > 1) {
     post.data.categories.pop()
   }
 
-  post.data.tags = post.data.tags.filter((tag, index) => post.data.tags.indexOf(tag) === index)
-
-};
-
+  post.data.tags = post.data.tags.filter(
+    (tag, index) => post.data.tags.indexOf(tag) === index
+  )
+}
 
 export async function getServerSideProps(context: any) {
   const res = await fetch(

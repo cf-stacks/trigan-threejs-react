@@ -8,8 +8,12 @@ function Combined({ time, setTime, isPlaying, isScroll }) {
   const [scaleDownValue, setScaleDownValue] = useState(12)
   const [Device, setDevice] = useState(30)
   const combinedRef = React.useRef()
-
-  useFrame(() => {
+  useFrame(({ clock }) => {
+    if (!isPlaying) {
+      clock.stop()
+    } else {
+      clock.running = true
+    }
     // Change position of the whole group, dependin on scrollPosition
     if (scrollPercent < 12) {
       // console.log(`test ${scrollPercent}`)

@@ -24,7 +24,8 @@ export interface NavLinkItem {
   icon: TablerIcon,
   url: string,
   label?: string
-  links?: NavLinkItem[]
+  links?: NavLinkItem[],
+  roleIds?: number[]
 }
 
 export const navLinks: NavLinkItem[] = [
@@ -37,6 +38,7 @@ export const navLinks: NavLinkItem[] = [
       { url: 'managelanguages', icon: IconLanguage, label: 'Manage languages' },
       { url: 'document-changes', icon: IconFiles, label: 'Document changes' },
       { url: 'teammembers-proposals', icon: IconUsers, label: 'Team members proposals' },
+      { url: 'admin-invitations', icon: IconUserPlus, label: 'Admin Invitations' },
     ],
   },
   {
@@ -85,8 +87,4 @@ export const navLinks: NavLinkItem[] = [
       { icon: IconClipboardText, url: 'proposals', label: 'Proposals' }
     ]
   }
-  
-  
-  
-  
 ]

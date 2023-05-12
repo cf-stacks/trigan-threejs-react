@@ -93,11 +93,13 @@ const TabHeaderAction: React.FC<TableHeaderProps> = (props) => {
                 {create.text}
             </Button>
 
-            <span className="cursor-pointer text-white" onClick={props.remove}>
-                <AiOutlineDelete size={24} />
-            </span>
-        </section>
-    )
+      {props.remove && (
+        <span className="cursor-pointer text-white" onClick={props.remove}>
+          <AiOutlineDelete size={24} />
+        </span>
+      )}
+    </section>
+  )
 }
 
 export default TabHeaderAction
