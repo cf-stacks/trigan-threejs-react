@@ -6,9 +6,11 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import { ThemeProvider } from 'next-themes';
 
 import GlobalLayout from '../../components/layouts/GlobalLayout';
+import disablePagesList from '../../../disablePagesList';
+import { useRouter } from 'next/router';
 
 const newpage = () => {
-
+const router = useRouter()
   const CARDS_ABOUT_TEAM = [
     {
       id: 1,
@@ -37,7 +39,14 @@ const newpage = () => {
     },
   ];
 
-
+const currentUrl = new URL(import.meta.url);
+const urlArray = currentUrl.pathname.split('/')
+const currentFilename = urlArray[urlArray.length-2]
+if(currentFilename && disablePagesList.includes(currentFilename))
+  {
+      router.push("/");
+        return <div></div>;  
+  }else
   return (
     <div>
       <ThemeProvider attribute="class" enableSystem={true}>

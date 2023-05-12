@@ -7,8 +7,19 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import { ThemeProvider } from 'next-themes';
 
 import GlobalLayout from '../../components/layouts/GlobalLayout';
+import { useRouter } from 'next/router';
+import disablePagesList from '../../../disablePagesList';
 
 const newpage = () => {
+const router = useRouter()
+const currentUrl = new URL(import.meta.url);
+const urlArray = currentUrl.pathname.split('/')
+const currentFilename = urlArray[urlArray.length-2]
+if(currentFilename && disablePagesList.includes(currentFilename))
+  {
+      router.push("/");
+        return <div></div>;  
+  }else
   return (
     <div>
       <ThemeProvider attribute="class" enableSystem={true}>

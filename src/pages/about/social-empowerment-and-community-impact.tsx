@@ -5,9 +5,20 @@ import { SEO } from '../../components/shared/SEO'
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import GlobalLayout from '../../components/layouts/GlobalLayout';
+import disablePagesList from '../../../disablePagesList';
+import { useRouter } from 'next/router';
 
 
 const newpage = () => {
+  const router = useRouter()
+  const currentUrl = new URL(import.meta.url);
+const urlArray = currentUrl.pathname.split('/')
+const currentFilename = urlArray[urlArray.length-2]
+if(currentFilename && disablePagesList.includes(currentFilename))
+  {
+      router.push("/");
+        return <div></div>;  
+  }else
   return (
     <div className=''>
       <SEO title="Eliminating Poverty and Deprivation with Trigan's Revolutionary Blockchain Solution" description='Trigan is a revolutionary platform that aims to combat poverty, deprivation, corruption, and inequality through its unique blockchain technology and Trigan Citizenship. Learn how our innovative economic model and transparent systems can create a fairer, more inclusive society and make a positive impact in your community.' />
