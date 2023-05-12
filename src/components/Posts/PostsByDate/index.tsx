@@ -74,13 +74,13 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
       >
         <img alt="image" src="https://cdn.shopify.com/s/files/1/2439/4751/products/Arrow-450x200.jpg?v=1608697847&width=600" />
       </button>
-      <div className="check flex justify-center mx-auto ml-2">
+      <div className="check flex justify-center mx-auto lg:ml-8">
         <div
-          className={`col-span-4  mb-10 flex w-2/3 flex-row flex-wrap justify-center ${
+          className={`col-span-4  mb-1 flex w-2/3 flex-row flex-wrap justify-center ${
             !sidebarShow ? `postSec` : `hideit`
           } `}
         >
-          <div className="grid gap-2 grid-cols-1  md:grid-cols-3">
+          <div className="grid grid-cols-1 gap- md:grid-cols-3">
             
             {mockPosts.length === 0 ? (
               <div className="text-[16px] text-white text-center">No posts to display</div>
@@ -89,7 +89,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                 return (
                   <div
                     key={i}
-                    className="post lg:h-[35rem] rounded-[15px] pb-4  bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black"
+                    className="post  lg:h-[38rem] rounded-[15px] pb-4  bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black"
                   >
                     <Link
                       href="/blog/post/[blog_name]"
