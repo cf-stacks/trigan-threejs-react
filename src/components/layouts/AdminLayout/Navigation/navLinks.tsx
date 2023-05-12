@@ -7,18 +7,22 @@ import {
   IconMail,
   IconUser,
   IconUsers,
+  IconUserCircle,
   IconTriangle,
   IconUserPlus,
+  IconBrandTopbuzz,
+  IconWorldWww,
   IconArrowSharpTurnRight,
   IconSchema,
   IconBrandLinkedin,
   IconBriefcase,
   TablerIcon,
+  IconId
 } from '@tabler/icons'
 
 export interface NavLinkItem {
   icon: TablerIcon,
-  url: string
+  url: string,
   label?: string
   links?: NavLinkItem[]
 }
@@ -35,22 +39,54 @@ export const navLinks: NavLinkItem[] = [
       { url: 'teammembers-proposals', icon: IconUsers, label: 'Team members proposals' },
     ],
   },
-  { icon: IconUserPlus, url: 'users', label: "Users" },
-  { icon: IconArticle, url: 'posts', label: "Posts" },
-  { icon: IconSchema, url: 'posts-proposal', label: 'Posts proposal' },
-  { icon: IconArrowSharpTurnRight, url: 'milestones', label: 'Milestones' },
-  { icon: IconUsers, url: 'teammembers', label: 'Team members' },
-  { icon: IconFiles, url: 'documents', label: 'Documents' },
-  { icon: IconClipboardText, url: 'proposals', label: 'Proposals' },
-  { icon: IconList, url: 'content', label: 'Content' },
-  { icon: IconTriangle, url: 'ABtesting', label: 'AB testing' },
-  { icon: IconBrandLinkedin, url: 'linkedin', label: 'LinkedIn' },
-  { icon: IconBrandLinkedin, url: 'linkedinaccounts', label: 'LinkedIn accounts' },
-  { icon: IconBriefcase, url: 'linkedinjobs', label: 'LinkedIn jobs' },
-  { icon: IconFiles, url: 'linkedinapplicants', label: 'LinkedIn applicants' },
-  { icon: IconFiles, url: 'hiring-role', label: 'Hiring Role' },
-  { icon: IconFiles, url: 'hiring-role-process', label: 'Hiring Role Process' },
-  { icon: IconFiles, url: 'hiring-role-process-step', label: 'Hiring Role Process Step' },
-  { icon: IconFiles, url: 'hiring-role-applicant', label: 'Hiring Role Applicant' },
-  { icon: IconFiles, url: 'hiring-role-applicant-process', label: 'Hiring Role Applicant Process' },
+  {
+    icon:IconId,
+    url:'linkedin',
+    label:'Recruitment',
+    links:[
+      { icon: IconBrandLinkedin, url: 'linkedin', label: 'LinkedIn' },
+      { icon: IconBrandLinkedin, url: 'linkedinaccounts', label: 'LinkedIn accounts' },
+      { icon: IconBriefcase, url: 'linkedinjobs', label: 'LinkedIn jobs' },
+      { icon: IconFiles, url: 'linkedinapplicants', label: 'LinkedIn applicants' },
+      { icon: IconFiles, url: 'hiring-role', label: 'Hiring Role' },
+      { icon: IconFiles, url: 'hiring-role-process', label: 'Hiring Role Process' },
+      { icon: IconFiles, url: 'hiring-role-process-step', label: 'Hiring Role Process Step' },
+      { icon: IconFiles, url: 'hiring-role-applicant', label: 'Hiring Role Applicant' },
+      { icon: IconFiles, url: 'hiring-role-applicant-process', label: 'Hiring Role Applicant Process' }
+    ]
+  },
+  {
+    icon:IconWorldWww,
+    url:'documents',
+    label:'Website',
+    links:[
+      { icon: IconFiles, url: 'documents', label: 'Documents' },
+      { icon: IconArrowSharpTurnRight, url: 'milestones', label: 'Milestones' },
+      { icon: IconTriangle, url: 'ABtesting', label: 'AB testing' },
+      { icon: IconList, url: 'content', label: 'Content' }
+    ]
+  },
+  {
+    icon:IconUserCircle,
+    url:'',
+    label:'Users',
+    links:[
+      { icon: IconUserPlus, url: 'users', label: "Users" },    
+      { icon: IconUsers, url: 'teammembers', label: 'Team members' }
+    ]
+  },
+  {
+    icon:IconBrandTopbuzz,
+    url:'posts',
+    label:'Moderation',
+    links:[
+      { icon: IconArticle, url: 'posts', label: "Posts" },
+      { icon: IconSchema, url: 'posts-proposal', label: 'Posts proposal' },
+      { icon: IconClipboardText, url: 'proposals', label: 'Proposals' }
+    ]
+  }
+  
+  
+  
+  
 ]
