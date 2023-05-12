@@ -21,16 +21,16 @@ const TeamCard: React.FC<TeamCardProps> = ({
   // console.log('teamMember', teamMember)
   return (
     <div
-      className="flex  justify-center overflow-hidden rounded-lg border-[1px] px-4 bg-blend-multiply backdrop-blur backdrop-filter md:px-2"
+      className="flex max-w-xs justify-center overflow-hidden rounded-xl   bg-[#212529] md:px-2"
       key={teamMember.id}
     >
-      <div className="flex flex-col justify-between items-center pt-[1.5rem]">
+      <div className="flex flex-col justify-between items-center">
         <div className="border-radius relative z-20 flex w-full items-center justify-center">
           <img
             // loading='lazy'
             src={teamMember.image}
             alt={teamMember.name}
-            className="h-44 w-44 rounded-full bg-black object-cover object-top p-0"
+            className="h-72 w-full rounded-xl bg-black object-fit object-top p-0"
           />
         </div>
         <div
@@ -40,21 +40,21 @@ const TeamCard: React.FC<TeamCardProps> = ({
           <div className="box-border flex flex-1 flex-col h-full min-h-[250px] w-full justify-between font-m_plus_rounded_1c ">
             {/* // className="flex flex-col justify-between h-full" */}
             <div className="">
-              <div className="flex w-full flex-col justify-between text-center">
-                <p className="mt-4 h-16 w-full text-center text-2xl font-semibold text-zinc-100 dark:text-black">
+              <div className="flex w-full flex-col justify-between text-start ">
+                <p className="px-4 py-2 h-16 w-full  text-2xl font-semibold text-zinc-100 dark:text-black ">
                   {teamMember.name}
                 </p>
                
               </div>
 
-              <div className="mb-2 w-full text-center">
-                <p className="mb-2 whitespace-pre text-base font-semibold leading-tight text-zinc-100 dark:text-black lg:text-lg">
+              <div className=" w-full text-start">
+                <p className="px-4 whitespace-pre text-base font-medium leading-tight text-zinc-100 dark:text-black lg:text-lg">
                   {teamMember.title}
                 </p>
                 
                 {teamMember?.category === 'Leadership' ||
                 teamMember?.category === 'Advisors' ? (
-                  <p className="p-4 text-zinc-100 dark:text-black">
+                  <p className="px-4 text-zinc-100 dark:text-black font-thin">
                     {teamMember.shortDescription}
                   </p>
                 ) : null}

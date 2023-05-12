@@ -20,17 +20,18 @@ const TeamCardL: React.FC<TeamCardProps> = ({
   
 }) => {
   return (
-    <div  className="flex max-w-xs items-center justify-center overflow-hidden rounded-lg border-[1px] px-4 md:px-2 bg-blend-multiply backdrop-blur backdrop-filter"
+    <div className="flex max-w-xs items-center justify-center overflow-hidden rounded-xl border-[1px] px-4 md:px-2 bg-[#212529]"
       key={teamMember.id}>
-      <div className="flex flex-col items-center pt-[1.5rem]">
-       <div className='w-full relative border-radius flex justify-center items-center z-20'>
+      <div className="flex flex-col items-center">
+        <div className='w-full relative border-radius flex justify-center items-center z-20 bg-white rounded-xl lg:h-fit pt-4
+       '>
         <img
           // loading='lazy'
           src={teamMember.image}
           alt={teamMember.name}
-          className="rounded-full bg-black  p-0"
           height={'180px'}
-          width={'180px'}
+            width={'180px'}
+            className="w-fit object-top h-inherit rounded-xl"
         />
 </div>
         <div className='w-80'
@@ -41,15 +42,15 @@ const TeamCardL: React.FC<TeamCardProps> = ({
           <div className="box-border flex min-h-[250px] w-full flex-col font-m_plus_rounded_1c  ">
             {/* // className="flex flex-col justify-between h-full" */}
             <div>
-              <div className="flex w-full text-center justify-between">
-                <p className="w-full text-center text-2xl font-semibold text-zinc-100 dark:text-black">
+              <div className="flex w-full pl-4 justify-between">
+                <p className="w-full  text-2xl font-semibold text-zinc-100 dark:text-black">
                   {teamMember.name}
                 </p>
 
               </div>
 
-              <div className="my-2 mb-2 w-full text-center">
-                <p className="mb-2 whitespace-pre text-base font-semibold leading-tight lg:text-lg text-zinc-100 dark:text-black">
+              <div className="my-2 mb-2 w-full pl-4">
+                <p className="mb-2 whitespace-pre text-base  leading-tight lg:text-lg text-zinc-100 dark:text-black">
                   {teamMember.title}
                 </p>
                 <p className="pt-2 text-zinc-100 dark:text-black">
