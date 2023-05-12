@@ -47,7 +47,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
 
   return (
     <>
-      <div className="tags mb-8 mt-16 flex w-full flex-wrap justify-center">
+      <div className="tags mb-8 mt-16 flex w-full flex-wrap justify-center line-clamp-2">
         {tagsArray.map((tag, i) => {
           return (
             <div
@@ -80,7 +80,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
             !sidebarShow ? `postSec` : `hideit`
           } `}
         >
-          <div className="grid grid-cols-1 gap- md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
             
             {mockPosts.length === 0 ? (
               <div className="text-[16px] text-white text-center">No posts to display</div>
@@ -89,7 +89,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                 return (
                   <div
                     key={i}
-                    className="post  lg:h-[38rem] rounded-[15px] pb-4  bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black"
+                    className="post  lg:h-[36rem] rounded-[15px] pb-4  bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black"
                   >
                     <Link
                       href="/blog/post/[blog_name]"
