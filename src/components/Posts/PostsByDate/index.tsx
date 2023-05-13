@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+  /* eslint-disable @next/next/no-img-element */
 import { ReactNode, useLayoutEffect, useState } from 'react'
 import { BlogPost } from '../../../types/BlogPost'
 import { FadeInWhenVisible } from '../../shared/FadeInWhenVisible'
@@ -122,14 +122,14 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                       </div>
 
                       <div className={`lg:px-3 px-1 font justify-start flex flex-row flex-wrap mt-1 max-h-6 overflow-hidden ${BlogPost.tags.length > maxTags ? 'line-clamp-1' : ''}`}>
-                        {BlogPost.tags.map((tag:any, index:number) => (
+                        {BlogPost.tags.slice(0, maxTags).map((tag: any, index: number) => (
                           <div key={index} className="mb-2 mr-2">
                             <span className="flex flex-row items-center rounded-full bg-[#4D5154] px-2 py-1.5 text-xs font-medium uppercase leading-none text-white">
                               {`#${tag}`}
                             </span>
                           </div>
                         ))}
-                        {BlogPost.tags.length > maxTags && <span className="text-[#4D5154]">..</span>}
+                        {BlogPost.tags.length > maxTags && <span className="text-white font-bold text-md">..</span>}
                       </div>
 
                       <Link
