@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+  /* eslint-disable @next/next/no-img-element */
 import { ReactNode, useLayoutEffect, useState } from 'react'
 import { BlogPost } from '../../../types/BlogPost'
 import { FadeInWhenVisible } from '../../shared/FadeInWhenVisible'
@@ -17,6 +17,8 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
   const mockPosts: any[] = posts.posts ?? []
   const tagsArray: any[] = ['Agriculture', 'Web3', 'Crypto', 'Metavarse']
   const [allPosts, setPosts] = useState(null)
+
+  const maxTags = 4;
 
   //on load, all posts are fetched directly from api and set to state so sidebar can show all tags
   useLayoutEffect(() => {
@@ -47,7 +49,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
 
   return (
     <>
-      <div className="tags mb-8 mt-16 flex w-full flex-wrap justify-center line-clamp-2">
+      <div className={`tags mb-8 mt-16 flex w-full flex-wrap justify-center`}>
         {tagsArray.map((tag, i) => {
           return (
             <div
@@ -56,16 +58,16 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
               onClick={() => setSelectedTag(i)}
             >
               <span
-                className={`border-1 flex flex-row flex-wrap items-center rounded-full border border-[#653394] bg-[${
-                  selectedTag === i ? '#653394' : 'none'
-                }] h-[46px] px-6 py-1.5 text-[16px] font-medium capitalize text-white`}
+                className={`border-1 flex flex-row flex-wrap items-center rounded-full border border-[#653394] bg-[${selectedTag === i ? '#653394' : 'none'
+                  }] h-[46px] px-6 py-1.5 text-[16px] font-medium capitalize text-white`}
               >
                 {tag}
               </span>
             </div>
-          )
+          );
         })}
       </div>
+
 
       <button
         title="Show sidebar"
@@ -80,7 +82,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
             !sidebarShow ? `postSec` : `hideit`
           } `}
         >
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             
             {mockPosts.length === 0 ? (
               <div className="text-[16px] text-white text-center">No posts to display</div>
@@ -89,7 +91,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                 return (
                   <div
                     key={i}
-                    className="post  lg:h-[36rem] rounded-[15px] pb-4  bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black"
+                    className="post lg:h-[36rem] rounded-[15px] lg:pb-5 pb-8  bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black mr-2"
                   >
                     <Link
                       href="/blog/post/[blog_name]"
@@ -105,7 +107,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                             : 'https://contentsnare.com/wp-content/uploads/2021/12/1964-dummy-text-image-generators-1024x576.jpg'
                           }
                           alt="Dummy photo"
-                          className="h-full w-full rounded-t-[15px] object-cover shadow-"
+                          className="h-64  w-full rounded-t-[15px] object-cover shadow-lg"
                         />
                       </div>
                     </Link>
@@ -118,21 +120,24 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                           Tags:
                         </span>
                       </div>
-                      <div className="lg:px-3 px-1 font justify-start flex flex-row flex-wrap mt-1 ">
-                        {BlogPost.tags.map((tag:any, index:any) => (
-                          <div key={index} className="mb-2 mr-2 flex-shrink-0">
+
+                      <div className={`lg:px-3 px-1 font justify-start flex flex-row flex-wrap mt-1 max-h-6 overflow-hidden ${BlogPost.tags.length > maxTags ? 'line-clamp-1' : ''}`}>
+                        {BlogPost.tags.slice(0, maxTags).map((tag: any, index: number) => (
+                          <div key={index} className="mb-2 mr-2">
                             <span className="flex flex-row items-center rounded-full bg-[#4D5154] px-2 py-1.5 text-xs font-medium uppercase leading-none text-white">
                               {`#${tag}`}
                             </span>
                           </div>
                         ))}
+                        {BlogPost.tags.length > maxTags && <span className="text-white font-bold text-md">..</span>}
                       </div>
+
                       <Link
                         href="/blog/post/[blog_name]"
                         passHref
                         as={`/blog/post/${BlogPost.slug_id}`}
                       >
-                        <h2 className="text-2xl lg:px-3 px-1 font-semibold text-white mt-4 hover:cursor-pointer hover:text-grey">
+                        <h2 className="text-2xl truncate lg:px-3 px-1 font-semibold text-white mt-4 hover:cursor-pointer hover:text-grey">
                           {BlogPost.title}
                         </h2>
                       </Link>
@@ -212,7 +217,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                     }}
                   >
                     <span
-                      className={`font flex flex flex-row flex-wrap items-center px-2 py-1.5 text-xl font-light leading-none text-white hover:cursor-pointer hover:opacity-50`}
+                      className={`font  flex flex-row flex-wrap items-center px-2 py-1.5 text-xl font-light leading-none text-white hover:cursor-pointer hover:opacity-50`}
                     >
                       {tag}
                     </span>
