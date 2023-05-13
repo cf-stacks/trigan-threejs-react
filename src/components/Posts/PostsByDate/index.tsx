@@ -18,7 +18,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
   const tagsArray: any[] = ['Agriculture', 'Web3', 'Crypto', 'Metavarse']
   const [allPosts, setPosts] = useState(null)
 
-  const maxTags = 2;
+  const maxTags = 4;
 
   //on load, all posts are fetched directly from api and set to state so sidebar can show all tags
   useLayoutEffect(() => {

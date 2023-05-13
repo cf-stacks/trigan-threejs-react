@@ -30,7 +30,7 @@ const TeamCard: React.FC<TeamCardProps> = ({
             // loading='lazy'
             src={teamMember.image}
             alt={teamMember.name}
-            className="h-72 w-full rounded-xl bg-white object-fit object-top p-0"
+            className="h-72 w-full rounded-xl bg-white object-contain object-center p-0"
           />
         </div>
         <div
