@@ -18,6 +18,8 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
   const tagsArray: any[] = ['Agriculture', 'Web3', 'Crypto', 'Metavarse']
   const [allPosts, setPosts] = useState(null)
 
+  const maxTags = 2;
+
   //on load, all posts are fetched directly from api and set to state so sidebar can show all tags
   useLayoutEffect(() => {
     fetch('https://test1.trigan.org/api/v1/posts?apiKey=g436739d6734gd6734', {
@@ -89,7 +91,7 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                 return (
                   <div
                     key={i}
-                    className="post lg:h-[36rem] rounded-[15px] lg:pb-5  bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black mr-2"
+                    className="post lg:h-[36rem] rounded-[15px] lg:pb-5 pb-8  bg-[#212529] shadow-md shadow-[#000000] dark:bg-white dark:text-black mr-2"
                   >
                     <Link
                       href="/blog/post/[blog_name]"
@@ -118,16 +120,18 @@ const PostsByDate: React.FC<PostsByDateProps> = ({ posts }) => {
                           Tags:
                         </span>
                       </div>
-                      <div className={`lg:px-3 px-1 font justify-start flex flex-row flex-wrap mt-1 max-h-6 overflow-hidden ${BlogPost.tags.length > 4 ? 'line-clamp-2' : ''}`}>
-                        {BlogPost.tags.map((tag: any, index: any) => (
+
+                      <div className={`lg:px-3 px-1 font justify-start flex flex-row flex-wrap mt-1 max-h-6 overflow-hidden ${BlogPost.tags.length > maxTags ? 'line-clamp-1' : ''}`}>
+                        {BlogPost.tags.map((tag:any, index:number) => (
                           <div key={index} className="mb-2 mr-2">
-                      
                             <span className="flex flex-row items-center rounded-full bg-[#4D5154] px-2 py-1.5 text-xs font-medium uppercase leading-none text-white">
                               {`#${tag}`}
                             </span>
                           </div>
                         ))}
+                        {BlogPost.tags.length > maxTags && <span className="text-[#4D5154]">..</span>}
                       </div>
+
                       <Link
                         href="/blog/post/[blog_name]"
                         passHref
