@@ -51,11 +51,12 @@ const NavigationLink = ({
     const page = pathname.replace('/admin/', '');
     if (!links) {
       return page === url;
+    } else {
+      return false;
     }
 
   }, [url, links, pathname]);
   const[isActive,setActive]=useState(activeStatus);
-  const[isOn, setOn]=useState(false);
   const submenuToggle = useMemo(() => {
     if (!links) {
       return null;
@@ -83,13 +84,7 @@ const NavigationLink = ({
             url&&push(`/admin/${url}`);
             onClick?.();
           } else {
-            setOn(!isOn)
-            if(isOn)
-            {
-              setActive(true);
-            } else{
-              setActive(false);
-            }
+              setActive(!isActive);            
             
           }
           
