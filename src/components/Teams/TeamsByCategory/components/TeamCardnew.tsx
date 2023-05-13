@@ -37,24 +37,24 @@ const TeamCard: React.FC<TeamCardProps> = ({
           className="flex flex-1 w-80"
           // className="relative z-10 flex h-full p-6 -mt-8 border border-gray-500 backdrop-blur"
         >
-          <div className="box-border flex flex-1 flex-col h-full min-h-[250px] w-full justify-between font-m_plus_rounded_1c ">
+          <div className="box-border flex flex-1 flex-col h-full min-h-[250px] w-full justify-between  ">
             {/* // className="flex flex-col justify-between h-full" */}
             <div className="">
-              <div className="flex w-full flex-col justify-between text-start ">
-                <p className="px-4 py-2 h-16 w-full  text-2xl font-semibold text-zinc-100 dark:text-black ">
+              <div className="flex w-full flex-col justify-between text-start">
+                <p className="px-4 py-1 h-16 w-full  text-2xl font-semibold text-zinc-100 dark:text-black mt-2">
                   {teamMember.name}
                 </p>
                
               </div>
 
-              <div className=" w-full text-start">
+              <div className=" w-full text-start mb-4">
                 <p className="px-4 whitespace-pre text-base font-medium leading-tight text-zinc-100 dark:text-black lg:text-lg">
                   {teamMember.title}
                 </p>
                 
                 {teamMember?.category === 'Leadership' ||
                 teamMember?.category === 'Advisors' ? (
-                  <p className="px-4 text-zinc-100 dark:text-black font-thin">
+                  <p className="px-4 text-zinc-100 dark:text-black font-thin line-clamp-6">
                     {teamMember.shortDescription}
                   </p>
                 ) : null}
@@ -64,13 +64,13 @@ const TeamCard: React.FC<TeamCardProps> = ({
             {teamMember?.category !== 'Leadership' && (
               <div className="m-2 flex justify-between items-center">
                 <button
-                  className="flex font-mono text-sm font-medium text-[#A855F7] duration-300 ease-in-out hover:text-white dark:hover:text-black md:text-base"
+                  className="flex font-mono text-sm font-medium ml-2 text-[#A855F7] duration-300 ease-in-out hover:text-white dark:hover:text-black md:text-base underline hover:underline-offset-2"
                   onClick={() => {
                     // setShowModal(!showModal)
                     handleShowDetails && handleShowDetails(teamMember)
                   }}
                 >
-                  see all
+                  Show more
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="ml-2 h-6 w-6"
