@@ -1,6 +1,6 @@
 import { useRouter } from "next/router"
 import { createStyles, Tooltip, UnstyledButton } from "@mantine/core";
-import { useMemo } from "react";
+import { useState,useMemo } from "react";
 import {NavLinkItem} from "./navLinks";
 import { IconCaretDown, IconCaretUp } from "@tabler/icons";
 import { white } from "tailwindcss/colors";
@@ -47,17 +47,15 @@ const NavigationLink = ({
 }: NavigationLinkProps) => {
   const {classes, cx} = useStyles();
   const {pathname, push} = useRouter()
-  const isActive = useMemo(() => {
+  const activeStatus = useMemo(() => {
     const page = pathname.replace('/admin/', '');
     if (!links) {
       return page === url;
     }
-    return links
-      .map(({ url }) => url)
-      .concat(url)
-      .includes(page);
-  }, [url, links, pathname]);
 
+  }, [url, links, pathname]);
+  const[isActive,setActive]=useState(activeStatus);
+  const[isOn, setOn]=useState(false);
   const submenuToggle = useMemo(() => {
     if (!links) {
       return null;
@@ -81,8 +79,20 @@ const NavigationLink = ({
             isActive,
         })}
         onClick={() => {
-          url&&push(`/admin/${url}`);
-          onClick?.();
+          if(!links){
+            url&&push(`/admin/${url}`);
+            onClick?.();
+          } else {
+            setOn(!isOn)
+            if(isOn)
+            {
+              setActive(true);
+            } else{
+              setActive(false);
+            }
+            
+          }
+          
         }}
       >
         <div className="flex">
