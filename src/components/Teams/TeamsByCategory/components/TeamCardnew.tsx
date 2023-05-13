@@ -41,20 +41,20 @@ const TeamCard: React.FC<TeamCardProps> = ({
             {/* // className="flex flex-col justify-between h-full" */}
             <div className="">
               <div className="flex w-full flex-col justify-between text-start">
-                <p className="px-4 py-1 h-16 w-full  text-2xl font-semibold text-zinc-100 dark:text-black mt-2">
+                <p className="px-4 py-1 ml-2 h-16 w-full  text-2xl font-semibold text-zinc-100 dark:text-black mt-2">
                   {teamMember.name}
                 </p>
                
               </div>
 
               <div className=" w-full text-start mb-4">
-                <p className="px-4 whitespace-pre text-base font-medium leading-tight text-zinc-100 dark:text-black lg:text-lg">
+                <p className="px-4 mb-2 ml-2 whitespace-pre text-base font-medium leading-tight text-zinc-100 dark:text-black lg:text-lg">
                   {teamMember.title}
                 </p>
                 
                 {teamMember?.category === 'Leadership' ||
                 teamMember?.category === 'Advisors' ? (
-                  <p className="px-4 text-zinc-100 dark:text-black font-thin line-clamp-6">
+                  <p className="px-4 text-zinc-100 dark:text-black font-thin line-clamp-6 ml-2">
                     {teamMember.shortDescription}
                   </p>
                 ) : null}
