@@ -53,7 +53,7 @@ const TeamCardL: React.FC<TeamCardProps> = ({
                 <p className="mb-2 whitespace-pre text-base  leading-tight lg:text-lg text-zinc-100 dark:text-black">
                   {teamMember.title}
                 </p>
-                <p className="pt-2 text-zinc-100 dark:text-black font-thin">
+                <p className="pt-2 text-zinc-100 dark:text-black font-thin mr-4">
                   {teamMember.shortDescription}
                 </p>
               </div>
@@ -64,7 +64,7 @@ const TeamCardL: React.FC<TeamCardProps> = ({
             {teamMember?.category !== 'Leadership' && (
               <div className="m-2 flex justify-between items-center">
                 <button
-                  className="flex font-mono text-sm font-medium text-[#A855F7] duration-300 ease-in-out hover:text-white dark:hover:text-black md:text-base underline hover:underline-offset-2"
+                  className="flex ml-2 lg:ml-0 font-mono text-sm font-medium text-[#A855F7] duration-300 ease-in-out hover:text-white dark:hover:text-black md:text-base underline hover:underline-offset-2"
                   onClick={() => {
                     // setShowModal(!showModal)
                     handleShowDetails && handleShowDetails(teamMember)

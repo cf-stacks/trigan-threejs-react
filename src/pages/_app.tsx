@@ -54,6 +54,10 @@ function MyApp({ Component, pageProps }: AppProps) {
               location="bottom"
               buttonText="I accept"
               cookieName="cookieConsent"
+              buttonStyle={{
+                color: '#fff',
+                background: '#A855F7',
+              }}
             >
                 This website uses cookies to enhance the user experience.
             </CookieConsent>
