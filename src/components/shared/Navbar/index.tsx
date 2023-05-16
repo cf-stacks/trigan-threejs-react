@@ -143,7 +143,6 @@ const Navbar: React.FC<NavbarProps> = () => {
                 saturation={0}
               />
               <directionalLight args={['#c8d5e3', 3]} position={[-10, 5, -1]} />
-              <Model />
             </Canvas>
           </Suspense>
         </div>
